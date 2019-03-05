@@ -79,9 +79,6 @@ Page({
       goodsJsonStr: that.data.goodsJsonStr,
       remark: remark
     };
-    if (that.data.kjId) {
-      postData.kjid = that.data.kjId
-    }
     if (that.data.pingtuanOpenId) {
       postData.pingtuanOpenId = that.data.pingtuanOpenId
     }
