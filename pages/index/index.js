@@ -242,12 +242,6 @@ Page({
       }
     })
   },
-  listenerSearchInput: function(e) {
-    this.setData({
-      searchInput: e.detail.value
-    })
-
-  },
   toSearch: function() {
     this.setData({
       curPage: 1

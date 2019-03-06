@@ -29,7 +29,6 @@ Page({
 
   //事件处理函数
   swiperchange: function(e) {
-    //console.log(e.detail.current)
     this.setData({
       swiperCurrent: e.detail.current
     })
@@ -70,9 +69,6 @@ Page({
           totalScoreToPay: res.data.basicInfo.minScore
         });
       }
-      if (res.data.basicInfo.pingtuan) {
-        that.pingtuanList(e.id)
-      }
       that.data.goodsDetail = res.data;
       if (res.data.basicInfo.videoId) {
         that.getVideoSrc(res.data.basicInfo.videoId);
@@ -104,18 +100,6 @@ Page({
     this.setData({
       shopType: "tobuy",
       selectSizePrice: this.data.goodsDetail.basicInfo.minPrice
-    });
-    this.bindGuiGeTap();
-  },
-  toPingtuan: function(e) {
-    let pingtuanopenid = 0
-    if (e.currentTarget.dataset.pingtuanopenid) {
-      pingtuanopenid = e.currentTarget.dataset.pingtuanopenid
-    }
-    this.setData({
-      shopType: "toPingtuan",
-      selectSizePrice: this.data.goodsDetail.basicInfo.pingtuanPrice,
-      pingtuanopenid: pingtuanopenid
     });
     this.bindGuiGeTap();
   },
@@ -300,32 +284,9 @@ Page({
       data: buyNowInfo
     })
     this.closePopupTap();
-    if (shoptype == 'toPingtuan') {
-      if (this.data.pingtuanopenid) {
-        wx.navigateTo({
-          url: "/pages/to-pay-order/index?orderType=buyNow&pingtuanOpenId=" + this.data.pingtuanopenid
-        })
-      } else {
-        WXAPI.pingtuanOpen(that.data.goodsDetail.basicInfo.id, wx.getStorageSync('token')).then(function(res) {
-          if (res.code != 0) {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 2000
-            })
-            return
-          }
-          wx.navigateTo({
-            url: "/pages/to-pay-order/index?orderType=buyNow&pingtuanOpenId=" + res.data.id
-          })
-        })
-      }
-    } else {
-      wx.navigateTo({
-        url: "/pages/to-pay-order/index?orderType=buyNow"
-      })
-    }
-
+    wx.navigateTo({
+      url: "/pages/to-pay-order/index?orderType=buyNow"
+    })
   },
   /**
    * 组建购物车信息
@@ -336,7 +297,7 @@ Page({
     shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
     shopCarMap.pic = this.data.goodsDetail.basicInfo.pic;
     shopCarMap.name = this.data.goodsDetail.basicInfo.name;
-    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸 
+    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
@@ -382,7 +343,7 @@ Page({
     shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
     shopCarMap.pic = this.data.goodsDetail.basicInfo.pic;
     shopCarMap.name = this.data.goodsDetail.basicInfo.name;
-    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸 
+    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
@@ -448,16 +409,6 @@ Page({
       }
     })
   },
-  pingtuanList: function(goodsId) {
-    var that = this;
-    WXAPI.pingtuanList(goodsId).then(function(res) {
-      if (res.code == 0) {
-        that.setData({
-          pingtuanList: res.data
-        });
-      }
-    })
-  },
   getVideoSrc: function(videoId) {
     var that = this;
     WXAPI.videoDetail(videoId).then(function(res) {
@@ -465,46 +416,6 @@ Page({
         that.setData({
           videoMp4Src: res.data.fdMp4
         });
-      }
-    })
-  },
-  getKanjiaInfo: function(gid) {
-    var that = this;
-    if (!app.globalData.kanjiaList || app.globalData.kanjiaList.length == 0) {
-      that.setData({
-        curGoodsKanjia: null
-      });
-      return;
-    }
-    let curGoodsKanjia = app.globalData.kanjiaList.find(ele => {
-      return ele.goodsId == gid
-    });
-    if (curGoodsKanjia) {
-      that.setData({
-        curGoodsKanjia: curGoodsKanjia
-      });
-    } else {
-      that.setData({
-        curGoodsKanjia: null
-      });
-    }
-  },
-  goKanjia: function() {
-    var that = this;
-    if (!that.data.curGoodsKanjia) {
-      return;
-    }
-    WXAPI.kanjiaJoin(that.data.curGoodsKanjia.id, wx.getStorageSync('token')).then(function(res) {
-      if (res.code == 0) {
-        wx.navigateTo({
-          url: "/pages/kanjia/index?kjId=" + res.data.kjId + "&joiner=" + res.data.uid + "&id=" + res.data.goodsId
-        })
-      } else {
-        wx.showModal({
-          title: '错误',
-          content: res.msg,
-          showCancel: false
-        })
       }
     })
   },
