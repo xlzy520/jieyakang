@@ -3,7 +3,6 @@ const WXAPI = require('../../wxapi/main')
 
 Page({
   data: {
-    totalScoreToPay: 0,
     goodsList: [],
     isNeedLogistics: 0, // 是否需要物流信息
     allGoodsPrice: 0,
@@ -125,7 +124,6 @@ Page({
       }
       if (!e) {
         that.setData({
-          totalScoreToPay: res.data.score,
           isNeedLogistics: res.data.isNeedLogistics,
           allGoodsPrice: res.data.amountTotle,
           allGoodsAndYunPrice: res.data.amountLogistics + res.data.amountTotle,
