@@ -1,24 +1,26 @@
 /**index.wxss**/
 
 .container {
-  background-color: #F2f2f2;
+  background-color: #f2f2f2;
   min-height: 100%;
   display: block;
 }
 .swiper-container{
-  width: 750rpx;
+  width: 690rpx;
   position: relative;
+  padding: 0 30rpx;
 }
-.swiper_box {
-  width: 100%;
-  height:300rpx;
-}
+/*.swiper_box {*/
+  /*width: 100%;*/
+  /*height:300rpx;*/
+/*}*/
 
 .swiper-container image {
-  width: 100%;
   display: inline-block;
+  border-radius: 30rpx;
   overflow: hidden;
-  height:300rpx;
+  width: 100%;
+  height: 300rpx;
 }
 .swiper-container .dots{
   position: absolute;
@@ -68,32 +70,57 @@
 /*.type-item-on{*/
   /*border-bottom: 4rpx solid #e64340;*/
 /*}*/
-
 .goods-container{
   display: flex;
   justify-content: space-between;
   flex-wrap:wrap;
+  background-color: #fff;
   box-sizing: content-box;
-  padding: 24rpx;
+  padding: 15rpx 0;
+  border-radius: 10rpx;
+  margin-top: 10rpx;
+}
+.goods-header{
+  padding: 10rpx 30rpx 20rpx;
+  font-size: 24rpx;
+  font-weight: bolder;
+}
+.goods-header::before{
+  content: "";
+  margin-right: 15rpx;
+  border-left: 5rpx solid;
+  border-left-color: #f22d47;
 }
 .goods-box{
-  width: 339rpx;
-  height: 472rpx;
+  display: flex;
+  width: 90%;
+  height: 300rpx;
+  margin: auto;
   background-color: #fff;
   overflow: hidden;
   margin-bottom: 24rpx;
+  border: 1px solid #eee;
+  /*box-shadow: 4rpx 10rpx 10rpx #f2f2f2;*/
+  box-shadow: ;
+  border-top: none;
 }
 .goods-box .img-box{
   width: 339rpx;
-  height: 339rpx;
+  height: 200rpx;
+  border: 2px solid #f0f0f0;
   overflow: hidden;
 }
 .goods-box .img-box image{
    width: 339rpx;
-   height: 339rpx;
+   height: 200rpx;
+}
+.goods-box .goods-detail{
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*justify-content: space-between;*/
 }
 .goods-box .goods-title{
-  width: 280rpx;
+  /*width: 280rpx;*/
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -103,7 +130,7 @@
   margin-left: 24rpx;
 }
 .goods-box .goods-price{
-  width: 280rpx;
+  /*width: 280rpx;*/
   overflow: hidden;
   font-size: 24rpx;
   padding: 24rpx 0;

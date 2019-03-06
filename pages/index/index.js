@@ -1,7 +1,7 @@
 const WXAPI = require('../../wxapi/main')
 const CONFIG = require('../../config.js')
 //获取应用实例
-var app = getApp()
+// var app = getApp()
 Page({
   data: {
     // indicatorDots: true,
@@ -102,7 +102,7 @@ Page({
       });
       that.getGoodsList(0);
     })
-    that.getCoupons();
+    // that.getCoupons();
     that.getNotice();
   },
   onPageScroll(e) {
