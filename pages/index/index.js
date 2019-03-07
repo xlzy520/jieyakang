@@ -15,6 +15,7 @@ Page({
     categories: [],
     activeCategoryId: 0,
     goods: [],
+    partners: [],
     scrollTop: 0,
     loadingMoreHidden: true,
     
@@ -85,6 +86,14 @@ Page({
     //     icon: 'none'
     //   })
     // })
+    WXAPI.getPartner({
+      type: 'index',
+      token: wx.getStorageSync('token')
+    }).then(function (res) {
+      that.setData({
+        partners: res.data
+      })
+    })
     WXAPI.goodsCategory().then(function (res) {
       var categories = [{
         id: 0,

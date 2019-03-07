@@ -294,5 +294,8 @@ module.exports = {
   },
   rechargeSendRules: () => {
     return request('/user/recharge/send/rule', true, 'get')
+  },
+  getPartner: data => {
+    return request('/friendly-partner/list', true, 'post', data)
   }
 }
