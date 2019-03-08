@@ -58,12 +58,14 @@
   <view class="goods-container">
     <view class="goods-header">餐具产品</view>
     <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
-      <view class="img-box">
-        <image src="{{item.pic}}_m" class="image" mode="aspectFill" lazy-load="true"/>
-      </view>
-      <view class="goods-detail">
-        <view class="goods-title">{{item.name}}</view>
-        <view class="goods-price">¥ {{item.minPrice}}</view>
+      <view class="goods-item">
+        <view class="img-box">
+          <image src="{{item.pic}}_m" class="image" mode="aspectFill" lazy-load="true"/>
+        </view>
+        <view class="goods-detail">
+          <view class="goods-title">{{item.name}}</view>
+          <view class="goods-price">¥ {{item.minPrice}}</view>
+        </view>
       </view>
     </view>
   </view>
@@ -71,6 +73,7 @@
     <view class="partner-title">合作伙伴</view>
     <view class="partner-item" wx:for-items="{{partners}}" wx:key="{{index}}">
       <image src="{{item.picUrl}}_m" class="image" mode="aspectFill" lazy-load="true"/>
+      <view class="partner-modal"></view>
       <view class="partner-name">- {{item.title}} -</view>
     </view>
   </view>
