@@ -26,7 +26,7 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#f2f2f2",
+    "navigationBarBackgroundColor": "#f8f8f8",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black",
     "onReachBottomDistance":50
@@ -47,7 +47,7 @@
       "iconPath": "images/nav/cart-off.png",
       "selectedIconPath": "images/nav/cart-on.png",
       "text": "购物车"
-    },    
+    },
     {
       "pagePath": "pages/my/index",
       "iconPath": "images/nav/my-off.png",

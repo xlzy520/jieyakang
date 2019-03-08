@@ -134,6 +134,9 @@ Page({
       page: this.data.curPage,
       pageSize: this.data.pageSize
     }).then(function (res) {
+      res.data.map(function (item) {
+        item.minPrice = item.minPrice.toFixed(2)
+      })
       wx.hideLoading()
       if (res.code == 404 || res.code == 700) {
         let newData = {
