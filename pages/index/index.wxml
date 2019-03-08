@@ -60,7 +60,7 @@
     <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
       <view class="goods-item">
         <view class="img-box">
-          <image src="{{item.pic}}_m" class="image" mode="aspectFill" lazy-load="true"/>
+          <image src="{{item.pic}}_m" class="image" mode="aspectFill"/>
         </view>
         <view class="goods-detail">
           <view class="goods-title">{{item.name}}</view>
@@ -75,7 +75,7 @@
   <view class="partner-container">
     <view class="partner-header">合作伙伴</view>
     <view class="partner-item" wx:for-items="{{partners}}" wx:key="{{index}}">
-      <image src="{{item.picUrl}}_m" class="image" mode="aspectFill" lazy-load="true"/>
+      <image src="{{item.picUrl}}_m" class="image" mode="aspectFill"/>
       <view class="partner-modal"></view>
       <view class="partner-name">- {{item.title}} -</view>
     </view>

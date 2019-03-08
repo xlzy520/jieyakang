@@ -8,7 +8,7 @@ Page({
     // autoplay: true,
     // interval: 3000,
     // duration: 1000,
-    loadingHidden: false, // loading
+    // loadingHidden: false, // loading
     userInfo: {},
     // swiperCurrent: 0,
     // selectCurrent: 0,
@@ -16,8 +16,8 @@ Page({
     activeCategoryId: 0,
     goods: [],
     partners: [],
-    scrollTop: 0,
-    loadingMoreHidden: true,
+    // scrollTop: 0,
+    // loadingMoreHidden: true,
     
     // hasNoCoupons: true,
     // coupons: [],
@@ -125,9 +125,9 @@ Page({
       categoryId = "";
     }
     var that = this;
-    wx.showLoading({
-      "mask": true
-    })
+    // wx.showLoading({
+    //   "mask": true
+    // })
     WXAPI.goods({
       categoryId: categoryId,
       nameLike: that.data.searchInput,
@@ -140,7 +140,7 @@ Page({
       wx.hideLoading()
       if (res.code == 404 || res.code == 700) {
         let newData = {
-          loadingMoreHidden: false
+          // loadingMoreHidden: false
         }
         if (!append) {
           newData.goods = []
@@ -156,7 +156,7 @@ Page({
         goods.push(res.data[i]);
       }
       that.setData({
-        loadingMoreHidden: true,
+        // loadingMoreHidden: true,
         goods: goods,
       });
     })
@@ -266,10 +266,10 @@ Page({
     });
     this.getGoodsList(this.data.activeCategoryId, true)
   },
-  onPullDownRefresh: function () {
-    this.setData({
-      curPage: 1
-    });
-    this.getGoodsList(this.data.activeCategoryId)
-  }
+  // onPullDownRefresh: function () {
+  //   this.setData({
+  //     curPage: 1
+  //   });
+  //   this.getGoodsList(this.data.activeCategoryId)
+  // }
 })

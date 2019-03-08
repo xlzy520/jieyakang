@@ -113,7 +113,7 @@
 .goods-box .img-box{
   width: 260rpx;
   height: 180rpx;
-  border: 2px solid #f0f0f0;
+  border: 1.5px solid #f0f0f0;
   border-radius: 10rpx;
   overflow: hidden;
 }
@@ -143,6 +143,7 @@
   white-space: nowrap;
   padding: 24rpx 0 0 0;
   color:#000;
+  margin-bottom: 30rpx;
 }
 .goods-box .goods-price{
   font-family: Mark Pro Regular, sans-serif;
@@ -150,17 +151,17 @@
   color:#ea5255;
 }
 .goods-select{
+  font-family: PingFang SC Medium, sans-serif;
   width: 126rpx;
   height: 54rpx;
   line-height: 54rpx;
-  border: 4rpx solid #ea5255;
+  border: 3.5rpx solid #ea5255;
   border-radius: 14rpx;
   /*padding: 10rpx;*/
   text-align: center;
   vertical-align: middle;
   color: #ea5255;
   font-size: 28rpx;
-  font-weight: bold;
 }
 .partner-container .partner-item{
   width: 100%;
