@@ -1,6 +1,7 @@
 /**index.wxss**/
 
 .container {
+  font-family: PingFang SC, serif;
   background-color: #f2f2f2;
   min-height: 100%;
   display: block;
@@ -80,12 +81,13 @@
   border-radius: 10rpx;
   margin-top: 20rpx;
 }
-.goods-header, .partner-title{
+.goods-header, .partner-header{
+  font-family: PingFang SC Bold, sans-serif;
   padding: 10rpx 30rpx 20rpx;
-  font-size: 24rpx;
-  font-weight: bolder;
+  font-size: 35rpx;
+  font-weight: 600;
 }
-.goods-header::before,.partner-title::before{
+.goods-header::before,.partner-header::before{
   content: "";
   margin-right: 15rpx;
   border-left: 8rpx solid;
@@ -128,16 +130,18 @@
 }
 .goods-box .goods-title, .goods-box .goods-price{
   overflow: hidden;
-  font-size: 24rpx;
+  font-size: 30rpx;
   margin-left: 48rpx;
 }
 .goods-box .goods-title{
+  font-family: PingFang SC Medium, sans-serif;
   text-overflow: ellipsis;
   white-space: nowrap;
   padding: 24rpx 0 0 0;
   color:#000;
 }
 .goods-box .goods-price{
+  font-family: MarkPro, sans-serif;
   padding: 24rpx 0;
   color:#e64340;
 }
@@ -148,29 +152,29 @@
   flex-direction: column;
   align-items: center;
   margin: 0 30rpx 30rpx;
-  border-radius: 10rpx;
 }
 .partner-item image{
   width: 100%;
-  height: 210rpx;
-  margin: auto;
+  height: 250rpx;
+  border-radius: 12rpx;
 }
 .partner-modal{
   position: absolute;
-  height: 210rpx;
+  height: 250rpx;
   width: 92%;
   background-color: rgba(0, 0, 0, 0.36);
+  border-radius: 12rpx;
 }
 .partner-name{
   color: #fff;
   font-size: 35rpx;
-  font-weight: bold;
+  font-weight: 500;
   position: absolute;
 }
 .no-more-goods{
   text-align: center;
   font-size: 24rpx;
-  padding-bottom:48rpx;
+  padding: 24rpx 0;
   color: #999;
 }
 .type-container{

@@ -70,7 +70,7 @@
     </view>
   </view>
   <view class="partner-container">
-    <view class="partner-title">合作伙伴</view>
+    <view class="partner-header">合作伙伴</view>
     <view class="partner-item" wx:for-items="{{partners}}" wx:key="{{index}}">
       <image src="{{item.picUrl}}_m" class="image" mode="aspectFill" lazy-load="true"/>
       <view class="partner-modal"></view>
