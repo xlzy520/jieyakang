@@ -1,7 +1,5 @@
 const WXAPI = require('../../wxapi/main')
 const CONFIG = require('../../config.js')
-//获取应用实例
-// var app = getApp()
 Page({
   data: {
     // indicatorDots: true,
@@ -161,77 +159,6 @@ Page({
       });
     })
   },
-  // getCoupons: function () {
-  //   var that = this;
-  //   WXAPI.coupons().then(function (res) {
-  //     if (res.code == 0) {
-  //       that.setData({
-  //         hasNoCoupons: false,
-  //         coupons: res.data
-  //       });
-  //     }
-  //   })
-  // },
-  
-  // gitCoupon: function (e) {
-  //   const that = this
-  //   if (e.currentTarget.dataset.pwd) {
-  //     wx.navigateTo({
-  //       url: "/pages/fetch-coupon/index?id=" + e.currentTarget.dataset.id
-  //     })
-  //     return
-  //   }
-  //   WXAPI.fetchCoupons({
-  //     id: e.currentTarget.dataset.id,
-  //     token: wx.getStorageSync('token')
-  //   }).then(function (res) {
-  //     if (res.code === 20001 || res.code === 20002) {
-  //       wx.showModal({
-  //         title: '错误',
-  //         content: '来晚了',
-  //         showCancel: false
-  //       })
-  //       return;
-  //     }
-  //     if (res.code === 20003) {
-  //       wx.showModal({
-  //         title: '错误',
-  //         content: '你领过了，别贪心哦~',
-  //         showCancel: false
-  //       })
-  //       return;
-  //     }
-  //     if (res.code === 30001) {
-  //       wx.showModal({
-  //         title: '错误',
-  //         content: '您的积分不足',
-  //         showCancel: false
-  //       })
-  //       return;
-  //     }
-  //     if (res.code === 20004) {
-  //       wx.showModal({
-  //         title: '错误',
-  //         content: '已过期~',
-  //         showCancel: false
-  //       })
-  //       return;
-  //     }
-  //     if (res.code === 0) {
-  //       wx.showToast({
-  //         title: '领取成功，赶紧去下单吧~',
-  //         icon: 'success',
-  //         duration: 2000
-  //       })
-  //     } else {
-  //       wx.showModal({
-  //         title: '错误',
-  //         content: res.msg,
-  //         showCancel: false
-  //       })
-  //     }
-  //   })
-  // },
   onShareAppMessage: function () {
     return {
       title: wx.getStorageSync('mallName') + '——' + CONFIG.shareProfile,
@@ -254,22 +181,10 @@ Page({
       }
     })
   },
-  // toSearch: function () {
-  //   this.setData({
-  //     curPage: 1
-  //   });
-  //   this.getGoodsList(this.data.activeCategoryId);
-  // },
   onReachBottom: function () {
     this.setData({
       curPage: this.data.curPage + 1
     });
     this.getGoodsList(this.data.activeCategoryId, true)
-  },
-  // onPullDownRefresh: function () {
-  //   this.setData({
-  //     curPage: 1
-  //   });
-  //   this.getGoodsList(this.data.activeCategoryId)
-  // }
+  }
 })
