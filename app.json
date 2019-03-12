@@ -32,9 +32,9 @@
     "onReachBottomDistance":50
   },
   "tabBar": {
-    "color": "#6e6d6b",
-    "selectedColor": "#e64340",
-    "borderStyle": "white",
+    "color": "#8e8d90",
+    "selectedColor": "#ea5255",
+    "borderStyle": "black",
     "backgroundColor": "#fff",
     "list": [{
      "pagePath": "pages/index/index",
