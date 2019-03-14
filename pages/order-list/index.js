@@ -3,9 +3,9 @@ const app = getApp()
 const WXAPI = require('../../wxapi/main')
 Page({
   data: {
-    statusType: ["待付款", "待发货", "待收货", "待评价", "已完成"],
+    statusType: ["待付款", "待发货", "待收货", "已确认"],
     currentType: 0,
-    tabClass: ["", "", "", "", ""]
+    tabClass: ["", "", "", ""]
   },
   statusTap: function(e) {
     const curType = e.currentTarget.dataset.index;

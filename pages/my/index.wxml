@@ -22,7 +22,7 @@
       </view>
       <view class='item' bindtap='goOrder' data-type="3">
         <image class="icon" src="/images/order/pj.png" background-size="cover"></image>
-        <view class='text'>待评价</view>
+        <view class='text'>已确认</view>
       </view>
     </view>
   </view>
