@@ -181,10 +181,10 @@ Page({
       }
     })
   },
-  onReachBottom: function () {
-    this.setData({
-      curPage: this.data.curPage + 1
-    });
-    this.getGoodsList(this.data.activeCategoryId, true)
-  }
+  // onReachBottom: function () {
+  //   this.setData({
+  //     curPage: this.data.curPage + 1
+  //   });
+  //   this.getGoodsList(this.data.activeCategoryId, true)
+  // }
 })
