@@ -64,7 +64,7 @@ Page({
         that.setData({
           hasMoreSelect: true,
           selectSize: that.data.selectSize + selectSizeTemp,
-          selectSizePrice: res.data.basicInfo.minPrice,
+          selectSizePrice: (res.data.basicInfo.minPrice).toFixed(2),
           totalScoreToPay: res.data.basicInfo.minScore
         });
       }
@@ -74,7 +74,7 @@ Page({
       }
       that.setData({
         goodsDetail: res.data,
-        selectSizePrice: res.data.basicInfo.minPrice,
+        selectSizePrice: (res.data.basicInfo.minPrice).toFixed(2),
         totalScoreToPay: res.data.basicInfo.minScore,
         buyNumMax: res.data.basicInfo.stores,
         buyNumber: (res.data.basicInfo.stores > 0) ? 1 : 0
@@ -98,7 +98,7 @@ Page({
   tobuy: function() {
     this.setData({
       shopType: "tobuy",
-      selectSizePrice: this.data.goodsDetail.basicInfo.minPrice
+      selectSizePrice: (this.data.goodsDetail.basicInfo.minPrice).toFixed(2)
     });
     this.bindGuiGeTap();
   },
