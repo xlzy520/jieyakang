@@ -102,8 +102,8 @@
   text-align: center;
 }
 .order-shortcut .item .icon {
-  width: 67rpx;
-  height: 67rpx;
+  width: 56rpx;
+  height: 56rpx;
   margin-left: 60rpx;
 }
 .order-shortcut .item .text {
