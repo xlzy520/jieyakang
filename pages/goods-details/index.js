@@ -82,7 +82,7 @@ Page({
       WxParse.wxParse('article', 'html', res.data.content, that, 5);
     })
     this.reputation(e.id);
-    this.getKanjiaInfo(e.id);
+    // this.getKanjiaInfo(e.id);
   },
   goShopCar: function() {
     wx.reLaunch({
