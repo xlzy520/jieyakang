@@ -1,6 +1,5 @@
 const WXAPI = require('../../wxapi/main')
 //获取应用实例
-var app = getApp();
 var WxParse = require('../../wxParse/wxParse.js');
 
 Page({
