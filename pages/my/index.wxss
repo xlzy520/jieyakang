@@ -1,11 +1,13 @@
 .container{
-  min-height: 100%;
+  min-height: 100vh;
   overflow: hidden;
   background-image: url(https://cdn.it120.cc/apifactory/2019/03/07/1c731c0a355da6c7f0e163fa1917d4d3.png);
   background-position: 0 -128rpx;
   background-size: 750rpx auto,1500rpx, auto;
   background-repeat: no-repeat;
   background-color: #f8f8f8;
+  color: #000;
+  justify-content: normal;
 }
 
 .userinfo {
@@ -23,12 +25,13 @@
   background-color: #b90105;
 }
 .userinfo-nickname {
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
-  font-size: 14px;
+  font-family: PingFang SC Medium, sans-serif;
+  margin: 20rpx 0;
+  font-size: 36rpx;
 }
 
 .my-item{
+  font-family: PingFang SC Medium, sans-serif;
   background-color: #fff;
   width: 100%;
   /*background: url(https://cdn.it120.cc/images/weappshop/arrow-right.png) no-repeat 750rpx center;*/
@@ -38,21 +41,23 @@
   line-height: 120rpx;
   padding-left: 100rpx;
   display: flex;
+  align-items: center;
 }
 .my-item-img{
   width: 50rpx;
   height: 36rpx;
 }
 .my-item-title{
-
+  margin-left: 30rpx;
+  flex: 0.7;
 }
 .my-item-subtitle{
-
+  color: #999;
 }
-navigator{
-  display: flex;
-  justify-content: space-between;
-  font-size: 30rpx;
+.arrow-right{
+  width: 24rpx;
+  height: 30rpx;
+  margin-left: 30rpx;
 }
 .my-order{
   width: 92%;
@@ -64,7 +69,7 @@ navigator{
   justify-content: flex-start;
 }
 .my-order-title{
-  font-family: PingFang SC Bold, sans-serif;
+  font-family: PingFang SC, sans-serif;
   padding: 30rpx 30rpx 0;
   font-size: 30rpx;
   font-weight: 600;
@@ -102,5 +107,9 @@ navigator{
   margin-left: 60rpx;
 }
 .order-shortcut .item .text {
-  font-size: 12px;
+  font-size: 26rpx;
+  margin-top: 10rpx;
+}
+.relogin{
+  margin-top: 30rpx;
 }

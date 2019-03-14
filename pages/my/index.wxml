@@ -26,20 +26,22 @@
       </view>
     </view>
   </view>
-  <view class="my-item">
+  <navigator class="my-item" url="/pages/select-address/index" hover-class="navigator-hover">
     <image class="my-item-img" src="/images/order-details/icon-address.png"></image>
     <view class="my-item-title">地址信息</view>
     <view class="my-item-subtitle">收货地址与信息</view>
+    <image class="arrow-right" src="/images/arrow-right.png"></image>
     <!--<navigator url="/pages/select-address/index" hover-class="navigator-hover">-->
-      <!---->
+    <!---->
     <!--</navigator>-->
-  </view>
+  </navigator>
   <view class="my-item">
     <image class="my-item-img" src="/images/contact_us.png"></image>
     <view class="my-item-title">联系我们</view>
     <view class="my-item-subtitle">联系方式与地址</view>
+    <image class="arrow-right" src="/images/arrow-right.png"></image>
   </view>
-  <view class="my-item" style="border:none;padding:0rpx;margin:0rpx;background:none;border:none;height:auto;line-height:auto;">
+  <view class="relogin">
     <button type="warn" bindtap="relogin">重新授权登录</button>
   </view>
 </view>
