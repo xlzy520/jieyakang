@@ -110,6 +110,12 @@
   font-size: 26rpx;
   margin-top: 10rpx;
 }
+.badge{
+  position: absolute;
+  top: 0;
+  left: 10rpx;
+  color: #f22d47;
+}
 .relogin{
   margin-top: 30rpx;
 }

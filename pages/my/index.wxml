@@ -15,6 +15,7 @@
       <view class='item' bindtap='goOrder' data-type="1">
         <image class="icon" src="/images/order/processed.png" background-size="cover"></image>
         <view class='text'>待发货</view>
+        <view class="badge">8</view>
       </view>
       <view class='item' bindtap='goOrder' data-type="2">
         <image class="icon" src="/images/order/dispatched.png" background-size="cover"></image>
