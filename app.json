@@ -9,14 +9,12 @@
     "pages/address-add/index",
     "pages/order-list/index",
     "pages/order-details/index",
-    "pages/wuliu/index",
     "pages/my/index",
     "pages/notice/show",
     "pages/recharge/index",
     "pages/withdraw/index",
     "pages/authorize/index",
     "pages/asset/index",
-    "pages/score/index",
     "pages/sign/index",
     "pages/category/category"
   ],
@@ -38,11 +36,17 @@
       "selectedIconPath": "images/nav/home-on.png",
       "text": "首页"
     },
+      {
+        "pagePath": "pages/shop-cart/index",
+        "iconPath": "images/nav/tableware-off.png",
+        "selectedIconPath": "images/nav/tableware-on.png",
+        "text": "餐具"
+      },
     {
       "pagePath": "pages/shop-cart/index",
-      "iconPath": "images/nav/cart-off.png",
-      "selectedIconPath": "images/nav/cart-on.png",
-      "text": "购物车"
+      "iconPath": "images/nav/order-off.png",
+      "selectedIconPath": "images/nav/order-on.png",
+      "text": "订单"
     },
     {
       "pagePath": "pages/my/index",
