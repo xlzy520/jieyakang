@@ -9,19 +9,19 @@
     <view class="my-order-title">我的订单</view>
     <view class='order-shortcut'>
       <view class='item' bindtap='goOrder' data-type="0">
-        <image class="icon" src="/images/order/topay.png" background-size="cover"></image>
-        <view class='text'>待付款</view>
+        <image class="icon" src="/images/order/order.png" background-size="cover"></image>
+        <view class='text'>我的订单</view>
       </view>
       <view class='item' bindtap='goOrder' data-type="1">
-        <image class="icon" src="/images/order/fahuo.png" background-size="cover"></image>
+        <image class="icon" src="/images/order/processed.png" background-size="cover"></image>
         <view class='text'>待发货</view>
       </view>
       <view class='item' bindtap='goOrder' data-type="2">
-        <image class="icon" src="/images/order/shouhuo.png" background-size="cover"></image>
+        <image class="icon" src="/images/order/dispatched.png" background-size="cover"></image>
         <view class='text'>待收货</view>
       </view>
       <view class='item' bindtap='goOrder' data-type="3">
-        <image class="icon" src="/images/order/pj.png" background-size="cover"></image>
+        <image class="icon" src="/images/order/confirmed.png" background-size="cover"></image>
         <view class='text'>已确认</view>
       </view>
     </view>
@@ -31,9 +31,6 @@
     <view class="my-item-title">地址信息</view>
     <view class="my-item-subtitle">收货地址与信息</view>
     <image class="arrow-right" src="/images/arrow-right.png"></image>
-    <!--<navigator url="/pages/select-address/index" hover-class="navigator-hover">-->
-    <!---->
-    <!--</navigator>-->
   </navigator>
   <view class="my-item">
     <image class="my-item-img" src="/images/contact_us.png"></image>
@@ -41,7 +38,7 @@
     <view class="my-item-subtitle">联系方式与地址</view>
     <image class="arrow-right" src="/images/arrow-right.png"></image>
   </view>
-  <view class="relogin">
-    <button type="warn" bindtap="relogin">重新授权登录</button>
-  </view>
+  <!--<view class="relogin">-->
+    <!--<button type="warn" bindtap="relogin">重新授权登录</button>-->
+  <!--</view>-->
 </view>
