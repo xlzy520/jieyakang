@@ -1,6 +1,5 @@
 {
-  "pages":[
-    "pages/start/start",
+  "pages": [
     "pages/index/index",
     "pages/goods-details/index",
     "pages/shop-cart/index",
@@ -10,6 +9,7 @@
     "pages/order-list/index",
     "pages/order-details/index",
     "pages/my/index",
+    "pages/tableware/index",
     "pages/notice/show",
     "pages/recharge/index",
     "pages/withdraw/index",
@@ -18,42 +18,44 @@
     "pages/sign/index",
     "pages/category/category"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f8f8f8",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black",
-    "onReachBottomDistance":50
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 50
   },
   "tabBar": {
     "color": "#8e8d90",
     "selectedColor": "#ea5255",
     "borderStyle": "black",
     "backgroundColor": "#fff",
-    "list": [{
-     "pagePath": "pages/index/index",
-      "iconPath": "images/nav/home-off.png",
-      "selectedIconPath": "images/nav/home-on.png",
-      "text": "首页"
-    },
+    "list": [
       {
-        "pagePath": "pages/shop-cart/index",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/nav/home-off.png",
+        "selectedIconPath": "images/nav/home-on.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/tableware/index",
         "iconPath": "images/nav/tableware-off.png",
         "selectedIconPath": "images/nav/tableware-on.png",
         "text": "餐具"
       },
-    {
-      "pagePath": "pages/shop-cart/index",
-      "iconPath": "images/nav/order-off.png",
-      "selectedIconPath": "images/nav/order-on.png",
-      "text": "订单"
-    },
-    {
-      "pagePath": "pages/my/index",
-      "iconPath": "images/nav/my-off.png",
-      "selectedIconPath": "images/nav/my-on.png",
-      "text": "我的"
-    }]
+      {
+        "pagePath": "pages/shop-cart/index",
+        "iconPath": "images/nav/order-off.png",
+        "selectedIconPath": "images/nav/order-on.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "iconPath": "images/nav/my-off.png",
+        "selectedIconPath": "images/nav/my-on.png",
+        "text": "我的"
+      }
+    ]
   },
   "navigateToMiniProgramAppIdList": [
     "wx0db38963938fe329"
