@@ -62,27 +62,6 @@ App({
         wx.setStorageSync('mallName', res.data.value);
       }
     })
-    WXAPI.scoreRules({
-      code: 'goodReputation'
-    }).then(function(res) {
-      if (res.code == 0) {        
-        that.globalData.order_reputation_score = res.data[0].score;
-      }
-    })
-    // 获取充值的最低金额
-    WXAPI.queryConfig({
-      key: 'recharge_amount_min'
-    }).then(function(res) {
-      if (res.code == 0) {
-        that.globalData.recharge_amount_min = res.data.value;
-      }
-    })
-    // 获取砍价设置
-    WXAPI.kanjiaList().then(function(res) {
-      if (res.code == 0) {
-        that.globalData.kanjiaList = res.data.result;
-      }
-    })
     // 判断是否登录
     let token = wx.getStorageSync('token');
     if (!token) {
@@ -114,7 +93,7 @@ App({
       })
     }, 1000)
   },
-  globalData: {                
+  globalData: {
     isConnected: true
-  }  
+  }
 })
