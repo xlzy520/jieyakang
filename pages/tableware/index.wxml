@@ -2,7 +2,6 @@
 <!--1px = 750/320 = 2.34rpx;-->
 <view class="container">
   <view class="goods-container">
-    <view class="goods-header">餐具产品</view>
     <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
       <view class="goods-item">
         <view class="img-box">

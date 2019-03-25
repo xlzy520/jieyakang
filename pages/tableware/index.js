@@ -22,25 +22,6 @@ Page({
      * 示例：
      * 调用接口封装方法
      */
-    // WXAPI.banners({type: 'index'}).then(function (res) {
-    //   if (res.code == 700) {
-    //     wx.showModal({
-    //       title: '提示',
-    //       content: '请在后台添加 banner 轮播图片，自定义类型填写 index',
-    //       showCancel: false
-    //     })
-    //   }
-    //   else {
-    //     that.setData({
-    //       banners: res.data
-    //     });
-    //   }
-    // }).catch(function (e) {
-    //   wx.showToast({
-    //     title: res.msg,
-    //     icon: 'none'
-    //   })
-    // })
     WXAPI.goodsCategory().then(function (res) {
       var categories = [{
         id: 0,
@@ -69,7 +50,6 @@ Page({
     // })
     WXAPI.goods({
       categoryId: categoryId,
-      nameLike: that.data.searchInput,
       page: this.data.curPage,
       pageSize: this.data.pageSize
     }).then(function (res) {

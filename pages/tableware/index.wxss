@@ -1,32 +1,8 @@
-/**index.wxss**/
-
 .container {
   font-family: PingFang SC, serif;
   background-color: #f8f8f8;
-  min-height: 100%;
+  min-height: 100vh;
   display: block;
-}
-.goods-container, .partner-container{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap:wrap;
-  background-color: #fff;
-  box-sizing: content-box;
-  padding: 15rpx 0;
-  border-radius: 10rpx;
-  margin-top: 20rpx;
-}
-.goods-header, .partner-header{
-  font-family: PingFang SC Bold, sans-serif;
-  padding: 10rpx 30rpx 20rpx;
-  font-size: 35rpx;
-  font-weight: 600;
-}
-.goods-header::before,.partner-header::before{
-  content: "";
-  margin-right: 15rpx;
-  border-left: 8rpx solid;
-  border-left-color: #f22d47;
 }
 .goods-box{
   display: flex;
@@ -35,7 +11,7 @@
   margin: auto;
   overflow: hidden;
   margin-bottom: 36rpx;
-  box-shadow: 0 -2rpx 8rpx 0 #fff,-5rpx 5rpx 8rpx 0 #eee,5rpx 12rpx 8rpx 0 #eee,0 10rpx 18rpx 5rpx #eee;
+  background-color: #fff;
 }
 .goods-box .goods-item{
   display: flex;
