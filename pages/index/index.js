@@ -110,7 +110,7 @@ Page({
       that.getGoodsList(0);
     })
     // that.getCoupons();
-    that.getNotice();
+    //that.getNotice();
   },
   onPageScroll(e) {
     let scrollTop = this.data.scrollTop
@@ -171,16 +171,19 @@ Page({
       }
     }
   },
-  getNotice: function () {
-    var that = this;
-    WXAPI.noticeList({pageSize: 5}).then(function (res) {
-      if (res.code == 0) {
-        that.setData({
-          noticeList: res.data
-        });
-      }
-    })
-  },
+  
+  // getNotice: function () {
+  //   var that = this;
+  //   WXAPI.noticeList({pageSize: 5}).then(function (res) {
+  //     if (res.code == 0) {
+  //       that.setData({
+  //         noticeList: res.data
+  //       });
+  //     }
+  //   })
+  // },
+  
+  
   // onReachBottom: function () {
   //   this.setData({
   //     curPage: this.data.curPage + 1
