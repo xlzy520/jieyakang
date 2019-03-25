@@ -48,10 +48,11 @@
   height: 36rpx;
 }
 .my-item-title{
-  margin-left: 30rpx;
+  margin-left: 10rpx;
   flex: 0.7;
 }
 .my-item-subtitle{
+  margin-left: 100rpx;
   color: #999;
 }
 .arrow-right{
@@ -111,10 +112,15 @@
   margin-top: 10rpx;
 }
 .badge{
-  position: absolute;
-  top: 0;
-  left: 10rpx;
-  color: #f22d47;
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  border-radius: 50%;
+  bottom: 125rpx;
+  left: 93rpx;
+  color: #fff;
+  background-color: #ea5255;
+  font-size: 27rpx;
 }
 .relogin{
   margin-top: 30rpx;
