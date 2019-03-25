@@ -7,22 +7,24 @@
     height: 88rpx;
     line-height: 88rpx;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     background-color: #fff;
 }
 .status-box .status-label{
-    width: 150rpx;
+    font-family: PingFang SC, sans-serif;
+    width: 27%;
     height: 100%;
     text-align: center;
-    font-size:28rpx;
-    color:#353535;
+    font-size:36rpx;
+    color: #424242;
     box-sizing: border-box;
     position: relative;
+    font-weight: 500;
 }
 .status-box .status-label.active{
-    color:#e64340;
-    border-bottom: 6rpx solid #e64340;
+    color:#ff001c;
+    border-bottom: 6rpx solid #ff001c;
 }
 .status-box .status-label .red-dot{
     width: 16rpx;
@@ -30,7 +32,7 @@
     position: absolute;
     left: 116rpx;
     top:23rpx;
-    background-color: #f43530;
+    background-color: #ff001c;
     border-radius: 50%;
 }
 .no-order{
@@ -45,14 +47,26 @@
     background-color: #F2f2f2;
 }
 .no-order-img{
-    width: 81rpx;
-    height: 96rpx;
+    width: 212rpx;
+    height: 213rpx;
     margin-bottom: 31rpx;
 }
 .no-order .text{
-    font-size:28rpx;
+    font-size:36rpx;
     color:#999999;
     text-align: center
+}
+.no-order-index-page{
+    width: 200rpx;
+    height: 54rpx;
+    line-height: 54rpx;
+    margin: auto;
+    color: #fff;
+    font-size: 30rpx;
+    padding: 10rpx 30rpx;
+    background-color: #ff001c;
+    border-radius: 12rpx;
+    margin-top: 40rpx;
 }
 .order-list{
     width: 100%;
@@ -73,7 +87,7 @@
 }
 .order-list .a-order .order-date .red{
     font-size:26rpx;
-    color:#e64340;
+    color:#ff001c;
 }
 .a-order  .goods-info,
 .goods-img-container{
