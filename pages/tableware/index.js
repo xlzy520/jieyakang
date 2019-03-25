@@ -1,61 +1,18 @@
 const WXAPI = require('../../wxapi/main')
-const CONFIG = require('../../config.js')
 Page({
   data: {
-    // indicatorDots: true,
-    // autoplay: true,
-    // interval: 3000,
-    // duration: 1000,
-    // loadingHidden: false, // loading
-    userInfo: {},
-    // swiperCurrent: 0,
-    // selectCurrent: 0,
     categories: [],
     activeCategoryId: 0,
     goods: [],
-    partners: [],
-    // scrollTop: 0,
-    // loadingMoreHidden: true,
-    
-    // hasNoCoupons: true,
-    // coupons: [],
-    searchInput: '',
     
     curPage: 1,
     pageSize: 20
   },
-  
-  // tabClick: function(e) {
-  //   this.setData({
-  //     activeCategoryId: e.currentTarget.id,
-  //     curPage: 1
-  //   });
-  //   this.getGoodsList(this.data.activeCategoryId);
-  // },
-  //事件处理函数
-  // swiperchange: function(e) {
-  //   //console.log(e.detail.current)
-  //   this.setData({
-  //     swiperCurrent: e.detail.current
-  //   })
-  // },
   toDetailsTap: function (e) {
     wx.navigateTo({
       url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
     })
   },
-  // tapBanner: function(e) {
-  //   if (e.currentTarget.dataset.id != 0) {
-  //     wx.navigateTo({
-  //       url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
-  //     })
-  //   }
-  // },
-  // bindTypeTap: function(e) {
-  //   this.setData({
-  //     selectCurrent: e.index
-  //   })
-  // },
   onLoad: function () {
     var that = this
     wx.setNavigationBarTitle({
@@ -84,20 +41,12 @@ Page({
     //     icon: 'none'
     //   })
     // })
-    WXAPI.getPartner({
-      type: 'index',
-      token: wx.getStorageSync('token')
-    }).then(function (res) {
-      that.setData({
-        partners: res.data
-      })
-    })
     WXAPI.goodsCategory().then(function (res) {
       var categories = [{
         id: 0,
         name: "全部"
       }];
-      if (res.code == 0) {
+      if (res.code === 0) {
         for (var i = 0; i < res.data.length; i++) {
           categories.push(res.data[i]);
         }
@@ -108,14 +57,6 @@ Page({
         curPage: 1
       });
       that.getGoodsList(0);
-    })
-    // that.getCoupons();
-    that.getNotice();
-  },
-  onPageScroll(e) {
-    let scrollTop = this.data.scrollTop
-    this.setData({
-      scrollTop: e.scrollTop
     })
   },
   getGoodsList: function (categoryId, append) {
@@ -157,28 +98,6 @@ Page({
         // loadingMoreHidden: true,
         goods: goods,
       });
-    })
-  },
-  onShareAppMessage: function () {
-    return {
-      title: wx.getStorageSync('mallName') + '——' + CONFIG.shareProfile,
-      path: '/pages/index/index',
-      success: function (res) {
-        // 转发成功
-      },
-      fail: function (res) {
-        // 转发失败
-      }
-    }
-  },
-  getNotice: function () {
-    var that = this;
-    WXAPI.noticeList({pageSize: 5}).then(function (res) {
-      if (res.code == 0) {
-        that.setData({
-          noticeList: res.data
-        });
-      }
     })
   },
   // onReachBottom: function () {
