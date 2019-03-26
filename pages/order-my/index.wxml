@@ -8,8 +8,8 @@
   </view>
   <view class="no-order" hidden="{{orderList ? true : false}}">
     <image src="/images/no-order.png" class="no-order-img"></image>
-    <view class="text" wx:if="{{currentType === 0}}">暂无订单，去别处看看吧。</view>
-    <view class="text" wx:if="{{currentType !== 0}}">暂无{{statusType[currentType]}}订单，切换全部看看吧～</view>
+    <view class="text" wx:if="{{currentType === '0'}}">暂无订单，去别处看看吧。</view>
+    <view class="text" wx:if="{{currentType !== '0'}}">暂无{{statusType[currentType]}}订单，切换全部看看吧～</view>
     <view bindtap="goBack" class="no-order-back">返回</view>
   </view>
   <view class="order-list" hidden="{{orderList ? false : true}}">
