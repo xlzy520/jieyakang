@@ -15,8 +15,7 @@
     "pages/withdraw/index",
     "pages/authorize/index",
     "pages/asset/index",
-    "pages/sign/index",
-    "pages/category/category"
+    "pages/sign/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
