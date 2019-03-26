@@ -9,8 +9,8 @@ Page({
     score_sign_continuous:0
   },
 	onLoad() {
-    
-	},	
+ 
+	},
   onShow() {
     let that = this;
     let userInfo = wx.getStorageSync('userInfo')
@@ -103,7 +103,7 @@ Page({
   },
   goOrder: function (e) {
     wx.navigateTo({
-      url: "/pages/order-list/index?type=" + e.currentTarget.dataset.type
+      url: "/pages/order-my/index?type=" + e.currentTarget.dataset.type
     })
   }
 })
