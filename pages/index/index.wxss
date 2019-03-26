@@ -82,16 +82,20 @@
   margin-top: 20rpx;
 }
 .goods-header, .partner-header{
+  display: flex;
   font-family: PingFang SC Bold, sans-serif;
   padding: 10rpx 30rpx 20rpx;
   font-size: 35rpx;
+  line-height: 35rpx;
   font-weight: 600;
 }
 .goods-header::before,.partner-header::before{
+  display: inline-block;
   content: "";
+  width: 8rpx;
+  height: 35rpx;
   margin-right: 15rpx;
-  border-left: 8rpx solid;
-  border-left-color: #f22d47;
+  background-image: linear-gradient(40deg, #ec693a, #e9425b);
 }
 .goods-box{
   display: flex;

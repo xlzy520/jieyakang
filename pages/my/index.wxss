@@ -31,17 +31,17 @@
 }
 
 .my-item{
+  display: flex;
+  align-items: center;
   font-family: PingFang SC Medium, sans-serif;
+  font-size: 35rpx;
+  color: #000;
   background-color: #fff;
   width: 100%;
-  /*background: url(https://cdn.it120.cc/images/weappshop/arrow-right.png) no-repeat 750rpx center;*/
-  /*background-size: 16rpx auto, 750rpx auto;*/
   border-bottom: 1px solid #eee;
   height: 120rpx;
   line-height: 120rpx;
   padding-left: 100rpx;
-  display: flex;
-  align-items: center;
 }
 .my-item-img{
   width: 50rpx;
@@ -56,9 +56,9 @@
   color: #999;
 }
 .arrow-right{
-  width: 24rpx;
-  height: 30rpx;
-  margin-left: 30rpx;
+  width: 14rpx;
+  height: 24rpx;
+  margin-left: 15rpx;
 }
 .my-order{
   width: 92%;
@@ -70,16 +70,20 @@
   justify-content: flex-start;
 }
 .my-order-title{
+  display: flex;
   font-family: PingFang SC, sans-serif;
   padding: 30rpx 30rpx 0;
-  font-size: 30rpx;
-  font-weight: 600;
+  font-size: 35rpx;
+  line-height: 35rpx;
+  color: #000;
 }
 .my-order-title::before{
+  display: inline-block;
   content: "";
+  width: 6rpx;
+  height: 30rpx;
   margin-right: 15rpx;
-  border-left: 5rpx solid;
-  border-left-color: #f22d47;
+  background-image: linear-gradient(40deg, #ec693a, #e9425b);
 }
 .about{
     width: 100%;
@@ -93,8 +97,7 @@
 
 .order-shortcut {
   display: flex;
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
+  padding-top: 30rpx;
 }
 .order-shortcut .item {
   display: flex;
@@ -108,16 +111,17 @@
   margin-left: 60rpx;
 }
 .order-shortcut .item .text {
+  font-family: PingFang SC Medium;
   font-size: 26rpx;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 .badge{
   width: 40rpx;
   height: 40rpx;
   position: relative;
   border-radius: 50%;
-  bottom: 125rpx;
-  left: 93rpx;
+  bottom: 130rpx;
+  left: 95rpx;
   color: #fff;
   background-color: #ea5255;
   font-size: 27rpx;
