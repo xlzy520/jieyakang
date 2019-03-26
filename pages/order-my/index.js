@@ -15,6 +15,11 @@ Page({
     });
     this.onShow();
   },
+  goBack: function(){
+    wx.navigateBack({
+      delta: 2,
+    })
+  },
   orderDetail: function(e) {
     var orderId = e.currentTarget.dataset.id;
     wx.navigateTo({

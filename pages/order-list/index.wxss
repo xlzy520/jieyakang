@@ -36,6 +36,7 @@
     border-radius: 50%;
 }
 .no-order{
+    font-family: PingFang SC Medium;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -47,26 +48,14 @@
     background-color: #F2f2f2;
 }
 .no-order-img{
-    width: 212rpx;
-    height: 213rpx;
+    width: 203rpx;
+    height: 214rpx;
     margin-bottom: 31rpx;
 }
 .no-order .text{
-    font-size:36rpx;
+    font-size:30rpx;
     color:#999999;
     text-align: center
-}
-.no-order-index-page{
-    width: 200rpx;
-    height: 54rpx;
-    line-height: 54rpx;
-    margin: auto;
-    color: #fff;
-    font-size: 30rpx;
-    padding: 10rpx 30rpx;
-    background-color: #ff001c;
-    border-radius: 12rpx;
-    margin-top: 40rpx;
 }
 .order-list{
     width: 100%;
