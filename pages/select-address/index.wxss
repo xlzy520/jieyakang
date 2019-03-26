@@ -1,52 +1,74 @@
 .container {
-    background-color:#F2f2f2;
+    background-color:#f8f8f8;
+    min-height: 100vh;
 }
 .address-list{
     width: 100%;
-    background-color: #fff;
-    margin-top: 20rpx;
     padding-bottom: 100rpx;
 }
-.address-list .a-address{
-    width: 720rpx;
-    margin-left: 30rpx;
+.address-list .address-item{
+    font-family: PingFang SC Medium;
+    color: #000;
+    width: 690rpx;
+    background-color: #fff;
+    margin: auto;
+    margin-top: 30rpx;
+    padding: 30rpx;
+    border-radius: 15rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1rpx solid #eee;
+    box-shadow: 1rpx 5rpx 10rpx #eee;
+    box-sizing: border-box;
+}
+.address-item .name-tel{
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 30rpx 0;
-    border-bottom: 1rpx solid #eee;
+    font-size: 30rpx;
 }
-.a-address .left-text{
-    width: 610rpx;
-    box-sizing: border-box;
-    padding-left: 58rpx;
+.name-tel .name{
+
 }
-.a-address .left-text.active{
-    background: url(https://cdn.it120.cc/apifactory/2019/03/13/bc82de25c747d446674a89cd37484850.png) no-repeat left center;
-    background-size: 28rpx auto;
+.name-tel .phone{
+    font-family: Mark Pro Regular;
+    color: #999;
+    font-weight: lighter;
 }
-.a-address .left-text .name-tel{
-    margin-bottom: 20rpx;
+.address-item .address-action{
+    display: flex;
+    justify-content: space-between;
 }
-.a-address .left-text .address-box{
-    font-size:24rpx;
-    color:#888888;
-    line-height:36rpx;
+.address-item .address{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 26rpx;
+    padding: 15rpx 0;
 }
-.a-address .right-edit{
-    width: 109rpx;
-    height: 100%;
-    padding: 50rpx 0 50rpx 58rpx;
-    box-sizing: border-box;
-    background: url(https://cdn.it120.cc/apifactory/2019/03/13/316735c9bb35608ccf34b6c7a6321347.png) no-repeat 43rpx center;
-    background-size: 35rpx auto;
+.address-action .address-default{
+     display: flex;
+     justify-content: space-between;
+ }
+.address-action .address-edit{
+    display: flex;
+    justify-content: space-between;
+}
+.address-action .address-edit-text{
+    color: #0087ff;
+}
+ .address-edit-icon, .address-check-icon{
+  width: 45rpx;
+  height: 45rpx;
+}
+.address-action  .address-default-text, .address-action .address-edit-text{
+    font-size: 28rpx;
+    margin-left: 15rpx;
 }
 .bottom-box{
     position: fixed;
     width: 100%;
     bottom: 0;
     font-size:28rpx;
-    color:#000000;
     border-top: 1rpx solid #eee;
     height:100rpx;
     line-height: 100rpx;
