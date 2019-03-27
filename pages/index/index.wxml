@@ -80,5 +80,5 @@
       <view class="partner-name">- {{item.title}} -</view>
     </view>
   </view>
-  <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
+  <view class="no-more-goods">没有更多啦</view>
 </view>

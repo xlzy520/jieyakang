@@ -15,7 +15,6 @@ Page({
     goods: [],
     partners: [],
     // scrollTop: 0,
-    // loadingMoreHidden: true,
     
     // hasNoCoupons: true,
     // coupons: [],
@@ -123,9 +122,9 @@ Page({
       categoryId = "";
     }
     var that = this;
-    // wx.showLoading({
-    //   "mask": true
-    // })
+    wx.showLoading({
+      "mask": true
+    })
     WXAPI.goods({
       categoryId: categoryId,
       nameLike: that.data.searchInput,
@@ -135,10 +134,9 @@ Page({
       res.data.map(function (item) {
         item.minPrice = item.minPrice.toFixed(2)
       })
-      wx.hideLoading()
-      if (res.code == 404 || res.code == 700) {
+      if (res.code === 404 || res.code === 700) {
         let newData = {
-          // loadingMoreHidden: false
+        
         }
         if (!append) {
           newData.goods = []
@@ -154,9 +152,10 @@ Page({
         goods.push(res.data[i]);
       }
       that.setData({
-        // loadingMoreHidden: true,
         goods: goods,
       });
+    }).finally(()=>{
+      wx.hideLoading()
     })
   },
   onShareAppMessage: function () {
@@ -190,4 +189,16 @@ Page({
   //   });
   //   this.getGoodsList(this.data.activeCategoryId, true)
   // }
+  onPullDownRefresh() {
+    wx.showLoading({
+      "mask": true
+    })
+    this.setData({
+      curPage: 1
+    });
+    this.getGoodsList(this.data.activeCategoryId)
+    wx.showNavigationBarLoading()
+    wx.hideLoading()
+    wx.hideNavigationBarLoading()
+  }
 })
