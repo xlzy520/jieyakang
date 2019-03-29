@@ -57,9 +57,9 @@ Page({
   // },
   onLoad: function () {
     var that = this
-    wx.setNavigationBarTitle({
-      title: wx.getStorageSync('mallName')
-    })
+    // wx.setNavigationBarTitle({
+    //   title: wx.getStorageSync('mallName')
+    // })
     /**
      * 示例：
      * 调用接口封装方法
@@ -160,7 +160,8 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-      title: wx.getStorageSync('mallName') + '——' + CONFIG.shareProfile,
+      // title: wx.getStorageSync('mallName') + '——' + CONFIG.shareProfile,
+      title: '洁雅康餐具' + '——' + CONFIG.shareProfile,
       path: '/pages/index/index',
       success: function (res) {
         // 转发成功
