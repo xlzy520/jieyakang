@@ -193,11 +193,12 @@ Page({
     wx.showLoading({
       "mask": true
     })
+    wx.showNavigationBarLoading()
     this.setData({
       curPage: 1
     });
     this.getGoodsList(this.data.activeCategoryId)
-    wx.showNavigationBarLoading()
+    wx.stopPullDownRefresh()
     wx.hideLoading()
     wx.hideNavigationBarLoading()
   }
