@@ -2,16 +2,17 @@
   font-family: PingFang SC, serif;
   background-color: #f8f8f8;
   min-height: 100vh;
-  display: block;
 }
 .goods-box{
   display: flex;
-  width: 90%;
+  width: 690rpx;
   height: 220rpx;
   margin: auto;
   overflow: hidden;
-  margin-bottom: 36rpx;
+  margin-top: 36rpx;
   background-color: #fff;
+  border-radius: 15rpx;
+  box-shadow: 5rpx 15rpx 15rpx #eee;
 }
 .goods-box .goods-item{
   display: flex;
