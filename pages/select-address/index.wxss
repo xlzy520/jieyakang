@@ -1,4 +1,5 @@
 .container {
+    font-family: PingFang SC Medium;
     background-color:#f8f8f8;
     min-height: 100vh;
 }
@@ -45,6 +46,9 @@
     font-size: 26rpx;
     padding: 15rpx 0;
 }
+.address-action{
+    margin-top: 30rpx;
+}
 .address-action .address-default{
      display: flex;
      justify-content: space-between;
@@ -66,18 +70,14 @@
 }
 .bottom-box{
     position: fixed;
-    width: 100%;
-    bottom: 0;
-    font-size:28rpx;
-    border-top: 1rpx solid #eee;
+    width: 690rpx;
+    bottom: 30rpx;
     height:100rpx;
     line-height: 100rpx;
-    background: #fff url(https://cdn.it120.cc/images/weappshop/arrow-right.png) no-repeat 705rpx center;
-    background-size: 15rpx auto;
+    background-color: #ff001c;
+    border-radius: 12rpx;
 }
-.bottom-box .add-btn{
-    margin-left: 30rpx;
-    padding-left: 70rpx;
-    background: url(https://cdn.it120.cc/images/weappshop/add-addr.png) no-repeat left center;
-    background-size: 40rpx auto;
+.bottom-box .add-address{
+    color: #fff;
+    text-align: center;
 }

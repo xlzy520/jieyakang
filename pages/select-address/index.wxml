@@ -19,7 +19,7 @@
                     <image class="address-check-icon" src="/images/addr-uncheck.png" wx:if="{{!item.isDefault}}"></image>
                     <view class="address-default-text">默认地址</view>
                 </view>
-                <view class="address-edit" bindtap="editAddess" data-id="{{item.id}}">
+                <view class="address-edit" catchtap="editAddress" data-id="{{item.id}}">
                     <image src="/images/addr-edit.png" class="address-edit-icon"></image>
                     <view class="address-edit-text">编辑</view>
                 </view>
@@ -27,6 +27,6 @@
         </view>
     </view>
     <view class="bottom-box">
-        <view class="add-btn" bindtap="addAddess">新增收货地址</view>
+        <view class="add-address" bindtap="addAddress">添加新地址</view>
     </view>
 </view>
