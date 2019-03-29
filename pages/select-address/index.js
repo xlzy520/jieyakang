@@ -12,7 +12,8 @@ Page({
       isDefault: 'true'
     }).then(() => {
       wx.showToast({
-        title: '设置成功'
+        title: '设置成功',
+        duration: 1000
       })
       this.initShippingAddress()
     })
