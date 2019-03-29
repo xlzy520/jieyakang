@@ -1,0 +1,10 @@
+<view class="contact-us container">
+    <view class="info-item address">
+        <view class="address-text">公司地址：{{companyAddress}}</view>
+        <view class="copy" bindtap="copyAddress">复制</view>
+    </view>
+    <view class="info-item phone">
+        <view class="phone-text">公司电话：{{companyPhone}}</view>
+        <view class="call" bindtap="call">拨打</view>
+    </view>
+</view>

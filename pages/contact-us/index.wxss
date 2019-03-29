@@ -1,0 +1,27 @@
+.contact-us{
+  font-family: PingFang SC Medium, sans-serif;
+}
+.contact-us .info-item{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 30rpx;
+  padding: 30rpx 0;
+  text-align: left;
+  border-top: 1px solid #e5e5e5;
+}
+.info-item.phone{
+  border-bottom: 1px solid #e5e5e5;
+}
+.phone-text, .address-text{
+  text-indent: 30rpx;
+}
+.copy, .call{
+  padding: 5rpx 5rpx;
+  margin-right: 15rpx;
+  width: 100rpx;
+  background-color: #ff001c;
+  color: #fff;
+  border-radius: 10rpx;
+  text-align: center;
+}
