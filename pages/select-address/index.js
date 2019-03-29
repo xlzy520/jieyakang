@@ -5,14 +5,14 @@ Page({
   },
 
   selectTap(e) {
-    const id = e.currentTarget.dataset.id;
+    const { id } = e.currentTarget.dataset;
     WXAPI.updateAddress({
       token: wx.getStorageSync('token'),
       id: id,
       isDefault: 'true'
     }).then(() => {
       wx.showToast({
-        title: '设置默认地址成功'
+        title: '设置成功'
       })
       this.initShippingAddress()
     })
