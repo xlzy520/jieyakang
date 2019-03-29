@@ -1,8 +1,6 @@
-const app = getApp()
 const WXAPI = require('../../wxapi/main')
 
 Page({
-
   /**
    * 页面的初始数据
    */
