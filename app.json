@@ -1,11 +1,12 @@
 {
   "pages": [
+    "pages/address-add/index",
     "pages/index/index",
     "pages/goods-details/index",
     "pages/to-pay-order/index",
     "pages/select-address/index",
     "pages/contact-us/index",
-    "pages/address-add/index",
+
     "pages/order-list/index",
     "pages/order-my/index",
     "pages/order-details/index",

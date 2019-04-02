@@ -1,8 +1,8 @@
 <view class="container">
-    <form bindsubmit="bindSave">
+    <form bindsubmit="bindSave" class="form-content">
         <view class="form-box">
             <view class="row-wrap">
-                <input name="linkMan" class="input" type="text" placeholder-class="phcolor"
+                <input name="linkMan" class="input" type="text" placeholder-class="phcolor" maxlength="20"
                        placeholder="收货人" value="{{addressData.linkMan}}{{wxaddress.userName}}"/>
             </view>
             <view class="row-wrap">
@@ -18,10 +18,16 @@
             <view class="addr-default-text">设为默认地址</view>
             <view class="addr-default-true"></view>
         </view>
-        <button type="warn" class="save-btn" formType="submit">保存</button>
+        <button class="save-btn" formType="submit">保存</button>
         <button type="default" class="save-btn" bindtap="deleteAddress" data-id="{{addressData.id}}"
                 wx:if="{{addressData}}">删除该地址
         </button>
-        <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+        <!--<button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>-->
     </form>
+    <view class="dialog" wx:if="{{tipText}}">
+        <view class="dialog-content">
+            <view class="tip-text">{{tipText}}</view>
+            <view class="tip-ok" bindtap="close">好的</view>
+        </view>
+    </view>
 </view>

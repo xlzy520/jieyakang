@@ -4,38 +4,35 @@ const WXAPI = require('../../wxapi/main')
 var app = getApp()
 Page({
   data: {
-  
+    tipText: ''
   },
-  bindCancel:function () {
+  bindCancel: function () {
     wx.navigateBack({})
+  },
+  checkPhone(phone) {
+    return /^1[34578]\d{9}$/.test(phone)
   },
   bindSave(e) {
     const linkMan = e.detail.value.linkMan;
     const address = e.detail.value.address;
     const mobile = e.detail.value.mobile;
-    const code = e.detail.value.code;
-
-    if (linkMan === ""){
-      wx.showModal({
-        title: '提示',
-        content: '请填写收货人姓名',
-        showCancel:false
+    const code = '000000';
+    
+    if (linkMan.length < 2 || linkMan.length > 20) {
+      this.setData({
+        tipText: '收货人姓名长度需要在2-20个字符之间'
       })
       return
     }
-    if (mobile === ""){
-      wx.showModal({
-        title: '提示',
-        content: '请填写手机号码',
-        showCancel:false
+    if (!this.checkPhone(mobile)) {
+      this.setData({
+        tipText: '请填写正确的手机号码'
       })
       return
     }
-    if (address === ""){
-      wx.showModal({
-        title: '提示',
-        content: '请填写详细地址',
-        showCancel:false
+    if (address.length < 5 || address.length > 120) {
+      this.setData({
+        tipText: '详细地址长度需要在5-120字符之间'
       })
       return
     }
@@ -60,7 +57,7 @@ Page({
         isDefault: 'true'
       })
     }
-    apiResult.then( (res)=> {
+    apiResult.then((res) => {
       if (res.code !== 0) {
         // 登录错误
         wx.hideLoading();
@@ -75,11 +72,16 @@ Page({
       wx.navigateBack({})
     })
   },
+  close() {
+    this.setData({
+      tipText: ''
+    })
+  },
   onLoad(e) {
     const id = e.id;
     if (id) {
       // 初始化原数据
-      WXAPI.addressDetail(id, wx.getStorageSync('token')).then( (res)=> {
+      WXAPI.addressDetail(id, wx.getStorageSync('token')).then((res) => {
         if (res.code === 0) {
           this.setData({
             id: id,
