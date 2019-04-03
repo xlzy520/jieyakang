@@ -16,7 +16,9 @@
         </view>
         <view class="addr-default">
             <view class="addr-default-text">设为默认地址</view>
-            <view class="addr-default-true"></view>
+            <view class="switch {{isDefault?'is-checked': ''}}" bindtap="changeSwitch">
+                <view class="switch__core {{isDefault?'switch__on': 'switch__off'}}"></view>
+            </view>
         </view>
         <button class="save-btn" formType="submit">保存</button>
         <button type="default" class="save-btn" bindtap="deleteAddress" data-id="{{addressData.id}}"

@@ -78,11 +78,12 @@ button[type="default"] {
   overflow: scroll;
 }
 .addr-default{
+  display: flex;
+  justify-content: space-between;
   color: #000;
   background-color: #fff;
   margin-top: 30rpx;
-  padding: 30rpx 0;
-  text-indent: 30rpx;
+  padding: 36rpx 30rpx;
 }
 .addr-default-text{
   text-indent: 30rpx;
@@ -119,4 +120,40 @@ button[type="default"] {
   height: 88rpx;
   line-height: 88rpx;
   color: #ff0000;
+}
+
+.switch__core{
+  margin: 0;
+  display: inline-block;
+  position: relative;
+  width: 111rpx;
+  height: 60rpx;
+  border: 3rpx solid #dcdfe6;
+  outline: none;
+  border-radius: 30rpx;
+  box-sizing: border-box;
+  background: #dcdfe6;
+  cursor: pointer;
+  transition: border-color .5s,background-color .5s;
+  vertical-align: middle;
+}
+.switch__core:after{
+  content: "";
+  position: absolute;
+  border-radius: 100%;
+  transition: all .5s;
+  width: 56rpx;
+  height: 56rpx;
+  background-color: #fff;
+}
+.switch__on{
+  border-color: #0087ff;
+  background-color: #0087ff;
+}
+.switch__off{
+  border-color: #efefef;
+  background-color: #efefef;
+}
+.switch.is-checked .switch__core:after {
+  left: 50rpx;
 }

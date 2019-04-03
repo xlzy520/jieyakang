@@ -4,10 +4,16 @@ const WXAPI = require('../../wxapi/main')
 var app = getApp()
 Page({
   data: {
-    tipText: ''
+    tipText: '',
+    isDefault: false
   },
   bindCancel: function () {
     wx.navigateBack({})
+  },
+  changeSwitch(){
+    this.setData({
+      isDefault: !this.data.isDefault
+    })
   },
   checkPhone(phone) {
     return /^1[34578]\d{9}$/.test(phone)
