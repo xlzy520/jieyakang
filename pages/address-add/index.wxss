@@ -29,8 +29,8 @@ page {
 .row-wrap {
   display: flex;
   width: 100%;
-  height: 88rpx;
-  line-height: 88rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   border-bottom: 1rpx solid #e5e5e5;
 }
 
@@ -42,7 +42,7 @@ page {
   font-family: Mark Pro Regular, sans-serif;
 }
 
-.save-btn, .cancel-btn {
+.save-btn {
   width: 690rpx;
   height: 88rpx;
   font-size: 34rpx;
@@ -66,13 +66,13 @@ button[type="default"] {
 
 .addr-details {
   display: flex;
-  height: auto;
-  padding: 30rpx 0;
+  height: 200rpx;
   border-bottom: 1rpx solid #e5e5e5;
 }
 
 .addr-details textarea {
-  min-height: 120rpx;
+  height: 200rpx;
+  padding: 30rpx;
   line-height: 1;
   width: 100%;
   overflow: scroll;
@@ -80,13 +80,21 @@ button[type="default"] {
 .addr-default{
   display: flex;
   justify-content: space-between;
+  height: 100rpx;
+  line-height: 100rpx;
   color: #000;
   background-color: #fff;
   margin-top: 30rpx;
-  padding: 36rpx 30rpx;
+  padding: 0 30rpx;
 }
-.addr-default-text{
-  text-indent: 30rpx;
+.addr-del{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #ff0000;
+  background-color: #fff;
+  margin-top: 30rpx;
+  padding: 0 30rpx;
 }
 
 .dialog{

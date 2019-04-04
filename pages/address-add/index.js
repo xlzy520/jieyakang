@@ -99,6 +99,9 @@ Page({
   onLoad(e) {
     const id = e.id;
     if (id) {
+      wx.setNavigationBarTitle({
+        title: '编辑收货地址'
+      })
       // 初始化原数据
       WXAPI.addressDetail(id, wx.getStorageSync('token')).then((res) => {
         if (res.code === 0) {
