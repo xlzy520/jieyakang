@@ -147,6 +147,7 @@ button[type="default"] {
 }
 .switch__core:after{
   content: "";
+  left: 0;
   position: absolute;
   border-radius: 100%;
   transition: all .5s;
