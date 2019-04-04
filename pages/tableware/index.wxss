@@ -1,5 +1,5 @@
 .container {
-  font-family: PingFang SC, serif;
+  font-family: PingFang SC Medium, sans-serif;
   background-color: #f8f8f8;
   min-height: 100vh;
 }
@@ -25,9 +25,10 @@
 .goods-box .img-box{
   width: 260rpx;
   height: 180rpx;
-  border: 1.5px solid #f0f0f0;
+  border: 2rpx solid #f0f0f0;
   border-radius: 10rpx;
   overflow: hidden;
+  box-sizing: content-box;
 }
 .goods-box .img-box image{
    width: 260rpx;
@@ -50,9 +51,9 @@
   font-family: PingFang SC Medium, sans-serif;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 24rpx 0 0 0;
+  padding: 50rpx 0 0 0;
   color:#000;
-  margin-bottom: 30rpx;
+  margin-bottom: 48rpx;
 }
 .goods-box .goods-price{
   font-family: Mark Pro Regular, sans-serif;
