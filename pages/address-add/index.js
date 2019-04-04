@@ -22,7 +22,7 @@ Page({
     const linkMan = e.detail.value.linkMan;
     const address = e.detail.value.address;
     const mobile = e.detail.value.mobile;
-    const code = '000000';
+    const code = '415600';
     
     if (linkMan.length < 2 || linkMan.length > 20) {
       this.setData({
@@ -45,25 +45,34 @@ Page({
     let apiResult
     if (this.data.id) {
       apiResult = WXAPI.updateAddress({
-        token: wx.getStorageSync('token'),
+        token: wx.getStorageSync('token'), // todo 增加选择省市县，默认安乡县
         id: this.data.id,
+        provinceId: 430000,
+        cityId: 430700,
+        districtId: 430721,
         linkMan: linkMan,
         address: address,
         mobile: mobile,
         code: code,
-        isDefault: 'true'
+        isDefault: this.data.isDefault.toString()
       })
     } else {
       apiResult = WXAPI.addAddress({
         token: wx.getStorageSync('token'),
+        provinceId: 430000,
+        cityId: 430700,
+        districtId: 430721,
         linkMan: linkMan,
         address: address,
         mobile: mobile,
         code: code,
-        isDefault: 'true'
+        isDefault: this.data.isDefault.toString()
       })
     }
     apiResult.then((res) => {
+      wx.showLoading({
+        title: '正在保存...',
+      })
       if (res.code !== 0) {
         // 登录错误
         wx.hideLoading();
@@ -72,10 +81,14 @@ Page({
           content: res.msg,
           showCancel: false
         })
-        return;
+      } else {
+        wx.hideLoading();
+        wx.showModal({
+          title: '成功',
+          showCancel: false
+        })
+        wx.navigateBack({})
       }
-      // 跳转到结算页面
-      wx.navigateBack({})
     })
   },
   close() {
@@ -93,7 +106,6 @@ Page({
             id: id,
             addressData: res.data,
           });
-          return;
         } else {
           wx.showModal({
             title: '提示',
@@ -104,15 +116,14 @@ Page({
       })
     }
   },
-  deleteAddress: function (e) {
-    var that = this;
-    var id = e.currentTarget.dataset.id;
+  deleteAddress(e) {
+    const id = e.currentTarget.dataset.id;
     wx.showModal({
       title: '提示',
       content: '确定要删除该收货地址吗？',
-      success: function (res) {
+      success: res=> {
         if (res.confirm) {
-          WXAPI.deleteAddress(id, wx.getStorageSync('token')).then(function () {
+          WXAPI.deleteAddress(id, wx.getStorageSync('token')).then(()=> {
             wx.navigateBack({})
           })
         } else {
