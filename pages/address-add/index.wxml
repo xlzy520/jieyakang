@@ -9,6 +9,11 @@
                 <input name="mobile" class="input" maxlength="11" type="number" placeholder-class="phcolor"
                        placeholder="手机号码" value="{{addressData.mobile}}{{wxaddress.telNumber}}"/>
             </view>
+            <view class="row-wrap" bindtap="selectCity">
+                <picker mode="multiSelector" range="{{pickerRegionRange}}" range-key="name" value="{{pickerSelect}}" bindchange="bindchange" bindcolumnchange="bindcolumnchange">
+                    {{showRegionStr}}
+                </picker>
+            </view>
             <view class="addr-details">
             <textarea name="address" placeholder="详细地址：县镇+街道+道路门牌号+企业单位地址名称"
                       placeholder-class="phcolor" value="{{addressData.address}}{{wxaddress.detailInfo}}"/>

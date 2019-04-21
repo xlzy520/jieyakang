@@ -77,6 +77,11 @@ button[type="default"] {
   width: 100%;
   overflow: scroll;
 }
+picker {
+  min-width: 20rpx;
+  height: 100%;
+  margin-right: 20rpx;
+}
 .addr-default{
   display: flex;
   justify-content: space-between;
