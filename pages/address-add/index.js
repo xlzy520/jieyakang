@@ -139,7 +139,7 @@ Page({
     const linkMan = e.detail.value.linkMan;
     const address = e.detail.value.address;
     const mobile = e.detail.value.mobile;
-    const code = e.detail.value.code;
+    const code = '000000';
     
     if (linkMan.length < 2 || linkMan.length > 20) {
       this.setData({
@@ -153,13 +153,7 @@ Page({
       })
       return
     }
-    if (this.data.selProvince === "请选择"){
-      this.setData({
-        tipText: '请选择地区'
-      })
-      return
-    }
-    if (this.data.selCity === "请选择"){
+    if (!this.data.pObject || !this.data.cObject){
       this.setData({
         tipText: '请选择地区'
       })
@@ -167,13 +161,7 @@ Page({
     }
     if (address === ""){
       this.setData({
-        tipText: '请选择地区'
-      })
-      return
-    }
-    if (code === ""){
-      this.setData({
-        tipText: '请选择邮编'
+        tipText: '请填写详细地址'
       })
       return
     }
@@ -218,12 +206,17 @@ Page({
         })
       } else {
         wx.hideLoading();
-        wx.showModal({
+        wx.showToast({
           title: '成功',
           showCancel: false
         })
         wx.navigateBack({})
       }
+    })
+  },
+  close(){
+    this.setData({
+      tipText: ''
     })
   },
   onLoad(e) {
