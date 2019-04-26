@@ -4,6 +4,7 @@
     "pages/address-add/index",
     "pages/index/index",
     "pages/goods-details/index",
+    "pages/shop-cart/index",
     "pages/to-pay-order/index",
     "pages/select-address/index",
     "pages/contact-us/index",
@@ -47,7 +48,7 @@
         "pagePath": "pages/order-list/index",
         "iconPath": "images/nav/order-off.png",
         "selectedIconPath": "images/nav/order-on.png",
-        "text": "订单"
+        "text": "购物车"
       },
       {
         "pagePath": "pages/my/index",
