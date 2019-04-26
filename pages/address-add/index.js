@@ -1,5 +1,5 @@
-const commonCityData = require('../../utils/city.js')
 const WXAPI = require('../../wxapi/main')
+const regeneratorRuntime = require('../../utils/runtime')
 //获取应用实例
 var app = getApp()
 Page({
@@ -10,7 +10,7 @@ Page({
     tipText: '',
     isDefault: false
   },
-  initRegionPicker () {
+  initRegionPicker (id) {
     WXAPI.province().then(res => {
       if (res.code === 0) {
         let _pickerRegionRange = []
@@ -18,7 +18,10 @@ Page({
         _pickerRegionRange.push([{ name: '请选择' }])
         _pickerRegionRange.push([{ name: '请选择' }])
         this.data.pickerRegionRange = _pickerRegionRange
-        this.bindcolumnchange({ detail: { column: 0, value: 0 } })
+        this.bindcolumnchange({ detail: { column: 0, value: 2 } })
+        if (!id) {
+          this.initRegionDB('湖南省', '常德市', '安乡县')
+        }
       }
     })
   },
@@ -78,12 +81,13 @@ Page({
       dObject: dObject
     })
   },
-  bindchange: function(e) {
+  bindchange(e) {
     console.log(e)
     const pObject = this.data.pickerRegionRange[0][e.detail.value[0]]
     const cObject = this.data.pickerRegionRange[1][e.detail.value[1]]
     const dObject = this.data.pickerRegionRange[2][e.detail.value[2]]
     const showRegionStr = pObject.name + cObject.name + dObject.name
+    console.log(showRegionStr);
     this.setData({
       pObject: pObject,
       cObject: cObject,
@@ -117,7 +121,7 @@ Page({
       if (res.code === 0) {
         this.data.pickerRegionRange[column + 1] = res.data
       }
-      this.bindcolumnchange({ detail: { column: column + 1, value: 0 } })
+      this.bindcolumnchange({ detail: { column: column + 1, value: 2 } })
     })
   },
   bindCancel: function () {
@@ -223,12 +227,12 @@ Page({
     })
   },
   onLoad(e) {
-   this.initRegionPicker() // 初始化省市区选择器
+    this.initRegionPicker(e.id) // 初始化省市区选择器
     if (e.id) { // 修改初始化数据库数据
       wx.setNavigationBarTitle({
         title: '编辑收货地址'
       })
-      WXAPI.addressDetail(e.id, wx.getStorageSync('token')).then( (res)=> {
+      WXAPI.addressDetail(e.id, wx.getStorageSync('token')).then((res)=> {
         if (res.code === 0) {
           this.setData({
             id: e.id,

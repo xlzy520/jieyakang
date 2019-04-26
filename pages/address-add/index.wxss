@@ -1,7 +1,11 @@
 page {
   height: 100%;
 }
-
+/*placeholder的样式*/
+.phcolor{
+  font-family: PingFang SC Medium, sans-serif;
+  color: #888;
+}
 .container {
   font-family: PingFang SC Medium, sans-serif;
   font-size: 30rpx;
@@ -12,10 +16,6 @@ page {
 }
 .form-content{
   width: 100%;
-}
-.phcolor{
-  font-family: PingFang SC Medium, sans-serif;
-  color: #888;
 }
 .form-box {
   width: 100%;
@@ -36,7 +36,11 @@ page {
 
 .row-wrap input {
   height: 100%;
-  padding-right: 30rpx;
+  /*padding-right: 30rpx;*/
+}
+.row-wrap picker {
+  height: 100%;
+  padding-left: 30rpx;
 }
 .row-wrap[name="mobile"]{
   font-family: Mark Pro Regular, sans-serif;
