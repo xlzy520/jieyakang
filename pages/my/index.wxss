@@ -71,7 +71,8 @@
 }
 .my-order-title{
   display: flex;
-  font-family: PingFang SC, sans-serif;
+  font-family: PingFang SC;
+  font-weight: bold;
   padding: 30rpx 30rpx 0;
   font-size: 35rpx;
   line-height: 35rpx;
