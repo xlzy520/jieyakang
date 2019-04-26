@@ -45,7 +45,7 @@
         "text": "餐具"
       },
       {
-        "pagePath": "pages/order-list/index",
+        "pagePath": "pages/shop-cart/index",
         "iconPath": "images/nav/order-off.png",
         "selectedIconPath": "images/nav/order-on.png",
         "text": "购物车"
