@@ -13,17 +13,17 @@
         <view class='text'>我的订单</view>
       </view>
       <view class='item' bindtap='goOrder' data-type="1">
-        <image class="icon" src="/images/order/processed.png" background-size="cover"></image>
-        <view class='text'>待发货</view>
+        <image class="icon" src="/images/order/pay.png" background-size="cover"></image>
+        <view class='text'>待付款</view>
         <view class="badge">8</view>
       </view>
       <view class='item' bindtap='goOrder' data-type="2">
-        <image class="icon" src="/images/order/dispatched.png" background-size="cover"></image>
-        <view class='text'>待收货</view>
+        <image class="icon" src="/images/order/processed.png" background-size="cover"></image>
+        <view class='text'>待发货</view>
       </view>
       <view class='item' bindtap='goOrder' data-type="3">
-        <image class="icon" src="/images/order/confirmed.png" background-size="cover"></image>
-        <view class='text'>已确认</view>
+        <image class="icon" src="/images/order/dispatched.png" background-size="cover"></image>
+        <view class='text'>待收货</view>
       </view>
     </view>
   </view>
