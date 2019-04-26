@@ -21,8 +21,8 @@
     position: relative;
 }
 .status-box .status-label.active{
-    color:#e64340;
-    border-bottom: 6rpx solid #e64340;
+    color:#ff001c;
+    border-bottom: 6rpx solid #ff001c;
 }
 .status-box .status-label .red-dot{
     width: 16rpx;
@@ -85,7 +85,7 @@
 }
 .order-list .a-order .order-date .red{
     font-size:26rpx;
-    color:#e64340;
+    color:#ff001c;
 }
 .a-order  .goods-info,
 .goods-img-container{
@@ -144,7 +144,7 @@
 }
 .order-list .a-order .price-box .total-price{
     font-size:26rpx;
-    color:#e64340;
+    color:#ff001c;
 }
 .a-order .price-box .btn{
     width: 166rpx;
@@ -162,6 +162,6 @@
     top:20rpx;
 }
 .a-order .price-box .topay-btn{
-    border:1px solid #e64340;
-    color: #e64340;
+    border:1px solid #ff001c;
+    color: #ff001c;
 }
