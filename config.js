@@ -1,8 +1,7 @@
 module.exports = {
   version: "1.0.0",
-  note: '充值界面增加快捷选择金额',
   subDomain: "jieyakang", // 如果你的域名是： https://api.it120.cc/abcd 那么这里只要填写 abcd
-  appid: "wx0db38963938fe329", // 您的小程序的appid，购物单功能需要使用
+  appid: "wxfcc24a29b3ff5f57", // 您的小程序的appid，购物单功能需要使用
   shareProfile: '洁雅康餐具,针对酒店、学习、机关食堂等餐饮行业的公共餐具的集中清晰、消毒、配送服务。' // 首页转发的时候话术
 }
 /*
