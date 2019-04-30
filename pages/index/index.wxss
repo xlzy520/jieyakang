@@ -126,10 +126,11 @@
    height: 164rpx;
 }
 .goods-box .goods-detail{
-  /*display: flex;*/
-  flex: 1;
-  /*flex-direction: row;*/
-  /*justify-content: space-between;*/
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  height: 164rpx;
 }
 .goods-box .goods-title, .goods-box .goods-price{
   overflow: hidden;
@@ -140,20 +141,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 20rpx;
 }
 .goods-box .goods-title{
   font-family: PingFang SC Medium, sans-serif;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 24rpx 0 0 0;
+  padding-top: 20rpx;
   color:#000;
-  margin-bottom: 30rpx;
 }
 .goods-box .goods-price{
   font-family: DINAlternate Bold, sans-serif;
   display: flex;
   align-items: center;
-  padding: 24rpx 0;
   color:#ff001c;
 }
 .price-label{
@@ -175,7 +175,6 @@
   line-height: 54rpx;
   background-color: #ff001c;
   border-radius: 8rpx;
-  /*padding: 10rpx;*/
   text-align: center;
   vertical-align: middle;
   color: #fff;

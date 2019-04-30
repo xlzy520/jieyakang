@@ -10,7 +10,11 @@
         <view class="goods-detail">
           <view class="goods-title">{{item.name}}</view>
           <view class="goods-wrap">
-            <view class="goods-price">¥ {{item.minPrice}}</view>
+            <view class="goods-price">
+                <view class="price-label">¥  </view>
+                <view class="price-value">{{item.minPrice}}</view>
+                <view class="price-unit"> /套</view>
+            </view>
             <view class="goods-select">选规格</view>
           </view>
         </view>
