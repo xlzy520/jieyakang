@@ -115,15 +115,15 @@
   padding: 0 30rpx;
 }
 .goods-box .img-box{
-  width: 260rpx;
-  height: 180rpx;
+  width: 164rpx;
+  height: 164rpx;
   border: 1.5px solid #f0f0f0;
   border-radius: 10rpx;
   overflow: hidden;
 }
 .goods-box .img-box image{
-   width: 260rpx;
-   height: 180rpx;
+   width: 164rpx;
+   height: 164rpx;
 }
 .goods-box .goods-detail{
   /*display: flex;*/
@@ -134,7 +134,7 @@
 .goods-box .goods-title, .goods-box .goods-price{
   overflow: hidden;
   font-size: 30rpx;
-  margin-left: 48rpx;
+  margin-left: 30rpx;
 }
 .goods-wrap{
   display: flex;
@@ -150,21 +150,35 @@
   margin-bottom: 30rpx;
 }
 .goods-box .goods-price{
-  font-family: Mark Pro Regular, sans-serif;
+  font-family: DINAlternate Bold, sans-serif;
+  display: flex;
+  align-items: center;
   padding: 24rpx 0;
-  color:#ea5255;
+  color:#ff001c;
 }
+.price-label{
+  font-size: 30rpx;
+  padding-right: 10rpx;
+}
+.price-value{
+  font-size: 34rpx;
+}
+.price-unit{
+  font-size: 26rpx;
+  padding-left: 10rpx;
+}
+
 .goods-select{
   font-family: PingFang SC Medium, sans-serif;
   width: 126rpx;
   height: 54rpx;
   line-height: 54rpx;
-  border: 3.5rpx solid #ea5255;
-  border-radius: 14rpx;
+  background-color: #ff001c;
+  border-radius: 8rpx;
   /*padding: 10rpx;*/
   text-align: center;
   vertical-align: middle;
-  color: #ea5255;
+  color: #fff;
   font-size: 28rpx;
 }
 .partner-container .partner-item{
