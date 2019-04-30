@@ -61,7 +61,6 @@ page {
   background-color: #fff;
   overflow: hidden;
   margin-bottom: 30rpx;
-  padding: 12rpx;
   border-radius: 10rpx;
 }
 .check{
@@ -96,9 +95,10 @@ page {
   width: 177rpx;
   height: 177rpx;
   overflow: hidden;
-  margin-left: 22rpx;
-  margin-right: 20rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
   background-color: #d8d8d8;
+  border-radius: 10rpx;
 }
 
 .goods-info .text-box {
@@ -192,7 +192,6 @@ page {
 .goods-info .img-box .img {
   width: 177rpx;
   height: 177rpx;
-  border-radius: 5rpx;
 }
 
 .a-goods-conts .delete-btn {

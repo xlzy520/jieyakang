@@ -46,7 +46,7 @@
                 <image class="address-check-icon" src="/images/unchecked.png" wx:if="{{!allSelect}}"></image>
                 <view class="check-label">全选</view>
             </view>
-            <view class="total" wx:if="{{!noSelect}}">
+            <view class="total" wx:if="{{saveHidden}}">
                 <view class="total-label">合计：</view>
                 <view class="total-unit">¥</view>
                 <view class="total-price">{{totalPrice}}</view>
