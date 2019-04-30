@@ -15,8 +15,8 @@
             </view>
             <view class="address-action">
                 <view class="address-default">
-                    <image class="address-check-icon" src="/images/addr-active.png" wx:if="{{item.isDefault}}"></image>
-                    <image class="address-check-icon" src="/images/addr-uncheck.png" wx:if="{{!item.isDefault}}"></image>
+                    <image class="address-check-icon" src="/images/check.png" wx:if="{{item.isDefault}}"></image>
+                    <image class="address-check-icon" src="/images/unchecked.png" wx:if="{{!item.isDefault}}"></image>
                     <view class="address-default-text">默认地址</view>
                 </view>
                 <view class="address-edit" catchtap="editAddress" data-id="{{item.id}}">

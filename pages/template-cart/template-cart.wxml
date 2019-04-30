@@ -17,8 +17,8 @@
         <view class="a-gooods" wx:for="{{list}}"  wx:key="{{index}}" >
             <view class="a-goods-conts {{item.active? 'active':''}}" bindtap="selectTap" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}"    style="{{item.left}}">
                 <view class="check">
-                    <image class="address-check-icon" src="/images/addr-active.png" wx:if="{{item.active}}"></image>
-                    <image class="address-check-icon" src="/images/addr-uncheck.png" wx:if="{{!item.active}}"></image>
+                    <image class="address-check-icon" src="/images/check.png" wx:if="{{item.active}}"></image>
+                    <image class="address-check-icon" src="/images/unchecked.png" wx:if="{{!item.active}}"></image>
                 </view>
                 <view class="goods-info">
                     <view class="img-box">
@@ -42,11 +42,11 @@
     <view class="jiesuan-box">
         <view class="left-price">
             <view class="check all-selected" bindtap="bindAllSelect">
-                <image class="address-check-icon" src="/images/addr-active.png" wx:if="{{allSelect}}"></image>
-                <image class="address-check-icon" src="/images/addr-uncheck.png" wx:if="{{!allSelect}}"></image>
+                <image class="address-check-icon" src="/images/check.png" wx:if="{{allSelect}}"></image>
+                <image class="address-check-icon" src="/images/unchecked.png" wx:if="{{!allSelect}}"></image>
                 <view class="check-label">全选</view>
             </view>
-            <view class="total" hidden="{{noSelect}}">
+            <view class="total" wx:if="{{!noSelect}}">
                 <view class="total-label">合计：</view>
                 <view class="total-unit">¥</view>
                 <view class="total-price">{{totalPrice}}</view>
