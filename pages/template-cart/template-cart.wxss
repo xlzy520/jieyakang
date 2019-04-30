@@ -208,6 +208,7 @@ page {
   justify-content: space-between;
   width: 100%;
   height: 88rpx;
+  line-height: 88rpx;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -220,7 +221,6 @@ page {
 .jiesuan-box .to-pay-btn {
   width: 240rpx;
   text-align: center;
-  line-height: 88rpx;
   background-color: #ff001c;
   font-size: 32rpx;
   color: #ffffff;
@@ -234,7 +234,6 @@ page {
   display: flex;
   width: 510rpx;
   justify-content: space-between;
-  line-height: 100rpx;
   padding: 0 30rpx 0 0;
   font-size: 28rpx;
   box-sizing: border-box;
@@ -260,6 +259,9 @@ page {
   color: #000;
 }
 .total-price{
+  display: flex;
+  align-items: baseline;
   margin-left: 3rpx;
   font-size: 34rpx;
+  vertical-align: middle;
 }
