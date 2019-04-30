@@ -48,8 +48,8 @@
       },
       {
         "pagePath": "pages/shop-cart/index",
-        "iconPath": "images/nav/order-off.png",
-        "selectedIconPath": "images/nav/order-on.png",
+        "iconPath": "images/nav/shop-card-off.png",
+        "selectedIconPath": "images/nav/shop-card-on.png",
         "text": "购物车"
       },
       {
