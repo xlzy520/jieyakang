@@ -62,6 +62,7 @@ page {
   overflow: hidden;
   margin-bottom: 30rpx;
   padding: 12rpx;
+  border-radius: 10rpx;
 }
 .check{
   display: flex;
