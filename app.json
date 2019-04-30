@@ -16,10 +16,8 @@
 
     "pages/notice/show",
     "pages/recharge/index",
-    "pages/withdraw/index",
     "pages/authorize/index",
     "pages/asset/index",
-    "pages/sign/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
