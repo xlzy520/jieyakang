@@ -9,6 +9,14 @@ page {
   margin: auto;
   margin-top: 280rpx;
 }
+.no-content-label{
+  font-family: PingFang SC Medium;
+  font-size: 30rpx;
+  color: #999;
+  margin-top: 30rpx;
+  margin-bottom: 42rpx;
+  text-align: center;
+}
 .short-card-no-content image{
   width: 261rpx;
   height: 165rpx;
@@ -24,7 +32,6 @@ page {
   line-height: 74rpx;
   text-align: center;
   font-size: 34rpx;
-  margin-top: 100rpx;
 }
 
 .list-top {
