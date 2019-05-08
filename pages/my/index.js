@@ -3,13 +3,11 @@ const CONFIG = require('../../config.js')
 const WXAPI = require('../../wxapi/main')
 Page({
 	data: {
-    balance:0.00,
-    freeze:0,
-    score:0,
-    score_sign_continuous:0
+	  order: []
+	  orderCount: []
   },
 	onLoad() {
- 
+	
 	},
   onShow() {
     let that = this;
@@ -24,44 +22,7 @@ Page({
     }
     this.getUserApiInfo();
     this.getUserAmount();
-  },
-  aboutUs : function () {
-    wx.showModal({
-      title: '关于我们',
-      content: '本系统基于开源小程序商城系统 https://github.com/EastWorld/wechat-app-mall 搭建，祝大家使用愉快！',
-      showCancel:false
-    })
-  },
-  getPhoneNumber: function(e) {
-    if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
-      wx.showModal({
-        title: '提示',
-        content: '无法获取手机号码',
-        showCancel: false
-      })
-      return;
-    }
-    var that = this;
-    WXAPI.bindMobile({
-      token: wx.getStorageSync('token'),
-      encryptedData: e.detail.encryptedData,
-      iv: e.detail.iv
-    }).then(function (res) {
-      if (res.code == 0) {
-        wx.showToast({
-          title: '绑定成功',
-          icon: 'success',
-          duration: 2000
-        })
-        that.getUserApiInfo();
-      } else {
-        wx.showModal({
-          title: '提示',
-          content: '绑定失败',
-          showCancel: false
-        })
-      }
-    })
+    this.getOrderStatistics()
   },
   getUserApiInfo: function () {
     var that = this;
@@ -88,22 +49,26 @@ Page({
       }
     })
   },
-  relogin:function(){
-    app.goLoginPageTimeOut()
-  },
-  goAsset: function () {
-    wx.navigateTo({
-      url: "/pages/asset/index"
-    })
-  },
-  goScore: function () {
-    wx.navigateTo({
-      url: "/pages/score/index"
-    })
-  },
   goOrder: function (e) {
     wx.navigateTo({
       url: "/pages/order-my/index?type=" + e.currentTarget.dataset.type
+    })
+  },
+  getOrderStatistics() {
+    WXAPI.orderStatistics(wx.getStorageSync('token')).then((res)=> {
+      if (res.code == 0) {
+        let tabClass = this.data.tabClass;
+        for (let i = 0; i < res.data.length; i++) {
+          if (i < 4) {
+            tabClass[i + 1] = res.data[i]>0? 'red-dot': ''
+          } else {
+            tabClass[i] = res.data[i]>0? 'red-dot': ''
+          }
+        }
+        this.setData({
+          tabClass: tabClass,
+        });
+      }
     })
   }
 })
