@@ -3,7 +3,6 @@ page{
 }
 .container{
     background-color: #f5f5f9;
-    justify-content: initial;
 }
 .form-box{
     width:100%;

@@ -7,7 +7,6 @@
   background-repeat: no-repeat;
   background-color: #f8f8f8;
   color: #000;
-  justify-content: normal;
 }
 
 .userinfo {

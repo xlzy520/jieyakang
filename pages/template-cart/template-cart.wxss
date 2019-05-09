@@ -1,10 +1,6 @@
 page {
   /*height: 100%;*/
 }
-
-.container {
-  justify-content: initial;
-}
 .short-card-no-content{
   margin: auto;
   margin-top: 280rpx;
