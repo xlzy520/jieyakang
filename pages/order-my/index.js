@@ -5,7 +5,7 @@ Page({
   data: {
     // status从0到4,为 "待付款", "待发货", "待收货","待评价", "已完成"
     statusType: ["全部订单", "待付款", "待发货", "待收货", "已完成"],
-    currentType: 0,
+    currentType: 1,
     tabClass: ["", "", "", "", ""],
     orderList: [],
     logisticsMap: {},
