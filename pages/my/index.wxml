@@ -8,22 +8,10 @@
     <!--<navigator url="/pages/order-list/index" hover-class="navigator-hover" class="my-order-title">我的订单</navigator>-->
     <view class="my-order-title">我的订单</view>
     <view class='order-shortcut'>
-      <view class='item' bindtap='goOrder' data-type="0">
-        <image class="icon" src="/images/order/order.png" background-size="cover"></image>
-        <view class='text'>我的订单</view>
-      </view>
-      <view class='item' bindtap='goOrder' data-type="1">
-        <image class="icon" src="/images/order/pay.png" background-size="cover"></image>
-        <view class='text'>待付款</view>
-        <view class="badge">8</view>
-      </view>
-      <view class='item' bindtap='goOrder' data-type="2">
-        <image class="icon" src="/images/order/processed.png" background-size="cover"></image>
-        <view class='text'>待发货</view>
-      </view>
-      <view class='item' bindtap='goOrder' data-type="3">
-        <image class="icon" src="/images/order/dispatched.png" background-size="cover"></image>
-        <view class='text'>待收货</view>
+      <view class='item' bindtap='goOrder' wx:for-items="{{orderNav}}" wx:key="{{index}}" data-type="{{item.type}}">
+        <image class="icon" src="/images/order/{{item.img}}.png" background-size="cover"></image>
+        <view class='text'>{{item.label}}</view>
+        <view class="badge" wx:if="{{badge[index] > 0}}">{{badge[index]}}</view>
       </view>
     </view>
   </view>

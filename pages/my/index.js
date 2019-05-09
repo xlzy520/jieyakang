@@ -3,8 +3,13 @@ const CONFIG = require('../../config.js')
 const WXAPI = require('../../wxapi/main')
 Page({
 	data: {
-	  order: []
-	  orderCount: []
+	  orderNav: [
+      {type: 0, label: '我的订单', img: 'order'},
+      {type: 1, label: '待付款', img: 'pay'},
+      {type: 2, label: '待发货', img: 'processed'},
+      {type: 3, label: '待收货', img: 'dispatched'},
+    ],
+    badge: [0,0,0,0]
   },
 	onLoad() {
 	
@@ -56,18 +61,12 @@ Page({
   },
   getOrderStatistics() {
     WXAPI.orderStatistics(wx.getStorageSync('token')).then((res)=> {
+      const { count_id_no_pay, count_id_no_transfer,count_id_no_confirm } = res.data
       if (res.code == 0) {
-        let tabClass = this.data.tabClass;
-        for (let i = 0; i < res.data.length; i++) {
-          if (i < 4) {
-            tabClass[i + 1] = res.data[i]>0? 'red-dot': ''
-          } else {
-            tabClass[i] = res.data[i]>0? 'red-dot': ''
-          }
-        }
+        let badge = [0, count_id_no_pay, count_id_no_transfer, count_id_no_confirm]
         this.setData({
-          tabClass: tabClass,
-        });
+          badge: badge
+      })
       }
     })
   }
