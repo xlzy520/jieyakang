@@ -118,17 +118,10 @@ Page({
   },
   getOrderStatistics() {
     WXAPI.orderStatistics(wx.getStorageSync('token')).then((res)=> {
+      const { count_id_no_pay, count_id_no_transfer,count_id_no_confirm, count_id_success } = res.data
       if (res.code == 0) {
-        let tabClass = this.data.tabClass;
-        for (let i = 0; i < res.data.length; i++) {
-          if (i < 4) {
-            tabClass[i + 1] = res.data[i]>0? 'red-dot': ''
-          } else {
-            tabClass[i] = res.data[i]>0? 'red-dot': ''
-          }
-        }
         this.setData({
-          tabClass: tabClass,
+          tabClass: [0, count_id_no_pay, count_id_no_transfer,count_id_no_confirm, count_id_success],
         });
       }
     })
@@ -164,7 +157,7 @@ Page({
           });
         } else {
           this.setData({
-            orderList: null,
+            orderList: [],
             logisticsMap: {},
             goodsMap: {}
           });
