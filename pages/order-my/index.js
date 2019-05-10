@@ -18,6 +18,7 @@ Page({
     const no_confirm = WXAPI.orderList({token: token, status: 2})
     const success = WXAPI.orderList({token: token, status: 4})
     Promise.all([no_pay, no_transfer, no_confirm, success]).then(res=>{
+      this.data.orderList = []
       res.map(order =>{
         if (order.code === 0) {
           this.setData({
