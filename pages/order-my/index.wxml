@@ -19,25 +19,38 @@
         <view class="order-status {{(item.status==-1 || item.status==4) ? '':'red'}}">{{item.statusStr}}</view>
       </view>
       <view class="goods-info" bindtap="orderDetail" data-id="{{item.id}}">
-        <div class="goods-container">
-          <view class="goods-box" wx:for-items="{{goodsMap[item.id]}}" wx:key="{{index}}">
-            <image src="{{item.pic}}" class="goods-img"></image>
-            <view class="goods-right">
-              <view class="goods-right-header">
-                <view class="goods-name"></view>
-                <view class="goods-price"></view>
-              </view>
-              <view class="goods-right-number"></view>
+        <view class="goods-box" wx:for-items="{{goodsMap[item.id]}}" wx:key="{{index}}">
+          <image src="{{item.pic}}" class="goods-img"></image>
+          <view class="goods-right">
+            <view class="goods-right-header">
+              <view class="goods-name">{{item.goodsName}}</view>
+              <view class="goods-price">￥{{item.amount}}</view>
+            </view>
+            <view class="goods-number">
+              <view class="goods-number-left">x </view>
+              <view>{{item.number}}</view>
             </view>
           </view>
-        </div>
+        </view>
       </view>
       <view class="price-box">
-        <view class="total-price" wx:if="{{item.score <= 0}}">合计：¥ {{item.amountReal}}</view>
-       <view class="btn cancel-btn" hidden="{{item.status==0? false : true}}" bindtap="cancelOrderTap"
-              data-id="{{item.id}}">取消订单</view>
-        <view class="btn topay-btn" hidden="{{item.status==0? false : true}}" bindtap="toPayTap" data-id="{{item.id}}"
-              data-money="{{item.amountReal}}" data-score="{{item.score}}">立即支付</view>
+        <view class="total-price">
+          共
+          <view class="total-number">{{item.goodsNumber}}</view>
+          份
+          <view class="white-space"></view>
+          合计：
+          <view class="price">
+            <view class="price-unit">¥</view>
+            {{item.amountReal}}
+          </view>
+        </view>
+        <view class="order-action">
+          <view class="btn cancel-btn" hidden="{{item.status==0? false : true}}" bindtap="cancelOrderTap"
+                data-id="{{item.id}}">取消订单</view>
+          <view class="btn topay-btn" hidden="{{item.status==0? false : true}}" bindtap="toPayTap" data-id="{{item.id}}"
+                data-money="{{item.amountReal}}" data-score="{{item.score}}">立即支付</view>
+        </view>
       </view>
     </view>
 
