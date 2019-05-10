@@ -189,8 +189,8 @@
     margin-left: 30rpx;
 }
 .a-order .price-box .cancel-btn{
-    color: #000;
-    border: 1rpx solid #000;
+    color: rgba(0,0,0,.8);
+    border: 1rpx solid rgba(0,0,0,.8);
 }
 .a-order .price-box .topay-btn{
     border:1px solid #ff001c;
