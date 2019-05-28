@@ -9,10 +9,15 @@ Page({
       {type: 2, label: '待发货', img: 'processed'},
       {type: 3, label: '待收货', img: 'dispatched'},
     ],
+    recordNav: [
+      {type: 0, label: '进货记录', img: 'order'},
+      {type: 1, label: '回收记录', img: 'pay'},
+      {type: 2, label: '库存记录', img: 'processed'},
+    ],
     badge: [0,0,0,0]
   },
 	onLoad() {
-	
+
 	},
   onShow() {
     let that = this;

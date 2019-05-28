@@ -59,7 +59,7 @@
   height: 24rpx;
   margin-left: 15rpx;
 }
-.my-order{
+.my-wrapper{
   width: 92%;
   margin:0rpx 30rpx 30rpx;
   background-color: #fff;
@@ -68,7 +68,7 @@
   flex-direction: column;
   justify-content: flex-start;
 }
-.my-order-title{
+.my-wrapper-title{
   display: flex;
   font-family: PingFang SC;
   font-weight: bold;
@@ -77,7 +77,7 @@
   line-height: 35rpx;
   color: #000;
 }
-.my-order-title::before{
+.my-wrapper-title::before{
   display: inline-block;
   content: "";
   width: 6rpx;
@@ -95,26 +95,30 @@
     padding-left: 100rpx;
 }
 
-.order-shortcut {
+.my-wrapper-content {
   display: flex;
   padding-top: 30rpx;
 }
-.order-shortcut .item {
+.my-wrapper-content .item {
   display: flex;
   flex-direction: column;
   width: 187rpx;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
-.order-shortcut .item .icon {
+.my-wrapper-content .item .icon {
   width: 56rpx;
   height: 56rpx;
-  margin-left: 60rpx;
 }
-.order-shortcut .item .text {
+.my-wrapper-content .item .text {
   font-family: PingFang SC Medium;
   font-size: 26rpx;
   margin-top: 20rpx;
 }
+.record .my-wrapper-content .item{
+    width: 100%;
+}
+
 .badge{
   width: 40rpx;
   height: 40rpx;

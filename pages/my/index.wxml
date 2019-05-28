@@ -4,10 +4,18 @@
     <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
     <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
   </view>
-  <view class="my-order">
-    <!--<navigator url="/pages/order-list/index" hover-class="navigator-hover" class="my-order-title">我的订单</navigator>-->
-    <view class="my-order-title">我的订单</view>
-    <view class='order-shortcut'>
+  <view class="my-wrapper record">
+    <view class="my-wrapper-title">进销存记录</view>
+    <view class='my-wrapper-content'>
+      <view class='item' bindtap='goOrder' wx:for-items="{{recordNav}}" wx:key="{{index}}" data-type="{{item.type}}">
+        <image class="icon" src="/images/order/{{item.img}}.png" background-size="cover"></image>
+        <view class='text'>{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="my-wrapper order">
+   <view class="my-wrapper-title">我的订单</view>
+    <view class='my-wrapper-content'>
       <view class='item' bindtap='goOrder' wx:for-items="{{orderNav}}" wx:key="{{index}}" data-type="{{item.type}}">
         <image class="icon" src="/images/order/{{item.img}}.png" background-size="cover"></image>
         <view class='text'>{{item.label}}</view>
@@ -15,6 +23,7 @@
       </view>
     </view>
   </view>
+
   <navigator class="my-item" url="/pages/select-address/index" hover-class="navigator-hover">
     <image class="my-item-img" src="/images/order-details/icon-address.png"></image>
     <view class="my-item-title">地址信息</view>
