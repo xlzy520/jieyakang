@@ -29,7 +29,7 @@ Page({
     })
   },
   onLoad() {
-  
+
   },
   onShow() {
     this.initShippingAddress();
@@ -39,10 +39,6 @@ Page({
       if (res.code === 0) {
         this.setData({
           addressList: res.data
-        });
-      } else if (res.code === 700) {
-        this.setData({
-          addressList: null
         });
       }
     })

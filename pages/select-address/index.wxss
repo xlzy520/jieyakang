@@ -3,6 +3,22 @@
     background-color:#f8f8f8;
     min-height: 100vh;
 }
+.no-address{
+    margin: auto;
+    margin-top: 280rpx;
+}
+.no-content-label{
+    font-family: PingFang SC Medium;
+    font-size: 30rpx;
+    color: #999;
+    margin-top: 30rpx;
+    margin-bottom: 42rpx;
+    text-align: center;
+}
+.no-address image{
+    width: 261rpx;
+    height: 165rpx;
+}
 .address-list{
     width: 100%;
     padding-bottom: 100rpx;
