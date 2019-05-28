@@ -36,7 +36,4 @@
     <view class="my-item-subtitle">联系方式与地址</view>
     <image class="arrow-right" src="/images/arrow-right.png"></image>
   </navigator>
-  <!--<view class="relogin">-->
-    <!--<button type="warn" bindtap="relogin">重新授权登录</button>-->
-  <!--</view>-->
 </view>
