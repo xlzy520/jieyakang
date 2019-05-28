@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/shop-cart/index",
     "pages/tableware/index",
     "pages/order-my/index",
     "pages/address-add/index",
-    "pages/index/index",
     "pages/goods-details/index",
 
     "pages/to-pay-order/index",
@@ -16,8 +16,7 @@
 
     "pages/notice/show",
     "pages/recharge/index",
-    "pages/authorize/index",
-    "pages/asset/index",
+    "pages/authorize/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -46,8 +45,8 @@
       },
       {
         "pagePath": "pages/shop-cart/index",
-        "iconPath": "images/nav/shop-card-off.png",
-        "selectedIconPath": "images/nav/shop-card-on.png",
+        "iconPath": "images/nav/shop-cart-off.png",
+        "selectedIconPath": "images/nav/shop-cart-on.png",
         "text": "购物车"
       },
       {
