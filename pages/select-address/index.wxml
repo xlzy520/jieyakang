@@ -28,7 +28,6 @@
   </view>
   <view class="no-address" wx:if="{{addressList.length===0}}">
     <image src="/images/no-address.png"></image>
-    <!-- todo 占位图要改!-->
     <view class="no-content-label">暂无绑定地址信息</view>
   </view>
   <view class="bottom-box">
