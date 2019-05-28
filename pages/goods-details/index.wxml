@@ -22,7 +22,7 @@
     <view class="goods-price" style="padding-left:35rpx;">¥ {{selectSizePrice}}</view>
     <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
     <view class="goods-price" style="color:#999;font-size:24rpx;">购买{{goodsDetail.basicInfo.numberOrders}}次</view>
-    <view class="goods-price" style="color:#999;font-size:24rpx;">共收到 {{goodsDetail.basicInfo.numberGoodReputation}} 次好评</view>
+    <!--<view class="goods-price" style="color:#999;font-size:24rpx;">共收到 {{goodsDetail.basicInfo.numberGoodReputation}} 次好评</view>-->
   </view>
   <view wx:if="{{hasMoreSelect}}" class="row-arrow" bindtap="bindGuiGeTap">
     {{selectSize}}
@@ -49,11 +49,11 @@
     </view>
   </view>
   <view class="footer-box">
-    <view class="contact">
-      <contact-button style="opacity:0;position:absolute;" type="default-dark" session-from="weapp"
-                      size="27"></contact-button>
-      <view style='position:absolute;bottom:10rpx;'> 客服</view>
-    </view>
+    <!--<view class="contact">-->
+      <!--<contact-button style="opacity:0;position:absolute;" type="default-dark" session-from="weapp"-->
+                      <!--size="27"></contact-button>-->
+      <!--<view style='position:absolute;bottom:10rpx;'> 客服</view>-->
+    <!--</view>-->
     <view class="shop-cart-btn" bindtap="goShopCar">
       <view class="shop-num">({{shopNum}})</view>
       <view style='position:absolute;bottom:10rpx;'> 购物车</view>
