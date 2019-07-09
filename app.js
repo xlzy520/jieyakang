@@ -1,4 +1,4 @@
-const WXAPI = require('wxapi/main')
+// const WXAPI = require('wxapi/main')
 App({
   navigateToLogin: false,
   onLaunch: function() {
@@ -57,14 +57,13 @@ App({
     let token = wx.getStorageSync('token');
     if (!token) {
       that.goLoginPageTimeOut()
-      return
     }
-    WXAPI.checkToken(token).then(function(res) {
-      if (res.code != 0) {
-        wx.removeStorageSync('token')
-        that.goLoginPageTimeOut()
-      }
-    })
+    // WXAPI.checkToken(token).then(function(res) {
+    //   if (res.code != 0) {
+    //     wx.removeStorageSync('token')
+    //     that.goLoginPageTimeOut()
+    //   }
+    // })
   },
   goLoginPageTimeOut: function() {
     if (this.navigateToLogin){

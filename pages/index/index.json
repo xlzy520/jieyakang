@@ -1,4 +1,7 @@
 {
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "洁雅康餐具"
+  "navigationBarTitleText": "洁雅康餐具",
+  "usingComponents": {
+    "goods-list": "/components/goods-list/index"
+  }
 }

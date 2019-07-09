@@ -11,7 +11,8 @@
     "pages/contact-us/index",
     "pages/order-details/index",
     "pages/my/index",
-    "pages/authorize/index"
+    "pages/authorize/index",
+    "pages/banner-detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

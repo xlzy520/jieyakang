@@ -10,6 +10,11 @@ Page({
       url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
     })
   },
+  toBannerDetail(){
+    wx.navigateTo({
+      url: "/pages/banner-detail/index"
+    })
+  },
   onLoad() {
     this.getGoodsList();
     WXAPI.getPartner({
@@ -22,7 +27,7 @@ Page({
       })
     })
   },
-  getGoodsList (categoryId) {
+  getGoodsList () {
     wx.showLoading({
       "mask": true
     })
@@ -51,13 +56,7 @@ Page({
     }
   },
   onPullDownRefresh() {
-    wx.showLoading({
-      "mask": true
-    })
     wx.showNavigationBarLoading()
-    this.setData({
-      curPage: 1
-    });
     this.getGoodsList()
     wx.stopPullDownRefresh()
     wx.hideLoading()

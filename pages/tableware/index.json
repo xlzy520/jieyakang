@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "餐具"
+  "navigationBarTitleText": "餐具",
+  "usingComponents": {
+    "goods-list": "/components/goods-list/index"
+  }
 }

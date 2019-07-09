@@ -9,14 +9,10 @@ Page({
     companyAddress: ''
   },
   getCompanyInfo(){
-    WXAPI.queryConfig({key: 'companyPhone'}).then(res=>{
+    WXAPI.getCompanyInfo().then(res=>{
       this.setData({
-        companyPhone: res.data.value
-      })
-    })
-    WXAPI.queryConfig({key: 'companyAddress'}).then(res=>{
-      this.setData({
-        companyAddress: res.data.value
+        companyPhone: res.data.phone,
+        companyAddress: res.data.address
       })
     })
   },

@@ -1,28 +1,8 @@
 <view class="container">
   <view class="banner">
-    <image bindtap="tapBanner" src="/images/banner/banner.png" class="slide-image"/>
+    <image bindtap="toBannerDetail" src="/images/banner/banner.png" class="slide-image"/>
   </view>
-  <view class="goods-container">
-    <view class="goods-header">餐具产品</view>
-    <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.goodsId}}">
-      <view class="goods-item">
-        <view class="img-box">
-          <image src="{{item.fileUrl}}" class="image" mode="aspectFill"/>
-        </view>
-        <view class="goods-detail">
-          <view class="goods-title">{{item.goodsName}}</view>
-          <view class="goods-wrap">
-            <view class="goods-price">
-              <view class="price-label">¥  </view>
-              <view class="price-value">{{item.price}}</view>
-              <view class="price-unit"> /套</view>
-            </view>
-            <view class="goods-select">选规格</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
+  <goods-list></goods-list>
   <view class="partner-container">
     <view class="partner-header">合作伙伴</view>
     <view class="partner-item" wx:for-items="{{partners}}" wx:key="{{index}}">

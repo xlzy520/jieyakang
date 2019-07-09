@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<!--1px = 750/320 = 2.34rpx;-->
+<view class="goods-container">
+  <view class="goods-header" wx:if="{{header}}">餐具产品</view>
+  <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.goodsId}}">
+    <view class="goods-item">
+      <view class="img-box">
+        <image src="{{item.fileUrl}}" class="image" mode="aspectFill"/>
+      </view>
+      <view class="goods-detail">
+        <view class="goods-title">{{item.goodsName}}</view>
+        <view class="goods-wrap">
+          <view class="goods-price">
+            <view class="price-label">¥  </view>
+            <view class="price-value">{{item.price}}</view>
+            <view class="price-unit"> /套</view>
+          </view>
+          <view class="goods-select">选规格</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
