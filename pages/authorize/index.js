@@ -80,20 +80,17 @@ Page({
   },
   login: function() {
     const that = this;
-    const token = wx.getStorageSync('token');
-    if (token) {
-      WXAPI.checkToken(token).then(function(res) {
-        if (res.code != 0) {
-          wx.removeStorageSync('token')
-          that.login();
-        } else {
-          // 回到原来的地方放
-          app.navigateToLogin = false
-          wx.navigateBack();
-        }
-      })
-      return;
-    }
+    // const token = wx.getStorageSync('token');
+    // if (token) {
+    //   app.navigateToLogin = false
+    //   wx.navigateBack();
+    // } else {
+    //   wx.removeStorageSync('token')
+    //   that.login();
+    // }
+    //
+    // app.navigateToLogin = false
+    // wx.navigateBack();
     wx.login({
       success: function(res) {
         WXAPI.login(res.code).then(function(res) {
@@ -130,17 +127,11 @@ Page({
           success: function(res) {
             let iv = res.iv;
             let encryptedData = res.encryptedData;
-            let referrer = '' // 推荐人
-            let referrer_storge = wx.getStorageSync('referrer');
-            if (referrer_storge) {
-              referrer = referrer_storge;
-            }
             // 下面开始调用注册接口
             WXAPI.register( {
               code: code,
               encryptedData: encryptedData,
               iv: iv,
-              referrer: referrer
             }).then(function(res) {
               wx.hideLoading();
               that.login();

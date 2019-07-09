@@ -54,15 +54,6 @@ App({
         wx.hideToast()
       }
     });
-    //  获取商城名称
-    // WXAPI.queryConfig({
-    //   key: 'mallName'
-    // }).then(function(res) {
-    //   if (res.code == 0) {
-    //     wx.setStorageSync('mallName', res.data.value);
-    //   }
-    // })
-    // 判断是否登录
     let token = wx.getStorageSync('token');
     if (!token) {
       that.goLoginPageTimeOut()

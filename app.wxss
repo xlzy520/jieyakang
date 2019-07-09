@@ -1,11 +1,13 @@
 @import 'weui/weui.wxss';
 
 .container {
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  font-family: PingFang SC, serif;
+  background-color: #fff;
+  min-height: 100%;
 }
 .wxParse-img {
   display: block !important;
