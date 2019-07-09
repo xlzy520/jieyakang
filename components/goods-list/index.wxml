@@ -9,11 +9,14 @@
       </view>
       <view class="goods-detail">
         <view class="goods-title">{{item.goodsName}}</view>
+        <view class="goods-rule" hidden="{{!item.rule}}">({{item.rule}})</view>
+        <view class="goods-rule" hidden="{{item.rule}}"></view>
         <view class="goods-wrap">
           <view class="goods-price">
             <view class="price-label">¥  </view>
             <view class="price-value">{{item.price}}</view>
-            <view class="price-unit"> /套</view>
+            <view class="price-xiegang">/</view>
+            <view class="price-unit">{{item.ruleType}}</view>
           </view>
           <view class="goods-select">选规格</view>
         </view>
