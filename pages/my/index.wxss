@@ -33,18 +33,18 @@
   display: flex;
   align-items: center;
   font-family: PingFang SC Medium, sans-serif;
-  font-size: 35rpx;
+  font-size: 26rpx;
   color: #000;
   background-color: #fff;
   width: 100%;
   border-bottom: 1px solid #eee;
-  height: 120rpx;
-  line-height: 120rpx;
+  height: 90rpx;
+  line-height: 90rpx;
   padding-left: 100rpx;
 }
 .my-item-img{
-  width: 50rpx;
-  height: 36rpx;
+  width: 44rpx;
+  height: 33rpx;
 }
 .my-item-title{
   margin-left: 10rpx;
@@ -60,19 +60,39 @@
   margin-left: 15rpx;
 }
 .my-wrapper{
-  width: 92%;
-  margin:0rpx 30rpx 30rpx;
+  width: 690rpx;
+  margin:22rpx 30rpx 30rpx;
   background-color: #fff;
   border-radius: 10rpx;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  box-shadow:0rpx 11rpx 24rpx 0rpx rgba(0, 0, 0, 0.08);
+}
+.my-wrapper.order{
+  height: 205rpx;
+}
+.my-wrapper.record{
+  background-color: unset;
+  height: 190rpx;
+  margin:0 0 30rpx 0;
+}
+.my-wrapper.record .my-wrapper-content{
+  padding-top: unset;
+  justify-content: space-between;
+}
+.my-wrapper.record .my-wrapper-content .item{
+  width: 330rpx;
+  height: 190rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0rpx 11rpx 24rpx 0rpx rgba(0, 0, 0, 0.08);
+  border-radius:12rpx;
 }
 .my-wrapper-title{
   display: flex;
   font-family: PingFang SC;
   font-weight: bold;
-  padding: 30rpx 30rpx 0;
+  padding: 24rpx 30rpx 0;
   font-size: 35rpx;
   line-height: 35rpx;
   color: #000;
@@ -91,6 +111,7 @@
   padding-top: 30rpx;
 }
 .my-wrapper-content .item {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 187rpx;
@@ -104,20 +125,27 @@
 .my-wrapper-content .item .text {
   font-family: PingFang SC Medium;
   font-size: 26rpx;
-  margin-top: 20rpx;
-}
-.record .my-wrapper-content .item{
-    width: 100%;
+  margin-top: 24rpx;
 }
 
 .badge{
+  position: absolute;
+  top:7rpx;
+  right:80rpx;
+  transform: translateY(-50%) translateX(100%);
+  text-align: center;
+  vertical-align: middle;
   width: 40rpx;
   height: 40rpx;
-  position: relative;
   border-radius: 50%;
-  bottom: 130rpx;
-  left: 95rpx;
   color: #fff;
   background-color: #ea5255;
   font-size: 27rpx;
+}
+
+.my-list{
+  width:750px;
+  height:177px;
+  background:rgba(255,255,255,1);
+  border:2px solid rgba(240, 240, 240, 1);
 }

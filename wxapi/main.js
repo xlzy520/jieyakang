@@ -25,7 +25,7 @@ const request = (url,data,method='post') => {
     })
   })
 }
-const request_xcx = (url,data,method='post') => {
+const request_xcx = (url,data={},method='post') => {
   let _url = API_BASE_URL_XCX + url
   return new Promise((resolve, reject) => {
     wx.request({
@@ -38,7 +38,11 @@ const request_xcx = (url,data,method='post') => {
         'Content-Type': method==='formdata'?'application/x-www-form-urlencoded':'application/json'
       },
       success(request) {
-        resolve(request.data)
+        if (request.data.success){
+          resolve(request.data)
+        } else {
+          reject(request.data)
+        }
       },
       fail(error) {
         reject(error)
@@ -200,10 +204,8 @@ module.exports = {
       token
     })
   },
-  orderStatistics: (token) => {
-    return request('/order/statistics', 'get', {
-      token
-    })
+  orderStatistics: () => {
+    return request_xcx('/order/statistics')
   },
   withDrawApply: (money, token) => {
     return request('/user/withDraw/apply', {

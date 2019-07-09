@@ -10,9 +10,8 @@ Page({
       {type: 3, label: '待收货', img: 'dispatched'},
     ],
     recordNav: [
-      {type: 0, label: '进货记录', img: 'order'},
-      {type: 1, label: '回收记录', img: 'pay'},
-      {type: 2, label: '库存记录', img: 'processed'},
+      {type: 0, label: '进销记录', img: 'jinxiaocun'},
+      {type: 1, label: '当前留存', img: 'liucun'},
     ],
     badge: [0,0,0,0]
   },
@@ -20,14 +19,12 @@ Page({
 
 	},
   onShow() {
-    let that = this;
     let userInfo = wx.getStorageSync('userInfo')
     if (!userInfo) {
       app.goLoginPageTimeOut()
     } else {
-      that.setData({
+      this.setData({
         userInfo: userInfo,
-        version: CONFIG.version
       })
     }
     this.getUserApiInfo();
@@ -65,14 +62,13 @@ Page({
     })
   },
   getOrderStatistics() {
-    WXAPI.orderStatistics(wx.getStorageSync('token')).then((res)=> {
+    WXAPI.orderStatistics().then((res)=> {
       const { count_id_no_pay, count_id_no_transfer,count_id_no_confirm } = res.data
-      if (res.code == 0) {
-        let badge = [0, count_id_no_pay, count_id_no_transfer, count_id_no_confirm]
-        this.setData({
-          badge: badge
+      let badge = [0, count_id_no_pay, count_id_no_transfer, count_id_no_confirm]
+      // todo 测试如果WXAPI的success是不是请求成功就算
+      this.setData({
+        badge: badge
       })
-      }
     })
   }
 })

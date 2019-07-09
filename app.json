@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/my/index",
     "pages/index/index",
     "pages/shop-cart/index",
     "pages/tableware/index",
@@ -10,7 +11,7 @@
     "pages/select-address/index",
     "pages/contact-us/index",
     "pages/order-details/index",
-    "pages/my/index",
+
     "pages/authorize/index",
     "pages/banner-detail/index"
   ],
