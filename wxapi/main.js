@@ -3,13 +3,15 @@
 const API_BASE_URL_XCX = 'https://www.easy-mock.com/mock/5ced4b17d564921f45a737c3/xcx'
 const API_BASE_URL_ADMIN = 'https://www.easy-mock.com/mock/5cdb6b1c196b3a1793f9fcad/admin'
 // todo 统一处理 正确错误、token过期
-const request = (url,data,method='post') => {
+const request = (url,data={},method='post') => {
   let _url = 'https://api.it120.cc/jieyakang/' + url
   return new Promise((resolve, reject) => {
     wx.request({
       url: _url,
       method: method==='formdata'?'post': method,
-      data: data,
+      data: Object.assign(data, {
+        token: wx.getStorageSync('token')
+      }),
       header: {
         'Content-Type': method==='formdata'?'application/x-www-form-urlencoded':'application/json'
       },
@@ -53,13 +55,15 @@ const request_xcx = (url,data={},method='post') => {
     })
   })
 }
-const request_admin = (url,data,method='post') => {
+const request_admin = (url,data={},method='post') => {
   let _url = API_BASE_URL_ADMIN + url
   return new Promise((resolve, reject) => {
     wx.request({
       url: _url,
       method: method==='formdata'?'post': method,
-      data: data,
+      data: Object.assign(data, {
+        token: wx.getStorageSync('token')
+      }),
       header: {
         'Content-Type': method==='formdata'?'application/x-www-form-urlencoded':'application/json'
       },
@@ -119,9 +123,6 @@ module.exports = {
   register: (data) => {
     return request('/user/wxapp/register/complex', data)
   },
-  banners: (data) => {
-    return request('/banner/list', 'get', data)
-  },
   goods: (data) => {
     return request_xcx('/goods/list', data)
   },
@@ -134,31 +135,26 @@ module.exports = {
     return request('/shop/goods/price', data)
   },
   addAddress: (data) => {
-    return request('/user/shipping-address/add', data)
+    return request_admin('/address/add', data)
   },
   updateAddress: (data) => {
-    return request('/user/shipping-address/update', data)
+    return request_admin('/address/update', data)
   },
   deleteAddress: (id, token) => {
-    return request('/user/shipping-address/delete', {
+    return request('/address/delete', {
       id,
       token
     })
   },
-  queryAddress: (token) => {
-    return request('/user/shipping-address/list', 'get', {
-      token
-    })
+  queryAddress: () => {
+    return request_xcx('/address/list')
   },
-  defaultAddress: (token) => {
-    return request('/user/shipping-address/default', 'get', {
-      token
-    })
+  defaultAddress: () => {
+    return request('/address/default')
   },
-  addressDetail: (id, token) => {
-    return request('/user/shipping-address/detail', 'get', {
+  addressDetail: (id) => {
+    return request('/address/detail',{
       id,
-      token
     })
   },
   userDetail: (token) => {

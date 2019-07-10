@@ -1,19 +1,50 @@
-page {
-  height: 100%;
-}
-/*placeholder的样式*/
 .phcolor{
   font-family: PingFang SC Medium, sans-serif;
   color: #888;
 }
 .container {
-  font-family: PingFang SC Medium, sans-serif;
-  font-size: 30rpx;
-  color: #000;
   background-color: #f8f8f8;
-  -webkit-font-smoothing: antialiased;
   border-top: 2rpx solid #e5e5e5;
 }
+
+/*身份选择*/
+.identity-select{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 34rpx;
+  background-color: #f8f8f8;
+  z-index: 999;
+}
+.identity-select-content{
+  font-family: PingFang SC Bold, sans-serif;
+  font-weight:bold;
+  padding-left: 60rpx;
+}
+.identity-select-title{
+  font-size: 48rpx;
+  padding-top: 80rpx;
+  padding-bottom: 51rpx;
+}
+.identity-select-helper{
+  font-weight: normal;
+  font-size:30rpx;
+  color: #999;
+  line-height:50rpx;
+}
+.card-select{
+  margin-top: 71rpx;
+}
+.card-select image{
+  width: 664rpx;
+  height: 254rpx;
+  margin-left: -17rpx;
+  margin-bottom: 36rpx;
+}
+
+
 .form-content{
   width: 100%;
 }
@@ -106,38 +137,6 @@ picker {
   padding: 0 30rpx;
 }
 
-.dialog{
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  font-size: 34rpx;
-  text-align: center;
-  background-color: rgba(127,127,127,.5);
-  z-index: 2;
-}
-.dialog-content{
-  position: absolute;
-  top: 434rpx;
-  left: 0;
-  right: 0;
-  width: 540rpx;
-  margin: auto;
-  background-color: #fff;
-  border-radius: 20rpx;
-  z-index: 3;
-}
-.tip-text{
-  line-height: 1.2;
-  padding: 48rpx 24rpx 43rpx 26rpx;
-  font-weight: lighter;
-  color: #404040;
-  border-bottom: 1rpx solid #d9d9d9;
-}
-.tip-ok{
-  height: 88rpx;
-  line-height: 88rpx;
-  color: #ff0000;
-}
 
 .switch__core{
   margin: 0;

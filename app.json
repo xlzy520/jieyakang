@@ -1,17 +1,17 @@
 {
   "pages": [
+    "pages/address-add/index",
     "pages/my/index",
     "pages/index/index",
     "pages/shop-cart/index",
     "pages/tableware/index",
     "pages/order-my/index",
-    "pages/address-add/index",
+
     "pages/goods-details/index",
     "pages/to-pay-order/index",
     "pages/select-address/index",
     "pages/contact-us/index",
     "pages/order-details/index",
-
     "pages/authorize/index",
     "pages/banner-detail/index"
   ],

@@ -1,0 +1,15 @@
+<view class="dialog">
+  <view class="dialog-content">
+    <view class="dialog-text">{{text}}</view>
+    <view class="dialog-footer">
+      <view wx:if="{{type==='warning'}}" class="dialog-warning">
+        <view class="dialog-close" bindtap="close">好的</view>
+      </view>
+      <view wx:if="{{type==='address'}}" class="dialog-column">
+        <view  class="dialog-close" bindtap="close">好的</view>
+        <view class="divider"></view>
+        <view  class="dialog-other-btn" bindtap="addAddress">添加地址</view>
+      </view>
+    </view>
+  </view>
+</view>

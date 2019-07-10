@@ -1,40 +1,41 @@
 <view class="container">
-    <form bindsubmit="bindSave" class="form-content">
-        <view class="form-box">
-            <view class="row-wrap">
-                <input name="linkMan" class="input" type="text" placeholder-class="phcolor" maxlength="20"
-                       placeholder="收货人" value="{{addressData.linkMan}}{{wxaddress.userName}}"/>
-            </view>
-            <view class="row-wrap">
-                <input name="mobile" class="input" maxlength="11" type="number" placeholder-class="phcolor"
-                       placeholder="手机号码" value="{{addressData.mobile}}{{wxaddress.telNumber}}"/>
-            </view>
-            <view class="row-wrap" bindtap="selectCity">
-                <picker mode="multiSelector" range="{{pickerRegionRange}}" range-key="name" value="{{pickerSelect}}" bindchange="bindchange" bindcolumnchange="bindcolumnchange">
-                    {{showRegionStr}}
-                </picker>
-            </view>
-            <view class="addr-details">
+  <view class="identity-select">
+    <view class="identity-select-content">
+      <view class="identity-select-title">选择身份标签</view>
+      <view class="identity-select-helper">选择好身份标签，</view>
+      <view class="identity-select-helper">有助于更好的填写地址信息</view>
+      <view class="card-select">
+        <image src="/images/address/restaurant-card.png"></image>
+        <image src="/images/address/school-card.png"></image>
+      </view>
+    </view>
+  </view>
+  <form bindsubmit="bindSave" class="form-content">
+    <view class="form-box">
+      <view class="row-wrap">
+        <input name="linkMan" class="input" type="text" placeholder-class="phcolor" maxlength="20"
+               placeholder="收货人" value="{{addressData.linkMan}}{{wxaddress.userName}}"/>
+      </view>
+      <view class="row-wrap">
+        <input name="mobile" class="input" maxlength="11" type="number" placeholder-class="phcolor"
+               placeholder="手机号码" value="{{addressData.mobile}}{{wxaddress.telNumber}}"/>
+      </view>
+      <view class="addr-details">
             <textarea name="address" placeholder="详细地址：县镇+街道+道路门牌号+企业单位地址名称"
                       placeholder-class="phcolor" value="{{addressData.address}}{{wxaddress.detailInfo}}"/>
-            </view>
-        </view>
-        <view class="addr-default">
-            <view class="addr-default-text">设为默认地址</view>
-            <view class="switch {{isDefault?'is-checked': ''}}" bindtap="changeSwitch">
-                <view class="switch__core {{isDefault?'switch__on': 'switch__off'}}"></view>
-            </view>
-        </view>
-        <view type="default" class="addr-del" bindtap="deleteAddress" data-id="{{addressData.id}}"
-                wx:if="{{addressData}}">删除地址
-        </view>
-        <button class="save-btn" formType="submit">保存</button>
-        <!--<button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>-->
-    </form>
-    <view class="dialog" wx:if="{{tipText}}">
-        <view class="dialog-content">
-            <view class="tip-text">{{tipText}}</view>
-            <view class="tip-ok" bindtap="close">好的</view>
-        </view>
+      </view>
     </view>
+    <view class="addr-default">
+      <view class="addr-default-text">设为默认地址</view>
+      <view class="switch {{isDefault?'is-checked': ''}}" bindtap="changeSwitch">
+        <view class="switch__core {{isDefault?'switch__on': 'switch__off'}}"></view>
+      </view>
+    </view>
+    <view type="default" class="addr-del" bindtap="deleteAddress" data-id="{{addressData.id}}"
+          wx:if="{{addressData}}">删除地址
+    </view>
+    <button class="save-btn" formType="submit">保存</button>
+    <!--<button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>-->
+  </form>
+  <dialog wx:if="{{tipText}}" type="warning" text="{{tipText}}" bindclose="close"></dialog>
 </view>

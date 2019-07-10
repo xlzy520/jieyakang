@@ -7,7 +7,6 @@ Page({
   selectTap(e) {
     const { id } = e.currentTarget.dataset;
     WXAPI.updateAddress({
-      token: wx.getStorageSync('token'),
       id: id,
       isDefault: 'true'
     }).then(() => {
@@ -35,12 +34,10 @@ Page({
     this.initShippingAddress();
   },
   initShippingAddress() {
-    WXAPI.queryAddress(wx.getStorageSync('token')).then((res)=> {
-      if (res.code === 0) {
-        this.setData({
-          addressList: res.data
-        });
-      }
+    WXAPI.queryAddress().then((res)=> {
+      this.setData({
+        addressList: res.data.list
+      });
     })
   }
 })
