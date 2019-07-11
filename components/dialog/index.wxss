@@ -40,8 +40,8 @@
   display: flex;
   justify-content: space-between;
 }
-.close.warning{
-  color: #ff0000;
+.close.warning,.other-btn.warning{
+  color: #ff001c;
 }
 .other-btn.blue{
   color: #0082ff;

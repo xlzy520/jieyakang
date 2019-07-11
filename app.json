@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/select-address/index",
     "pages/address-add/index",
     "pages/my/index",
     "pages/index/index",
@@ -9,7 +10,7 @@
 
     "pages/goods-details/index",
     "pages/to-pay-order/index",
-    "pages/select-address/index",
+
     "pages/contact-us/index",
     "pages/order-details/index",
     "pages/authorize/index",

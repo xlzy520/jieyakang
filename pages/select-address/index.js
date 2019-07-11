@@ -23,8 +23,9 @@ Page({
     })
   },
   editAddress(e) {
+    const {id,type}=e.currentTarget.dataset
     wx.navigateTo({
-      url: "/pages/address-add/index?id=" + e.currentTarget.dataset.id
+      url: "/pages/address-add/index?id=" + id+'&addressType='+type
     })
   },
   onLoad() {

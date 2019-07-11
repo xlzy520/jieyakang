@@ -5,13 +5,13 @@
       <view class="identity-select-helper">选择好身份标签，</view>
       <view class="identity-select-helper">有助于更好的填写地址信息</view>
       <view class="card-select">
-        <image src="/images/address/restaurant-card.png" bindtap="selectIdentity" data-type="restaurant"></image>
-        <image src="/images/address/school-card.png" bindtap="selectIdentity" data-type="school"></image>
+        <image src="/images/address/restaurant-card.png" bindtap="selectIdentity" data-type="1"></image>
+        <image src="/images/address/school-card.png" bindtap="selectIdentity" data-type="0"></image>
       </view>
     </view>
   </view>
   <form bindsubmit="bindSave" class="form-content">
-    <view class="form-box" wx:if="{{addressData.addressType === 'restaurant'}}">
+    <view class="form-box" wx:if="{{addressData.addressType}}">
       <view class="row-wrap">
         <input name="consignee" class="input" type="text" placeholder-class="phcolor" maxlength="25"
                placeholder="收货人" value="{{addressData.consignee}}"/>
@@ -25,13 +25,13 @@
                       placeholder-class="phcolor" value="{{addressData.address}}"/>
       </view>
     </view>
-    <view class="form-box school" wx:if="{{addressData.addressType === 'school'}}">
+    <view class="form-box school" wx:if="{{!addressData.addressType}}">
       <view class="row-wrap">
         <picker bindchange="bindPickerChange" value="{{schoolIndex}}" range="{{schoolList}}" range-key="schoolName">
           <view class="picker">{{schoolList[schoolIndex].schoolName}}</view>
         </picker>
       </view>
-      <view class="row-wrap" wx:if="{{addressData.addressType === 'school'}}">
+      <view class="row-wrap" wx:if="{{!addressData.addressType}}">
         <input name="classNumber" class="input" type="text" placeholder-class="phcolor" maxlength="16"
                placeholder="班级号码（例：113班）" value="{{classNumber}}"/>
       </view>

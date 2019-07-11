@@ -141,7 +141,7 @@ module.exports = {
     return request_admin('/address/update', data)
   },
   deleteAddress: (id, token) => {
-    return request('/address/delete', {
+    return request_admin('/address/delete', {
       id,
       token
     })
@@ -153,7 +153,7 @@ module.exports = {
     return request('/address/default')
   },
   addressDetail: (id) => {
-    return request('/address/detail',{
+    return request_xcx('/address/detail',{
       id,
     })
   },

@@ -4,7 +4,7 @@ var app = getApp()
 Page({
   data: {
     addressData: {
-      addressType: 'restaurant',//school, restaurant
+      addressType: '1',//school, restaurant
       consignee: '',
       mobile: '',
       address: '',
@@ -127,25 +127,26 @@ Page({
     })
   },
   onLoad(e) {
+    if (e.addressType){
+      this.setData({
+        'addressData.addressType': e.addressType,
+        identityHidden: true
+      })
+    }
     this.getSchoolList()
     if (e.id) { // 修改初始化数据库数据
       wx.setNavigationBarTitle({
         title: '编辑收货地址'
       })
-      WXAPI.addressDetail(e.id, wx.getStorageSync('token')).then((res)=> {
-        if (res.code === 0) {
-          this.setData({
-            id: e.id,
-            addressData: res.data,
-            showRegionStr: res.data.provinceStr + res.data.cityStr + res.data.areaStr
-          });
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: '无法获取快递地址数据',
-            showCancel: false
-          })
-        }
+      WXAPI.addressDetail(e.id).then((res)=> {
+        this.setData({
+          id: e.id,
+          addressData: res.data,
+        });
+      }).catch(err=>{
+        this.setData({
+          tipText: '无法获取快递地址数据',
+        })
       })
     }
   },

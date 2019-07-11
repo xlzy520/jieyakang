@@ -1,99 +1,109 @@
 .container {
-    font-family: PingFang SC Medium;
-    background-color:#f8f8f8;
-    min-height: 100vh;
+  background-color: #f8f8f8;
 }
-.no-address{
-    margin: auto;
-    margin-top: 280rpx;
-}
-.no-content-label{
-    font-family: PingFang SC Medium;
-    font-size: 30rpx;
-    color: #999;
-    margin-top: 30rpx;
-    margin-bottom: 42rpx;
-    text-align: center;
-}
-.no-address image{
-    width: 261rpx;
-    height: 165rpx;
-}
-.address-list{
-    width: 100%;
-    padding-bottom: 100rpx;
-}
-.address-list .address-item{
-    font-family: PingFang SC Medium;
-    color: #000;
-    width: 690rpx;
-    background-color: #fff;
-    margin: auto;
-    margin-top: 30rpx;
-    padding: 30rpx;
-    border-radius: 15rpx;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1rpx solid #eee;
-    box-shadow: 1rpx 5rpx 10rpx #eee;
-    box-sizing: border-box;
-}
-.address-item .name-tel{
-    display: flex;
-    justify-content: space-between;
-    font-size: 30rpx;
-}
-.name-tel .name{
 
+.no-address {
+  margin: auto;
+  margin-top: 280rpx;
 }
-.name-tel .phone{
-    font-family: Mark Pro Regular;
-    color: #999;
-    font-weight: lighter;
+.no-content-text {
+  font-family: PingFang SC Medium, sans-serif;
+  font-size: 30rpx;
+  color: #999;
+  margin-top: 30rpx;
+  margin-bottom: 42rpx;
+  text-align: center;
 }
-.address-item .address-action{
-    display: flex;
-    justify-content: space-between;
+.no-address image {
+  width: 261rpx;
+  height: 165rpx;
 }
-.address-item .address{
-    display: flex;
-    justify-content: flex-start;
-    font-size: 26rpx;
-    padding: 15rpx 0;
+
+
+.address-list {
+  width: 100%;
+  padding-bottom: 100rpx;
 }
-.address-action{
-    margin-top: 30rpx;
+.address-list .address-item {
+  width: 690rpx;
+  background-color: #fff;
+  margin: auto;
+  margin-top: 30rpx;
+  padding: 30rpx;
+  border-radius: 15rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1rpx solid #eee;
+  box-shadow: 1rpx 5rpx 10rpx #eee;
+  box-sizing: border-box;
 }
-.address-action .address-default{
-     display: flex;
-     justify-content: space-between;
- }
-.address-action .address-edit{
-    display: flex;
-    justify-content: space-between;
+.name-tel .phone {
+  font-family: Mark Pro Regular, sans-serif;
+  color: #999;
+  font-weight: lighter;
 }
-.address-action .address-edit-text{
-    color: #0087ff;
+.address-type-wrap{
+  display: flex;
+  align-items: center;
 }
- .address-edit-icon, .address-check-icon{
+.address-type-wrap .school,
+.address-type-wrap .restaurant{
+  font-weight: 100;
+  margin-right: 15rpx;
+  height: 36rpx;
+  color: #fff;
+  font-size: 24rpx;
+  text-align: center;
+  vertical-align: middle;
+  width: 66rpx;
+  padding: 0;
+}
+.address-type-wrap .school{
+  background: #0068F5;
+}
+.address-type-wrap .restaurant{
+  background: #F29B3A;
+}
+
+.address-item .name-tel,
+.address-item .address-action,
+.address-action .address-default,
+.address-action .address-edit {
+  display: flex;
+  justify-content: space-between;
+}
+.address-item .address {
+  font-size: 26rpx;
+  padding: 15rpx 0;
+}
+.address-action {
+  margin-top: 30rpx;
+}
+.address-action .address-edit-text {
+  color: #0087ff;
+}
+.address-edit-icon, .address-check-icon {
   width: 45rpx;
   height: 45rpx;
 }
-.address-action  .address-default-text, .address-action .address-edit-text{
-    font-size: 28rpx;
-    margin-left: 15rpx;
+
+.address-action .address-default-text, .address-action .address-edit-text {
+  font-size: 28rpx;
+  margin-left: 15rpx;
 }
-.bottom-box{
-    position: fixed;
-    width: 690rpx;
-    bottom: 30rpx;
-    height:100rpx;
-    line-height: 100rpx;
-    background-color: #ff001c;
-    border-radius: 12rpx;
+
+
+.footer {
+  position: fixed;
+  width: 690rpx;
+  bottom: 30rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #ff001c;
+  border-radius: 12rpx;
 }
-.bottom-box .add-address{
-    color: #fff;
-    text-align: center;
+.footer .add-address {
+  color: #fff;
+  text-align: center;
 }

@@ -1,25 +1,22 @@
 <view class="container">
   <view class="address-list" wx:if="{{addressList.length>0}}">
     <view class="address-item" wx:for-items="{{addressList}}"
-          wx:key="{{index}}" bindtap="selectTap" data-id="{{item.id}}">
+          wx:key="{{index}}" bindtap="selectTap" data-id="{{item.addressId}}">
       <view class="name-tel">
-        <view class="name">
-          {{item.linkMan}}
-        </view>
-        <view class="phone">
-          {{item.mobile}}
-        </view>
+        <view class="name">{{item.consignee}}</view>
+        <view class="phone">{{item.mobile}}</view>
       </view>
-      <view class="address">
-        {{item.address}}
+      <view class="address-type-wrap">
+        <view class="{{item.addressType?'restaurant':'school'}}">{{item.addressType?'餐馆':'学校'}}</view>
+        <view class="address">{{item.address}}</view>
       </view>
       <view class="address-action">
         <view class="address-default">
-          <image class="address-check-icon" src="/images/check.png" wx:if="{{item.isDefault}}"></image>
-          <image class="address-check-icon" src="/images/unchecked.png" wx:if="{{!item.isDefault}}"></image>
-          <view class="address-default-text">默认地址</view>
+          <image class="address-check-icon" src="/images/{{item.isDefault?'check':'unchecked'}}.png"></image>
+          <view class="address-default-text">默认{{item.addressType?'地址':'班级'}}</view>
         </view>
-        <view class="address-edit" catchtap="editAddress" data-id="{{item.id}}">
+        <view class="address-edit" catchtap="editAddress" data-id="{{item.addressId}}"
+              data-type="{{item.addressType}}">
           <image src="/images/addr-edit.png" class="address-edit-icon"></image>
           <view class="address-edit-text">编辑</view>
         </view>
@@ -28,9 +25,9 @@
   </view>
   <view class="no-address" wx:if="{{addressList.length===0}}">
     <image src="/images/no-address.png"></image>
-    <view class="no-content-label">暂无绑定地址信息</view>
+    <view class="no-content-text">暂无绑定地址信息</view>
   </view>
-  <view class="bottom-box">
+  <view class="footer">
     <view class="add-address" bindtap="addAddress">添加新地址</view>
   </view>
 </view>
