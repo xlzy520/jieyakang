@@ -7,78 +7,96 @@ Page({
       addressType: 'restaurant',//school, restaurant
       consignee: '',
       mobile: '',
-      address: '安乡县',
-      isDefault: false
+      address: '',
+      isDefault: true
     },
+    schoolList: [],
     tipText: '',
+    identityHidden: false,
+    dialogType: '',
+    schoolIndex: 0,
+    classNumber: ''
   },
-  bindCancel: function () {
-    wx.navigateBack({})
-  },
-  changeSwitch(){
+  selectIdentity(e){
     this.setData({
-      isDefault: !this.data.isDefault
+      identityHidden: true,
+      'addressData.addressType': e.currentTarget.dataset.type
+    })
+  },
+  getSchoolList(){
+    WXAPI.getSchoolList().then((res) => {
+      this.setData({
+        schoolList: res.data.list
+      })
+    })
+  },
+  reSelectIdentity(){
+    this.setData({
+      identityHidden: false
+    })
+  },
+  changeDefaultStatus() {
+    this.setData({
+      'addressData.isDefault': !this.data.addressData.isDefault
+    })
+  },
+  bindPickerChange(e) {
+    this.setData({
+      schoolIndex: e.detail.value
     })
   },
   checkPhone(phone) {
     return /^1[34578]\d{9}$/.test(phone)
   },
   bindSave(e) {
-    const linkMan = e.detail.value.linkMan;
-    const address = e.detail.value.address;
-    const mobile = e.detail.value.mobile;
-    const code = '000000';
-    
-    if (linkMan.length < 2 || linkMan.length > 20) {
-      this.setData({
-        tipText: '收货人姓名长度需要在2-20个字符之间'
-      })
-      return
+    let consignee,classNumber;
+    let address = e.detail.value.address;
+    if (this.data.addressData.addressType === 'school') {
+      classNumber = e.detail.value.classNumber;
+      if (classNumber.trim().length < 2 || classNumber.trim().length > 15) {
+        this.setData({
+          tipText: '班级号长度需要在2-16个字符之间'
+        })
+        return
+      }
+      address = this.data.schoolList[this.data.schoolIndex].schoolName + '  '+classNumber
+    } else {
+      consignee = e.detail.value.consignee;
+      if (consignee.trim().length < 2 || consignee.trim().length > 25) {
+        this.setData({
+          tipText: '收货人姓名长度需要在2-25个字符之间'
+        })
+        return
+      }
     }
+    const mobile = e.detail.value.mobile;
     if (!this.checkPhone(mobile)) {
       this.setData({
         tipText: '请填写正确的手机号码'
       })
       return
     }
-    if (!this.data.pObject || !this.data.cObject){
-      this.setData({
-        tipText: '请选择地区'
-      })
-      return
-    }
-    if (address === ""){
+    if (address.trim() === ""){
       this.setData({
         tipText: '请填写详细地址'
       })
       return
     }
     let apiResult
+    let params = {
+      token: wx.getStorageSync('token'),
+      address: address,
+      mobile: mobile,
+      isDefault: this.data.addressData.isDefault,
+      consignee: consignee||'',
+    }
     if (this.data.id) {
       apiResult = WXAPI.updateAddress({
-        token: wx.getStorageSync('token'),
-        id: that.data.id,
-        provinceId: this.data.pObject.id,
-        cityId: this.data.cObject.id,
-        districtId: this.data.dObject ? this.data.dObject.id : '',
-        linkMan: linkMan,
-        address: address,
-        mobile: mobile,
-        code: code,
-        isDefault: this.data.isDefault.toString()
+        id: this.data.id,
+        ...params
       })
     } else {
-      apiResult = WXAPI.addAddress({
-        token: wx.getStorageSync('token'),
-        provinceId: this.data.pObject.id,
-        cityId: this.data.cObject.id,
-        districtId: this.data.dObject ? this.data.dObject.id : '',
-        linkMan: linkMan,
-        address: address,
-        mobile: mobile,
-        code: code,
-        isDefault: this.data.isDefault.toString()
-      })
+      apiResult = WXAPI.addAddress(params)
     }
     apiResult.then((res) => {
       wx.showLoading({
@@ -104,11 +122,12 @@ Page({
   },
   close(){
     this.setData({
-      tipText: ''
+      tipText: '',
+      dialogType: ''
     })
   },
   onLoad(e) {
-    this.initRegionPicker(e.id) // 初始化省市区选择器
+    this.getSchoolList()
     if (e.id) { // 修改初始化数据库数据
       wx.setNavigationBarTitle({
         title: '编辑收货地址'
@@ -120,7 +139,6 @@ Page({
             addressData: res.data,
             showRegionStr: res.data.provinceStr + res.data.cityStr + res.data.areaStr
           });
-          this.initRegionDB(res.data.provinceStr, res.data.cityStr, res.data.areaStr)
         } else {
           wx.showModal({
             title: '提示',
@@ -131,20 +149,16 @@ Page({
       })
     }
   },
-  deleteAddress: function (e) {
-    const id = e.currentTarget.dataset.id;
-    wx.showModal({
-      title: '提示',
-      content: '确定要删除该收货地址吗？',
-      success: res=> {
-        if (res.confirm) {
-          WXAPI.deleteAddress(id, wx.getStorageSync('token')).then(()=> {
-            wx.navigateBack({})
-          })
-        } else {
-          console.log('用户点击取消')
-        }
-      }
+  deleteAddress() {
+    this.setData({
+      tipText: '确定要删除该收货地址吗？',
+      dialogType: 'delete'
     })
   },
+  confirmDelete(e){
+    const id = e.currentTarget.dataset.id;
+    WXAPI.deleteAddress(id).then(()=> {
+      wx.navigateBack({})
+    })
+  }
 })

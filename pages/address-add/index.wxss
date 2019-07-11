@@ -67,17 +67,21 @@
 
 .row-wrap input {
   height: 100%;
-  /*padding-right: 30rpx;*/
 }
 .row-wrap picker {
+  width: 100%;
   height: 100%;
   padding-left: 30rpx;
+}
+.row-wrap .picker{
+  height: 100rpx;
 }
 .row-wrap[name="mobile"]{
   font-family: Mark Pro Regular, sans-serif;
 }
 
-.save-btn {
+
+.btn {
   width: 690rpx;
   height: 88rpx;
   font-size: 34rpx;
@@ -90,6 +94,11 @@
 
 .save-btn {
   background-color: #ff001c;
+  color: #fff;
+  margin-top: 50rpx;
+}
+.reselect-btn{
+  background-color: #ffbf5a;
   color: #fff;
   margin-top: 50rpx;
 }
@@ -135,42 +144,4 @@ picker {
   background-color: #fff;
   margin-top: 30rpx;
   padding: 0 30rpx;
-}
-
-
-.switch__core{
-  margin: 0;
-  display: inline-block;
-  position: relative;
-  width: 111rpx;
-  height: 60rpx;
-  border: 3rpx solid #dcdfe6;
-  outline: none;
-  border-radius: 30rpx;
-  box-sizing: border-box;
-  background: #dcdfe6;
-  cursor: pointer;
-  transition: border-color .5s,background-color .5s;
-  vertical-align: middle;
-}
-.switch__core:after{
-  content: "";
-  left: 0;
-  position: absolute;
-  border-radius: 100%;
-  transition: all .5s;
-  width: 56rpx;
-  height: 56rpx;
-  background-color: #fff;
-}
-.switch__on{
-  border-color: #0087ff;
-  background-color: #0087ff;
-}
-.switch__off{
-  border-color: #efefef;
-  background-color: #efefef;
-}
-.switch.is-checked .switch__core:after {
-  left: 50rpx;
 }

@@ -220,5 +220,8 @@ module.exports = {
   },
   getCompanyInfo: ()=>{
     return request_admin('/company/getInfo')
+  },
+  getSchoolList: ()=>{
+    return request_admin('/school/list')
   }
 }

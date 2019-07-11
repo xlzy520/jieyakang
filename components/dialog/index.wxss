@@ -9,7 +9,7 @@
   background-color: rgba(127,127,127,.5);
   z-index: 999;
 }
-.dialog-content{
+.content{
   font-family: PingFang SC Medium, sans-serif;
   position: absolute;
   top: 434rpx;
@@ -21,7 +21,7 @@
   border-radius: 20rpx;
   z-index: 3;
 }
-.dialog-text{
+.text{
   text-wrap: normal;
   word-wrap: break-word;
   word-break: normal;
@@ -31,22 +31,19 @@
   color: #404040;
   border-bottom: 1rpx solid #d9d9d9;
 }
-.dialog-close, .dialog-other-btn {
+.close, .other-btn {
   width: 100%;
   height: 88rpx;
   line-height: 88rpx;
 }
-.dialog-column{
+.btn-wrap{
   display: flex;
   justify-content: space-between;
 }
-.dialog-warning .dialog-close{
+.close.warning{
   color: #ff0000;
 }
-.dialog-column .dialog-close{
-  color: #ff0000;
-}
-.dialog-column .dialog-other-btn{
+.other-btn.blue{
   color: #0082ff;
 }
 .divider{

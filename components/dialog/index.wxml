@@ -1,15 +1,12 @@
 <view class="dialog">
-  <view class="dialog-content">
-    <view class="dialog-text">{{text}}</view>
-    <view class="dialog-footer">
-      <view wx:if="{{type==='warning'}}" class="dialog-warning">
-        <view class="dialog-close" bindtap="close">好的</view>
-      </view>
-      <view wx:if="{{type==='address'}}" class="dialog-column">
-        <view  class="dialog-close" bindtap="close">好的</view>
-        <view class="divider"></view>
-        <view  class="dialog-other-btn" bindtap="addAddress">添加地址</view>
-      </view>
+  <view class="content">
+    <view class="text">{{text}}</view>
+    <view class="btn-wrap">
+      <view class="close warning" bindtap="close" wx:if="{{!type}}">好的</view>
+      <view class="close" bindtap="close" wx:if="{{type==='delete'}}">取消</view>
+      <view class="divider" wx:if="{{type}}"></view>
+      <view class="other-btn blue" bindtap="addAddress" wx:if="{{type==='add-address'}}">添加地址</view>
+      <view class="other-btn warning" bindtap="confirm" wx:if="{{type==='delete'}}">删除</view>
     </view>
   </view>
 </view>
