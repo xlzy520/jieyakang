@@ -127,7 +127,7 @@ module.exports = {
     return request_xcx('/goods/list', data)
   },
   goodsDetail: (id) => {
-    return request('/shop/goods/detail', 'get', {
+    return request_xcx('/goods/detail', {
       id
     })
   },

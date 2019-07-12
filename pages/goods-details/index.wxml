@@ -1,6 +1,6 @@
-<import src="../../wxParse/wxParse.wxml"/>
+<!--<import src="../../wxParse/wxParse.wxml"/>-->
 <view class="container">
-  <view class="swiper-container" wx:if="{{!goodsDetail.basicInfo.videoId}}">
+  <view class="goods-img-wrap swiper-container" wx:if="{{false}}">
     <swiper class="swiper_box"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
       <block wx:for="{{goodsDetail.pics}}" wx:key="id">
@@ -15,45 +15,23 @@
       </block>
     </view>
   </view>
-  <view class="swiper-container" wx:if="{{goodsDetail.basicInfo.videoId}}">
-    <video src="{{videoMp4Src}}" autoplay="true" loop="true" style='width:100%'></video>
+  <view class="goods-img-wrap">
+    <image class="goods-img" src="{{goodsDetail.fileUrl}}"></image>
   </view>
-  <view class="goods-info">
-    <view class="goods-price" style="padding-left:35rpx;">¥ {{selectSizePrice}}</view>
-    <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
-    <view class="goods-price" style="color:#999;font-size:24rpx;">购买{{goodsDetail.basicInfo.numberOrders}}次</view>
-    <!--<view class="goods-price" style="color:#999;font-size:24rpx;">共收到 {{goodsDetail.basicInfo.numberGoodReputation}} 次好评</view>-->
-  </view>
-  <view wx:if="{{hasMoreSelect}}" class="row-arrow" bindtap="bindGuiGeTap">
-    {{selectSize}}
-  </view>
-  <view class="goods-des-info">
-    <view class="label-title">商品介绍</view>
-    <view class="goods-text">
-      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
-    </view>
-  </view>
-  <view class="goods-des-info" style="margin-top:35rpx;" wx:if="{{reputation}}">
-    <view class="label-title" style="border-bottom:1px solid #eee;">大家评价
-      <text style="color:red">（{{reputation.length}}）</text>
-    </view>
-    <view class="goods-text" style="margin-top:15rpx;" wx:for="{{reputation}}" wx:key="id">
-      <view style="width:100rpx;float:left;">
-        <image style="width: 100rpx; height: 100rpx;" src="{{item.user.avatarUrl}}"></image>
-        <view style="text-align:center;width:100rpx;">{{item.goods.goodReputationStr}}</view>
+  <view class="goods-content">
+    <view class="goods-parameter">
+      <view class="goods-price">
+        <view class="price-unit">¥</view>
+        <view class="price">{{goodsDetail}}</view>
       </view>
-      <view style="width:550rpx;float:left;margin-left:35rpx;border-bottom:1px solid #eee;">
-        <view>{{item.goods.goodReputationRemark}}</view>
-        <view style="color: #B0B0B0;font-size:24rpx;">{{item.goods.dateReputation}} {{item.goods.property}}</view>
-      </view>
+      <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
+      <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
     </view>
-  </view>
+    <view class="goods-specification">
+
+    </view>
+   </view>
   <view class="footer-box">
-    <!--<view class="contact">-->
-      <!--<contact-button style="opacity:0;position:absolute;" type="default-dark" session-from="weapp"-->
-                      <!--size="27"></contact-button>-->
-      <!--<view style='position:absolute;bottom:10rpx;'> 客服</view>-->
-    <!--</view>-->
     <view class="shop-cart-btn" bindtap="goShopCar">
       <view class="shop-num">({{shopNum}})</view>
       <view style='position:absolute;bottom:10rpx;'> 购物车</view>

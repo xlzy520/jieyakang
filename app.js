@@ -74,14 +74,14 @@ App({
       wx.navigateTo({
         url: "/pages/authorize/index"
       })
-    }, 1000)
+    }, 500)
   },
   goStartIndexPage: function() {
     setTimeout(function() {
       wx.redirectTo({
         url: "/pages/start/start"
       })
-    }, 1000)
+    }, 500)
   },
   globalData: {
     isConnected: true

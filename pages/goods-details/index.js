@@ -1,14 +1,14 @@
 const WXAPI = require('../../wxapi/main')
 //获取应用实例
-var WxParse = require('../../wxParse/wxParse.js');
+// var WxParse = require('../../wxParse/wxParse.js');
 
 Page({
   data: {
-    autoplay: true,
-    interval: 3000,
-    duration: 1000,
+    // autoplay: true,
+    // interval: 3000,
+    // duration: 1000,
     goodsDetail: {},
-    swiperCurrent: 0,
+    // swiperCurrent: 0,
     hasMoreSelect: false,
     selectSize: "选择：",
     selectSizePrice: 0,
@@ -43,46 +43,21 @@ Page({
         data: e.inviter_id
       })
     }
-    var that = this;
-    that.data.kjId = e.kjId;
     // 获取购物车数据
     wx.getStorage({
       key: 'shopCarInfo',
-      success: function(res) {
-        that.setData({
+      success: res=> {
+        this.setData({
           shopCarInfo: res.data,
           shopNum: res.data.shopNum
         });
       }
     })
-    WXAPI.goodsDetail(e.id).then(function(res) {
-      var selectSizeTemp = "";
-      if (res.data.properties) {
-        for (var i = 0; i < res.data.properties.length; i++) {
-          selectSizeTemp = selectSizeTemp + " " + res.data.properties[i].name;
-        }
-        that.setData({
-          hasMoreSelect: true,
-          selectSize: that.data.selectSize + selectSizeTemp,
-          selectSizePrice: (res.data.basicInfo.minPrice).toFixed(2),
-          totalScoreToPay: res.data.basicInfo.minScore
-        });
-      }
-      that.data.goodsDetail = res.data;
-      if (res.data.basicInfo.videoId) {
-        that.getVideoSrc(res.data.basicInfo.videoId);
-      }
-      that.setData({
-        goodsDetail: res.data,
-        selectSizePrice: (res.data.basicInfo.minPrice).toFixed(2),
-        totalScoreToPay: res.data.basicInfo.minScore,
-        buyNumMax: res.data.basicInfo.stores,
-        buyNumber: (res.data.basicInfo.stores > 0) ? 1 : 0
-      });
-      WxParse.wxParse('article', 'html', res.data.content, that, 5);
+    WXAPI.goodsDetail(e.id).then((res)=> {
+      this.setData({
+        goodsDetail: res.data
+      })
     })
-    this.reputation(e.id);
-    // this.getKanjiaInfo(e.id);
   },
   goShopCar: function() {
     wx.reLaunch({
@@ -142,14 +117,6 @@ Page({
    */
   labelItemTap: function(e) {
     var that = this;
-    /*
-    console.log(e)
-    console.log(e.currentTarget.dataset.propertyid)
-    console.log(e.currentTarget.dataset.propertyname)
-    console.log(e.currentTarget.dataset.propertychildid)
-    console.log(e.currentTarget.dataset.propertychildname)
-    */
-    // 取消该分类下的子栏目所有的选中状态
     var childs = that.data.goodsDetail.properties[e.currentTarget.dataset.propertyindex].childsCurGoods;
     for (var i = 0; i < childs.length; i++) {
       that.data.goodsDetail.properties[e.currentTarget.dataset.propertyindex].childsCurGoods[i].active = false;
@@ -364,64 +331,8 @@ Page({
     if (!buyNowInfo.shopList) {
       buyNowInfo.shopList = [];
     }
-    /*    var hasSameGoodsIndex = -1;
-        for (var i = 0; i < toBuyInfo.shopList.length; i++) {
-          var tmpShopCarMap = toBuyInfo.shopList[i];
-          if (tmpShopCarMap.goodsId == shopCarMap.goodsId && tmpShopCarMap.propertyChildIds == shopCarMap.propertyChildIds) {
-            hasSameGoodsIndex = i;
-            shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
-            break;
-          }
-        }
-        toBuyInfo.shopNum = toBuyInfo.shopNum + this.data.buyNumber;
-        if (hasSameGoodsIndex > -1) {
-          toBuyInfo.shopList.splice(hasSameGoodsIndex, 1, shopCarMap);
-        } else {
-          toBuyInfo.shopList.push(shopCarMap);
-        }*/
-
     buyNowInfo.shopList.push(shopCarMap);
     buyNowInfo.kjId = this.data.kjId;
     return buyNowInfo;
   },
-  onShareAppMessage: function() {
-    return {
-      title: this.data.goodsDetail.basicInfo.name,
-      path: '/pages/goods-details/index?id=' + this.data.goodsDetail.basicInfo.id + '&inviter_id=' + wx.getStorageSync('uid'),
-      success: function(res) {
-        // 转发成功
-      },
-      fail: function(res) {
-        // 转发失败
-      }
-    }
-  },
-  reputation: function(goodsId) {
-    var that = this;
-    WXAPI.goodsReputation({
-      goodsId: goodsId
-    }).then(function(res) {
-      if (res.code == 0) {
-        that.setData({
-          reputation: res.data
-        });
-      }
-    })
-  },
-  getVideoSrc: function(videoId) {
-    var that = this;
-    WXAPI.videoDetail(videoId).then(function(res) {
-      if (res.code == 0) {
-        that.setData({
-          videoMp4Src: res.data.fdMp4
-        });
-      }
-    })
-  },
-  joinPingtuan: function(e) {
-    let pingtuanopenid = e.currentTarget.dataset.pingtuanopenid
-    wx.navigateTo({
-      url: "/pages/to-pay-order/index?orderType=buyNow&pingtuanOpenId=" + pingtuanopenid
-    })
-  }
 })
