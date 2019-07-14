@@ -16,28 +16,45 @@
     </view>
   </view>
   <view class="goods-img-wrap">
-    <image class="goods-img" src="{{goodsDetail.fileUrl}}"></image>
+    <image class="goods-img" src="{{goodsDetail.fileUrls[0]}}"></image>
   </view>
   <view class="goods-content">
     <view class="goods-parameter">
-      <view class="goods-price">
-        <view class="price-unit">¥</view>
-        <view class="price">{{goodsDetail}}</view>
+      <view class="row goods-price">
+        <view class="price-money">¥</view>
+        <view class="price">{{goodsDetail.priceStr}}</view>
+        <view class="price-unit">/{{goodsDetail.pack?'套':'件'}}</view>
       </view>
-      <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
-      <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
+      <view class="row goods-title-and-type">
+        <view class="goods-title">{{goodsDetail.goodsName}}</view>
+        <view class="goods-type {{goodsDetail.useType==='学校'?'school':'restaurant'}}">{{goodsDetail.useType}}</view>
+      </view>
     </view>
     <view class="goods-specification">
-
+      <view class="left-title">规格</view>
+      <view class="right-content">
+        <view class="spec-item" wx:for="{{goodsDetail.specsList}}" wx:key="specsId">
+          {{item.specsName}}: {{item.specsStr}}
+        </view>
+      </view>
+    </view>
+    <view class="goods-specification songhuo">
+      <view class="left-title">送货</view>
+      <view class="right-content">
+       <view class="top">
+         厂家直送
+         <view class="dividing"></view>
+         免快递费用
+       </view>
+       <view class="bottom">
+         08:00 - 17:00 间下单，一小时后开始配送。
+       </view>
+      </view>
     </view>
    </view>
   <view class="footer-box">
-    <view class="shop-cart-btn" bindtap="goShopCar">
-      <view class="shop-num">({{shopNum}})</view>
-      <view style='position:absolute;bottom:10rpx;'> 购物车</view>
-    </view>
-    <view wx:if="{{!goodsDetail.basicInfo.pingtuan}}" class="join-shop-cart" bindtap="toAddShopCar">加入购物车</view>
-    <view wx:if="{{!goodsDetail.basicInfo.pingtuan}}" class="now-buy" bindtap="tobuy">立即购买</view>
+    <image src="/images/goods-detail/shop-cart.png" class="join-shop-cart" bindtap="toAddShopCar">加入购物车</image>
+    <image src="/images/goods-detail/buy-now.png" class="now-buy" bindtap="tobuy">立即购买</image>
   </view>
   <view class="show-popup" hidden="{{hideShopPopup}}" catchtouchmove="true">
     <view class="popup-mask" bindtap="closePopupTap"></view>
@@ -75,13 +92,7 @@
           <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
         </view>
       </view>
-      <view class="popup-join-btn" wx:if="{{shopType =='addShopCar'}}" bindtap="addShopCar">
-        加入购物车
-      </view>
-      <view class="popup-join-btn" data-shopType="{{shopType}}"
-            wx:if="{{shopType =='tobuy' || shopType =='toPingtuan'}}" bindtap="buyNow">
-        立即购买
-      </view>
+      <view class="popup-join-btn" bindtap="popupOk">确定</view>
     </view>
   </view>
 </view>

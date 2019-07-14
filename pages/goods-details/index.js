@@ -165,6 +165,13 @@ Page({
       canSubmit: canSubmit
     })
   },
+  popupOk(){
+    if (this.data.shopType === 'addShopCar'){
+      this.addShopCar()
+    } else {
+      this.buyNow()
+    }
+  },
   /**
    * 加入购物车
    */
@@ -214,10 +221,7 @@ Page({
   /**
    * 立即购买
    */
-  buyNow: function(e) {
-    let that = this
-    let shoptype = e.currentTarget.dataset.shoptype
-    console.log(shoptype)
+  buyNow: function() {
     if (this.data.goodsDetail.properties && !this.data.canSubmit) {
       if (!this.data.canSubmit) {
         wx.showModal({
@@ -243,7 +247,7 @@ Page({
       return;
     }
     //组建立即购买信息
-    var buyNowInfo = this.buliduBuyNowInfo(shoptype);
+    var buyNowInfo = this.buliduBuyNowInfo();
     // 写入本地存储
     wx.setStorage({
       key: "buyNowInfo",
@@ -304,7 +308,7 @@ Page({
   /**
    * 组建立即购买信息
    */
-  buliduBuyNowInfo: function(shoptype) {
+  buliduBuyNowInfo: function() {
     var shopCarMap = {};
     shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
     shopCarMap.pic = this.data.goodsDetail.basicInfo.pic;
@@ -313,9 +317,6 @@ Page({
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
-    if (shoptype == 'toPingtuan') {
-      shopCarMap.price = this.data.goodsDetail.basicInfo.pingtuanPrice;
-    }
     shopCarMap.score = this.data.totalScoreToPay;
     shopCarMap.left = "";
     shopCarMap.active = true;

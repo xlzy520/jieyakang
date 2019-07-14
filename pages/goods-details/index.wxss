@@ -38,7 +38,8 @@ swiper-item image {
 }
 
 .goods-img-wrap{
-
+  width: 750rpx;
+  height: 600rpx;
 }
 .goods-img-wrap .goods-img{
   width: 750rpx;
@@ -46,91 +47,116 @@ swiper-item image {
 }
 
 
-.goods-info{
+.goods-content{
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  padding: 35rpx 0;
-  margin-bottom: 24rpx;
-  width: 100%;
-  position: relative;
-}
-.goods-info .goods-title{
   box-sizing: border-box;
-  padding: 0 35rpx;
-  font-size: 32rpx;
-  line-height: 1.4;
+  width: 100%;
+}
+.goods-content .goods-parameter{
+  background: #fff;
+  width: 750rpx;
+  height: 161rpx;
+}
+.row{
+  display: flex;
+  margin-top: 18rpx;
+  padding: 0 30rpx;
+}
+.goods-title-and-type{
+  align-items: center;
+}
+.goods-parameter .goods-price{
+  font-family: DINAlternate Bold, sans-serif;
+  color: #ff001c;
+  align-items: baseline;
+}
+.goods-price .price-money{
+  font-weight: bold;
+}
+.goods-price .price{
+  font-size: 50rpx;
+  font-weight: bold;
+}
+.goods-price .price-unit{
+  font-family: PingFang SC Medium, sans-serif;
+  font-size: 26rpx;
+}
+ .goods-parameter .goods-title{
+   font-family: PingFang SC Bold, sans-serif;
+   font-size: 36rpx;
+}
+
+.goods-parameter .goods-type{
+  line-height: 1;
+  margin-left: 30rpx;
+  border-radius: 2rpx;
+  font-family: PingFang SC Medium, sans-serif;
+  font-size: 22rpx;
+  padding: 5rpx 10rpx;
+  color: #fff;
+}
+.goods-type.school{
+  background: #0068F5;
+}
+.goods-type.restaurant{
+  background: #F29B3A;
+}
+.goods-content .goods-specification{
+  font-family: PingFang SC Medium, sans-serif;
+  font-weight:500;
+  display: flex;
+  background: #fff;
+  margin-top: 20rpx;
+  width: 100%;
+  height: 129rpx;
+}
+.goods-content .goods-specification.songhuo{
+  height: auto;
+}
+.left-title{
+  color: #888;
+  font-size: 26rpx;
+  padding: 30rpx;
+}
+.right-content{
+  font-size: 26rpx;
+  padding: 30rpx 0;
   color: #000;
-  margin-bottom: 28rpx;
-  padding-right: 60px;
+  line-height: 40rpx;
 }
-.goods-info .goods-price{
-   font-family: Mark Pro Regular, sans-serif;
-   box-sizing:border-box;
-   color:#ea5255;
-   font-size: 56rpx;
+.right-content .dividing{
+  box-sizing: border-box;
+  width: 1rpx;
+  margin: 7rpx 20rpx;
+  border-right: 1rpx solid #e4e4e4;
 }
+.right-content .top{
+  display: flex;
+  letter-spacing: 1rpx;
+}
+.right-content .bottom{
+  letter-spacing: 1rpx;
+  line-height: 60rpx;
+}
+.spec-item{
+  letter-spacing: 1rpx;
+}
+
+
 .footer-box{
-  width: 100%;
-  height: 100rpx;
-  background-color: #fff;
   position: fixed;
-  bottom: 0;
-  left: 0;
   display: flex;
-  box-shadow:0 0 8rpx 0 ;
+  width: 690rpx;
+  bottom: 10rpx;
 }
-.footer-box .contact {
-  position: relative;
-  width: 120rpx;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 20rpx;
-  color: #008000;
-  box-sizing: border-box;
-  background: url("https://cdn.it120.cc/images/weappshop/kefu.png") no-repeat center 21rpx;
-  background-size: 55rpx auto;
-}
-.footer-box .shop-cart-btn {
-  position: relative;
-  width: 135rpx;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  font-size: 20rpx;
-  color: #acacb7;
-  box-sizing: border-box;
-  background: url("https://cdn.it120.cc/images/weappshop/cart.png") no-repeat center 21rpx;
-  background-size: 44rpx auto;
-}
-.footer-box .shop-cart-btn .shop-num{
-  position: absolute;
-  color:#ea5255;
-  left: 85rpx;
-  top:10rpx;
-}
-.footer-box .join-shop-cart{
-  text-align: center;
-  width: 250rpx;
-  height: 100%;
-  line-height: 100rpx;
-  background-color: #ff6850;
-  color:#fff;
-  font-size: 34rpx;
-}
+.footer-box .join-shop-cart,
 .footer-box .now-buy{
-  text-align: center;
-  height: 100%;
-  width: 250rpx;
-  line-height: 100rpx;
-  background-color: #ea5255;
-  color:#fff;
-  font-size: 34rpx;
+  width: 345rpx;
+  height: 75rpx;
 }
+
+
 .show-popup{
   position: fixed;
   top: 0;
@@ -145,7 +171,7 @@ swiper-item image {
   left: 0;
   width:100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(130, 130, 134, 0.5);
   z-index: 5;
 }
 .popup-contents{
@@ -153,6 +179,7 @@ swiper-item image {
   left: 0;
   bottom: 0;
   width:100%;
+  border-radius: 30rpx;
   background-color: #fff;
   z-index: 6;
 }
