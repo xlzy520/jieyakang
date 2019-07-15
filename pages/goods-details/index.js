@@ -17,19 +17,36 @@ Page({
     hideShopPopup: true,
     buyNumber: 0,
     buyNumMin: 1,
-    buyNumMax: 0,
+    buyNumMax: 10000,
 
     propertyChildIds: "",
     propertyChildNames: "",
     canSubmit: false, //  选中规格尺寸时候是否允许加入购物车
     shopCarInfo: {},
     shopType: "addShopCar", //购物类型，加入购物车或立即购买，默认为加入购物车
+    ciShuTag: ['一餐','二餐'],
+    specSelected: '',
+    cishuSelected: '',
+    renshu: 0,
+    tianshu: 0
   },
 
   //事件处理函数
   swiperchange: function(e) {
     this.setData({
       swiperCurrent: e.detail.current
+    })
+  },
+  selectSpec(e){
+    const spec =  e.target.dataset.id
+    this.setData({
+      specSelected: spec
+    })
+  },
+  selectCiShuTag(e){
+    const cishu = e.target.dataset.num
+    this.setData({
+      cishuSelected: cishu
     })
   },
   onLoad: function(e) {
@@ -93,21 +110,23 @@ Page({
       hideShopPopup: true
     })
   },
-  numJianTap: function() {
-    if (this.data.buyNumber > this.data.buyNumMin) {
-      var currentNum = this.data.buyNumber;
+  numJianTap(e) {
+    const type = e.target.dataset.type
+    if (this.data[type] > this.data.buyNumMin) {
+      var currentNum = this.data[type];
       currentNum--;
       this.setData({
-        buyNumber: currentNum
+        [type]: currentNum
       })
     }
   },
-  numJiaTap: function() {
-    if (this.data.buyNumber < this.data.buyNumMax) {
-      var currentNum = this.data.buyNumber;
+  numJiaTap(e) {
+    const type = e.target.dataset.type
+    if (this.data[type] < this.data.buyNumMax) {
+      var currentNum = this.data[type];
       currentNum++;
       this.setData({
-        buyNumber: currentNum
+        [type]: currentNum
       })
     }
   },
@@ -115,7 +134,7 @@ Page({
    * 选择商品规格
    * @param {Object} e
    */
-  labelItemTap: function(e) {
+  labelItemTap(e) {
     var that = this;
     var childs = that.data.goodsDetail.properties[e.currentTarget.dataset.propertyindex].childsCurGoods;
     for (var i = 0; i < childs.length; i++) {

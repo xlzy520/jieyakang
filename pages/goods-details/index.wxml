@@ -16,7 +16,8 @@
     </view>
   </view>
   <view class="goods-img-wrap">
-    <image class="goods-img" src="{{goodsDetail.fileUrls[0]}}"></image>
+<!--    <image class="goods-img" src="{{goodsDetail.fileUrls[0]}}"></image>-->
+    <image class="goods-img" src="http://www.xlzy520.cn/750_600/餐馆餐具.png"></image>
   </view>
   <view class="goods-content">
     <view class="goods-parameter">
@@ -61,35 +62,57 @@
     <view class="popup-contents">
       <view class="pop-goods-info">
         <view class="pop-img-box">
-          <image src="{{goodsDetail.basicInfo.pic}}" class="goods-thumbnail"/>
+<!--          <image src="{{goodsDetail.fileUrls[0]}}" class="goods-thumbnail"/>-->
+          <image src="http://www.xlzy520.cn/750_600/餐馆餐具.png" class="goods-thumbnail"/>
         </view>
         <view class="pop-goods-des">
-          <view class="pop-goods-title">{{goodsDetail.basicInfo.name}}</view>
-          <view class="pop-goods-price">¥ {{selectSizePrice}}</view>
+          <view class="pop-goods-title">{{goodsDetail.goodsName}}</view>
+          <view class="pop-goods-price">
+            <view class="row goods-price">
+              <view class="price-money">¥</view>
+              <view class="price">{{goodsDetail.priceStr}}</view>
+              <view class="price-unit">/{{goodsDetail.pack?'套':'件'}}</view>
+            </view>
+          </view>
+          <view class="pop-goods-guige-select">(已选择规格A{{}})</view>
         </view>
         <view class="pop-goods-close" bindtap="closePopupTap"></view>
       </view>
-      <view class="size-label-box">
-        <block wx:for="{{goodsDetail.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
-          <view class="label">{{property.name}}</view>
-          <view class="label-item-box">
-            <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id"
-                  bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertyid="{{property.id}}"
-                  data-propertyname="{{property.name}}" data-propertychildindex="{{index}}"
-                  data-propertychildid="{{item.id}}" data-propertychildname="{{item.name}}">
-              {{item.name}}
-            </view>
+      <view class="goods-guige" wx:if="{{goodsDetail.useType!=='幼儿园餐具'}}">
+        <view class="left-title">餐具规格</view>
+        <view class="right-content">
+          <view class="guige-item {{specSelected===item.specsId?'active': ''}}"
+                wx:for="{{goodsDetail.specsList}}" wx:key="item.specsId"
+                data-id="{{item.specsId}}" bindtap="selectSpec">
+            {{item.specsName}} : {{item.specsStr}}
           </view>
-        </block>
+        </view>
       </view>
-      <view class="buy-num-box">
-        <view class="num-label">购买数量</view>
+      <view class="jiu-can-box jiu-can-ci-shu">
+        <view class="num-label">就餐次数</view>
+        <view class="ci-shu-tag-wrap">
+          <view class="ci-shu-tag {{cishuSelected===index?'active':''}}" wx:for="{{ciShuTag}}" wx:key="item"
+                bindtap="selectCiShuTag" data-num="{{index}}">{{item}}</view>
+        </view>
+      </view>
+      <view class="jiu-can-box jiu-can-ren-shu">
+        <view class="num-label">就餐人数</view>
         <view class="num-box">
-          <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+          <view class="num-jian {{renshu == buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="renshu">-</view>
           <view class="num-input">
-            <input type="number" value="{{buyNumber}}" disabled/>
+            <input type="number" value="{{renshu}}" disabled/>
           </view>
-          <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+          <view class="num-jia {{renshu== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="renshu">+</view>
+        </view>
+      </view>
+      <view class="jiu-can-box jiu-can-tian-shu">
+        <view class="num-label">就餐天数</view>
+        <view class="num-box">
+          <view class="num-jian {{tianshu === 0 ? 'hui': ''}}" bindtap="numJianTap" data-type="tianshu">-</view>
+          <view class="num-input">
+            <input type="number" value="{{tianshu}}" disabled/>
+          </view>
+          <view class="num-jia {{tianshu== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="tianshu">+</view>
         </view>
       </view>
       <view class="popup-join-btn" bindtap="popupOk">确定</view>
