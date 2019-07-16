@@ -70,7 +70,7 @@
           <view class="pop-goods-price">
             <view class="row goods-price">
               <view class="price-money">¥</view>
-              <view class="price">{{goodsDetail.priceStr}}</view>
+              <view class="price">{{selectSizePrice}}</view>
               <view class="price-unit">/{{goodsDetail.pack?'套':'件'}}</view>
             </view>
           </view>
@@ -84,7 +84,8 @@
         <view class="right-content">
           <view class="guige-item {{specSelected===item.specsId?'active': ''}}"
                 wx:for="{{goodsDetail.specsList}}" wx:key="item.specsId"
-                data-id="{{item.specsId}}" data-specsname="{{item.specsName}}" bindtap="selectSpec">
+                data-id="{{item.specsId}}" data-specsname="{{item.specsName}}"
+                data-price="item.price" bindtap="selectSpec">
             {{item.specsName}} : {{item.specsStr}}
           </view>
         </view>
@@ -119,5 +120,5 @@
       <view class="popup-join-btn" bindtap="popupOk">确定</view>
     </view>
   </view>
-  <dialog wx:if="{{tipText}}" type="{{dialogType}}" text="{{tipText}}" bindclose="close"></dialog>
+  <dialog wx:if="{{tipText}}" text="{{tipText}}" bindclose="close"></dialog>
 </view>

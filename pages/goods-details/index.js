@@ -6,8 +6,6 @@ Page({
     // duration: 1000,
     // swiperCurrent: 0,
     goodsDetail: {},
-    selectSpecLabel: "",
-    selectSizePrice: 0,
     hideShopPopup: true,
     
     buyNumMin: 1,
@@ -19,13 +17,14 @@ Page({
     shopCarInfo: {},
     shopType: "addShopCar", //购物类型，加入购物车或立即购买，默认为加入购物车
     ciShuTag: ['一餐','二餐'],
+    selectSpecLabel: "",
+    selectSizePrice: 0,
     specSelected: '',
     cishuSelected: '',
     renshu: 0,
     tianshu: 0,
   
     tipText: '',
-    dialogType: ''
   },
 
   //事件处理函数
@@ -37,9 +36,11 @@ Page({
   selectSpec(e){
     const spec =  e.target.dataset.id
     const specsName =  e.target.dataset.specsname
+    const price =  e.target.dataset.price
     this.setData({
       specSelected: spec,
       selectSpecLabel: specsName,
+      selectSizePrice: price
     })
   },
   selectCiShuTag(e){
@@ -48,24 +49,13 @@ Page({
       cishuSelected: cishu
     })
   },
-  onLoad: function(e) {
-    if (e.inviter_id) {
-      wx.setStorage({
-        key: 'inviter_id_' + e.id,
-        data: e.inviter_id
-      })
-      wx.setStorage({
-        key: 'referrer',
-        data: e.inviter_id
-      })
-    }
+  onLoad(e) {
     // 获取购物车数据
     wx.getStorage({
       key: 'shopCarInfo',
       success: res=> {
         this.setData({
-          shopCarInfo: res.data,
-          shopNum: res.data.shopNum
+          shopCarInfo: res.data
         });
       }
     })
@@ -84,20 +74,21 @@ Page({
     this.setData({
       shopType: "addShopCar"
     })
-    this.bindGuiGeTap();
+    this.openGuigeDialog();
   },
   tobuy() {
     this.setData({
       shopType: "tobuy"
     });
-    this.bindGuiGeTap();
+    this.openGuigeDialog();
   },
   /**
    * 规格选择弹出框
    */
-  bindGuiGeTap: function() {
+  openGuigeDialog() {
     this.setData({
-      hideShopPopup: false
+      hideShopPopup: false,
+      selectSizePrice: this.data.goodsDetail.priceStr
     })
   },
   /**
@@ -231,7 +222,7 @@ Page({
       return
     }
     //组建购物车
-    const shopCarInfo = this.bulidShopCarInfo();
+    const shopCarInfo = this.buildShopCarInfo();
     this.setData({
       shopCarInfo: shopCarInfo
     });
@@ -267,28 +258,23 @@ Page({
   /**
    * 组建购物车信息
    */
-  bulidShopCarInfo: function() {
-    // 加入购物车
-    let shopCarMap = {};
-    shopCarMap.goodsId = this.data.goodsDetail.id;
-    shopCarMap.pic = this.data.goodsDetail.pic;
-    shopCarMap.name = this.data.goodsDetail.name;
-    // shopCarMap.label=this.data.goodsDetail.id; 规格尺寸
-    shopCarMap.propertyChildIds = this.data.propertyChildIds;
-    shopCarMap.label = this.data.propertyChildNames;
-    shopCarMap.price = this.data.selectSizePrice;
-    shopCarMap.score = this.data.totalScoreToPay;
-    shopCarMap.left = "";
-    shopCarMap.active = true;
-    shopCarMap.number = this.data.buyNumber;
-    shopCarMap.logisticsType = this.data.goodsDetail.logisticsId;
-    shopCarMap.logistics = this.data.goodsDetail.logistics;
-    shopCarMap.weight = this.data.goodsDetail.weight;
-
+  buildShopCarInfo() {
+    const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
+    const { specSelected, cishuSelected, renshu, tianshu } = this.data
+    let shopCarMap = {
+      goodsId: goodsId,
+      goodsName: goodsName,
+      fileUrls: fileUrls,
+      priceStr: priceStr,
+      specsList: specsList,
+      useType: useType,
+  
+      specSelected: specSelected,
+      cishuSelected: cishuSelected,
+      renshu: renshu,
+      tianshu: tianshu
+    };
     let shopCarInfo = this.data.shopCarInfo;
-    if (!shopCarInfo.shopNum) {
-      shopCarInfo.shopNum = 0;
-    }
     if (!shopCarInfo.shopList) {
       shopCarInfo.shopList = [];
     }
@@ -301,14 +287,12 @@ Page({
         break;
       }
     }
-
-    shopCarInfo.shopNum = shopCarInfo.shopNum + this.data.buyNumber;
+    
     if (hasSameGoodsIndex > -1) {
       shopCarInfo.shopList.splice(hasSameGoodsIndex, 1, shopCarMap);
     } else {
       shopCarInfo.shopList.push(shopCarMap);
     }
-    shopCarInfo.kjId = this.data.kjId;
     return shopCarInfo;
   },
   /**
