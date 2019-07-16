@@ -316,6 +316,9 @@ swiper-item image {
   border: 1rpx solid #fe103d;
   background: #ffe7eb;
 }
+.buy-num{
+  margin-bottom: 90rpx;
+}
 .jiu-can-box .num-box{
   display: flex;
 }

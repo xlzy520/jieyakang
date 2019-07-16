@@ -75,11 +75,11 @@
             </view>
           </view>
           <view class="pop-goods-guige-select"
-                wx:if="{{goodsDetail.useType!=='幼儿园餐具'}}">(已选择：{{selectSpecLabel}})</view>
+                wx:if="{{goodsDetail.useType==='幼儿园餐具'}}">(已选择：{{selectSpecLabel}})</view>
         </view>
         <view class="pop-goods-close" bindtap="closePopupTap"></view>
       </view>
-      <view class="goods-guige" wx:if="{{goodsDetail.useType!=='幼儿园餐具'}}">
+      <view class="goods-guige" wx:if="{{goodsDetail.useType==='幼儿园餐具'}}">
         <view class="left-title">餐具规格</view>
         <view class="right-content">
           <view class="guige-item {{specSelected===item.specsId?'active': ''}}"
@@ -90,14 +90,16 @@
           </view>
         </view>
       </view>
-      <view class="jiu-can-box jiu-can-ci-shu">
+      <view class="jiu-can-box jiu-can-ci-shu"
+            wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
         <view class="num-label">就餐次数</view>
         <view class="ci-shu-tag-wrap">
           <view class="ci-shu-tag {{cishuSelected===index+1?'active':''}}" wx:for="{{ciShuTag}}" wx:key="item"
                 bindtap="selectCiShuTag" data-num="{{index+1}}">{{item}}</view>
         </view>
       </view>
-      <view class="jiu-can-box jiu-can-ren-shu">
+      <view class="jiu-can-box jiu-can-ren-shu"
+            wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
         <view class="num-label">就餐人数</view>
         <view class="num-box">
           <view class="num-jian {{renshu == buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="renshu">-</view>
@@ -107,7 +109,8 @@
           <view class="num-jia {{renshu== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="renshu">+</view>
         </view>
       </view>
-      <view class="jiu-can-box jiu-can-tian-shu">
+      <view class="jiu-can-box jiu-can-tian-shu"
+            wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
         <view class="num-label">就餐天数</view>
         <view class="num-box">
           <view class="num-jian {{tianshu === buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="tianshu">-</view>
@@ -115,6 +118,17 @@
             <input type="number" value="{{tianshu}}"/>
           </view>
           <view class="num-jia {{tianshu== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="tianshu">+</view>
+        </view>
+      </view>
+      <view class="jiu-can-box buy-num"
+            wx:if="{{goodsDetail.useType==='餐馆餐具'||goodsDetail.useType==='宴席餐具'}}">
+        <view class="num-label">购买数量(件)</view>
+        <view class="num-box">
+          <view class="num-jian {{buyNum === buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="buyNum">-</view>
+          <view class="num-input">
+            <input type="number" value="{{buyNum}}"/>
+          </view>
+          <view class="num-jia {{buyNum== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="buyNum">+</view>
         </view>
       </view>
       <view class="popup-join-btn" bindtap="popupOk">确定</view>

@@ -23,6 +23,7 @@ Page({
     cishuSelected: '',
     renshu: 0,
     tianshu: 0,
+    buyNum: 0,
   
     tipText: '',
   },
@@ -186,32 +187,40 @@ Page({
    */
   validate(){
     const { useType } = this.data.goodsDetail
-    const { specSelected, cishuSelected, renshu, tianshu } = this.data
-    // if (useType === '幼儿园餐具') {
-    if (useType !== '幼儿园餐具'&&!specSelected) {
+    const { specSelected, cishuSelected, renshu, tianshu, buyNum } = this.data
+    if (useType !== '餐馆餐具'&&useType !== '宴席餐具') {
+      if (useType === '幼儿园餐具'&&!specSelected) {
+        this.setData({
+          tipText: '请选择规格'
+        })
+        return
+      }
+      if (!cishuSelected) {
+        this.setData({
+          tipText: '请选择就餐次数'
+        })
+        return
+      }
+      if (renshu <= 0) {
+        this.setData({
+          tipText: '请输入就餐人数'
+        })
+        return
+      }
+      if (tianshu <= 0) {
+        this.setData({
+          tipText: '请输入就餐天数'
+        })
+        return
+      }
+    }
+    if (buyNum <= 0) {
       this.setData({
-        tipText: '请选择规格'
+        tipText: '请输入购买数量'
       })
       return
     }
-    if (!cishuSelected) {
-      this.setData({
-        tipText: '请选择就餐次数'
-      })
-      return
-    }
-    if (renshu <= 0) {
-      this.setData({
-        tipText: '请输入就餐人数'
-      })
-      return
-    }
-    if (tianshu <= 0) {
-      this.setData({
-        tipText: '请输入就餐天数'
-      })
-      return
-    }
+
     return true
   },
   /**
@@ -278,18 +287,54 @@ Page({
     if (!shopCarInfo.shopList) {
       shopCarInfo.shopList = [];
     }
-    let hasSameGoodsIndex = -1;
+    let sameGoods
+    // todo 各种情况分类
+    switch (useType) {
+      case '幼儿园餐具':
+        sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId
+          &&v.specSelected === specSelected&&v.cishuSelected === cishuSelected)
+        if (sameGoods) {
+          shopCarMap.renshu = shopCarMap.renshu + sameGoods.renshu;
+          shopCarMap.tianshu = shopCarMap.tianshu + sameGoods.tianshu;
+        }
+        break;
+      case '中学餐具':
+        sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId &&v.cishuSelected === cishuSelected)
+        if (sameGoods) {
+          shopCarMap.renshu = shopCarMap.renshu + sameGoods.renshu;
+          shopCarMap.tianshu = shopCarMap.tianshu + sameGoods.tianshu;
+        }
+        break;
+      case '小学餐具':
+        sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId &&v.cishuSelected === cishuSelected)
+        if (sameGoods) {
+          shopCarMap.renshu = shopCarMap.renshu + sameGoods.renshu;
+          shopCarMap.tianshu = shopCarMap.tianshu + sameGoods.tianshu;
+        }
+        break;
+      case '幼儿园餐具':
+        break;
+      case '幼儿园餐具':
+        break;
+      default:
+        break;
+    }
+   sameGoods = shopCarInfo.shopList.findIndex(v=>v.goodsId ===goodsId
+      &&v.specSelected === specSelected)
     for (let i = 0; i < shopCarInfo.shopList.length; i++) {
       let tmpShopCarMap = shopCarInfo.shopList[i];
-      if (tmpShopCarMap.goodsId == shopCarMap.goodsId && tmpShopCarMap.propertyChildIds == shopCarMap.propertyChildIds) {
-        hasSameGoodsIndex = i;
+      if (tmpShopCarMap.goodsId == shopCarMap.goodsId &&
+        tmpShopCarMap.specSelected == shopCarMap.specSelected) {
+        sameGoods = i;
+        shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
+        shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
         shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
         break;
       }
     }
     
-    if (hasSameGoodsIndex > -1) {
-      shopCarInfo.shopList.splice(hasSameGoodsIndex, 1, shopCarMap);
+    if (sameGoods > -1) {
+      shopCarInfo.shopList.splice(sameGoods, 1, shopCarMap);
     } else {
       shopCarInfo.shopList.push(shopCarMap);
     }
