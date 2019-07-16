@@ -1,3 +1,6 @@
 {
-   "navigationBarTitleText": "餐具详情"
+  "navigationBarTitleText": "餐具详情",
+  "usingComponents": {
+    "dialog": "/components/dialog/index"
+  }
 }
