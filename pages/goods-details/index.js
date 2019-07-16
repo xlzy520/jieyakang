@@ -321,26 +321,24 @@ Page({
    * 组建立即购买信息
    */
   buliduBuyNowInfo: function() {
-    let shopCarMap = {};
-    shopCarMap.goodsId = this.data.goodsDetail.id;
-    shopCarMap.pic = this.data.goodsDetail.pic;
-    shopCarMap.name = this.data.goodsDetail.name;
-    // shopCarMap.label=this.data.goodsDetail.id; 规格尺寸
-    shopCarMap.propertyChildIds = this.data.propertyChildIds;
-    shopCarMap.label = this.data.propertyChildNames;
-    shopCarMap.price = this.data.selectSizePrice;
-    shopCarMap.score = this.data.totalScoreToPay;
-    shopCarMap.left = "";
-    shopCarMap.active = true;
-    shopCarMap.number = this.data.buyNumber;
-    shopCarMap.logisticsType = this.data.goodsDetail.logisticsId;
-    shopCarMap.logistics = this.data.goodsDetail.logistics;
-    shopCarMap.weight = this.data.goodsDetail.weight;
+    const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
+    const { specSelected, cishuSelected, renshu, tianshu, buyNum } = this.data
+    let shopCarMap = {
+      goodsId: goodsId,
+      goodsName: goodsName,
+      fileUrls: fileUrls,
+      priceStr: priceStr,
+      specsList: specsList,
+      useType: useType,
+
+      specSelected: specSelected,
+      cishuSelected: cishuSelected,
+      renshu: renshu,
+      tianshu: tianshu,
+      buyNum: buyNum
+    };
 
     let buyNowInfo = {};
-    if (!buyNowInfo.shopNum) {
-      buyNowInfo.shopNum = 0;
-    }
     if (!buyNowInfo.shopList) {
       buyNowInfo.shopList = [];
     }
