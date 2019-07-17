@@ -67,6 +67,7 @@
         </view>
         <view class="pop-goods-des">
           <view class="pop-goods-title">{{goodsDetail.goodsName}}</view>
+          <view class="goods-rule" hidden="{{!goodsDetail.specsList[0].specsStr}}">({{goodsDetail.specsList[0].specsStr}})</view>
           <view class="pop-goods-price">
             <view class="row goods-price">
               <view class="price-money">¥</view>
@@ -94,7 +95,7 @@
             wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
         <view class="num-label">就餐次数</view>
         <view class="ci-shu-tag-wrap">
-          <view class="ci-shu-tag {{cishuSelected===index+1?'active':''}}" wx:for="{{ciShuTag}}" wx:key="item"
+          <view class="ci-shu-tag {{eatNum===index+1?'active':''}}" wx:for="{{ciShuTag}}" wx:key="item"
                 bindtap="selectCiShuTag" data-num="{{index+1}}">{{item}}</view>
         </view>
       </view>
@@ -102,33 +103,33 @@
             wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
         <view class="num-label">就餐人数</view>
         <view class="num-box">
-          <view class="num-jian {{renshu == buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="renshu">-</view>
+          <view class="num-jian {{peopleNum == buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="peopleNum">-</view>
           <view class="num-input">
-            <input type="number" value="{{renshu}}"/>
+            <input type="number" value="{{peopleNum}}"/>
           </view>
-          <view class="num-jia {{renshu== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="renshu">+</view>
+          <view class="num-jia {{peopleNum== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="peopleNum">+</view>
         </view>
       </view>
       <view class="jiu-can-box jiu-can-tian-shu"
             wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
         <view class="num-label">就餐天数</view>
         <view class="num-box">
-          <view class="num-jian {{tianshu === buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="tianshu">-</view>
+          <view class="num-jian {{eatDay === buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="eatDay">-</view>
           <view class="num-input">
-            <input type="number" value="{{tianshu}}"/>
+            <input type="number" value="{{eatDay}}"/>
           </view>
-          <view class="num-jia {{tianshu== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="tianshu">+</view>
+          <view class="num-jia {{eatDay== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="eatDay">+</view>
         </view>
       </view>
       <view class="jiu-can-box buy-num"
             wx:if="{{goodsDetail.useType==='餐馆餐具'||goodsDetail.useType==='宴席餐具'}}">
         <view class="num-label">购买数量(件)</view>
         <view class="num-box">
-          <view class="num-jian {{buyNum === buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="buyNum">-</view>
+          <view class="num-jian {{quantity === buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="quantity">-</view>
           <view class="num-input">
-            <input type="number" value="{{buyNum}}"/>
+            <input type="number" value="{{quantity}}"/>
           </view>
-          <view class="num-jia {{buyNum== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="buyNum">+</view>
+          <view class="num-jia {{quantity== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="quantity">+</view>
         </view>
       </view>
       <view class="popup-join-btn" bindtap="popupOk">确定</view>

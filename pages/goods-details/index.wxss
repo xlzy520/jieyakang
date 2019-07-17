@@ -250,6 +250,14 @@ swiper-item image {
 .pop-goods-title{
 
 }
+.goods-rule{
+  font-family: PingFang SC Medium, sans-serif;
+  font-weight:500;
+  color: #888;
+  height: 28rpx;
+  font-size: 22rpx;
+  margin-top: 10rpx;
+}
 .pop-goods-price{
   font-family: DINAlternate Bold, sans-serif;
 }
@@ -356,11 +364,10 @@ swiper-item image {
   width: 690rpx;
   height: 89rpx;
   line-height: 89rpx;
-  margin: auto;
+  margin: 20rpx auto 10rpx;
   text-align: center;
   background: linear-gradient(#fe1446, #ff001c);
   font-size:28rpx;
   color:#ffffff;
   border-radius: 44.5rpx;
-  margin-bottom: 10rpx;
 }

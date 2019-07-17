@@ -19,11 +19,11 @@ Page({
     ciShuTag: ['一餐','二餐'],
     selectSpecLabel: "",
     selectSizePrice: 0,
-    specSelected: '',
-    cishuSelected: '',
-    renshu: 0,
-    tianshu: 0,
-    buyNum: 0,
+    specsId: '',
+    eatNum: '',
+    peopleNum: 0,
+    eatDay: 0,
+    quantity: 0,
   
     tipText: '',
   },
@@ -39,7 +39,7 @@ Page({
     const specsName =  e.target.dataset.specsname
     const price =  e.target.dataset.price
     this.setData({
-      specSelected: spec,
+      specsId: spec,
       selectSpecLabel: specsName,
       selectSizePrice: price
     })
@@ -47,7 +47,7 @@ Page({
   selectCiShuTag(e){
     const cishu = e.target.dataset.num
     this.setData({
-      cishuSelected: cishu
+      eatNum: cishu
     })
   },
   onLoad(e) {
@@ -190,26 +190,26 @@ Page({
    */
   validate(){
     const { useType } = this.data.goodsDetail
-    const { specSelected, cishuSelected, renshu, tianshu, buyNum } = this.data
+    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
     if (useType !== '餐馆餐具'&&useType !== '宴席餐具') {
-      if (useType === '幼儿园餐具'&&!specSelected) {
+      if (useType === '幼儿园餐具'&&!specsId) {
         this.setTipText('请选择规格')
         return
       }
-      if (!cishuSelected) {
+      if (!eatNum) {
         this.setTipText('请选择就餐次数')
         return
       }
-      if (renshu <= 0) {
+      if (peopleNum <= 0) {
         this.setTipText('请输入就餐人数')
         return
       }
-      if (tianshu <= 0) {
+      if (eatDay <= 0) {
         this.setTipText('请输入就餐天数')
         return
       }
     } else {
-      if (buyNum <= 0) {
+      if (quantity <= 0) {
         this.setTipText('请输入购买数量')
         return
       }
@@ -262,7 +262,7 @@ Page({
    */
   buildShopCarInfo() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
-    const { specSelected, cishuSelected, renshu, tianshu, buyNum } = this.data
+    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
@@ -271,11 +271,11 @@ Page({
       specsList: specsList,
       useType: useType,
   
-      specSelected: specSelected,
-      cishuSelected: cishuSelected,
-      renshu: renshu,
-      tianshu: tianshu,
-      buyNum: buyNum
+      specsId: specsId,
+      eatNum: eatNum,
+      peopleNum: peopleNum,
+      eatDay: eatDay,
+      quantity: quantity
     };
     let shopCarInfo = this.data.shopCarInfo;
     if (!shopCarInfo.shopList) {
@@ -286,23 +286,23 @@ Page({
     switch (useType) {
       case '幼儿园餐具':
         sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId
-          &&v.specSelected === specSelected&&v.cishuSelected === cishuSelected)
+          &&v.specsId === specsId&&v.eatNum === eatNum)
         if (sameGoods) {
-          shopCarMap.renshu = shopCarMap.renshu + sameGoods.renshu;
-          shopCarMap.tianshu = shopCarMap.tianshu + sameGoods.tianshu;
+          shopCarMap.peopleNum = shopCarMap.peopleNum + sameGoods.peopleNum;
+          shopCarMap.eatDay = shopCarMap.eatDay + sameGoods.eatDay;
         }
         break;
       case '小学餐具': case '中学餐具':
-        sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId &&v.cishuSelected === cishuSelected)
+        sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId &&v.eatNum === eatNum)
         if (sameGoods) {
-          shopCarMap.renshu = shopCarMap.renshu + sameGoods.renshu;
-          shopCarMap.tianshu = shopCarMap.tianshu + sameGoods.tianshu;
+          shopCarMap.peopleNum = shopCarMap.peopleNum + sameGoods.peopleNum;
+          shopCarMap.eatDay = shopCarMap.eatDay + sameGoods.eatDay;
         }
         break;
       case '宴席餐具':  case '餐馆餐具':
         sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId)
         if (sameGoods) {
-          shopCarMap.buyNum = shopCarMap.buyNum + sameGoods.buyNum;
+          shopCarMap.quantity = shopCarMap.quantity + sameGoods.quantity;
         }
         break;
       default:
@@ -322,7 +322,7 @@ Page({
    */
   buliduBuyNowInfo: function() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
-    const { specSelected, cishuSelected, renshu, tianshu, buyNum } = this.data
+    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
@@ -331,11 +331,11 @@ Page({
       specsList: specsList,
       useType: useType,
 
-      specSelected: specSelected,
-      cishuSelected: cishuSelected,
-      renshu: renshu,
-      tianshu: tianshu,
-      buyNum: buyNum
+      specsId: specsId,
+      eatNum: eatNum,
+      peopleNum: peopleNum,
+      eatDay: eatDay,
+      quantity: quantity
     };
 
     let buyNowInfo = {};
