@@ -10,20 +10,17 @@ Page({
     
     buyNumMin: 1,
     buyNumMax: 100000,
-
-    propertyChildIds: "",
-    propertyChildNames: "",
-    canSubmit: false, //  选中规格尺寸时候是否允许加入购物车
+    
     shopCarInfo: {},
     shopType: "addShopCar", //购物类型，加入购物车或立即购买，默认为加入购物车
-    ciShuTag: ['一餐','二餐'],
+    eatNumTag: ['一餐','二餐'],
     selectSpecLabel: "",
     selectSizePrice: 0,
     specsId: '',
-    eatNum: '',
-    peopleNum: 0,
-    eatDay: 0,
-    quantity: 0,
+    eatNum: 2,
+    peopleNum: 10,
+    eatDay: 10,
+    quantity: 10,
   
     tipText: '',
   },
@@ -44,10 +41,10 @@ Page({
       selectSizePrice: price
     })
   },
-  selectCiShuTag(e){
-    const cishu = e.target.dataset.num
+  selectEatNumTag(e){
+    const eatNum = e.target.dataset.num
     this.setData({
-      eatNum: cishu
+      eatNum: eatNum
     })
   },
   onLoad(e) {
@@ -87,9 +84,26 @@ Page({
    * 规格选择弹出框
    */
   openGuigeDialog() {
+    let eatNumTag = []
+    switch (this.data.goodsDetail.useType) {
+      case '幼儿园餐具':
+        eatNumTag = [{label: '两餐', value: 2}]
+        break;
+      case '小学餐具':
+        eatNumTag = [{label: '一餐', value: 1},{label: '两餐', value: 2}]
+        break;
+      case '中学餐具':
+        //todo 初中不能选四餐，待确认
+        eatNumTag = [{label: '一餐', value: 1},{label: '两餐', value: 2},
+          {label: '三餐', value: 3},{label: '四餐', value: 4}]
+        break;
+      default:
+        break;
+    }
     this.setData({
       hideShopPopup: false,
-      selectSizePrice: this.data.goodsDetail.priceStr
+      selectSizePrice: this.data.goodsDetail.priceStr,
+      eatNumTag: eatNumTag
     })
   },
   /**

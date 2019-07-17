@@ -76,7 +76,8 @@
             </view>
           </view>
           <view class="pop-goods-guige-select"
-                wx:if="{{goodsDetail.useType==='幼儿园餐具'}}">(已选择：{{selectSpecLabel}})</view>
+                wx:if="{{goodsDetail.useType==='幼儿园餐具'}}">
+            {{selectSpecLabel?'(已选择：'+selectSpecLabel+')':'请选择规格分类'}}</view>
         </view>
         <view class="pop-goods-close" bindtap="closePopupTap"></view>
       </view>
@@ -86,7 +87,7 @@
           <view class="guige-item {{specSelected===item.specsId?'active': ''}}"
                 wx:for="{{goodsDetail.specsList}}" wx:key="item.specsId"
                 data-id="{{item.specsId}}" data-specsname="{{item.specsName}}"
-                data-price="item.price" bindtap="selectSpec">
+                data-price="{{item.price}}" bindtap="selectSpec">
             {{item.specsName}} : {{item.specsStr}}
           </view>
         </view>
@@ -95,8 +96,8 @@
             wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
         <view class="num-label">就餐次数</view>
         <view class="ci-shu-tag-wrap">
-          <view class="ci-shu-tag {{eatNum===index+1?'active':''}}" wx:for="{{ciShuTag}}" wx:key="item"
-                bindtap="selectCiShuTag" data-num="{{index+1}}">{{item}}</view>
+          <view class="ci-shu-tag {{eatNum===item.value?'active':''}}" wx:for="{{eatNumTag}}" wx:key="item.label"
+                bindtap="selectEatNumTag" data-num="{{item.value}}">{{item.label}}</view>
         </view>
       </view>
       <view class="jiu-can-box jiu-can-ren-shu"
