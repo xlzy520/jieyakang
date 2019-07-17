@@ -150,6 +150,7 @@ module.exports = {
     return request_xcx('/address/list')
   },
   defaultAddress: () => {
+    // todo 到时候要换成默认地址的接口
     return request_xcx('/address/detail')
   },
   addressDetail: (id) => {

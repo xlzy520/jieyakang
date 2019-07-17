@@ -1,72 +1,57 @@
-const app = getApp()
 const WXAPI = require('../../wxapi/main')
 
 Page({
   data: {
     goodsList: [],
-    isNeedLogistics: 0, // 是否需要物流信息
     allGoodsPrice: 0,
     yunPrice: 0,
     allGoodsAndYunPrice: 0,
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
-    pingtuanOpenId: undefined, //拼团的话记录团号
-
-    hasNoCoupons: true,
-    coupons: [],
-    youhuijine: 0, //优惠券金额
-    curCoupon: null // 当前选择使用的优惠券
+    curAddressData: {}
   },
-  onShow: function () {
-    var that = this;
-    var shopList = [];
+  onShow () {
+    let shopList = [];
     //立即购买下单
-    if ("buyNow" == that.data.orderType) {
-      var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
-      that.data.kjId = buyNowInfoMem.kjId;
+    if ("buyNow" === this.data.orderType) {
+      let buyNowInfoMem = wx.getStorageSync('buyNowInfo');
       if (buyNowInfoMem && buyNowInfoMem.shopList) {
+        switch (buyNowInfoMem.useType) {
+          case '幼儿园餐具':
+            break;
+          case '小学餐具': case '中学餐具':
+            break;
+          case '宴席餐具':  case '餐馆餐具':
+            break;
+          default:
+            break;
+        }
         shopList = buyNowInfoMem.shopList
       }
     } else {
       //购物车下单
-      var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
-      that.data.kjId = shopCarInfoMem.kjId;
+      let shopCarInfoMem = wx.getStorageSync('shopCarInfo');
       if (shopCarInfoMem && shopCarInfoMem.shopList) {
-        // shopList = shopCarInfoMem.shopList
         shopList = shopCarInfoMem.shopList.filter(entity => {
           return entity.active;
         });
       }
     }
-    that.setData({
+    this.setData({
       goodsList: shopList,
     });
-    that.initShippingAddress();
+    this.initShippingAddress();
   },
 
   onLoad: function (e) {
     let _data = {
       isNeedLogistics: 1,
-      orderType: e.orderType
-    }
-    if (e.pingtuanOpenId) {
-      _data.pingtuanOpenId = e.pingtuanOpenId
+      orderType: e.orderType|| 'buyNow'
     }
     this.setData(_data);
   },
 
-  getDistrictId: function (obj, aaa) {
-    if (!obj) {
-      return "";
-    }
-    if (!aaa) {
-      return "";
-    }
-    return aaa;
-  },
-
   createOrder: function (e) {
-    var that = this;
     var loginToken = wx.getStorageSync('token') // 用户登录 token
     var remark = ""; // 备注信息
     if (e) {
@@ -75,14 +60,14 @@ Page({
 
     var postData = {
       token: loginToken,
-      goodsJsonStr: that.data.goodsJsonStr,
+      goodsJsonStr: this.data.goodsJsonStr,
       remark: remark
     };
-    if (that.data.pingtuanOpenId) {
-      postData.pingtuanOpenId = that.data.pingtuanOpenId
+    if (this.data.pingtuanOpenId) {
+      postData.pingtuanOpenId = this.data.pingtuanOpenId
     }
-    if (that.data.isNeedLogistics > 0) {
-      if (!that.data.curAddressData) {
+    if (this.data.isNeedLogistics > 0) {
+      if (!this.data.curAddressData) {
         wx.hideLoading();
         wx.showModal({
           title: '错误',
@@ -91,45 +76,35 @@ Page({
         })
         return;
       }
-      postData.provinceId = that.data.curAddressData.provinceId;
-      postData.cityId = that.data.curAddressData.cityId;
-      if (that.data.curAddressData.districtId) {
-        postData.districtId = that.data.curAddressData.districtId;
+      postData.provinceId = this.data.curAddressData.provinceId;
+      postData.cityId = this.data.curAddressData.cityId;
+      if (this.data.curAddressData.districtId) {
+        postData.districtId = this.data.curAddressData.districtId;
       }
-      postData.address = that.data.curAddressData.address;
-      postData.linkMan = that.data.curAddressData.linkMan;
-      postData.mobile = that.data.curAddressData.mobile;
-      postData.code = that.data.curAddressData.code;
+      postData.address = this.data.curAddressData.address;
+      postData.linkMan = this.data.curAddressData.linkMan;
+      postData.mobile = this.data.curAddressData.mobile;
+      postData.code = this.data.curAddressData.code;
     }
-    if (that.data.curCoupon) {
-      postData.couponId = that.data.curCoupon.id;
+    if (this.data.curCoupon) {
+      postData.couponId = this.data.curCoupon.id;
     }
     if (!e) {
       postData.calculate = "true";
     }
 
-    WXAPI.orderCreate(postData).then(function (res) {
-      if (res.code != 0) {
-        wx.showModal({
-          title: '错误',
-          content: res.msg,
-          showCancel: false
-        })
-        return;
-      }
-
-      if (e && "buyNow" != that.data.orderType) {
+    WXAPI.orderCreate(postData).then( (res)=> {
+      if (e && "buyNow" != this.data.orderType) {
         // 清空购物车数据
         wx.removeStorageSync('shopCarInfo');
       }
       if (!e) {
-        that.setData({
+        this.setData({
           isNeedLogistics: res.data.isNeedLogistics,
           allGoodsPrice: res.data.amountTotle,
           allGoodsAndYunPrice: res.data.amountLogistics + res.data.amountTotle,
           yunPrice: res.data.amountLogistics
         });
-        that.getMyCoupons();
         return;
       }
       WXAPI.addTempleMsgFormid({
@@ -196,25 +171,30 @@ Page({
       wx.redirectTo({
         url: "/pages/order-my/index"
       });
+    }).catch(err=>{
+      wx.showModal({
+        title: '错误',
+        content: err.msg,
+        showCancel: false
+      })
     })
   },
   initShippingAddress: function () {
-    var that = this;
-    WXAPI.defaultAddress(wx.getStorageSync('token')).then(function (res) {
-      if (res.code == 0) {
-        that.setData({
-          curAddressData: res.data
-        });
-      } else {
-        that.setData({
-          curAddressData: null
-        });
-      }
-      that.processYunfei();
+    WXAPI.defaultAddress().then( (res)=> {
+      this.setData({
+        curAddressData: {
+          ...res.data,
+          class: '113班'
+        }
+      });
+      this.processYunfei();
+    }).catch(err=>{
+      this.setData({
+        curAddressData: null
+      });
     })
   },
   processYunfei: function () {
-    var that = this;
     var goodsList = this.data.goodsList;
     var goodsJsonStr = "[";
     var isNeedLogistics = 0;
@@ -233,25 +213,19 @@ Page({
       }
 
 
-      let inviter_id = 0;
-      let inviter_id_storge = wx.getStorageSync('inviter_id_' + carShopBean.goodsId);
-      if (inviter_id_storge) {
-        inviter_id = inviter_id_storge;
-      }
 
-
-      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number + ',"propertyChildIds":"' + carShopBean.propertyChildIds + '","logisticsType":0, "inviter_id":' + inviter_id + '}';
+      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number+'}';
       goodsJsonStr += goodsJsonStrTmp;
 
 
     }
     goodsJsonStr += "]";
     //console.log(goodsJsonStr);
-    that.setData({
+    this.setData({
       isNeedLogistics: isNeedLogistics,
       goodsJsonStr: goodsJsonStr
     });
-    // that.createOrder();
+    // this.createOrder();
   },
   addAddress: function () {
     wx.navigateTo({
@@ -262,39 +236,5 @@ Page({
     wx.navigateTo({
       url: "/pages/select-address/index"
     })
-  },
-  getMyCoupons: function () {
-    var that = this;
-    WXAPI.myCoupons({
-      token: wx.getStorageSync('token'),
-      status: 0
-    }).then(function (res) {
-      if (res.code == 0) {
-        var coupons = res.data.filter(entity => {
-          return entity.moneyHreshold <= that.data.allGoodsAndYunPrice;
-        });
-        if (coupons.length > 0) {
-          that.setData({
-            hasNoCoupons: false,
-            coupons: coupons
-          });
-        }
-      }
-    })
-  },
-  bindChangeCoupon: function (e) {
-    const selIndex = e.detail.value[0] - 1;
-    if (selIndex == -1) {
-      this.setData({
-        youhuijine: 0,
-        curCoupon: null
-      });
-      return;
-    }
-    //console.log("selIndex:" + selIndex);
-    this.setData({
-      youhuijine: this.data.coupons[selIndex].money,
-      curCoupon: this.data.coupons[selIndex]
-    });
   }
 })

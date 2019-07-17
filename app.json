@@ -1,6 +1,9 @@
 {
   "pages": [
+    "pages/to-pay-order/index",
     "pages/goods-details/index",
+
+
     "pages/index/index",
     "pages/select-address/index",
     "pages/address-add/index",
@@ -10,8 +13,6 @@
     "pages/tableware/index",
     "pages/order-my/index",
 
-
-    "pages/to-pay-order/index",
 
     "pages/contact-us/index",
     "pages/order-details/index",

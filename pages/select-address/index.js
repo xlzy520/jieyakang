@@ -14,7 +14,7 @@ Page({
         title: '设置成功',
         duration: 1000
       })
-      this.initShippingAddress()
+      wx.navigateBack({})
     })
   },
   addAddress() {
@@ -28,7 +28,7 @@ Page({
       url: "/pages/address-add/index?id=" + id+'&addressType='+type
     })
   },
-  onLoad() {
+  onLoad(e) {
 
   },
   onShow() {
