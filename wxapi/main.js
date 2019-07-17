@@ -150,7 +150,7 @@ module.exports = {
     return request_xcx('/address/list')
   },
   defaultAddress: () => {
-    return request('/address/default')
+    return request_xcx('/address/detail')
   },
   addressDetail: (id) => {
     return request_xcx('/address/detail',{
@@ -158,7 +158,7 @@ module.exports = {
     })
   },
   userDetail: (token) => {
-    return request('/user/detail', 'get', {
+    return request_xcx('/user/detail', 'get', {
       token
     })
   },
@@ -185,9 +185,6 @@ module.exports = {
       token
     })
   },
-  orderReputation: (data) => {
-    return request('/order/reputation', data)
-  },
   orderClose: (orderId, token) => {
     return request('/order/close', {
       orderId,
@@ -202,18 +199,6 @@ module.exports = {
   },
   orderStatistics: () => {
     return request_xcx('/order/statistics')
-  },
-  withDrawApply: (money, token) => {
-    return request('/user/withDraw/apply', {
-      money,
-      token
-    })
-  },
-  cashLogs: (data) => {
-    return request('/user/cashLog', data)
-  },
-  rechargeSendRules: () => {
-    return request('/user/recharge/send/rule', 'get')
   },
   getPartner: () => {
     return request_admin('/partner/list')
