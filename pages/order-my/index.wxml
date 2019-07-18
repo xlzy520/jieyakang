@@ -3,7 +3,6 @@
     <view bindtap="statusTap" class="status-label {{index == currentType ? 'active' : ''}}"
           wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
       <view class="label">{{item}}</view>
-      <view class="{{tabClass[index]>0?'red-dot': ''}}"></view>
     </view>
   </view>
   <view class="no-order" hidden="{{orderList.length !== 0}}">

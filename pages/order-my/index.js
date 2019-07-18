@@ -3,30 +3,18 @@ const app = getApp()
 const WXAPI = require('../../wxapi/main')
 Page({
   data: {
-    // status从0到4,为 "待付款", "待发货", "待收货","待评价", "已完成"
-    statusType: ["全部订单", "待付款", "待发货", "待收货", "已完成"],
+    // status从0到3,为 "待付款", "待发货", "待收货","待评价"
+    statusType: ["全部订单", "待付款", "待发货", "待收货"],
     currentType: 1,
-    tabClass: ["", "", "", "", ""],
     orderList: [],
-    logisticsMap: {},
     goodsMap: {}
   },
   getAllOrder(){
-    const token = wx.getStorageSync('token')
-    const no_pay = WXAPI.orderList({token: token, status: 0})
-    const no_transfer = WXAPI.orderList({token: token, status: 1})
-    const no_confirm = WXAPI.orderList({token: token, status: 2})
-    const success = WXAPI.orderList({token: token, status: 4})
-    Promise.all([no_pay, no_transfer, no_confirm, success]).then(res=>{
-      this.data.orderList = []
-      res.map(order =>{
-        if (order.code === 0) {
-          this.setData({
-            orderList: this.data.orderList.concat(order.data.orderList),
-            goodsMap: Object.assign(this.data.goodsMap, order.data.goodsMap),
-            logisticsMap: Object.assign(this.data.logisticsMap, order.data.logisticsMap)
-          })
-        }
+    WXAPI.orderList({
+      statusCode: ''
+    }).then((res) => {
+      this.setData({
+        orderList: res.data.list
       })
     })
   },
@@ -117,16 +105,6 @@ Page({
     // 生命周期函数--监听页面初次渲染完成
 
   },
-  getOrderStatistics() {
-    WXAPI.orderStatistics(wx.getStorageSync('token')).then((res)=> {
-      const { count_id_no_pay, count_id_no_transfer,count_id_no_confirm, count_id_success } = res.data
-      if (res.code == 0) {
-        this.setData({
-          tabClass: [0, count_id_no_pay, count_id_no_transfer,count_id_no_confirm, count_id_success],
-        });
-      }
-    })
-  },
   onShow() {
     // 获取订单列表
     let status = this.data.currentType;
@@ -147,7 +125,6 @@ Page({
       token: wx.getStorageSync('token'),
       status: status
     };
-    this.getOrderStatistics();
     if (status !== 9) {
       WXAPI.orderList(postData).then((res)=> {
         if (res.code == 0) {

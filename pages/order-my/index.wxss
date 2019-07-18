@@ -30,15 +30,6 @@
     color:#ff001c;
     border-bottom: 6rpx solid #ff001c;
 }
-.status-box .status-label .red-dot{
-    width: 16rpx;
-    height: 16rpx;
-    position: absolute;
-    left: 116rpx;
-    top:23rpx;
-    background-color: #ff001c;
-    border-radius: 50%;
-}
 .no-order{
     width: 100%;
     position: absolute;
