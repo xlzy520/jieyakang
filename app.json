@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/order-details/index",
+    "pages/order-my/index",
     "pages/to-pay-order/index",
     "pages/goods-details/index",
 
@@ -11,11 +13,9 @@
 
     "pages/shop-cart/index",
     "pages/tableware/index",
-    "pages/order-my/index",
-
 
     "pages/contact-us/index",
-    "pages/order-details/index",
+
     "pages/authorize/index",
     "pages/banner-detail/index"
   ],
