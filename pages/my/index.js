@@ -1,8 +1,8 @@
 const app = getApp()
-const CONFIG = require('../../config.js')
 const WXAPI = require('../../wxapi/main')
 Page({
 	data: {
+    userType: '1',
 	  orderNav: [
       {type: 0, label: '我的订单', img: 'order'},
       {type: 1, label: '待付款', img: 'pay'},
@@ -16,7 +16,8 @@ Page({
     badge: [0,0,0,0]
   },
 	onLoad() {
-
+    this.getUserTypeByDefaultAddress();
+    this.getOrderStatistics()
 	},
   onShow() {
     let userInfo = wx.getStorageSync('userInfo')
@@ -27,44 +28,23 @@ Page({
         userInfo: userInfo,
       })
     }
-    this.getUserApiInfo();
-    this.getUserAmount();
-    this.getOrderStatistics()
   },
-  getUserApiInfo: function () {
-    var that = this;
-    WXAPI.userDetail(wx.getStorageSync('token')).then(function (res) {
-      if (res.code == 0) {
-        let _data = {}
-        _data.apiUserInfoMap = res.data
-        if (res.data.base.mobile) {
-          _data.userMobile = res.data.base.mobile
-        }
-        that.setData(_data);
-      }
+  getUserTypeByDefaultAddress() {
+    WXAPI.defaultAddress().then((res)=> {
+      this.setData({
+        userType: res.data.addressType
+      })
     })
   },
-  getUserAmount: function () {
-    var that = this;
-    WXAPI.userAmount(wx.getStorageSync('token')).then(function (res) {
-      if (res.code == 0) {
-        that.setData({
-          balance: res.data.balance.toFixed(2),
-          freeze: res.data.freeze.toFixed(2),
-          score: res.data.score
-        });
-      }
-    })
-  },
-  goOrder: function (e) {
+  goOrder(e) {
     wx.navigateTo({
       url: "/pages/order-my/index?type=" + e.currentTarget.dataset.type
     })
   },
   getOrderStatistics() {
     WXAPI.orderStatistics().then((res)=> {
-      const { count_id_no_pay, count_id_no_transfer,count_id_no_confirm } = res.data
-      let badge = [0, count_id_no_pay, count_id_no_transfer, count_id_no_confirm]
+      const { unpaidCount, unshippedCount,unreceivedCount } = res.data
+      let badge = [0, unpaidCount, unshippedCount, unreceivedCount]
       // todo 测试如果WXAPI的success是不是请求成功就算
       this.setData({
         badge: badge
