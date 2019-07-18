@@ -1,13 +1,10 @@
 const wxpay = require('../../utils/pay.js')
-const app = getApp()
 const WXAPI = require('../../wxapi/main')
 Page({
   data: {
-    // status从0到3,为 "待付款", "待发货", "待收货","待评价"
-    statusType: ["全部订单", "待付款", "待发货", "待收货"],
-    currentType: 1,
+    orderTypeTabs: ["全部订单", "待付款", "待发货", "待收货"],
+    currentTab: 0,
     orderList: [],
-    goodsMap: {}
   },
   getAllOrder(){
     WXAPI.orderList({
@@ -25,7 +22,7 @@ Page({
   },
   statusTap(e) {
     this.setData({
-      currentType: e.currentTarget.dataset.index
+      currentTab: e.currentTarget.dataset.index
     })
     this.onShow();
   },
@@ -40,12 +37,10 @@ Page({
     wx.showModal({
       title: '确定要取消该订单吗？',
       content: '',
-      success(res) {
+      success:(res)=> {
         if (res.confirm) {
-          WXAPI.orderClose(orderId, wx.getStorageSync('token')).then((res)=> {
-            if (res.code == 0) {
-              this.onShow();
-            }
+          WXAPI.orderClose(orderId).then((res)=> {
+            this.onShow();
           })
         }
       }
@@ -97,7 +92,7 @@ Page({
   onLoad(options) {
     if (options && options.type) {
       this.setData({
-        currentType: Number(options.type)
+        currentTab: Number(options.type)
       });
     }
   },
@@ -107,39 +102,15 @@ Page({
   },
   onShow() {
     // 获取订单列表
-    let status = this.data.currentType;
-    switch (this.data.currentType) {
-      case 0:
-        status = 9;
-        break;
-      case 1:case 2:case 3:
-      status = this.data.currentType - 1;
-        break;
-      case 4:
-        status = 4;
-        break;
-      default:
-        break;
-    }
-    const postData = {
-      token: wx.getStorageSync('token'),
-      status: status
-    };
-    if (status !== 9) {
-      WXAPI.orderList(postData).then((res)=> {
-        if (res.code == 0) {
-          this.setData({
-            orderList: res.data.orderList,
-            logisticsMap: res.data.logisticsMap,
-            goodsMap: res.data.goodsMap
-          });
-        } else {
-          this.setData({
-            orderList: [],
-            logisticsMap: {},
-            goodsMap: {}
-          });
-        }
+    const currentTabIndex = this.data.currentTab
+    const tabMap = ['', 'unpaid', 'unshipped', 'unreceived']
+    if (currentTabIndex !== 0) {
+      WXAPI.orderList({
+        statusCode: tabMap[currentTabIndex]
+      }).then((res)=> {
+        this.setData({
+          orderList: res.data.list
+        });
       })
     } else {
       this.getAllOrder()

@@ -156,9 +156,6 @@ form {
   color: #888;
   margin-right: 15rpx;
 }
-.heji .heji-xiaoji{
-
-}
 .heji .heji-yuan,
 .heji .heji-price{
   font-family: DINAlternate Bold, sans-serif;
@@ -168,6 +165,8 @@ form {
 .heji .heji-price{
   font-size: 28rpx;
 }
+
+
 .a-goods .text-box .arow {
   display: flex;
   justify-content: space-between;

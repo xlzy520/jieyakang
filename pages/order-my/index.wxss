@@ -1,57 +1,64 @@
-.container{
-    width: 100%;
-    min-height: 100vh;
-    background-color: #F2f2f2;
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F2f2f2;
 }
-.status-box{
-    width: 690rpx;
-    padding: 0 30rpx;
-    height: 88rpx;
-    line-height: 88rpx;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
+
+.status-box {
+  width: 690rpx;
+  padding: 0 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
 }
-.status-box .status-label{
-    font-family: PingFang SC Bold, sans-serif;
-    font-size: 30rpx;
-    color:#666;
-    width: 140rpx;
-    height: 100%;
-    text-align: center;
-    box-sizing: border-box;
-    position: relative;
+.status-box .status-label {
+  color: #666;
+  width: 120rpx;
+  height: 100%;
+  text-align: center;
+  box-sizing: border-box;
 }
-.status-box .status-label:not(:last-child){
-    margin-right: 10rpx;
+.status-box .status-label:not(:last-child) {
+  margin-right: 10rpx;
 }
-.status-box .status-label.active{
-    color:#ff001c;
-    border-bottom: 6rpx solid #ff001c;
+.status-box .status-label.active {
+  font-family: PingFang SC Bold, sans-serif;
+  font-weight: bold;
+  color: #ff001c;
+  border-bottom: 6rpx solid #ff001c;
 }
-.no-order{
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    top: 88rpx;
-    left: 0;
-    right: 0;
-    text-align: center;
-    padding-top: 203rpx;
-    background-color: #F2f2f2;
+.status-box .status-label.active:after{
+  content: "";
+  width: 120rpx;
+  height: 4rpx;
+  color: #ff001c;
 }
-.no-order-img{
-    width: 203rpx;
-    height: 214rpx;
-    margin-bottom: 31rpx;
+
+.no-order {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  top: 88rpx;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding-top: 203rpx;
+  background-color: #F2f2f2;
 }
-.no-order .text{
-    font-size:28rpx;
-    color:#999999;
-    text-align: center
+.no-order-img {
+  width: 203rpx;
+  height: 214rpx;
+  margin-bottom: 31rpx;
 }
-.no-order-back{
+.no-order .text {
+  font-size: 28rpx;
+  color: #999999;
+  text-align: center
+}
+.no-order-back {
   width: 200rpx;
   height: 54rpx;
   line-height: 54rpx;
@@ -63,127 +70,133 @@
   border-radius: 12rpx;
   margin-top: 40rpx;
 }
-.order-list{
-    width: 690rpx;
+
+
+.order-list {
+  width: 690rpx;
 }
-.order-list .a-order{
-    font-family: PingFang SC Medium, sans-serif;
-    font-size: 26rpx;
-    width: 100%;
-    background-color: #fff;
-    margin-top: 30rpx;
-    border-radius: 12rpx;
+.order-list .a-order {
+  font-size: 26rpx;
+  background-color: #fff;
+  margin-top: 30rpx;
+  padding: 0 30rpx;
 }
-.order-list .a-order .order-number{
-    padding: 30rpx;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+.order-list .a-order .order-number {
+  font-size: 26rpx;
+  padding: 30rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.order-list .a-order .order-number .order-number-label{
-    color: #999;
+.order-number .order-number-label {
+  color: #999;
 }
-.order-list .a-order .order-number .order-status{
-    color: #ff001c;
+.order-number .order-status {
+  color: #ff001c;
 }
-.order-list .a-order .order-number .red{
-    font-size:26rpx;
-    color:#ff001c;
+
+.a-order .goods-info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
-.a-order  .goods-info{
-    padding: 0 30rpx;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.goods-info .goods-box {
+  width: 100%;
+  height: 164rpx;
+  display: flex;
+  margin-bottom: 30rpx;
 }
-.goods-info .goods-box{
-    width: 100%;
-    height: 164rpx;
-    display: flex;
-    overflow: hidden;
-    margin-bottom: 20rpx;
+.goods-info .goods-box .goods-img {
+  width: 164rpx;
+  height: 164rpx;
 }
-.goods-info .goods-box .goods-img{
-    width: 164rpx;
-    height: 164rpx;
+.goods-box .goods-right {
+  padding-left: 30rpx;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
-.goods-box .goods-right{
-    padding-left: 30rpx;
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
+.goods-right .goods-right-header {
+  font-size: 26rpx;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+  line-height: 40rpx;
 }
-.goods-right .goods-right-header{
-    display: flex;
-    justify-content: space-between;
+.goods-right .goods-right-header .goods-name {
+
 }
-.goods-right .goods-right-header .goods-name{
-    color: #000;
+.goods-right .goods-right-header .goods-price {
+  display: flex;
+  font-family: DINAlternate Bold, sans-serif;
+  font-weight: bold;
+  color: #E93F33;
+  font-size: 34rpx;
 }
-.goods-right .goods-right-header .goods-price{
-    font-family: DINAlternate Bold, sans-serif;
-    color: #ff001c;
-    font-size: 34rpx;
+.goods-right .goods-number {
+  margin-top: 25rpx;
+  display: flex;
+  justify-content: space-between;
 }
-.goods-right .goods-number{
-    color: #888;
-    font-size: 28rpx;
-    display: flex;
-    line-height: 40rpx;
-    justify-content: flex-end;
+.goods-right .goods-number .goods-guige {
+  font-size: 22rpx;
+  color: #888;
 }
-.goods-right .goods-number .goods-number-left{
-    font-size: 20rpx;
+.goods-number.school{
+  justify-content: flex-end;
 }
-.order-list .a-order .price-box{
-    position: relative;
-    padding: 20rpx 30rpx;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.goods-number .goods-num{
+  display: flex;
+  color: #888;
+  font-size: 28rpx;
+  line-height: 40rpx;
 }
-.order-list .a-order .price-box .total-price{
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 30rpx;
+
+.heji{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30rpx;
+  line-height: 40rpx;
+  font-size: 22rpx;
 }
-.total-price .total-number{
-    color:#ff001c;
-    padding: 0 15rpx;
+.heji .heji-gong{
+  color: #888;
+  margin-right: 15rpx;
 }
-.white-space{
-    width: 30rpx;
+.heji .heji-yuan{
+  margin-right: 10rpx;
 }
-.total-price .price{
-    font-family: Myriad Pro, sans-serif;
-    display: flex;
-    line-height: 40rpx;
-    color:#ff001c;
-    font-size: 34rpx;
+.heji .heji-yuan,
+.heji .heji-price{
+  font-family: DINAlternate Bold, sans-serif;
+  font-weight: bold;
+  color: #E93F33;
 }
-.total-price .price .price-unit{
-    color: #ff001c;
-    font-size: 26rpx;
-    margin-right: 5rpx;
+.heji .heji-price{
+  font-size: 28rpx;
 }
-.price-box .order-action{
-    display: flex;
-    justify-content: flex-end;
+
+.order-action {
+  display: flex;
+  justify-content: flex-end;
+  padding: 30rpx 0;
 }
-.a-order .price-box .btn{
-    width: 148rpx;
-    height: 51rpx;
-    box-sizing: border-box;
-    text-align: center;
-    line-height: 51rpx;
-    border-radius: 25.5rpx;
-    margin-left: 30rpx;
+.a-order .order-action .btn,
+.a-order .order-action .topay-btn{
+  width: 148rpx;
+  height: 51rpx;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 51rpx;
+  border-radius: 25.5rpx;
+  margin-left: 30rpx;
 }
-.a-order .price-box .cancel-btn{
-    color: rgba(0,0,0,.8);
-    border: 1rpx solid rgba(0,0,0,.8);
+.a-order .order-action .cancel-btn {
+  color: rgba(0, 0, 0, .8);
+  border: 1rpx solid rgba(0, 0, 0, .8);
 }
-.a-order .price-box .topay-btn{
-    border:1px solid #ff001c;
-    color: #ff001c;
+.a-order .order-action .topay-btn {
+  border: 1px solid #ff001c;
+  color: #ff001c;
 }
