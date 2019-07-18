@@ -174,7 +174,7 @@ module.exports = {
     return request_xcx('/order/list', data)
   },
   orderDetail: (id, token) => {
-    return request('/order/detail', 'get', {
+    return request_xcx('/order/detail',{
       id,
       token
     })
