@@ -97,7 +97,7 @@
         <view class="num-label">就餐次数</view>
         <view class="ci-shu-tag-wrap">
           <view class="ci-shu-tag {{eatNum===item.value?'active':''}}" wx:for="{{eatNumTag}}" wx:key="item.label"
-                bindtap="selectEatNumTag" data-num="{{item.value}}">{{item.label}}</view>
+                bindtap="selectEatNumTag" data-num="{{item.value}}" data-label="{{item.label}}">{{item.label}}</view>
         </view>
       </view>
       <view class="jiu-can-box jiu-can-ren-shu"

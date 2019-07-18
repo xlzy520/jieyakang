@@ -18,8 +18,9 @@ Page({
     selectSizePrice: 0,
     specsId: '',
     eatNum: 2,
+    eatNumLabel: '二餐',
     peopleNum: 10,
-    eatDay: 10,
+    eatDay: 20,
     quantity: 10,
   
     tipText: '',
@@ -43,8 +44,10 @@ Page({
   },
   selectEatNumTag(e){
     const eatNum = e.target.dataset.num
+    const eatNumLabel = e.target.dataset.label
     this.setData({
-      eatNum: eatNum
+      eatNum: eatNum,
+      eatNumLabel: eatNumLabel
     })
   },
   onLoad(e) {
@@ -275,8 +278,8 @@ Page({
    * 组建购物车信息
    */
   buildShopCarInfo() {
-    const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
-    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
+    const { goodsId,goodsName,fileUrls,priceStr,specsList,useType} = this.data.goodsDetail
+    const { specsId, eatNum, peopleNum, eatDay, quantity,eatNumLabel } = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
@@ -284,9 +287,10 @@ Page({
       priceStr: priceStr,
       specsList: specsList,
       useType: useType,
-  
+      
       specsId: specsId,
       eatNum: eatNum,
+      eatNumLabel: eatNumLabel,
       peopleNum: peopleNum,
       eatDay: eatDay,
       quantity: quantity
@@ -336,7 +340,7 @@ Page({
    */
   buliduBuyNowInfo: function() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
-    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
+    const { specsId, eatNum, peopleNum, eatDay, quantity, eatNumLabel } = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
@@ -347,6 +351,7 @@ Page({
 
       specsId: specsId,
       eatNum: eatNum,
+      eatNumLabel: eatNumLabel,
       peopleNum: peopleNum,
       eatDay: eatDay,
       quantity: quantity
