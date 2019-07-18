@@ -3,25 +3,34 @@ const WXAPI = require('../../wxapi/main')
 Page({
   data: {
     goodsList: [],
-    allGoodsPrice: 0,
-    yunPrice: 0,
-    allGoodsAndYunPrice: 0,
+    allGoodsPrice: 0.00,
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
-    curAddressData: {}
+    curAddressData: {},
+    totalNum: 0, //共几份
   },
   onShow () {
     let shopList = [];
     //立即购买下单
     if ("buyNow" === this.data.orderType) {
       let buyNowInfoMem = wx.getStorageSync('buyNowInfo');
+      let {useType, quantity, priceStr, eatNum, peopleNum, eatDay,eatNumLabel} = buyNowInfoMem.shopList[0]
       if (buyNowInfoMem && buyNowInfoMem.shopList) {
-        switch (buyNowInfoMem.useType) {
-          case '幼儿园餐具':
-            break;
-          case '小学餐具': case '中学餐具':
+        useType = '小学餐具'
+        switch (useType) {
+          case '幼儿园餐具': case '小学餐具': case '中学餐具':
+          const totalNum = eatNum * peopleNum * eatDay
+          this.setData({
+            totalNum: totalNum,
+            eatNumLabel: eatNumLabel,
+            allGoodsPrice: (totalNum * Number(priceStr)).toFixed(2)
+          })
             break;
           case '宴席餐具':  case '餐馆餐具':
+            this.setData({
+              totalNum: quantity,
+              allGoodsPrice: quantity * Number(priceStr).toFixed(2)
+            })
             break;
           default:
             break;
@@ -43,67 +52,38 @@ Page({
     this.initShippingAddress();
   },
 
-  onLoad: function (e) {
-    let _data = {
-      isNeedLogistics: 1,
+  onLoad(e) {
+    this.setData({
       orderType: e.orderType|| 'buyNow'
-    }
-    this.setData(_data);
+    });
   },
 
-  createOrder: function (e) {
-    var loginToken = wx.getStorageSync('token') // 用户登录 token
-    var remark = ""; // 备注信息
-    if (e) {
-      remark = e.detail.value.remark; // 备注信息
+  createOrder(e) {
+    if (!this.data.curAddressData) {
+      wx.hideLoading();
+      wx.showModal({
+        title: '错误',
+        content: '请先设置您的收货地址！',
+        showCancel: false
+      })
+      return;
     }
-
-    var postData = {
-      token: loginToken,
-      goodsJsonStr: this.data.goodsJsonStr,
-      remark: remark
+    let postData = {
+      goodsInfo: this.data.goodsList,
+      ...this.data.curAddressData
     };
-    if (this.data.pingtuanOpenId) {
-      postData.pingtuanOpenId = this.data.pingtuanOpenId
-    }
-    if (this.data.isNeedLogistics > 0) {
-      if (!this.data.curAddressData) {
-        wx.hideLoading();
-        wx.showModal({
-          title: '错误',
-          content: '请先设置您的收货地址！',
-          showCancel: false
-        })
-        return;
-      }
-      postData.provinceId = this.data.curAddressData.provinceId;
-      postData.cityId = this.data.curAddressData.cityId;
-      if (this.data.curAddressData.districtId) {
-        postData.districtId = this.data.curAddressData.districtId;
-      }
-      postData.address = this.data.curAddressData.address;
-      postData.linkMan = this.data.curAddressData.linkMan;
-      postData.mobile = this.data.curAddressData.mobile;
-      postData.code = this.data.curAddressData.code;
-    }
-    if (this.data.curCoupon) {
-      postData.couponId = this.data.curCoupon.id;
-    }
     if (!e) {
       postData.calculate = "true";
     }
 
     WXAPI.orderCreate(postData).then( (res)=> {
-      if (e && "buyNow" != this.data.orderType) {
+      if (e && "buyNow" !== this.data.orderType) {
         // 清空购物车数据
         wx.removeStorageSync('shopCarInfo');
       }
       if (!e) {
         this.setData({
-          isNeedLogistics: res.data.isNeedLogistics,
-          allGoodsPrice: res.data.amountTotle,
-          allGoodsAndYunPrice: res.data.amountLogistics + res.data.amountTotle,
-          yunPrice: res.data.amountLogistics
+          allGoodsPrice: res.data.allGoodsPrice
         });
         return;
       }
@@ -113,7 +93,7 @@ Page({
         formId: e.detail.formId
       })
       // 配置模板消息推送
-      var postJsonString = {};
+      let postJsonString = {};
       postJsonString.keyword1 = {
         value: res.data.dateAdd,
         color: '#173177'
@@ -179,60 +159,24 @@ Page({
       })
     })
   },
-  initShippingAddress: function () {
+  initShippingAddress() {
     WXAPI.defaultAddress().then( (res)=> {
       this.setData({
-        curAddressData: {
-          ...res.data,
-          class: '113班'
-        }
+        curAddressData: res.data
       });
-      this.processYunfei();
+      this.createOrder();
     }).catch(err=>{
       this.setData({
         curAddressData: null
       });
     })
   },
-  processYunfei: function () {
-    var goodsList = this.data.goodsList;
-    var goodsJsonStr = "[";
-    var isNeedLogistics = 0;
-    var allGoodsPrice = 0;
-
-    for (let i = 0; i < goodsList.length; i++) {
-      let carShopBean = goodsList[i];
-      if (carShopBean.logistics) {
-        isNeedLogistics = 1;
-      }
-      allGoodsPrice += carShopBean.price * carShopBean.number;
-
-      var goodsJsonStrTmp = '';
-      if (i > 0) {
-        goodsJsonStrTmp = ",";
-      }
-
-
-
-      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number+'}';
-      goodsJsonStr += goodsJsonStrTmp;
-
-
-    }
-    goodsJsonStr += "]";
-    //console.log(goodsJsonStr);
-    this.setData({
-      isNeedLogistics: isNeedLogistics,
-      goodsJsonStr: goodsJsonStr
-    });
-    // this.createOrder();
-  },
-  addAddress: function () {
+  addAddress() {
     wx.navigateTo({
       url: "/pages/address-add/index"
     })
   },
-  selectAddress: function () {
+  selectAddress() {
     wx.navigateTo({
       url: "/pages/select-address/index"
     })

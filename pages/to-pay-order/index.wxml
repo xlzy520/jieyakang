@@ -6,7 +6,7 @@
       </view>
       <view class="show-address" hidden="{{!curAddressData}}" bindtap="selectAddress">
         <view class="row">
-          <view class="name-or-class">{{curAddressData.consignee||curAddressData.consignee}}</view>
+          <view class="name-or-class">{{curAddressData.consignee||curAddressData.class}}</view>
           <view class="mobile">{{curAddressData.mobile}}</view>
         </view>
         <view class="row">
@@ -27,23 +27,33 @@
             <view class="goods-name">{{item.goodsName}}</view>
             <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{item.priceStr}}</view>
           </view>
-          <view class="guige-num">
-            <view class="goods-guige">({{item.specsList[0].specsStr}})</view>
-            <view class="goods-num"><view style="font-size: 20rpx;margin-right: 15rpx">x</view> {{item.number|| 100}}</view>
+          <view class="guige-num {{item.useType==='餐馆餐具'||item.useType==='宴席餐具'?'': 'school'}}">
+            <view class="goods-guige" wx:if="{{item.useType==='餐馆餐具'||item.useType==='宴席餐具'}}">
+              ({{item.specsList[0].specsStr}})</view>
+            <view class="goods-num"><view style="font-size: 20rpx;margin-right: 15rpx">x</view> {{totalNum}}</view>
+          </view>
+          <view class="num-detail">
+            <view class="num-detail-row" wx:if="{{item.useType!=='餐馆餐具'&&item.useType!=='宴席餐具'&&item.useType!=='幼儿园餐具'}}">
+              <view class="ji-can">{{item.eatNumLabel}}</view>
+              <view class="ji-suan-shi">{{item.peopleNum}}人 * {{item.eatDay}} 天 = {{allGoodsPrice}}</view>
+            </view>
           </view>
           <view class="heji">
-            <view class="heji-gong">共{{}}4份, </view>
+            <view class="heji-gong">共{{totalNum}}份, </view>
             <view class="heji-xiaoji">小计:</view>
             <view class="heji-yuan">¥ </view>
-            <view class="heji-price">{{}}16.00</view>
+            <view class="heji-price">{{allGoodsPrice}}</view>
           </view>
         </view>
       </view>
     </view>
     <view class="tips">* 08:00 - 17:00 间下单，一小时后开始配送。</view>
     <view class="jiesuan-box">
-      <view class="left-price">
-        <view class="total">合计：¥ {{allGoodsAndYunPrice - youhuijine}}</view>
+      <view class="heji">
+        <view class="heji-gong">共{{totalNum}}份, </view>
+        <view class="heji-xiaoji">小计:</view>
+        <view class="heji-yuan">¥ </view>
+        <view class="heji-price">{{allGoodsPrice}}</view>
       </view>
       <button class="to-pay-btn" formType="submit">提交订单</button>
     </view>
