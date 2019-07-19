@@ -1,0 +1,10 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F2f2f2;
+}
+.container .top-nav{
+  box-sizing: content-box;
+  width:400rpx;
+  padding:0 175rpx;
+}

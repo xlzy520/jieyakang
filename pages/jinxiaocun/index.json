@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "进销存记录",
+  "usingComponents": {
+    "top-nav": "/components/top-nav/index"
+  }
+}

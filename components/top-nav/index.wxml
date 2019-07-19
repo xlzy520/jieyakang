@@ -1,0 +1,6 @@
+<view class="top-nav">
+  <view wx:for="{{tabList}}" data-index="{{index}}" bindtap="navTap"
+        class="top-nav-tab {{index === currentTab ? 'active' : ''}}">
+    <view class="top-nav-label">{{item}}</view>
+  </view>
+</view>

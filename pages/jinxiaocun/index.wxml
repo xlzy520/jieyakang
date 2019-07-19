@@ -1,0 +1,3 @@
+<view class="container">
+  <top-nav tabList="{{tabList}}" currentTab="{{currentTab}}" bindchange="changeCurrentTab"></top-nav>
+</view>

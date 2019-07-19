@@ -1,0 +1,32 @@
+.top-nav {
+  width: 690rpx;
+  padding: 0 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+.top-nav .top-nav-tab {
+  font-family: PingFang SC Bold, sans-serif;
+  font-weight: bold;
+  color: #666;
+  width: 120rpx;
+  height: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+.top-nav .top-nav-tab:not(:last-child) {
+  margin-right: 10rpx;
+}
+.top-nav .top-nav-tab.active {
+  color: #ff001c;
+  border-bottom: 6rpx solid #ff001c;
+}
+.top-nav .top-nav-tab.active:after{
+  content: "";
+  width: 120rpx;
+  height: 4rpx;
+  color: #ff001c;
+}

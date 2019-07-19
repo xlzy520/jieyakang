@@ -22,7 +22,7 @@ Page({
   },
   statusTap(e) {
     this.setData({
-      currentTab: e.currentTarget.dataset.index
+      currentTab: e.detail
     })
     this.onShow();
   },

@@ -4,39 +4,6 @@
   background-color: #F2f2f2;
 }
 
-.status-box {
-  width: 690rpx;
-  padding: 0 30rpx;
-  height: 88rpx;
-  line-height: 88rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-}
-.status-box .status-label {
-  color: #666;
-  width: 120rpx;
-  height: 100%;
-  text-align: center;
-  box-sizing: border-box;
-}
-.status-box .status-label:not(:last-child) {
-  margin-right: 10rpx;
-}
-.status-box .status-label.active {
-  font-family: PingFang SC Bold, sans-serif;
-  font-weight: bold;
-  color: #ff001c;
-  border-bottom: 6rpx solid #ff001c;
-}
-.status-box .status-label.active:after{
-  content: "";
-  width: 120rpx;
-  height: 4rpx;
-  color: #ff001c;
-}
-
 .no-order {
   width: 100%;
   position: absolute;
