@@ -5,8 +5,13 @@
       <view class="status-des">{{titleMap[orderDetail.statusCode].labelTip}}</view>
     </view>
   </view>
-  <view class="address-box">
+  <view class="order-status-des"
+        wx:if="{{orderDetail.statusCode==='unreceived'||orderDetail.statusCode==='completed'}}">
     <image class="icon" src="/images/order-details/{{orderDetail.statusCode}}.png"></image>
+    <view class="order-status-des">{{orderDetail.statusName}}</view>
+  </view>
+  <view class="address-box">
+    <image class="icon" src="/images/order-details/location.png"></image>
     <view class="show-address">
       <view class="row">
         <view class="name-or-class">{{orderDetail.consignee||orderDetail.class}}</view>
@@ -20,7 +25,8 @@
   </view>
   <view class="goods-list">
     <view class="goods-info">
-      <view class="goods-box" wx:for="{{orderDetail.orderDetails}}" wx:for-item="goods" wx:key="{{goods.orderId}}">
+      <view class="goods-box" wx:for="{{orderDetail.orderDetails}}" wx:for-item="goods"
+            bindtap="gotoGoods" wx:key="{{goods.orderId}}">
         <image src="http://www.xlzy520.cn/164_164/餐馆餐具.png" class="goods-img"></image>
 <!--        <image src="{{goods.goodsUrl}}" class="goods-img"></image>-->
         <view class="goods-right">
@@ -38,10 +44,10 @@
     </view>
     <view class="heji">
       <!-- todo 记得删除默认-->
-      <view class="heji-gong">共{{item.goodsNumber||200}}份, </view>
+      <view class="heji-gong">共{{orderDetail.total}}份, </view>
       <view class="heji-xiaoji">共计:</view>
       <view class="heji-yuan">¥ </view>
-      <view class="heji-price">{{allGoodsPrice||'500.00'}}</view>
+      <view class="heji-price">{{orderDetail.amount}}</view>
     </view>
   </view>
   <view class="order-info">
@@ -65,12 +71,12 @@
       <view class="call" bindtap="call">拨打</view>
     </view>
   </view>
-  <view class="order-operation">
+  <view class="order-operation" wx:if="{{orderDetail.statusCode!=='unshipped'}}">
     <form bindsubmit="confirmBtnTap" report-submit="true">
       <view class="btn-row">
-        <button class="confirm-btn">取消订单</button>
-        <button class="confirm-btn" formType="submit">确认收货</button>
-        <button class="confirm-btn" formType="submit">付款</button>
+        <view class="cancel-btn" bindtap="cancelOrderTap" wx:if="{{orderDetail.statusCode==='unpaid'}}">取消订单</view>
+        <view class="pay-btn" bindtap="toPayTap" wx:if="{{orderDetail.statusCode==='unpaid'}}">付款</view>
+        <button class="confirm-btn" formType="submit" wx:if="{{orderDetail.statusCode==='unreceived'}}">确认收货</button>
       </view>
     </form>
   </view>

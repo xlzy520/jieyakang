@@ -8,20 +8,19 @@ Page({
         labelTip: '剩23小时59分自动关闭'
       },
       'unshipped': {
-        label: '等待买家付款',
-        labelTip: '等待买家付款'
+        label: '买家已付款',
+        labelTip: '加速装箱中，切莫着急～'
       },
       'unreceived': {
-        label: '等待买家付款',
-        labelTip: '等待买家付款'
+        label: '洁雅康已为您发货',
+        labelTip: '餐具已经在路上了，请耐心等待～'
       },
       'completed': {
-        label: '等待买家付款',
-        labelTip: '等待买家付款'
+        label: '交易成功',
+        labelTip: '期待您的下次下单～'
       }
     },
     orderId: 0,
-    goodsList: [],
     orderDetail: {}
   },
   call() {
@@ -29,11 +28,18 @@ Page({
       phoneNumber: '0736-4388889'
     })
   },
+  gotoGoods(e){
+    wx.navigateTo({
+      url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
+    })
+  },
   onLoad(e) {
-    const orderId = e.id;
-    this.setData({
-      orderId: orderId
-    });
+    if (e.id) {
+      const orderId = e.id;
+      this.setData({
+        orderId: orderId
+      });
+    }
   },
   onShow() {
     WXAPI.orderDetail(this.data.orderId).then(res => {
@@ -47,16 +53,64 @@ Page({
         showCancel: false
       })
     })
-    var yunPrice = parseFloat(this.data.yunPrice);
-    var allprice = 0;
-    var goodsList = this.data.goodsList;
-    for (var i = 0; i < goodsList.length; i++) {
-      allprice += parseFloat(goodsList[0].price) * goodsList[0].number;
+  },
+  cancelOrderTap() {
+    wx.showModal({
+      title: '确定要取消该订单吗？',
+      content: '',
+      success:(res)=> {
+        if (res.confirm) {
+          WXAPI.orderClose({
+            orderId: this.data.orderId
+          }).then((res)=> {
+            this.onShow();
+          })
+        }
+      }
+    })
+  },
+  toPayTap(e) {
+    const that = this;
+    const orderId = e.currentTarget.dataset.id;
+    let money = e.currentTarget.dataset.money;
+    console.log(money);
+    // const needScore = e.currentTarget.dataset.score;
+    WXAPI.userAmount(wx.getStorageSync('token')).then(function(res) {
+      if (res.code == 0) {
+        // 增加提示框
+        let _msg = '订单金额: ' + money +' 元'
+        wx.showModal({
+          title: '请确认支付',
+          content: _msg,
+          confirmText: "确认支付",
+          cancelText: "取消支付",
+          success (res) {
+            if (res.confirm) {
+              that._toPayTap(orderId, money)
+            } else {
+              console.log('用户点击取消支付')
+            }
+          }
+        });
+      } else {
+        wx.showModal({
+          title: '错误',
+          content: '无法获取用户资金信息',
+          showCancel: false
+        })
+      }
+    })
+  },
+  _toPayTap (orderId, money){
+    const _this = this
+    if (money <= 0) {
+      // 直接使用余额支付
+      WXAPI.orderPay(orderId, wx.getStorageSync('token')).then(function (res) {
+        _this.onShow();
+      })
+    } else {
+      wxpay.wxpay('order', money, orderId, "/pages/order-list/index");
     }
-    this.setData({
-      allGoodsPrice: allprice,
-      yunPrice: yunPrice
-    });
   },
   confirmBtnTap(e) {
     let that = this;
