@@ -2,7 +2,7 @@
   <view class="banner">
     <image bindtap="toBannerDetail" src="/images/banner/banner.png" class="slide-image"/>
   </view>
-  <goods-list></goods-list>
+  <goods-list id="goods-list"></goods-list>
   <view class="partner-container">
     <view class="partner-header">合作伙伴</view>
     <view class="partner-item" wx:for-items="{{partners}}" wx:key="{{index}}">

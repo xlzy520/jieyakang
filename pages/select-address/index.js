@@ -7,11 +7,11 @@ Page({
   selectTap(e) {
     const { id } = e.currentTarget.dataset;
     WXAPI.updateAddress({
-      id: id,
+      addressId: id,
       isDefault: 'true'
     }).then(() => {
       wx.showToast({
-        title: '设置成功',
+        title: '更新默认地址成功',
         duration: 1000
       })
       wx.navigateBack({})
@@ -35,10 +35,18 @@ Page({
     this.initShippingAddress();
   },
   initShippingAddress() {
-    WXAPI.queryAddress().then((res)=> {
+    wx.showLoading({
+      title: '正在获取地址列表...'
+    })
+    WXAPI.getAddressList({
+      pageIndex: 1,
+      pageSize: 20
+    }).then((res)=> {
       this.setData({
         addressList: res.data.list
       });
+    }).finally(()=>{
+      wx.hideLoading()
     })
   }
 })

@@ -11,7 +11,9 @@ Page({
     buyNumMin: 1,
     buyNumMax: 100000,
     
-    shopCarInfo: {},
+    shopCarInfo: {
+      shopList: []
+    },
     shopType: "addShopCar", //购物类型，加入购物车或立即购买，默认为加入购物车
     eatNumTag: ['一餐','二餐'],
     selectSpecLabel: "",
@@ -51,19 +53,18 @@ Page({
     })
   },
   onLoad(e) {
-    // 获取购物车数据
-    wx.getStorage({
-      key: 'shopCarInfo',
-      success: res=> {
-        this.setData({
-          shopCarInfo: res.data
-        });
-      }
+    wx.showLoading({
+      "mask": true,
+      title: '正在获取商品详情...'
     })
-    WXAPI.goodsDetail(e.id).then((res)=> {
+    WXAPI.goodsDetail({
+      goodsId: e.id
+    }).then((res)=> {
       this.setData({
         goodsDetail: res.data
       })
+    }).finally(()=>{
+      wx.hideLoading()
     })
   },
   goShopCar: function() {
@@ -109,9 +110,6 @@ Page({
       eatNumTag: eatNumTag
     })
   },
-  /**
-   * 规格选择弹出框隐藏
-   */
   closePopupTap: function() {
     this.setData({
       hideShopPopup: true
@@ -136,56 +134,6 @@ Page({
         [type]: currentNum
       })
     }
-  },
-  labelItemTap(e) {
-    let that = this;
-    let childs = that.data.goodsDetail.properties[e.currentTarget.dataset.propertyindex].childsCurGoods;
-    for (let i = 0; i < childs.length; i++) {
-      that.data.goodsDetail.properties[e.currentTarget.dataset.propertyindex].childsCurGoods[i].active = false;
-    }
-    // 设置当前选中状态
-    that.data.goodsDetail.properties[e.currentTarget.dataset.propertyindex].childsCurGoods[e.currentTarget.dataset.propertychildindex].active = true;
-    // 获取所有的选中规格尺寸数据
-    let needSelectNum = that.data.goodsDetail.properties.length;
-    let curSelectNum = 0;
-    let propertyChildIds = "";
-    let propertyChildNames = "";
-    for (let i = 0; i < that.data.goodsDetail.properties.length; i++) {
-      childs = that.data.goodsDetail.properties[i].childsCurGoods;
-      for (let j = 0; j < childs.length; j++) {
-        if (childs[j].active) {
-          curSelectNum++;
-          propertyChildIds = propertyChildIds + that.data.goodsDetail.properties[i].id + ":" + childs[j].id + ",";
-          propertyChildNames = propertyChildNames + that.data.goodsDetail.properties[i].name + ":" + childs[j].name + "  ";
-        }
-      }
-    }
-    let canSubmit = false;
-    if (needSelectNum == curSelectNum) {
-      canSubmit = true;
-    }
-    // 计算当前价格
-    if (canSubmit) {
-      WXAPI.goodsPrice({
-        goodsId: that.data.goodsDetail.id,
-        propertyChildIds: propertyChildIds
-      }).then(function(res) {
-        that.setData({
-          selectSizePrice: res.data.price,
-          totalScoreToPay: res.data.score,
-          propertyChildIds: propertyChildIds,
-          propertyChildNames: propertyChildNames,
-          buyNumMax: res.data.stores,
-          buyNumber: (res.data.stores > 0) ? 1 : 0
-        });
-      })
-    }
-
-
-    this.setData({
-      goodsDetail: that.data.goodsDetail,
-      canSubmit: canSubmit
-    })
   },
   popupOk(){
     if (this.data.shopType === 'addShopCar'){
@@ -233,9 +181,6 @@ Page({
     }
     return true
   },
-  /**
-   * 加入购物车
-   */
   addShopCar() {
     if (!this.validate()) {
       return
@@ -251,20 +196,17 @@ Page({
     })
     this.closePopupTap();
     wx.showToast({
-      title: '加入购物车成功',
+      title: '添加成功，在购物车等亲～',
       icon: 'success',
       duration: 2000
     })
   },
-  /**
-   * 立即购买
-   */
   buyNow() {
     if (!this.validate()) {
       return
     }
     //组建立即购买信息
-    const buyNowInfo = this.buliduBuyNowInfo();
+    const buyNowInfo = this.buildBuyNowInfo();
     wx.setStorage({
       key: "buyNowInfo",
       data: buyNowInfo
@@ -274,9 +216,6 @@ Page({
       url: "/pages/to-pay-order/index?orderType=buyNow"
     })
   },
-  /**
-   * 组建购物车信息
-   */
   buildShopCarInfo() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType} = this.data.goodsDetail
     const { specsId, eatNum, peopleNum, eatDay, quantity,eatNumLabel } = this.data
@@ -296,9 +235,9 @@ Page({
       quantity: quantity
     };
     let shopCarInfo = this.data.shopCarInfo;
-    if (!shopCarInfo.shopList) {
-      shopCarInfo.shopList = [];
-    }
+    // if (shopCarInfo.shopList === undefined) {
+    //   shopCarInfo.shopList = [];
+    // }
     let sameGoods
     // todo 各种情况分类
     switch (useType) {
@@ -326,7 +265,7 @@ Page({
       default:
         break;
     }
-
+    console.log(sameGoods);
     if (sameGoods) {
       const sameGoodsIndex = shopCarInfo.shopList.findIndex(v=>v.goodsId === sameGoods.goodsId)
       shopCarInfo.shopList.splice(sameGoodsIndex, 1, shopCarMap);
@@ -335,10 +274,7 @@ Page({
     }
     return shopCarInfo;
   },
-  /**
-   * 组建立即购买信息
-   */
-  buliduBuyNowInfo: function() {
+  buildBuyNowInfo: function() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
     const { specsId, eatNum, peopleNum, eatDay, quantity, eatNumLabel } = this.data
     let shopCarMap = {

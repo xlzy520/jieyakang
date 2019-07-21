@@ -2,20 +2,21 @@
 <!--1px = 750/320 = 2.34rpx;-->
 <view class="goods-container">
   <view class="goods-header" wx:if="{{header}}">餐具产品</view>
-  <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.goodsId}}">
+  <view class="goods-box" wx:for="{{goods}}" wx:key="{{index}}"
+        bindtap="toDetailsTap" data-id="{{item.goodsId}}">
     <view class="goods-item">
       <view class="img-box">
-        <image src="{{item.fileUrl}}" class="image" mode="aspectFill"/>
+        <image src="http://84c0a094.ngrok.io/market/file/preview?fileUrl={{item.fileUrls[0]}}" class="image" mode="aspectFill"/>
       </view>
       <view class="goods-detail">
         <view class="goods-title">{{item.goodsName}}</view>
-        <view class="goods-rule" hidden="{{!item.specsList[0].specsStr}}">({{item.specsList[0].specsStr}})</view>
+        <view class="goods-rule" hidden="{{item.specsList[0].pack}}">({{item.specsList[0].specsStr}})</view>
         <view class="goods-wrap">
           <view class="goods-price">
             <view class="price-label">¥  </view>
-            <view class="price-value">{{item.specsList[0].priceStr}}</view>
+            <view class="price-value">{{item.priceStr}}</view>
             <view class="price-xiegang">/</view>
-            <view class="price-unit">{{item.specsList[0].unit}}</view>
+            <view class="price-unit">{{item.specsList[0].pack?'套':'件'}}</view>
           </view>
           <view class="goods-select">选规格</view>
         </view>

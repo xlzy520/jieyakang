@@ -1,6 +1,58 @@
-<!--index.wxml-->
-<import src="../template-cart/template-cart.wxml"/>
-
 <view class="container">
-     <template is="{{goodsList.list.length > 0 ? 'cart-goods-list' : 'no-goods'}}" data="{{...goodsList}}"></template>
+  <view class="no-goods" wx:if="{{!shopList.length}}">
+    <view class="shop-cart-no-content">
+      <image src="/images/no-shop-cart.png"></image>
+      <view class="no-content-label">购物车空空如也～</view>
+    </view>
+    <view class="to-index-btn" bindtap="toIndexPage">
+      去逛逛
+    </view>
+  </view>
+
+  <view class="cart-goods-list">
+    <view class="list-top" hidden="{{!shopList.length}}">
+      <view class="edit-btn" bindtap="shopCarEdit" data-type="{{isEditing}}">{{isEditing?'编辑': '完成'}}</view>
+    </view>
+    <view class="goodsList">
+      <view class="a-gooods" wx:for="{{shopList}}" wx:for-item="goods" wx:key="{{goods.goodsId}}" >
+        <view class="a-goods-conts {{goods.active? 'active':''}}" bindtap="selectTap" data-index="{{index}}">
+          <view class="check">
+            <image class="address-check-icon" src="/images/{{goods.active?'check': 'unchecked'}}.png"></image>
+          </view>
+          <view class="goods-info">
+            <view class="img-box">
+<!--              <image src="{{goods.pic}}" class="img"/>-->
+              <image src="https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2019-07-02/6382dc5d00b486371428f62251103d3a.jpg" class="img"/>
+            </view>
+            <view class="text-box">
+              <view class="goods-title">{{goods.goodsName}}</view>
+              <!--<view class="goods-label">{{item.label}}</view>-->
+              <view class="goods-price">¥ {{goods.priceStr}}</view>
+              <view class="buy-num">
+                <view class="jian-btn {{goods.number==1? 'disabled' : ''}}" catchtap="jianBtnTap" data-index="{{index}}">-</view>
+                <input  type="number" value="{{goods.number}}" disabled/>
+                <view class="jia-btn {{goods.number==curTouchGoodStore? 'disabled' : ''}}" catchtap="jiaBtnTap" data-index="{{index}}">+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="jiesuan-box" wx:if="{{shopList.length}}">
+      <view class="left-price">
+        <view class="check all-selected" bindtap="bindAllSelect">
+          <image src="/images/{{allSelect?'check':'unchecked'}}.png"></image>
+          <view class="check-label">全选</view>
+        </view>
+        <view class="total" wx:if="{{isEditing}}">
+          <view class="total-label">合计：</view>
+          <view class="total-unit">¥</view>
+          <view class="total-price">{{totalPrice}}</view>
+        </view>
+      </view>
+      <view class="footer-btn {{noSelect?'no-select':''}}" bindtap="editSubmit"
+            data-type="isEditing">{{isEditing?'删除': '去结算'}}</view>
+    </view>
+  </view>
+
 </view>

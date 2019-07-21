@@ -22,7 +22,7 @@
     </view>
   </view>
   <navigator class="my-item" url="/pages/select-address/index" hover-class="navigator-hover">
-    <image class="my-item-img" src="/images/order-details/icon-address.png"></image>
+    <image class="my-item-img" src="/images/icon-addr.png"></image>
     <view class="my-item-title">地址信息</view>
     <view class="my-item-subtitle">收货地址与信息</view>
     <image class="arrow-right" src="/images/arrow-right.png"></image>

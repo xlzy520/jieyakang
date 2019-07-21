@@ -2,7 +2,6 @@ const WXAPI = require('../../wxapi/main.js')
 const CONFIG = require('../../config.js')
 Page({
   data: {
-    goods: [],
     partners: []
   },
   toDetailsTap(e) {
@@ -18,28 +17,11 @@ Page({
   onLoad() {
     const token = wx.getStorageSync('token')
     if (token){
-      this.getGoodsList();
       this.getPartner()
     }
   },
-  getGoodsList () {
-    wx.showLoading({
-      "mask": true
-    })
-    WXAPI.goods({
-      pageIndex: 1,
-      pageSize: 20
-    }).then((res)=> {
-      this.setData({
-        goods: res.data.list,
-      });
-    }).finally(()=>{
-      wx.hideLoading()
-    })
-  },
   getPartner(){
     WXAPI.getPartner({
-      type: 'index',
       pageIndex: 1,
       pageSize: 20
     }).then((res) =>{
@@ -63,7 +45,7 @@ Page({
   },
   onPullDownRefresh() {
     wx.showNavigationBarLoading()
-    this.getGoodsList()
+    this.selectComponent("#goods-list").getGoodsList()
     wx.stopPullDownRefresh()
     wx.hideLoading()
     wx.hideNavigationBarLoading()

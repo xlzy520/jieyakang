@@ -16,7 +16,8 @@ Component({
   methods: {
     getGoodsList () {
       wx.showLoading({
-        "mask": true
+        "mask": true,
+        title: '正在获取商品列表...'
       })
       WXAPI.goods({
         pageIndex: 1,

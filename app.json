@@ -1,21 +1,20 @@
 {
   "pages": [
+    "pages/select-address/index",
+    "pages/shop-cart/index",
+    "pages/index/index",
+
+    "pages/jinxiaocun/index",
+
     "pages/order-details/index",
     "pages/order-my/index",
     "pages/to-pay-order/index",
     "pages/goods-details/index",
 
-
-    "pages/index/index",
-    "pages/select-address/index",
     "pages/address-add/index",
     "pages/my/index",
-
-    "pages/shop-cart/index",
     "pages/tableware/index",
-
     "pages/contact-us/index",
-
     "pages/authorize/index",
     "pages/banner-detail/index"
   ],

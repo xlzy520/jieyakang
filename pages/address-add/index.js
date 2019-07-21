@@ -48,6 +48,11 @@ Page({
   checkPhone(phone) {
     return /^1[34578]\d{9}$/.test(phone)
   },
+  setTipText(text){
+    this.setData({
+      tipText: text
+    })
+  },
   bindSave(e) {
     let consignee,classNumber;
     let address = e.detail.value.address;
@@ -71,15 +76,11 @@ Page({
     }
     const mobile = e.detail.value.mobile;
     if (!this.checkPhone(mobile)) {
-      this.setData({
-        tipText: '请填写正确的手机号码'
-      })
+      this.setTipText('请填写正确的手机号码')
       return
     }
     if (address.trim() === ""){
-      this.setData({
-        tipText: '请填写详细地址'
-      })
+      this.setTipText('请填写详细地址')
       return
     }
     let apiResult
@@ -98,26 +99,23 @@ Page({
     } else {
       apiResult = WXAPI.addAddress(params)
     }
+    wx.showLoading({
+      title: '正在保存...',
+    })
     apiResult.then((res) => {
-      wx.showLoading({
-        title: '正在保存...',
+      wx.hideLoading();
+      wx.showToast({
+        title: '请求成功',
+        showCancel: false
       })
-      if (res.code !== 0) {
-        // 登录错误
-        wx.hideLoading();
-        wx.showModal({
-          title: '失败',
-          content: res.msg,
-          showCancel: false
-        })
-      } else {
-        wx.hideLoading();
-        wx.showToast({
-          title: '成功',
-          showCancel: false
-        })
-        wx.navigateBack({})
-      }
+      wx.navigateBack({})
+    }).catch(err=>{
+      wx.hideLoading();
+      wx.showModal({
+        title: '失败',
+        content: err.msg,
+        showCancel: false
+      })
     })
   },
   close(){
@@ -135,7 +133,7 @@ Page({
     }
     this.getSchoolList()
     if (e.id) { // 修改初始化数据库数据
-      wx.setNavigationBarTitle({
+      wx.setNavigationOBarTitle({
         title: '编辑收货地址'
       })
       WXAPI.addressDetail(e.id).then((res)=> {
@@ -144,9 +142,7 @@ Page({
           addressData: res.data,
         });
       }).catch(err=>{
-        this.setData({
-          tipText: '无法获取快递地址数据',
-        })
+        this.setTipText('无法获取快递地址数据')
       })
     }
   },

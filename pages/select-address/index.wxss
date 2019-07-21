@@ -15,8 +15,8 @@
   text-align: center;
 }
 .no-address image {
-  width: 261rpx;
-  height: 165rpx;
+  width: 180rpx;
+  height: 230rpx;
 }
 
 

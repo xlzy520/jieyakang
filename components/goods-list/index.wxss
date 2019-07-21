@@ -113,6 +113,7 @@
 .price-unit{
   font-family: PingFang SC Medium, sans-serif;
   font-size: 26rpx;
+  margin-top:8rpx;
 }
 .goods-select{
   font-family: PingFang SC Medium, sans-serif;

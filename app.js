@@ -1,8 +1,7 @@
 // const WXAPI = require('wxapi/main')
 App({
   navigateToLogin: false,
-  onLaunch: function() {
-    const that = this;
+  onLaunch() {
     // 检测新版本
     const updateManager = wx.getUpdateManager()
     updateManager.onUpdateReady(function () {
@@ -22,10 +21,10 @@ App({
      * 无网络状态下根据实际情况进行调整
      */
     wx.getNetworkType({
-      success(res) {
+      success:(res)=> {
         const networkType = res.networkType
         if (networkType === 'none') {
-          that.globalData.isConnected = false
+          this.globalData.isConnected = false
           wx.showToast({
             title: '当前无网络',
             icon: 'loading',
@@ -38,46 +37,41 @@ App({
      * 监听网络状态变化
      * 可根据业务需求进行调整
      */
-    wx.onNetworkStatusChange(function(res) {
+    wx.onNetworkStatusChange((res)=> {
       if (!res.isConnected) {
-        that.globalData.isConnected = false
+        this.globalData.isConnected = false
         wx.showToast({
           title: '网络已断开',
           icon: 'loading',
           duration: 2000,
-          complete: function() {
-            that.goStartIndexPage()
+          complete: ()=> {
+            this.goStartIndexPage()
           }
         })
       } else {
-        that.globalData.isConnected = true
+        this.globalData.isConnected = true
         wx.hideToast()
       }
     });
     let token = wx.getStorageSync('token');
     if (!token) {
-      that.goLoginPageTimeOut()
+      console.log('not-token');
+      this.goLoginPageTimeOut()
     }
-    // WXAPI.checkToken(token).then(function(res) {
-    //   if (res.code != 0) {
-    //     wx.removeStorageSync('token')
-    //     that.goLoginPageTimeOut()
-    //   }
-    // })
   },
-  goLoginPageTimeOut: function() {
+  goLoginPageTimeOut() {
     if (this.navigateToLogin){
       return
     }
     this.navigateToLogin = true
-    setTimeout(function() {
+    setTimeout(()=> {
       wx.navigateTo({
         url: "/pages/authorize/index"
       })
-    }, 500)
+    }, 0)
   },
-  goStartIndexPage: function() {
-    setTimeout(function() {
+  goStartIndexPage() {
+    setTimeout(()=> {
       wx.redirectTo({
         url: "/pages/start/start"
       })
