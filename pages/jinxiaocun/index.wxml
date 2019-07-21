@@ -1,6 +1,6 @@
 <view class="container">
   <top-nav tabList="{{tabList}}" currentTab="{{currentTab}}" bindchange="changeCurrentTab"></top-nav>
-  <view class="search">
+  <view class="search" hidden="{{currentTab}}">
     <picker mode="date" value="{{start}}" start="2019-07-01" end="{{endDate}}"
             bindchange="bindDateChange" data-type="start">
       <view class="picker">
@@ -45,10 +45,24 @@
   </view>
   <view class="store-current" hidden="{{!currentTab}}">
     <view class="store-row">
-      <view class="row-header"></view>
+      <view class="row-header">宴席餐具</view>
       <view class="row-content">
-        <view class="store-goods-type"></view>
-        <view class="store-number"></view>
+        <view class="store-block">
+          <view class="store-goods-type">餐盘</view>
+          <view class="store-number">300</view>
+        </view>
+        <view class="store-block">
+          <view class="store-goods-type">餐盘</view>
+          <view class="store-number">300</view>
+        </view>
+        <view class="store-block">
+          <view class="store-goods-type">餐盘</view>
+          <view class="store-number">300</view>
+        </view>
+        <view class="store-block">
+          <view class="store-goods-type">餐盘</view>
+          <view class="store-number">300</view>
+        </view>
       </view>
     </view>
   </view>

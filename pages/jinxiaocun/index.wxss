@@ -115,3 +115,44 @@
 .record-item-content .item{
   color: #787878;
 }
+
+
+.store-current{
+  box-sizing: border-box;
+  padding: 0 30rpx;
+}
+.store-row{
+  width: 750rpx;
+  height: 240rpx;
+  background: #fff;
+  margin-top: 30rpx;
+}
+.row-header{
+  font-family: PingFang SC Bold, sans-serif;
+  font-weight: bold;
+  font-size: 26rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-bottom: 1rpx solid #dfdfdf;
+  padding: 0 30rpx;
+}
+.row-content{
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx;
+}
+.store-block{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: 1.6;
+}
+.store-block .store-goods-type{
+  font-size: 28rpx;
+  color: #888;
+}
+.store-block .store-number{
+  font-family: PingFang SC Bold, sans-serif;
+  font-weight: bold;
+  font-size: 36rpx;
+}
