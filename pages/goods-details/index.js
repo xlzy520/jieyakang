@@ -234,7 +234,7 @@ Page({
       eatDay: eatDay,
       quantity: quantity
     };
-    let shopCarInfo = this.data.shopCarInfo;
+    let shopCarInfo = wx.getStorageSync('shopCarInfo');
     // if (shopCarInfo.shopList === undefined) {
     //   shopCarInfo.shopList = [];
     // }
@@ -265,7 +265,6 @@ Page({
       default:
         break;
     }
-    console.log(sameGoods);
     if (sameGoods) {
       const sameGoodsIndex = shopCarInfo.shopList.findIndex(v=>v.goodsId === sameGoods.goodsId)
       shopCarInfo.shopList.splice(sameGoodsIndex, 1, shopCarMap);

@@ -2,15 +2,15 @@ const WXAPI = require('../../wxapi/main')
 const app = getApp()
 Page({
   data: {
-    isEditing: true,
+    isEditing: false,
     totalPrice: 0,
-    allSelect: true,
+    allSelect: false,
     noSelect: false,
     shopList: []
   },
 
   onLoad() {
-    // this.onShow();
+
   },
   onShow() {
     const shopCarInfo = wx.getStorageSync('shopCarInfo');
@@ -19,7 +19,6 @@ Page({
         shopList: shopCarInfo.shopList
       })
     }
-    // this.setGoodsList(this.totalPrice(), this.allSelect(), this.noSelect(),);
   },
   shopCarEdit(e){
     const active = e.target.dataset.type
@@ -36,6 +35,7 @@ Page({
         isEditing: true
       })
     }
+    this.updatePageData()
     // this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
   },
   toIndexPage() {
@@ -45,18 +45,16 @@ Page({
   },
   delItem(e) {
     var index = e.currentTarget.dataset.index;
-    var list = this.data.goodsList.list;
+    var list = this.data.shopList;
     list.splice(index, 1);
-    this.setGoodsList(this.totalPrice(), this.allSelect(), this.noSelect(), list);
+    this.updatePageData()
   },
   selectTap(e) {
     const index = e.currentTarget.dataset.index;
     const { shopList } = this.data;
     if (index !== "" && index !== null) {
       shopList[parseInt(index)].active = !shopList[parseInt(index)].active;
-      this.setShopList()
-      this.setTotalPrice()
-      this.setSelectStatus()
+      this.updatePageData()
     }
   },
   setShopList(){
@@ -77,7 +75,7 @@ Page({
     for (let i = 0; i < shopList.length; i++) {
       let curItem = shopList[i];
       if (curItem.active) {
-        total += parseFloat(curItem.price) * curItem.number;
+        total += parseFloat(curItem.priceStr) * curItem.quantity;
       }
     }
     total = parseFloat(total.toFixed(2)); //js浮点计算bug，取两位小数精度
@@ -94,59 +92,31 @@ Page({
       noSelect: noSelect
     })
   },
-  setGoodsList(total, allSelect, noSelect) {
-    this.setData({
-      totalPrice: total,
-      allSelect: allSelect,
-      noSelect: noSelect
-    });
-    var shopCarInfo = {};
-    var tempNumber = 0;
-    shopCarInfo.shopList = list;
-    for (var i = 0; i < list.length; i++) {
-      tempNumber = tempNumber + list[i].number
-    }
-    shopCarInfo.shopNum = tempNumber;
-    wx.setStorage({
-      key: "shopCarInfo",
-      data: shopCarInfo
-    })
-  },
-  bindAllSelect() {
-    let { allSelect, shopList } = this.data
-    shopList.map(v=>v.active=!allSelect)
+  updatePageData(){
     this.setShopList()
     this.setTotalPrice()
     this.setSelectStatus()
   },
-  jiaBtnTap(e) {
-    var that = this
-    var index = e.currentTarget.dataset.index;
-    var list = that.data.goodsList.list;
-    if (index !== "" && index != null) {
-      // 添加判断当前商品购买数量是否超过当前商品可购买库存
-      var carShopBean = list[parseInt(index)];
-      var carShopBeanStores = 0;
-      WXAPI.goodsDetail(carShopBean.goodsId).then(function(res) {
-        carShopBeanStores = res.data.basicInfo.stores;
-        if (list[parseInt(index)].number < carShopBeanStores) {
-          list[parseInt(index)].number++;
-          that.setGoodsList(that.getSaveHide(), that.totalPrice(), that.allSelect(), that.noSelect(), list);
-        }
-        that.setData({
-          curTouchGoodStore: carShopBeanStores
-        })
-      })
-    }
+  bindAllSelect() {
+    let { allSelect, shopList } = this.data
+    shopList.map(v=>v.active=!allSelect)
+    this.updatePageData()
   },
-  jianBtnTap(e) {
-    var index = e.currentTarget.dataset.index;
-    var list = this.data.goodsList.list;
+  jiaJianBtnTap(e) {
+    const index = e.currentTarget.dataset.index;
+    const type = e.currentTarget.dataset.type;
+    let list = this.data.shopList;
     if (index !== "" && index != null) {
-      if (list[parseInt(index)].number > 1) {
-        list[parseInt(index)].number--;
-        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+      if (type === 'decrease'){
+        if (list[parseInt(index)].quantity > 1) {
+          list[parseInt(index)].quantity--;
+        }
+      } else {
+        if (list[parseInt(index)].quantity < 9999) {
+          list[parseInt(index)].quantity++;
+        }
       }
+      this.updatePageData()
     }
   },
   editSubmit(e){
@@ -154,20 +124,14 @@ Page({
     isEditing? this.deleteSelected(): this.toPayOrder()
   },
   deleteSelected() {
-    var list = this.data.goodsList.list;
-    /*
-     for(let i = 0 ; i < list.length ; i++){
-           let curItem = list[i];
-           if(curItem.active){
-             list.splice(i,1);
-           }
-     }
-     */
-    // above codes that remove elements in a for statement may change the length of list dynamically
-    list = list.filter(function(curGoods) {
-      return !curGoods.active;
-    });
-    this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+    let list = this.data.shopList;
+    list = list.filter(v=> !v.active)
+    this.setData({
+      shopList: list
+    })
+    this.setShopList()
+    this.setTotalPrice()
+    this.setSelectStatus()
   },
   toPayOrder() {
     wx.showLoading();

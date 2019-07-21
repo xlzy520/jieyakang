@@ -6,7 +6,7 @@ Page({
 
   selectTap(e) {
     const { id } = e.currentTarget.dataset;
-    WXAPI.updateAddress({
+    WXAPI.updateAddressDefault({
       addressId: id,
       isDefault: 'true'
     }).then(() => {

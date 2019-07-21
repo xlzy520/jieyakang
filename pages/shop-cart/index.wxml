@@ -11,7 +11,7 @@
 
   <view class="cart-goods-list">
     <view class="list-top" hidden="{{!shopList.length}}">
-      <view class="edit-btn" bindtap="shopCarEdit" data-type="{{isEditing}}">{{isEditing?'编辑': '完成'}}</view>
+      <view class="edit-btn" bindtap="shopCarEdit" data-type="{{isEditing}}">{{isEditing?'完成': '编辑'}}</view>
     </view>
     <view class="goodsList">
       <view class="a-gooods" wx:for="{{shopList}}" wx:for-item="goods" wx:key="{{goods.goodsId}}" >
@@ -29,9 +29,11 @@
               <!--<view class="goods-label">{{item.label}}</view>-->
               <view class="goods-price">¥ {{goods.priceStr}}</view>
               <view class="buy-num">
-                <view class="jian-btn {{goods.number==1? 'disabled' : ''}}" catchtap="jianBtnTap" data-index="{{index}}">-</view>
-                <input  type="number" value="{{goods.number}}" disabled/>
-                <view class="jia-btn {{goods.number==curTouchGoodStore? 'disabled' : ''}}" catchtap="jiaBtnTap" data-index="{{index}}">+</view>
+                <view class="jian-btn {{goods.quantity==1? 'disabled' : ''}}" catchtap="jiaJianBtnTap"
+                      data-index="{{index}}" data-type="decrease">-</view>
+                <input type="number" value="{{goods.quantity}}" disabled/>
+                <view class="jia-btn {{goods.quantity===9999? 'disabled' : ''}}" catchtap="jiaJianBtnTap"
+                      data-index="{{index}}" data-type="increase">+</view>
               </view>
             </view>
           </view>
@@ -44,7 +46,7 @@
           <image src="/images/{{allSelect?'check':'unchecked'}}.png"></image>
           <view class="check-label">全选</view>
         </view>
-        <view class="total" wx:if="{{isEditing}}">
+        <view class="total" wx:if="{{!isEditing}}">
           <view class="total-label">合计：</view>
           <view class="total-unit">¥</view>
           <view class="total-price">{{totalPrice}}</view>

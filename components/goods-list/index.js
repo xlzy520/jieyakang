@@ -19,7 +19,7 @@ Component({
         "mask": true,
         title: '正在获取商品列表...'
       })
-      WXAPI.goods({
+      return WXAPI.goods({
         pageIndex: 1,
         pageSize: 20
       }).then((res)=> {

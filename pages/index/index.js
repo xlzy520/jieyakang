@@ -45,9 +45,10 @@ Page({
   },
   onPullDownRefresh() {
     wx.showNavigationBarLoading()
-    this.selectComponent("#goods-list").getGoodsList()
-    wx.stopPullDownRefresh()
-    wx.hideLoading()
-    wx.hideNavigationBarLoading()
+    this.selectComponent("#goods-list").getGoodsList().then(()=>{
+      wx.stopPullDownRefresh()
+      wx.hideLoading()
+      wx.hideNavigationBarLoading()
+    })
   }
 })

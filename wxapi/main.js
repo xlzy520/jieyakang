@@ -1,10 +1,10 @@
 // 小程序开发api接口工具包，https://github.com/gooking/wxapi
 // const API_BASE_URL = 'https://api.it120.cc/jieyakang/'
-// const API_BASE_URL_XCX = 'https://www.easy-mock.com/mock/5ced4b17d564921f45a737c3/xcx'
-// const API_BASE_URL_ADMIN = 'https://www.easy-mock.com/mock/5cdb6b1c196b3a1793f9fcad/admin'
-const baseUrl = 'http://84c0a094.ngrok.io/market'
-const API_BASE_URL_XCX = baseUrl
-const API_BASE_URL_ADMIN = baseUrl
+const API_BASE_URL_XCX = 'https://www.easy-mock.com/mock/5ced4b17d564921f45a737c3/xcx'
+const API_BASE_URL_ADMIN = 'https://www.easy-mock.com/mock/5cdb6b1c196b3a1793f9fcad/admin'
+// const baseUrl = 'http://84c0a094.ngrok.io/market'
+// const API_BASE_URL_XCX = baseUrl
+// const API_BASE_URL_ADMIN = baseUrl
 const app = getApp()
 // todo 统一处理 正确错误、token过期
 const request = (url,data={},method='post') => {
@@ -80,6 +80,9 @@ const request_admin = (url,data={},method='post') => {
             wx.removeStorageSync('token')
             app.goLoginPageTimeOut()
           } else {
+            wx.showToast({
+              title: request.data.msg
+            })
             reject(request.data)
           }
         }
@@ -145,7 +148,7 @@ module.exports = {
     return request('/user/wxapp/register/complex', data)
   },
   goods: (data) => {
-    return request_xcx('/goods/list', data)
+    return request_admin('/goods/list', data)
   },
   goodsDetail: (id) => {
     return request_admin('/goods/detail', id)
@@ -156,17 +159,17 @@ module.exports = {
   addAddress: (data) => {
     return request_admin('/address/save', data)
   },
+  updateAddressDefault: (data) => {
+    return request_xcx('/address/default/update', data)
+  },
   updateAddress: (data) => {
     return request_admin('/address/update', data)
   },
-  deleteAddress: (id, token) => {
-    return request_admin('/address/delete', {
-      id,
-      token
-    })
+  deleteAddress: data => {
+    return request_admin('/address/delete', data)
   },
   getAddressList: (data) => {
-    return request_xcx('/address/list', data)
+    return request_admin('/address/list', data)
   },
   defaultAddress: () => {
     return request_xcx('/address/default/get')

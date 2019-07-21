@@ -50,33 +50,20 @@ Page({
     const that = this;
     const orderId = e.currentTarget.dataset.id;
     let money = e.currentTarget.dataset.money;
-    console.log(money);
-    // const needScore = e.currentTarget.dataset.score;
-    WXAPI.userAmount(wx.getStorageSync('token')).then(function(res) {
-      if (res.code == 0) {
-        // 增加提示框
-        let _msg = '订单金额: ' + money +' 元'
-        wx.showModal({
-          title: '请确认支付',
-          content: _msg,
-          confirmText: "确认支付",
-          cancelText: "取消支付",
-          success (res) {
-            if (res.confirm) {
-              that._toPayTap(orderId, money)
-            } else {
-              console.log('用户点击取消支付')
-            }
-          }
-        });
-      } else {
-        wx.showModal({
-          title: '错误',
-          content: '无法获取用户资金信息',
-          showCancel: false
-        })
+    let _msg = '订单金额: ' + money +' 元'
+    wx.showModal({
+      title: '请确认支付',
+      content: _msg,
+      confirmText: "确认支付",
+      cancelText: "取消支付",
+      success (res) {
+        if (res.confirm) {
+          that._toPayTap(orderId, money)
+        } else {
+          console.log('用户取消支付')
+        }
       }
-    })
+    });
   },
   _toPayTap (orderId, money){
     const _this = this

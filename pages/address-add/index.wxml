@@ -11,7 +11,7 @@
     </view>
   </view>
   <form bindsubmit="bindSave" class="form-content">
-    <view class="form-box" wx:if="{{addressData.addressType==='1'}}">
+    <view class="form-box" wx:if="{{addressData.addressType}}">
       <view class="row-wrap">
         <input name="consignee" class="input" type="text" placeholder-class="phcolor" maxlength="25"
                placeholder="收货人" value="{{addressData.consignee}}"/>
@@ -25,15 +25,15 @@
                       placeholder-class="phcolor" value="{{addressData.address}}"/>
       </view>
     </view>
-    <view class="form-box school" wx:if="{{addressData.addressType==='0'}}">
+    <view class="form-box school" wx:if="{{!addressData.addressType}}">
       <view class="row-wrap">
         <picker bindchange="bindPickerChange" value="{{schoolIndex}}" range="{{schoolList}}" range-key="schoolName">
           <view class="picker">{{schoolList[schoolIndex].schoolName}}</view>
         </picker>
       </view>
       <view class="row-wrap">
-        <input name="classNumber" class="input" type="text" placeholder-class="phcolor" maxlength="16"
-               placeholder="班级号码（例：113班）" value="{{classNumber}}"/>
+        <input name="consignee" class="input" type="text" placeholder-class="phcolor" maxlength="25"
+               placeholder="班级号码（例：113班）" value="{{addressData.consignee}}"/>
       </view>
       <view class="row-wrap">
         <input name="mobile" class="input" maxlength="11" type="number" placeholder-class="phcolor"
@@ -44,8 +44,8 @@
       <view class="addr-default-text">设为默认地址</view>
       <switch checked color="#0087ff" bindchange="changeDefaultStatus"/>
     </view>
-    <view type="default" class="addr-del" bindtap="deleteAddress" data-id="{{addressData.id}}"
-          wx:if="{{id}}">删除地址
+    <view type="default" class="addr-del" bindtap="deleteAddress" data-id="{{addressData.addressId}}"
+          wx:if="{{addressData.addressId}}">删除地址
     </view>
     <button class="btn save-btn" formType="submit">保存</button>
     <button class="btn reselect-btn" bindtap="reSelectIdentity">重新选择身份标签</button>

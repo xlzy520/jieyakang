@@ -109,8 +109,8 @@ page {
 }
 
 .goods-info .img-box {
-  width: 177rpx;
-  height: 177rpx;
+  width: 164rpx;
+  height: 164rpx;
   overflow: hidden;
   margin-left: 30rpx;
   margin-right: 30rpx;
@@ -197,7 +197,7 @@ page {
 }
 
 .goods-info .text-box .buy-num input {
-  font-family: PingFang SC Medium;
+  font-family: PingFang SC Medium, sans-serif;
   width: 68rpx;
   height: 48rpx;
   min-height: 48rpx;
@@ -207,8 +207,8 @@ page {
 }
 
 .goods-info .img-box .img {
-  width: 177rpx;
-  height: 177rpx;
+  width: 164rpx;
+  height: 164rpx;
 }
 
 .a-goods-conts .delete-btn {

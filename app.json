@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/select-address/index",
     "pages/shop-cart/index",
     "pages/index/index",
+    "pages/select-address/index",
+
+
 
     "pages/jinxiaocun/index",
 

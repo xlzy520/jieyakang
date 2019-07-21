@@ -4,7 +4,7 @@ var app = getApp()
 Page({
   data: {
     addressData: {
-      addressType: '1',//school, restaurant
+      addressType: 1,//school, restaurant
       consignee: '',
       mobile: '',
       address: '',
@@ -54,42 +54,46 @@ Page({
     })
   },
   bindSave(e) {
-    let consignee,classNumber;
+    let schoolId;
+    let consignee = e.detail.value.consignee;
     let address = e.detail.value.address;
-    if (this.data.addressData.addressType === 'school') {
-      classNumber = e.detail.value.classNumber;
-      if (classNumber.trim().length < 2 || classNumber.trim().length > 15) {
-        this.setData({
-          tipText: '班级号长度需要在2-16个字符之间'
-        })
-        return
-      }
-      address = this.data.schoolList[this.data.schoolIndex].schoolName + '  '+classNumber
-    } else {
-      consignee = e.detail.value.consignee;
-      if (consignee.trim().length < 2 || consignee.trim().length > 25) {
+    if (consignee.trim().length < 2 || consignee.trim().length > 25) {
+      if (this.data.addressData.addressType) {
         this.setData({
           tipText: '收货人姓名长度需要在2-25个字符之间'
         })
-        return
+      } else {
+        this.setData({
+          tipText: '班级长度需要在2-25个字符之间'
+        })
       }
+
+      return
     }
     const mobile = e.detail.value.mobile;
     if (!this.checkPhone(mobile)) {
       this.setTipText('请填写正确的手机号码')
       return
     }
-    if (address.trim() === ""){
-      this.setTipText('请填写详细地址')
-      return
-    }
     let apiResult
     let params = {
-      token: wx.getStorageSync('token'),
-      address: address,
       mobile: mobile,
       isDefault: this.data.addressData.isDefault,
-      consignee: consignee||'',
+      consignee: consignee,
+    }
+    if (!this.data.addressData.addressType) { //学校
+      schoolId = this.data.schoolList[this.data.schoolIndex].schoolId
+      params = Object.assign(params,{
+        schoolId: schoolId
+      })
+    } else {
+      if (address.trim() === ""){
+        this.setTipText('请填写详细地址')
+        return
+      }
+      params = Object.assign(params,{
+        address: address
+      })
     }
     if (this.data.id) {
       apiResult = WXAPI.updateAddress({
@@ -133,12 +137,13 @@ Page({
     }
     this.getSchoolList()
     if (e.id) { // 修改初始化数据库数据
-      wx.setNavigationOBarTitle({
+      wx.setNavigationBarTitle({
         title: '编辑收货地址'
       })
-      WXAPI.addressDetail(e.id).then((res)=> {
+      WXAPI.addressDetail({
+        addressId: e.id
+      }).then((res)=> {
         this.setData({
-          id: e.id,
           addressData: res.data,
         });
       }).catch(err=>{
@@ -154,7 +159,9 @@ Page({
   },
   confirmDelete(e){
     const id = e.currentTarget.dataset.id;
-    WXAPI.deleteAddress(id).then(()=> {
+    WXAPI.deleteAddress({
+      addressId: id
+    }).then(()=> {
       wx.navigateBack({})
     })
   }

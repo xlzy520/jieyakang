@@ -54,8 +54,8 @@
     </view>
    </view>
   <view class="footer-box">
-    <image src="/images/goods-detail/shop-cart.png" class="join-shop-cart" bindtap="toAddShopCar">加入购物车</image>
-    <image src="/images/goods-detail/buy-now.png" class="now-buy" bindtap="tobuy">立即购买</image>
+    <image src="/images/goods-detail/shop-cart.png" class="join-shop-cart" bindtap="toAddShopCar"></image>
+    <image src="/images/goods-detail/buy-now.png" class="now-buy" bindtap="tobuy"></image>
   </view>
   <view class="show-popup" hidden="{{hideShopPopup}}" catchtouchmove="true">
     <view class="popup-mask" bindtap="closePopupTap"></view>
