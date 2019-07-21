@@ -8,3 +8,110 @@
   width:400rpx;
   padding:0 175rpx;
 }
+
+.no-record {
+  margin: auto;
+  margin-top: 223rpx;
+}
+.no-content-text {
+  color: #999;
+  margin-top: 30rpx;
+  text-align: center;
+}
+.no-record image {
+  margin-left: 62rpx;
+  width: 203rpx;
+  height: 214rpx;
+}
+
+.search{
+  width: 690rpx;
+  padding: 10rpx 30rpx;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+}
+.search picker{
+  width: 230rpx;
+  color: rgba(0,0,0,.5);
+
+  border: 1rpx solid #707070;
+}
+.search .picker{
+  text-align: center;
+  padding: 10rpx 30rpx;
+  box-sizing: border-box;
+  display: flex;
+}
+.search .placeholder{
+  width: 100%;
+}
+.search .submit{
+  height: 45rpx;
+  line-height: 45rpx;
+  padding: 5rpx 20rpx;
+  background: linear-gradient(#3399ff, #6ab9ff);
+  color: #fff;
+  border-radius: 20rpx;
+}
+
+.record-content{
+  width: 750rpx;
+}
+.record-content .record-list{
+  margin-bottom: 40rpx;
+}
+.record-list .record-item{
+  background: #fff;
+  margin-top: 30rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  box-shadow:0 9rpx 9rpx 1rpx rgba(0, 0, 0, 0.05);
+}
+.record-item .record-item-header{
+  font-family: PingFang SC Bold, sans-serif;
+  font-weight:bold;
+  font-size: 26rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.record-item-header .icon{
+  width: 60rpx;
+  height: 60rpx;
+  padding-top: 20rpx;
+  margin-left: -10rpx;
+}
+.record-item-header .left-title{
+  width: 60rpx;
+  height: 60rpx;
+}
+.record-item-header .number{
+  flex: 1;
+}
+.record-item-header .goods-type{
+  margin-left: 30rpx;
+  flex: 1;
+}
+.record-item-header .date{
+  font-family: PingFang SC Medium, sans-serif;
+}
+.record-item .record-item-content{
+  font-size: 22rpx;
+  font-weight:500;
+}
+.record-item .row{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30rpx;
+  line-height: 1;
+}
+.record-item .row:last-child{
+  padding-bottom: 40rpx;
+}
+.record-item-content .item{
+  color: #787878;
+}

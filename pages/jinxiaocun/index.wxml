@@ -1,3 +1,55 @@
 <view class="container">
   <top-nav tabList="{{tabList}}" currentTab="{{currentTab}}" bindchange="changeCurrentTab"></top-nav>
+  <view class="search">
+    <picker mode="date" value="{{start}}" start="2019-07-01" end="{{endDate}}"
+            bindchange="bindDateChange" data-type="start">
+      <view class="picker">
+        <view class="placeholder" hidden="{{start}}">开始时间</view>
+        <view class="picker-content" hidden="{{!start}}">{{start}}</view>
+      </view>
+    </picker>
+    <view class="middle">至</view>
+    <picker mode="date" value="{{end}}" start="2019-79-01" end="{{endDate}}"
+            bindchange="bindDateChange" data-type="end">
+      <view class="picker">
+        <view class="placeholder" hidden="{{end}}">结束时间</view>
+        <view class="picker-content" hidden="{{!end}}">{{end}}</view>
+      </view>
+    </picker>
+    <view class="submit" bindtap="submit">查询</view>
+  </view>
+  <view class="no-record" wx:if="{{!recordList.length}}">
+    <image src="/images/no-order.png"></image>
+    <view class="no-content-text">暂无进销存记录</view>
+    <view class="no-content-text">去选购一下餐具吧～</view>
+  </view>
+  <view class="record-content" hidden="{{currentTab}}">
+    <view class="record-list">
+      <view class="record-item" wx:for="{{recordList}}" wx:for-item="record" wx:key="{{record.inventoryId}}">
+        <view class="record-item-header">
+          <image class="icon" src="/images/jxc/{{record.inventoryType?'jin':'shou'}}.png"></image>
+          <view class="goods-type">{{record.useType}}</view>
+          <view class="number">{{record.number}}件</view>
+          <view class="date">{{record.date}}</view>
+        </view>
+        <view class="record-item-content">
+          <view class="row" wx:for="{{record.ss}}" wx:for-item="row">
+            <view class="left-title">{{row.name}}</view>
+            <view class="item" wx:for="{{row.list}}" wx:for-item="detail">
+              {{detail.tablewareName}}:{{detail.quantity}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="record-no-more" wx:if="{{false}}">没有更多了</view>
+  </view>
+  <view class="store-current" hidden="{{!currentTab}}">
+    <view class="store-row">
+      <view class="row-header"></view>
+      <view class="row-content">
+        <view class="store-goods-type"></view>
+        <view class="store-number"></view>
+      </view>
+    </view>
+  </view>
 </view>
