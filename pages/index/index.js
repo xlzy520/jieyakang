@@ -16,16 +16,11 @@ Page({
     })
   },
   onLoad() {
-    this.getGoodsList();
-    WXAPI.getPartner({
-      type: 'index',
-      pageIndex: 1,
-      pageSize: 20
-    }).then((res) =>{
-      this.setData({
-        partners: res.data.list
-      })
-    })
+    const token = wx.getStorageSync('token')
+    if (token){
+      this.getGoodsList();
+      this.getPartner()
+    }
   },
   getGoodsList () {
     wx.showLoading({
@@ -40,6 +35,17 @@ Page({
       });
     }).finally(()=>{
       wx.hideLoading()
+    })
+  },
+  getPartner(){
+    WXAPI.getPartner({
+      type: 'index',
+      pageIndex: 1,
+      pageSize: 20
+    }).then((res) =>{
+      this.setData({
+        partners: res.data.list
+      })
     })
   },
   onShareAppMessage () {

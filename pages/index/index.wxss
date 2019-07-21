@@ -12,14 +12,15 @@
   height: 280rpx;
 }
 
-.goods-container, .partner-container{
+.partner-container{
+  width: 750rpx;
   display: flex;
   justify-content: space-between;
   flex-wrap:wrap;
   padding: 9rpx 0;
   border-radius: 12rpx;
 }
-.goods-header, .partner-header{
+.partner-header{
   display: flex;
   height: 30rpx;
   line-height: 30rpx;
@@ -28,7 +29,7 @@
   font-size: 30rpx;
   font-weight: 600;
 }
-.goods-header::before,.partner-header::before{
+.partner-header::before{
   display: inline-block;
   content: "";
   width: 6rpx;
