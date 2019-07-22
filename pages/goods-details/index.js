@@ -9,7 +9,7 @@ Page({
     hideShopPopup: true,
     
     buyNumMin: 1,
-    buyNumMax: 100000,
+    buyNumMax: 9999,
     
     shopCarInfo: {
       shopList: []

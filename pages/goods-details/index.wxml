@@ -57,7 +57,7 @@
     <image src="/images/goods-detail/shop-cart.png" class="join-shop-cart" bindtap="toAddShopCar"></image>
     <image src="/images/goods-detail/buy-now.png" class="now-buy" bindtap="tobuy"></image>
   </view>
-  <view class="show-popup" hidden="{{hideShopPopup}}" catchtouchmove="true">
+  <view class="show-popup" hidden="{{hideShopPopup}}">
     <view class="popup-mask" bindtap="closePopupTap"></view>
     <view class="popup-contents">
       <view class="pop-goods-info">

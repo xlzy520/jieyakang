@@ -219,37 +219,6 @@ swiper-item image {
   align-self: flex-start;
   margin-top: -10rpx;
 }
-
-
-.size-label-box  .label{
-  font-size:26rpx;
-  color:#000;
-  padding-left: 30rpx;
-  padding: 30rpx 0 20rpx 30rpx;
-}
-.size-label-box .label-item-box{
-  display: flex;
-  margin-left: 30rpx;
-  flex-direction: row;
-  flex-wrap:wrap;
-}
-.size-label-box .label-item{
-  font-size:26rpx;
-  color:#000;
-  padding: 14rpx 20rpx;
-  border: 1px solid #ddd;
-  border-radius: 6rpx;
-  margin: 0 20rpx 20rpx 0;
-}
-.size-label-box .label-item.active{
-  color: #ea5255;
-  border: 1px solid #ea5255;
-}
-
-
-.pop-goods-title{
-
-}
 .goods-rule{
   font-family: PingFang SC Medium, sans-serif;
   font-weight:500;
@@ -272,7 +241,6 @@ swiper-item image {
 .pop-goods-guige-select{
   font-size: 22rpx;
 }
-
 .goods-guige{
   display: flex;
   border-bottom: 1rpx solid #eee;
