@@ -8,7 +8,7 @@
 }
 .swiper_box {
   width: 100%;
-  height:565rpx;
+  height: 600rpx;
 }
 swiper-item image {
   width: 100%;
@@ -34,7 +34,8 @@ swiper-item image {
   opacity: .3;
 }
 .swiper-container .dots .dot.active{
-  opacity: .6;
+  background: #ff001c;
+  opacity: 1;
 }
 
 .goods-img-wrap{

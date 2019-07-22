@@ -1,5 +1,3 @@
-<!--index.wxml-->
-<!--1px = 750/320 = 2.34rpx;-->
 <view class="goods-container">
   <view class="goods-header" wx:if="{{header}}">餐具产品</view>
   <view class="goods-box" wx:for="{{goods}}" wx:key="{{index}}"

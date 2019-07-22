@@ -1,10 +1,7 @@
 const WXAPI = require('../../wxapi/main')
 Page({
   data: {
-    // autoplay: true,
-    // interval: 3000,
-    // duration: 1000,
-    // swiperCurrent: 0,
+    swiperCurrent: 0,
     goodsDetail: {},
     hideShopPopup: true,
     
@@ -26,6 +23,7 @@ Page({
     quantity: 10,
   
     tipText: '',
+    imgs: ['http://www.xlzy520.cn/750_600/餐馆餐具.png', 'http://www.xlzy520.cn/750_600/餐馆餐具.png']
   },
 
   //事件处理函数
