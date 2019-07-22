@@ -2,7 +2,7 @@ const app = getApp()
 const WXAPI = require('../../wxapi/main')
 Page({
 	data: {
-    userType: '1',
+    userType: '0',
 	  orderNav: [
       {type: 0, label: '我的订单', img: 'order'},
       {type: 1, label: '待付款', img: 'pay'},

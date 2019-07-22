@@ -13,7 +13,7 @@
       </view>
     </view>
   </view>
-  <view class="my-wrapper record" wx:if="{{userType}}">
+  <view class="my-wrapper record" wx:if="{{userType==='0'}}">
     <view class='my-wrapper-content'>
       <view class='item' bindtap='goOrder' wx:for-items="{{recordNav}}" wx:key="{{index}}" data-type="{{item.type}}">
         <image class="icon" src="/images/record/{{item.img}}.png" background-size="cover"></image>
