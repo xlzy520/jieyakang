@@ -6,7 +6,9 @@ Page({
     totalPrice: 0,
     allSelect: false,
     noSelect: false,
-    shopList: []
+    shopList: [],
+    hideShopPopup: true,
+    tipText: '',
   },
 
   onLoad() {
@@ -240,7 +242,97 @@ Page({
       url: "/pages/to-pay-order/index"
     })
   },
-  onHide() {
-    console.log('onHide监听页面隐藏');
+  
+  // 规格选择
+  openGuigeDialog() {
+    let eatNumTag = []
+    switch (this.data.goodsDetail.useType) {
+      case '幼儿园餐具':
+        eatNumTag = [{label: '两餐', value: 2}]
+        break;
+      case '小学餐具':
+        eatNumTag = [{label: '一餐', value: 1},{label: '两餐', value: 2}]
+        break;
+      case '中学餐具':
+        //todo 初中不能选四餐，待确认
+        eatNumTag = [{label: '一餐', value: 1},{label: '两餐', value: 2},
+          {label: '三餐', value: 3},{label: '四餐', value: 4}]
+        break;
+      default:
+        break;
+    }
+    this.setData({
+      hideShopPopup: false,
+      selectSizePrice: this.data.goodsDetail.priceStr,
+      eatNumTag: eatNumTag
+    })
+  },
+  closePopupTap: function() {
+    this.setData({
+      hideShopPopup: true
+    })
+  },
+  numJianTap(e) {
+    const type = e.target.dataset.type
+    if (this.data[type] > this.data.buyNumMin) {
+      let currentNum = this.data[type];
+      currentNum--;
+      this.setData({
+        [type]: currentNum
+      })
+    }
+  },
+  numJiaTap(e) {
+    const type = e.target.dataset.type
+    if (this.data[type] < this.data.buyNumMax) {
+      let currentNum = this.data[type];
+      currentNum++;
+      this.setData({
+        [type]: currentNum
+      })
+    }
+  },
+  popupOk(){
+    if (this.data.shopType === 'addShopCar'){
+      this.addShopCar()
+    } else {
+      this.buyNow()
+    }
+  },
+  setTipText(text=''){
+    this.setData({
+      tipText: text
+    })
+  },
+  close(){
+    this.setTipText()
+  },
+  validate(){
+    const { useType } = this.data.goodsDetail
+    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
+    if (useType !== '餐馆餐具'&&useType !== '宴席餐具') {
+      if (useType === '幼儿园餐具'&&!specsId) {
+        this.setTipText('请选择规格')
+        return
+      }
+      if (!eatNum) {
+        this.setTipText('请选择就餐次数')
+        return
+      }
+      if (peopleNum <= 0) {
+        this.setTipText('请输入就餐人数')
+        return
+      }
+      if (eatDay <= 0) {
+        this.setTipText('请输入就餐天数')
+        return
+      }
+    } else {
+      if (quantity <= 0) {
+        this.setTipText('请输入购买数量')
+        return
+      }
+    }
+    return true
   },
 })

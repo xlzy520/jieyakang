@@ -282,3 +282,191 @@ page {
   font-size: 34rpx;
   vertical-align: middle;
 }
+
+
+
+.show-popup{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  z-index: 4;
+}
+.popup-mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background-color: rgba(130, 130, 134, 0.5);
+  z-index: 5;
+}
+.popup-contents{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width:100%;
+  border-radius: 20rpx;
+  background-color: #fff;
+  z-index: 6;
+}
+.pop-goods-info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  padding: 30rpx 0;
+}
+.pop-img-box{
+  margin-right: 30rpx;
+}
+.pop-img-box .goods-thumbnail{
+  width: 164rpx;
+  height: 164rpx;
+}
+.pop-goods-title{
+  width: 484rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size:26rpx;
+  color:#000000;
+}
+.pop-goods-price{
+  font-size:26rpx;
+  color:#ff001c;
+  margin-top:20rpx;
+}
+.pop-goods-close{
+  width: 36rpx;
+  height: 36rpx;
+  flex: 1;
+  background:url("https://cdn.it120.cc/images/weappshop/popup-close.png") no-repeat center center;
+  background-size: 36rpx auto;
+  align-self: flex-start;
+  margin-top: -10rpx;
+}
+.goods-rule{
+  font-family: PingFang SC Medium, sans-serif;
+  font-weight:500;
+  color: #888;
+  height: 28rpx;
+  font-size: 22rpx;
+  margin-top: 10rpx;
+}
+.pop-goods-price{
+  font-family: DINAlternate Bold, sans-serif;
+}
+.pop-goods-price .price{
+  font-size: 34rpx;
+}
+.pop-goods-price .row{
+  align-items: baseline;
+  padding: unset;
+  margin-top: 36rpx;
+}
+.pop-goods-guige-select{
+  font-size: 22rpx;
+}
+.goods-guige{
+  display: flex;
+  border-bottom: 1rpx solid #eee;
+  margin: 0 30rpx;
+}
+.goods-guige .left-title{
+  color: #000;
+  padding-left: 0;
+}
+.goods-guige .guige-item{
+  font-size: 26rpx;
+  padding: 10rpx 30rpx 10rpx 20rpx;
+  background: #f5f5f5;
+  border-radius: 6rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #d7d7d7;
+}
+.goods-guige .guige-item.active{
+  background: #ffe7eb;
+  color: #fe1241;
+  border: 1rpx solid #fe103d;
+}
+.num-label{
+  font-size:26rpx;
+  color:#000000;
+}
+
+.jiu-can-box{
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 30rpx 10rpx 0;
+  margin-left: 30rpx;
+  align-items: center;
+}
+.jiu-can-box .ci-shu-tag-wrap{
+  display: flex;
+}
+.jiu-can-box .ci-shu-tag{
+  font-size: 26rpx;
+  width: 118rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  border: 1rpx solid #d7d7d7;
+  background: #f5f5f5;
+  border-radius: 6rpx;
+  margin-left: 20rpx;
+  text-align: center;
+}
+.jiu-can-box .ci-shu-tag.active{
+  color: #ff001c;
+  border: 1rpx solid #fe103d;
+  background: #ffe7eb;
+}
+.buy-num{
+  margin-bottom: 90rpx;
+}
+.jiu-can-box .num-box{
+  display: flex;
+}
+.jiu-can-box .num-box .num-jian,
+.jiu-can-box .num-box .num-input,
+.jiu-can-box .num-box .num-jia{
+  background: #f5f5f5;
+  height: 54rpx;
+  line-height: 54rpx;
+  text-align: center;
+  border: 1px solid #eee;
+  border-radius: 6rpx 0 0 6rpx;
+}
+.jiu-can-box .num-box .num-jian,
+.jiu-can-box .num-box .num-jia{
+  font-size: 36rpx;
+  width: 54rpx;
+  color: #9f9f9f;
+}
+.jiu-can-box .num-box .num-input{
+  font-family: PingFang SC Bold, sans-serif;
+  margin: 0 5rpx;
+  width: 92rpx;
+  font-size: 26rpx;
+  color: #000;
+}
+.jiu-can-box .num-box .num-input input{
+  height: 100%;
+}
+.jiu-can-box .num-box .hui{
+  background-color: #f5f5f9;
+}
+.popup-join-btn{
+  font-family: PingFang SC Bold, sans-serif;
+  width: 690rpx;
+  height: 89rpx;
+  line-height: 89rpx;
+  margin: 20rpx auto 10rpx;
+  text-align: center;
+  background: linear-gradient(#fe1446, #ff001c);
+  font-size:28rpx;
+  color:#ffffff;
+  border-radius: 44.5rpx;
+}
