@@ -62,7 +62,7 @@
         2019-04-08  17:06:57
       </view>
     </view>
-    <view class="label" wx:if="orderDetail.statusCode !== 'unpaid'">
+    <view class="label" wx:if="{{orderDetail.statusCode !== 'unpaid'}}">
       <view class="title">付款时间:</view>
       <view class="content">
         2019-04-08  17:06:57

@@ -9,6 +9,8 @@ Page({
     shopList: [],
     hideShopPopup: true,
     tipText: '',
+    eatNumTag: ['一餐','二餐', '三餐', '四餐'],
+    currentShop: {} // todo 先保存在这里  点确认后再更新到缓存中
   },
 
   onLoad() {
@@ -59,6 +61,21 @@ Page({
       this.updatePageData()
     }
   },
+  selectEatNumTag(e){
+    const eatNumLabel = e.target.dataset.label
+    const index = e.currentTarget.dataset.index;
+    const eatNum = this.data.eatNumTag.findIndex(v=>v===eatNumLabel)
+    this.setData({
+      eatNum: eatNum+1
+    })
+  },
+  changeGuige(e){
+    const index = e.currentTarget.dataset.index;
+    this.setData({
+      hideShopPopup: false,
+      index: index
+    })
+  },
   setShopList(){
     const { shopList } = this.data
     this.setData({
@@ -80,7 +97,7 @@ Page({
         total += parseFloat(curItem.priceStr) * curItem.quantity;
       }
     }
-    total = parseFloat(total.toFixed(2)); //js浮点计算bug，取两位小数精度
+    total = total.toFixed(2); //js浮点计算bug，取两位小数精度
     this.setData({
       totalPrice: total
     })
@@ -136,113 +153,11 @@ Page({
     this.setSelectStatus()
   },
   toPayOrder() {
-    wx.showLoading();
-    var that = this;
-    if (this.data.goodsList.noSelect) {
-      wx.hideLoading();
-      return;
-    }
-    // 重新计算价格，判断库存
-    var shopList = [];
-    var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
-    if (shopCarInfoMem && shopCarInfoMem.shopList) {
-      // shopList = shopCarInfoMem.shopList
-      shopList = shopCarInfoMem.shopList.filter(entity => {
-        return entity.active;
-      });
-    }
-    if (shopList.length == 0) {
-      wx.hideLoading();
-      return;
-    }
-    var isFail = false;
-    var doneNumber = 0;
-    var needDoneNUmber = shopList.length;
-    for (let i = 0; i < shopList.length; i++) {
-      if (isFail) {
-        wx.hideLoading();
-        return;
-      }
-      let carShopBean = shopList[i];
-      // 获取价格和库存
-      if (!carShopBean.propertyChildIds || carShopBean.propertyChildIds == "") {
-        WXAPI.goodsDetail(carShopBean.goodsId).then(function(res) {
-          doneNumber++;
-          if (res.data.properties) {
-            wx.showModal({
-              title: '提示',
-              content: res.data.basicInfo.name + ' 商品已失效，请重新购买',
-              showCancel: false
-            })
-            isFail = true;
-            wx.hideLoading();
-            return;
-          }
-          if (res.data.basicInfo.stores < carShopBean.number) {
-            wx.showModal({
-              title: '提示',
-              content: res.data.basicInfo.name + ' 库存不足，请重新购买',
-              showCancel: false
-            })
-            isFail = true;
-            wx.hideLoading();
-            return;
-          }
-          if (res.data.basicInfo.minPrice != carShopBean.price) {
-            wx.showModal({
-              title: '提示',
-              content: res.data.basicInfo.name + ' 价格有调整，请重新购买',
-              showCancel: false
-            })
-            isFail = true;
-            wx.hideLoading();
-            return;
-          }
-          if (needDoneNUmber == doneNumber) {
-            that.navigateToPayOrder();
-          }
-        })
-      } else {
-        WXAPI.goodsPrice({
-          goodsId: carShopBean.goodsId,
-          propertyChildIds: carShopBean.propertyChildIds
-        }).then(function(res) {
-          doneNumber++;
-          if (res.data.stores < carShopBean.number) {
-            wx.showModal({
-              title: '提示',
-              content: carShopBean.name + ' 库存不足，请重新购买',
-              showCancel: false
-            })
-            isFail = true;
-            wx.hideLoading();
-            return;
-          }
-          if (res.data.price != carShopBean.price) {
-            wx.showModal({
-              title: '提示',
-              content: carShopBean.name + ' 价格有调整，请重新购买',
-              showCancel: false
-            })
-            isFail = true;
-            wx.hideLoading();
-            return;
-          }
-          if (needDoneNUmber == doneNumber) {
-            that.navigateToPayOrder();
-          }
-        })
-      }
-
-    }
-  },
-  navigateToPayOrder() {
-    wx.hideLoading();
+    console.log(2);
     wx.navigateTo({
       url: "/pages/to-pay-order/index"
     })
   },
-  
   // 规格选择
   openGuigeDialog() {
     let eatNumTag = []

@@ -27,7 +27,7 @@ Page({
     this.onShow();
   },
   orderDetail(e) {
-    var orderId = e.currentTarget.dataset.id;
+    let orderId = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: "/pages/order-details/index?id=" + orderId
     })
@@ -47,7 +47,6 @@ Page({
     })
   },
   toPayTap(e) {
-    const that = this;
     const orderId = e.currentTarget.dataset.id;
     let money = e.currentTarget.dataset.money;
     let _msg = '订单金额: ' + money +' 元'
@@ -56,9 +55,9 @@ Page({
       content: _msg,
       confirmText: "确认支付",
       cancelText: "取消支付",
-      success (res) {
+      success:(res) =>{
         if (res.confirm) {
-          that._toPayTap(orderId, money)
+          this._toPayTap(orderId, money)
         } else {
           console.log('用户取消支付')
         }
@@ -66,15 +65,7 @@ Page({
     });
   },
   _toPayTap (orderId, money){
-    const _this = this
-    if (money <= 0) {
-      // 直接使用余额支付
-      WXAPI.orderPay(orderId, wx.getStorageSync('token')).then(function (res) {
-        _this.onShow();
-      })
-    } else {
-      wxpay.wxpay('order', money, orderId, "/pages/order-list/index");
-    }
+    wxpay.wxpay('order', money, orderId, "/pages/order-list/index");
   },
   onLoad(options) {
     if (options && options.type) {

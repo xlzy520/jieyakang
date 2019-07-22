@@ -8,7 +8,7 @@
       </view>
       <view class="address-type-wrap">
         <view class="{{item.addressType?'restaurant':'school'}}">{{item.addressType?'餐馆':'学校'}}</view>
-        <view class="address">{{item.address}}</view>
+        <view class="address">{{item.address||item.schoolName}}</view>
       </view>
       <view class="address-action">
         <view class="address-default">

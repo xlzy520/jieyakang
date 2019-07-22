@@ -60,15 +60,13 @@ App({
     }
   },
   goLoginPageTimeOut() {
-    if (this.navigateToLogin){
-      return
-    }
-    this.navigateToLogin = true
+    console.log('goLoginPageTimeOut');
     setTimeout(()=> {
+      console.log('为什么不跳转');
       wx.navigateTo({
         url: "/pages/authorize/index"
       })
-    }, 0)
+    }, 500)
   },
   goStartIndexPage() {
     setTimeout(()=> {

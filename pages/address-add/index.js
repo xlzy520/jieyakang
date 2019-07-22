@@ -24,7 +24,10 @@ Page({
     })
   },
   getSchoolList(){
-    WXAPI.getSchoolList().then((res) => {
+    WXAPI.getSchoolList({
+      pageIndex: 1,
+      pageSize: 20
+    }).then((res) => {
       this.setData({
         schoolList: res.data.list
       })

@@ -26,12 +26,13 @@ Page({
     wx.login({
       success: res=> {
         WXAPI.login(res.code).then(res=> {
-          if (res.code === 10000) {
+          wx.setStorageSync('token', res.data.appToken)
+          if (true) {
+          // if (res.data.isFirst) {
             // 去注册
             this.registerUser();
             return;
           }
-          wx.setStorageSync('token', res.data)
           // 回到原来的地方放
           app.navigateToLogin = false
           wx.navigateBack();
@@ -48,22 +49,19 @@ Page({
     })
   },
   registerUser() {
-    let that = this;
     wx.login({
-      success: function(res) {
-        let code = res.code; // 微信登录接口返回的 code 参数，下面注册接口需要用到
+      success: (login_res) =>{
+        let code = login_res.code; // 微信登录接口返回的 code 参数，下面注册接口需要用到
         wx.getUserInfo({
-          success: function(res) {
-            let iv = res.iv;
-            let encryptedData = res.encryptedData;
+          success: (userInfo_res)=> {
+            const {iv,encryptedData } = userInfo_res
             // 下面开始调用注册接口
             WXAPI.register( {
               code: code,
               encryptedData: encryptedData,
               iv: iv,
-            }).then(function(res) {
+            }).then(()=> {
               wx.hideLoading();
-              that.login();
             })
           }
         })

@@ -24,7 +24,7 @@
 <!--              <image src="{{goods.pic}}" class="img"/>-->
               <image src="https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2019-07-02/6382dc5d00b486371428f62251103d3a.jpg" class="img"/>
             </view>
-            <view class="text-box">
+            <view class="text-box" wx:if="{{false}}">
               <view class="goods-title">{{goods.goodsName}}</view>
               <!--<view class="goods-label">{{item.label}}</view>-->
               <view class="goods-price">¥ {{goods.priceStr}}</view>
@@ -36,11 +36,26 @@
                       data-index="{{index}}" data-type="increase">+</view>
               </view>
             </view>
+            <view class="text-box" wx:if="{{true}}">
+              <view class="name-price">
+                <view class="goods-name">{{goods.goodsName}}</view>
+                <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{goods.priceStr}}</view>
+              </view>
+              <view class="guige-num">
+                <view class="detail-selected" catchtap="changeGuige" data-index="{{index}}">
+                  <view class="label">一餐 , 10人 , 20天</view>
+                  <image src="/images/arrow-right.png"></image>
+                </view>
+                <view class="goods-num">
+                  <view style="font-size: 20rpx;margin-right: 15rpx">x</view>
+                  {{goods.quantity}}</view>
+              </view>
+            </view>
           </view>
         </view>
       </view>
     </view>
-    <view class="jiesuan-box" wx:if="{{shopList.length}}">
+    <view class="jiesuan-box" wx:if="{{shopList.length&&hideShopPopup}}">
       <view class="left-price">
         <view class="check all-selected" bindtap="bindAllSelect">
           <image src="/images/{{allSelect?'check':'unchecked'}}.png"></image>
@@ -53,7 +68,7 @@
         </view>
       </view>
       <view class="footer-btn {{noSelect?'no-select':''}}" bindtap="editSubmit"
-            data-type="isEditing">{{isEditing?'删除': '去结算'}}</view>
+            data-type="{{isEditing}}">{{isEditing?'删除': '去结算'}}</view>
     </view>
   </view>
 
@@ -62,75 +77,57 @@
     <view class="popup-contents">
       <view class="pop-goods-info">
         <view class="pop-img-box">
-          <!--          <image src="{{goodsDetail.fileUrls[0]}}" class="goods-thumbnail"/>-->
+          <!--          <image src="{{shopList[index].fileUrls[0]}}" class="goods-thumbnail"/>-->
           <image src="http://www.xlzy520.cn/750_600/餐馆餐具.png" class="goods-thumbnail"/>
         </view>
         <view class="pop-goods-des">
-          <view class="pop-goods-title">{{goodsDetail.goodsName}}</view>
-          <view class="goods-rule" hidden="{{!goodsDetail.specsList[0].specsStr}}">({{goodsDetail.specsList[0].specsStr}})</view>
+          <view class="pop-goods-title">{{shopList[index].goodsName}}</view>
+          <view class="goods-rule" hidden="{{!shopList[index].specsList[0].specsStr}}">({{shopList[index].specsList[0].specsStr}})</view>
           <view class="pop-goods-price">
             <view class="row goods-price">
               <view class="price-money">¥</view>
-              <view class="price">{{selectSizePrice}}</view>
-              <view class="price-unit">/{{goodsDetail.pack?'套':'件'}}</view>
+              <view class="price">{{shopList[index].priceStr}}</view>
+              <view class="price-unit">/{{shopList[index].pack?'套':'件'}}</view>
             </view>
           </view>
-          <view class="pop-goods-guige-select"
-                wx:if="{{goodsDetail.useType==='幼儿园餐具'}}">
-            {{selectSpecLabel?'(已选择：'+selectSpecLabel+')':'请选择规格分类'}}</view>
         </view>
         <view class="pop-goods-close" bindtap="closePopupTap"></view>
       </view>
-      <view class="goods-guige" wx:if="{{goodsDetail.useType==='幼儿园餐具'}}">
-        <view class="left-title">餐具规格</view>
-        <view class="right-content">
-          <view class="guige-item {{specSelected===item.specsId?'active': ''}}"
-                wx:for="{{goodsDetail.specsList}}" wx:key="item.specsId"
-                data-id="{{item.specsId}}" data-specsname="{{item.specsName}}"
-                data-price="{{item.price}}" bindtap="selectSpec">
-            {{item.specsName}} : {{item.specsStr}}
-          </view>
-        </view>
-      </view>
-      <view class="jiu-can-box jiu-can-ci-shu"
-            wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
+      <view class="jiu-can-box jiu-can-ci-shu" wx:if="{{!shopList[index].pack}}">
         <view class="num-label">就餐次数</view>
         <view class="ci-shu-tag-wrap">
-          <view class="ci-shu-tag {{eatNum===item.value?'active':''}}" wx:for="{{eatNumTag}}" wx:key="item.label"
-                bindtap="selectEatNumTag" data-num="{{item.value}}" data-label="{{item.label}}">{{item.label}}</view>
+          <view class="ci-shu-tag {{shopList[index].eatNum===item.value?'active':''}}" wx:for="{{eatNumTag}}" wx:key="item.label"
+                bindtap="selectEatNumTag" data-index="{{index}}" data-label="{{item}}">{{item}}</view>
         </view>
       </view>
-      <view class="jiu-can-box jiu-can-ren-shu"
-            wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
+      <view class="jiu-can-box jiu-can-ren-shu" wx:if="{{!shopList[index].pack}}">
         <view class="num-label">就餐人数</view>
         <view class="num-box">
-          <view class="num-jian {{peopleNum == buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="peopleNum">-</view>
+          <view class="num-jian {{shopList[index].peopleNum == 1 ? 'hui': ''}}" bindtap="numJianTap" data-type="peopleNum">-</view>
           <view class="num-input">
-            <input type="number" value="{{peopleNum}}"/>
+            <input type="number" value="{{shopList[index].peopleNum}}"/>
           </view>
-          <view class="num-jia {{peopleNum== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="peopleNum">+</view>
+          <view class="num-jia {{peopleNum== 9999 ? 'hui': ''}}" bindtap="numJiaTap" data-type="peopleNum">+</view>
         </view>
       </view>
-      <view class="jiu-can-box jiu-can-tian-shu"
-            wx:if="{{goodsDetail.useType!=='餐馆餐具'&&goodsDetail.useType!=='宴席餐具'}}">
+      <view class="jiu-can-box jiu-can-tian-shu" wx:if="{{!shopList[index].pack}}">
         <view class="num-label">就餐天数</view>
         <view class="num-box">
-          <view class="num-jian {{eatDay === buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="eatDay">-</view>
+          <view class="num-jian {{shopList[index].eatDay === 1 ? 'hui': ''}}" bindtap="numJianTap" data-type="eatDay">-</view>
           <view class="num-input">
-            <input type="number" value="{{eatDay}}"/>
+            <input type="number" value="{{shopList[index].eatDay}}"/>
           </view>
-          <view class="num-jia {{eatDay== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="eatDay">+</view>
+          <view class="num-jia {{eatDay== 31 ? 'hui': ''}}" bindtap="numJiaTap" data-type="eatDay">+</view>
         </view>
       </view>
-      <view class="jiu-can-box buy-num"
-            wx:if="{{goodsDetail.useType==='餐馆餐具'||goodsDetail.useType==='宴席餐具'}}">
+      <view class="jiu-can-box buy-num" wx:if="{{shopList[index].pack}}">
         <view class="num-label">购买数量(件)</view>
         <view class="num-box">
-          <view class="num-jian {{quantity === buyNumMin ? 'hui': ''}}" bindtap="numJianTap" data-type="quantity">-</view>
+          <view class="num-jian {{shopList[index].quantity === 1 ? 'hui': ''}}" bindtap="numJianTap" data-type="quantity">-</view>
           <view class="num-input">
-            <input type="number" value="{{quantity}}"/>
+            <input type="number" value="{{shopList[index].quantity}}"/>
           </view>
-          <view class="num-jia {{quantity== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap" data-type="quantity">+</view>
+          <view class="num-jia {{quantity== 9999 ? 'hui': ''}}" bindtap="numJiaTap" data-type="quantity">+</view>
         </view>
       </view>
       <view class="popup-join-btn" bindtap="popupOk">确定</view>

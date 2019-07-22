@@ -2,6 +2,8 @@
   "pages": [
     "pages/shop-cart/index",
     "pages/index/index",
+
+
     "pages/select-address/index",
 
 

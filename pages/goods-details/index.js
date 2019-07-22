@@ -17,7 +17,6 @@ Page({
     selectSizePrice: 0,
     specsId: '',
     eatNum: 2,
-    eatNumLabel: '二餐',
     peopleNum: 10,
     eatDay: 20,
     quantity: 10,
@@ -44,10 +43,8 @@ Page({
   },
   selectEatNumTag(e){
     const eatNum = e.target.dataset.num
-    const eatNumLabel = e.target.dataset.label
     this.setData({
-      eatNum: eatNum,
-      eatNumLabel: eatNumLabel
+      eatNum: eatNum
     })
   },
   onLoad(e) {
@@ -200,6 +197,12 @@ Page({
     })
   },
   buyNow() {
+    // todo 选择地址的逻辑
+    // WXAPI.getAddressList().then( (res)=> {
+    //   if (res.length){
+    //
+    //   }
+    // })
     if (!this.validate()) {
       return
     }
@@ -216,7 +219,7 @@ Page({
   },
   buildShopCarInfo() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType} = this.data.goodsDetail
-    const { specsId, eatNum, peopleNum, eatDay, quantity,eatNumLabel } = this.data
+    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
@@ -227,7 +230,6 @@ Page({
       
       specsId: specsId,
       eatNum: eatNum,
-      eatNumLabel: eatNumLabel,
       peopleNum: peopleNum,
       eatDay: eatDay,
       quantity: quantity
@@ -256,6 +258,9 @@ Page({
         }
         break;
         case '宴席餐具':  case '餐馆餐具':
+          delete shopCarMap.eatNum
+          delete shopCarMap.eatDay
+          delete shopCarMap.peopleNum
         sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId)
         if (sameGoods) {
           shopCarMap.quantity = shopCarMap.quantity + sameGoods.quantity;
@@ -276,7 +281,7 @@ Page({
   },
   buildBuyNowInfo: function() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
-    const { specsId, eatNum, peopleNum, eatDay, quantity, eatNumLabel } = this.data
+    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
@@ -287,7 +292,6 @@ Page({
 
       specsId: specsId,
       eatNum: eatNum,
-      eatNumLabel: eatNumLabel,
       peopleNum: peopleNum,
       eatDay: eatDay,
       quantity: quantity
@@ -296,6 +300,11 @@ Page({
     let buyNowInfo = {};
     if (!buyNowInfo.shopList) {
       buyNowInfo.shopList = [];
+    }
+    if (useType === '宴席餐具'|| useType === '餐馆餐具'){
+      delete shopCarMap.eatNum
+      delete shopCarMap.eatDay
+      delete shopCarMap.peopleNum
     }
     buyNowInfo.shopList.push(shopCarMap);
     return buyNowInfo;

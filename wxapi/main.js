@@ -2,7 +2,7 @@
 // const API_BASE_URL = 'https://api.it120.cc/jieyakang/'
 const API_BASE_URL_XCX = 'https://www.easy-mock.com/mock/5ced4b17d564921f45a737c3/xcx'
 const API_BASE_URL_ADMIN = 'https://www.easy-mock.com/mock/5cdb6b1c196b3a1793f9fcad/admin'
-// const baseUrl = 'http://84c0a094.ngrok.io/market'
+// const baseUrl = 'http://cbd80aa6.ngrok.io/market'
 // const API_BASE_URL_XCX = baseUrl
 // const API_BASE_URL_ADMIN = baseUrl
 const app = getApp()
@@ -80,8 +80,10 @@ const request_admin = (url,data={},method='post') => {
             wx.removeStorageSync('token')
             app.goLoginPageTimeOut()
           } else {
-            wx.showToast({
-              title: request.data.msg
+            wx.showModal({
+              title: '错误',
+              content: request.data.msg,
+              showCancel: false
             })
             reject(request.data)
           }
@@ -131,13 +133,6 @@ module.exports = {
   wxpay: (data) => {
     return request('/pay/wx/wxapp', data)
   },
-  // login: (code) => {
-  //   return request('/user/wxapp/login', {
-  //     code,
-  //     type: 2
-  //   }, 'formdata')
-  // },
-  // 正式环境
   login: (code) => {
     return request_xcx('/login', {
       username: code,
@@ -145,7 +140,7 @@ module.exports = {
     }, 'formdata')
   },
   register: (data) => {
-    return request('/user/wxapp/register/complex', data)
+    return request_admin('/user/logon', data)
   },
   goods: (data) => {
     return request_admin('/goods/list', data)
@@ -228,8 +223,8 @@ module.exports = {
   getCompanyInfo: ()=>{
     return request_admin('/company/getInfo')
   },
-  getSchoolList: ()=>{
-    return request_admin('/school/list')
+  getSchoolList: (data)=>{
+    return request_admin('/school/list', data)
   },
   getInventoryList: ()=>{
     return request_admin('/inventory/list')

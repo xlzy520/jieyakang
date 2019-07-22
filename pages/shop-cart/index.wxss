@@ -92,7 +92,7 @@ page {
 .a-goods-conts {
   display: flex;
   justify-content: space-between;
-  padding-left: 30rpx;
+  padding: 0 30rpx;
   height: 100%;
   box-sizing: border-box;
   transition: margin-left 0.2s ease-in-out;
@@ -106,6 +106,7 @@ page {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+  flex-grow: 1;
 }
 
 .goods-info .img-box {
@@ -119,8 +120,11 @@ page {
 }
 
 .goods-info .text-box {
-  width: 400rpx;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   position: relative;
+  box-sizing: border-box;
 }
 
 .goods-info .text-box .goods-title {
@@ -244,6 +248,7 @@ page {
 }
 
 .jiesuan-box .footer-btn.no-select {
+  pointer-events: none;
   background-color: #b2b2b2;
 }
 
@@ -362,36 +367,12 @@ page {
   font-size: 34rpx;
 }
 .pop-goods-price .row{
+  display: flex;
   align-items: baseline;
   padding: unset;
   margin-top: 36rpx;
 }
-.pop-goods-guige-select{
-  font-size: 22rpx;
-}
-.goods-guige{
-  display: flex;
-  border-bottom: 1rpx solid #eee;
-  margin: 0 30rpx;
-}
-.goods-guige .left-title{
-  color: #000;
-  padding-left: 0;
-}
-.goods-guige .guige-item{
-  font-size: 26rpx;
-  padding: 10rpx 30rpx 10rpx 20rpx;
-  background: #f5f5f5;
-  border-radius: 6rpx;
-  margin-bottom: 20rpx;
-  box-sizing: border-box;
-  border: 1rpx solid #d7d7d7;
-}
-.goods-guige .guige-item.active{
-  background: #ffe7eb;
-  color: #fe1241;
-  border: 1rpx solid #fe103d;
-}
+
 .num-label{
   font-size:26rpx;
   color:#000000;
@@ -422,9 +403,6 @@ page {
   color: #ff001c;
   border: 1rpx solid #fe103d;
   background: #ffe7eb;
-}
-.buy-num{
-  margin-bottom: 90rpx;
 }
 .jiu-can-box .num-box{
   display: flex;
@@ -469,4 +447,56 @@ page {
   font-size:28rpx;
   color:#ffffff;
   border-radius: 44.5rpx;
+}
+
+.text-box .name-price{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  line-height: 40rpx;
+  box-sizing: border-box;
+}
+.name-price .goods-name{
+  font-size: 26rpx;
+}
+.name-price .goods-price{
+  display: flex;
+  font-family: DINAlternate Bold, sans-serif;
+  font-weight: bold;
+  font-size: 34rpx;
+  color: #ff0000;
+}
+.guige-num{
+  margin-top: 67rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.guige-num .goods-num{
+  display: flex;
+  color: #888;
+  font-size: 22rpx;
+  font-weight:500;
+  line-height: 40rpx;
+}
+
+.guige-num .detail-selected{
+  width: 274rpx;
+  height: 43rpx;
+  line-height: 43rpx;
+  border-radius: 6rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5f5f5;
+}
+.detail-selected .label{
+  font-size: 26rpx;
+  color: #888;
+  font-weight: 500;
+}
+.detail-selected image{
+  width: 12rpx;
+  height: 22rpx;
+  transform: rotate(90deg);
+  margin-right: 20rpx;
 }

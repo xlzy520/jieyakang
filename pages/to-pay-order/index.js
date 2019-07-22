@@ -8,13 +8,14 @@ Page({
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
     curAddressData: {},
     totalNum: 0, //共几份
+    eatNumTag: ['一餐','二餐', '三餐', '四餐'],
   },
   onShow () {
     let shopList = [];
     //立即购买下单
     if ("buyNow" === this.data.orderType) {
       let buyNowInfoMem = wx.getStorageSync('buyNowInfo');
-      let {useType, quantity, priceStr, eatNum, peopleNum, eatDay,eatNumLabel} = buyNowInfoMem.shopList[0]
+      let {useType, quantity, priceStr, eatNum, peopleNum,eatDay} = buyNowInfoMem.shopList[0]
       if (buyNowInfoMem && buyNowInfoMem.shopList) {
         useType = '小学餐具'
         switch (useType) {
@@ -22,7 +23,6 @@ Page({
           const totalNum = eatNum * peopleNum * eatDay
           this.setData({
             totalNum: totalNum,
-            eatNumLabel: eatNumLabel,
             allGoodsPrice: (totalNum * Number(priceStr)).toFixed(2)
           })
             break;
@@ -59,22 +59,20 @@ Page({
   },
 
   createOrder(e) {
-    if (!this.data.curAddressData) {
-      wx.hideLoading();
-      wx.showModal({
-        title: '错误',
-        content: '请先设置您的收货地址！',
-        showCancel: false
-      })
-      return;
-    }
+    // if (!this.data.curAddressData) {
+    //   wx.hideLoading();
+    //   wx.showModal({
+    //     title: '错误',
+    //     content: '请先设置您的收货地址！',
+    //     showCancel: false
+    //   })
+    //   return;
+    // }
+
     let postData = {
-      goodsInfo: this.data.goodsList,
-      ...this.data.curAddressData
+      addressId: this.data.curAddressData.addressId,
+      orderDetails: this.data.goodsList,
     };
-    if (!e) {
-      postData.calculate = "true";
-    }
 
     WXAPI.orderCreate(postData).then( (res)=> {
       if (e && "buyNow" !== this.data.orderType) {
@@ -118,7 +116,7 @@ Page({
         module: 'order',
         business_id: res.data.id,
         trigger: -1,
-        postJsonString: JSON.stringify(postJsonString),
+        postJsonString: postJsonString,
         template_id: 'mGVFc31MYNMoR9Z-A9yeVVYLIVGphUVcK2-S2UdZHmg',
         type: 0,
         token: wx.getStorageSync('token'),
@@ -141,7 +139,7 @@ Page({
         module: 'order',
         business_id: res.data.id,
         trigger: 2,
-        postJsonString: JSON.stringify(postJsonString),
+        postJsonString: postJsonString,
         template_id: 'Arm2aS1rsklRuJSrfz-QVoyUzLVmU2vEMn_HgMxuegw',
         type: 0,
         token: wx.getStorageSync('token'),
