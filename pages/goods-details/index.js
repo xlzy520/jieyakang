@@ -235,42 +235,45 @@ Page({
       quantity: quantity
     };
     let shopCarInfo = wx.getStorageSync('shopCarInfo');
-    // if (shopCarInfo.shopList === undefined) {
-    //   shopCarInfo.shopList = [];
-    // }
     let sameGoods
-    // todo 各种情况分类
-    switch (useType) {
-      case '幼儿园餐具':
-        sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId
-          &&v.specsId === specsId&&v.eatNum === eatNum)
-        if (sameGoods) {
-          shopCarMap.peopleNum = shopCarMap.peopleNum + sameGoods.peopleNum;
-          shopCarMap.eatDay = shopCarMap.eatDay + sameGoods.eatDay;
-        }
-        break;
-      case '小学餐具': case '中学餐具':
+    if (!shopCarInfo||!shopCarInfo.shopList) {
+      shopCarInfo = {}
+      shopCarInfo.shopList = [];
+      shopCarInfo.shopList.push(shopCarMap);
+    } else {
+      switch (useType) {
+        case '幼儿园餐具':
+          sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId
+            &&v.specsId === specsId&&v.eatNum === eatNum)
+          if (sameGoods) {
+            shopCarMap.peopleNum = shopCarMap.peopleNum + sameGoods.peopleNum;
+            shopCarMap.eatDay = shopCarMap.eatDay + sameGoods.eatDay;
+          }
+          break;
+        case '小学餐具': case '中学餐具':
         sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId &&v.eatNum === eatNum)
         if (sameGoods) {
           shopCarMap.peopleNum = shopCarMap.peopleNum + sameGoods.peopleNum;
           shopCarMap.eatDay = shopCarMap.eatDay + sameGoods.eatDay;
         }
         break;
-      case '宴席餐具':  case '餐馆餐具':
+        case '宴席餐具':  case '餐馆餐具':
         sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId)
         if (sameGoods) {
           shopCarMap.quantity = shopCarMap.quantity + sameGoods.quantity;
         }
         break;
-      default:
-        break;
+        default:
+          break;
+      }
+      if (sameGoods) {
+        const sameGoodsIndex = shopCarInfo.shopList.findIndex(v=>v.goodsId === sameGoods.goodsId)
+        shopCarInfo.shopList.splice(sameGoodsIndex, 1, shopCarMap);
+      } else {
+        shopCarInfo.shopList.push(shopCarMap);
+      }
     }
-    if (sameGoods) {
-      const sameGoodsIndex = shopCarInfo.shopList.findIndex(v=>v.goodsId === sameGoods.goodsId)
-      shopCarInfo.shopList.splice(sameGoodsIndex, 1, shopCarMap);
-    } else {
-      shopCarInfo.shopList.push(shopCarMap);
-    }
+    // todo 各种情况分类
     return shopCarInfo;
   },
   buildBuyNowInfo: function() {
