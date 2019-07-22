@@ -20,7 +20,7 @@ Page({
   selectIdentity(e){
     this.setData({
       identityHidden: true,
-      'addressData.addressType': e.currentTarget.dataset.type
+      'addressData.addressType': Number(e.currentTarget.dataset.type)
     })
   },
   getSchoolList(){

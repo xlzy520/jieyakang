@@ -48,7 +48,7 @@
           wx:if="{{addressData.addressId}}">删除地址
     </view>
     <button class="btn save-btn" formType="submit">保存</button>
-    <button class="btn reselect-btn" bindtap="reSelectIdentity">重新选择身份标签</button>
+    <button class="btn reselect-btn" bindtap="reSelectIdentity" hidden="{{}}">重新选择身份标签</button>
     <!--<button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>-->
   </form>
   <dialog wx:if="{{tipText}}" type="{{dialogType}}" text="{{tipText}}" bindclose="close"
