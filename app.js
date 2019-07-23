@@ -53,16 +53,11 @@ App({
         wx.hideToast()
       }
     });
-    let token = wx.getStorageSync('token');
-    if (!token) {
-      console.log('not-token');
-      this.goLoginPageTimeOut()
-    }
+    // let token = wx.getStorageSync('token');
   },
   goLoginPageTimeOut() {
     console.log('goLoginPageTimeOut');
     setTimeout(()=> {
-      console.log('为什么不跳转');
       wx.navigateTo({
         url: "/pages/authorize/index"
       })

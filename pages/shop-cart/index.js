@@ -47,12 +47,6 @@ Page({
       url: "/pages/index/index"
     });
   },
-  delItem(e) {
-    var index = e.currentTarget.dataset.index;
-    var list = this.data.shopList;
-    list.splice(index, 1);
-    this.updatePageData()
-  },
   selectTap(e) {
     const index = e.currentTarget.dataset.index;
     const { shopList } = this.data;
@@ -66,7 +60,6 @@ Page({
     const eatNum = this.data.eatNumTag.findIndex(v=>v===eatNumLabel)
     this.setData({
       'currentShop.eatNum': eatNum+1,
-      'currentShop.eatNumLabel': eatNumLabel,
     })
   },
   changeGuige(e){
@@ -153,7 +146,6 @@ Page({
     this.setSelectStatus()
   },
   toPayOrder() {
-    console.log(2);
     wx.navigateTo({
       url: "/pages/to-pay-order/index"
     })
@@ -195,7 +187,7 @@ Page({
     if (hideShopPopup) {
       if (this.data[type] > 1) {
         let currentNum = this.data[type];
-        currentNum++;
+        currentNum--;
         this.setData({
           [type]: currentNum
         })
@@ -203,11 +195,10 @@ Page({
     } else {
       if (currentShop[type] > 1) {
         let currentNum = currentShop[type];
-        currentNum++;
+        currentNum--;
+        const str = 'currentShop.'+ type
         this.setData({
-          currentShop: {
-            [type]: currentNum
-          }
+          [str]: currentNum
         })
       }
     }
@@ -219,22 +210,32 @@ Page({
       if (this.data[type] < 9999) {
         let currentNum = this.data[type];
         currentNum++;
-        // this.setData({
-        //   [type]: currentNum
-        // })
+        this.setData({
+          [type]: currentNum
+        })
       }
     } else {
       if (currentShop[type] < 9999) {
         let currentNum = currentShop[type];
         currentNum++;
+        const str = 'currentShop.'+ type
         this.setData({
-          // 'currentShop.'[type]: currentNum
+          [str]: currentNum
         })
       }
     }
     
   },
   confirmChange(){
+    const { eatNum, peopleNum, eatDay } =  this.data.currentShop
+    const index = this.data.shopList.findIndex(v=>v.goodsId === this.data.currentShop.goodsId)
+    this.data.currentShop.quantity = eatNum* peopleNum * eatDay
+    this.data.shopList.splice(index,1)
+    this.data.shopList.splice(index,0, this.data.currentShop)
+    this.updatePageData()
+    this.setData({
+      hideShopPopup: true
+    })
     // 确认修改购物车
   },
   setTipText(text=''){

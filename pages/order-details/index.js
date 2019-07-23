@@ -78,25 +78,14 @@ Page({
       content: _msg,
       confirmText: "确认支付",
       cancelText: "取消支付",
-      success (res) {
+      success :(res)=> {
         if (res.confirm) {
-          that._toPayTap(orderId, money)
+          wxpay.wxpay('order', money, orderId, "/pages/order-list/index");
         } else {
           console.log('用户点击取消支付')
         }
       }
     });
-  },
-  _toPayTap (orderId, money){
-    const _this = this
-    if (money <= 0) {
-      // 直接使用余额支付
-      WXAPI.orderPay(orderId, wx.getStorageSync('token')).then(function (res) {
-        _this.onShow();
-      })
-    } else {
-      wxpay.wxpay('order', money, orderId, "/pages/order-list/index");
-    }
   },
   confirmBtnTap(e) {
     let that = this;

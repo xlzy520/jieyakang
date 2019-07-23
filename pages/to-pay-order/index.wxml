@@ -1,5 +1,5 @@
 <view class="container">
-  <form bindsubmit="createOrder" report-submit="true">
+  <form bindsubmit="toPay" report-submit="true">
     <view class="address-box">
       <view class="add-address" hidden="{{curAddressData}}">
         <view class="title" bindtap="addAddress">新增收货地址</view>

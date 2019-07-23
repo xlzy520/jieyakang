@@ -11,7 +11,15 @@ Page({
     endDate: utils.parseTime(new Date())
   },
   onLoad() {
-    WXAPI.getInventoryList().then(res=>{
+   this.getInventoryList()
+  },
+  getInventoryList(){
+    WXAPI.getInventoryList({
+      pageSize: 20,
+      pageIndex: 1,
+      startDate: this.data.start,
+      endDate: this.data.end
+    }).then(res=>{
       this.setData({
         recordList: res.data.list
       })
@@ -30,7 +38,7 @@ Page({
 
   },
   submit(){
-
+    this.getInventoryList()
   },
   changeCurrentTab(e){
     this.setData({

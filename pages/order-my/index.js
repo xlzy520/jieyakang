@@ -8,6 +8,8 @@ Page({
   },
   getAllOrder(){
     WXAPI.orderList({
+      pageIndex: 1,
+      pageSize: 20,
       statusCode: ''
     }).then((res) => {
       this.setData({
@@ -84,6 +86,8 @@ Page({
     const tabMap = ['', 'unpaid', 'unshipped', 'unreceived']
     if (currentTabIndex !== 0) {
       WXAPI.orderList({
+        pageSize: 20,
+        pageIndex: 1,
         statusCode: tabMap[currentTabIndex]
       }).then((res)=> {
         this.setData({

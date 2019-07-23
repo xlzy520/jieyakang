@@ -249,13 +249,15 @@ Page({
             shopCarMap.peopleNum = shopCarMap.peopleNum + sameGoods.peopleNum;
             shopCarMap.eatDay = shopCarMap.eatDay + sameGoods.eatDay;
           }
+          shopCarMap.quantity = shopCarMap.peopleNum * shopCarMap.eatDay * shopCarMap.eatNum
           break;
         case '小学餐具': case '中学餐具':
-        sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId &&v.eatNum === eatNum)
-        if (sameGoods) {
-          shopCarMap.peopleNum = shopCarMap.peopleNum + sameGoods.peopleNum;
-          shopCarMap.eatDay = shopCarMap.eatDay + sameGoods.eatDay;
+          sameGoods = shopCarInfo.shopList.find(v=>v.goodsId ===goodsId &&v.eatNum === eatNum)
+          if (sameGoods) {
+            shopCarMap.peopleNum = shopCarMap.peopleNum + sameGoods.peopleNum;
+            shopCarMap.eatDay = shopCarMap.eatDay + sameGoods.eatDay;
         }
+          shopCarMap.quantity = shopCarMap.peopleNum * shopCarMap.eatDay * shopCarMap.eatNum
         break;
         case '宴席餐具':  case '餐馆餐具':
           delete shopCarMap.eatNum

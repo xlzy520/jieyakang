@@ -1,10 +1,10 @@
 // 小程序开发api接口工具包，https://github.com/gooking/wxapi
 // const API_BASE_URL = 'https://api.it120.cc/jieyakang/'
-const API_BASE_URL_XCX = 'https://www.easy-mock.com/mock/5ced4b17d564921f45a737c3/xcx'
-const API_BASE_URL_ADMIN = 'https://www.easy-mock.com/mock/5cdb6b1c196b3a1793f9fcad/admin'
-// const baseUrl = 'http://cbd80aa6.ngrok.io/market'
-// const API_BASE_URL_XCX = baseUrl
-// const API_BASE_URL_ADMIN = baseUrl
+// const API_BASE_URL_XCX = 'https://www.easy-mock.com/mock/5ced4b17d564921f45a737c3/xcx'
+// const API_BASE_URL_ADMIN = 'https://www.easy-mock.com/mock/5cdb6b1c196b3a1793f9fcad/admin'
+const baseUrl = 'http://6afb2cc4.ngrok.io/market'
+const API_BASE_URL_XCX = baseUrl
+const API_BASE_URL_ADMIN = baseUrl
 const app = getApp()
 // todo 统一处理 正确错误、token过期
 const request = (url,data={},method='post') => {
@@ -131,7 +131,7 @@ module.exports = {
     return request('/template-msg/put', data)
   },
   wxpay: (data) => {
-    return request('/pay/wx/wxapp', data)
+    return request_admin('/bill/pay', data)
   },
   login: (code) => {
     return request_xcx('/login', {
@@ -174,18 +174,8 @@ module.exports = {
       id,
     })
   },
-  userDetail: (token) => {
-    return request_xcx('/user/detail', 'get', {
-      token
-    })
-  },
-  userAmount: (token) => {
-    return request('/user/amount', 'get', {
-      token
-    })
-  },
   orderCreate: (data) => {
-    return request('/order/create', data)
+    return request_admin('/order/save', data)
   },
   orderList: (data) => {
     return request_xcx('/order/list', data)
@@ -203,7 +193,7 @@ module.exports = {
     })
   },
   orderClose: (orderId, token) => {
-    return request('/order/close', {
+    return request_admin('/order/close', {
       orderId,
       token
     })
