@@ -63,17 +63,17 @@ Page({
   },
   selectEatNumTag(e){
     const eatNumLabel = e.target.dataset.label
-    const index = e.currentTarget.dataset.index;
     const eatNum = this.data.eatNumTag.findIndex(v=>v===eatNumLabel)
     this.setData({
-      eatNum: eatNum+1
+      'currentShop.eatNum': eatNum+1,
+      'currentShop.eatNumLabel': eatNumLabel,
     })
   },
   changeGuige(e){
     const index = e.currentTarget.dataset.index;
     this.setData({
       hideShopPopup: false,
-      index: index
+      currentShop: JSON.parse(JSON.stringify(this.data.shopList[index]))
     })
   },
   setShopList(){
@@ -170,8 +170,10 @@ Page({
         break;
       case '中学餐具':
         //todo 初中不能选四餐，待确认
-        eatNumTag = [{label: '一餐', value: 1},{label: '两餐', value: 2},
-          {label: '三餐', value: 3},{label: '四餐', value: 4}]
+        eatNumTag = [
+          {label: '一餐', value: 1},{label: '两餐', value: 2},
+          {label: '三餐', value: 3},{label: '四餐', value: 4}
+          ]
         break;
       default:
         break;
@@ -189,30 +191,51 @@ Page({
   },
   numJianTap(e) {
     const type = e.target.dataset.type
-    if (this.data[type] > this.data.buyNumMin) {
-      let currentNum = this.data[type];
-      currentNum--;
-      this.setData({
-        [type]: currentNum
-      })
+    const { hideShopPopup, currentShop } = this.data
+    if (hideShopPopup) {
+      if (this.data[type] > 1) {
+        let currentNum = this.data[type];
+        currentNum++;
+        this.setData({
+          [type]: currentNum
+        })
+      }
+    } else {
+      if (currentShop[type] > 1) {
+        let currentNum = currentShop[type];
+        currentNum++;
+        this.setData({
+          currentShop: {
+            [type]: currentNum
+          }
+        })
+      }
     }
   },
   numJiaTap(e) {
     const type = e.target.dataset.type
-    if (this.data[type] < this.data.buyNumMax) {
-      let currentNum = this.data[type];
-      currentNum++;
-      this.setData({
-        [type]: currentNum
-      })
-    }
-  },
-  popupOk(){
-    if (this.data.shopType === 'addShopCar'){
-      this.addShopCar()
+    const { hideShopPopup, currentShop } = this.data
+    if (hideShopPopup) {
+      if (this.data[type] < 9999) {
+        let currentNum = this.data[type];
+        currentNum++;
+        this.setData({
+          [type]: currentNum
+        })
+      }
     } else {
-      this.buyNow()
+      if (currentShop[type] < 9999) {
+        let currentNum = currentShop[type];
+        currentNum++;
+        this.setData({
+          'currentShop.'[type]: currentNum
+        })
+      }
     }
+    
+  },
+  confirmChange(){
+    // 确认修改购物车
   },
   setTipText(text=''){
     this.setData({
