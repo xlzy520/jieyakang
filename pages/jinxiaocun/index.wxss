@@ -41,9 +41,10 @@
 }
 .search .picker{
   text-align: center;
-  padding: 10rpx 30rpx;
+  padding: 5rpx 15rpx;
   box-sizing: border-box;
   display: flex;
+  justify-content: center;
 }
 .search .placeholder{
   width: 100%;
@@ -98,6 +99,7 @@
 }
 .record-item-header .date{
   font-family: PingFang SC Medium, sans-serif;
+  width: 160rpx;
 }
 .record-item .record-item-content{
   font-size: 22rpx;

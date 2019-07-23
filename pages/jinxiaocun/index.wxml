@@ -29,19 +29,19 @@
         <view class="record-item-header">
           <image class="icon" src="/images/jxc/{{record.inventoryType?'jin':'shou'}}.png"></image>
           <view class="goods-type">{{record.useType}}</view>
-          <view class="number">{{record.number}}件</view>
+          <view class="number">{{record.quantityStr}}</view>
           <view class="date">{{record.date}}</view>
         </view>
         <view class="record-item-content">
-          <view class="row" wx:for="{{record.ss}}" wx:for-item="row">
-            <view class="left-title">{{row.name}}</view>
-            <view class="item" wx:for="{{row.list}}" wx:for-item="detail">
+          <view class="row" wx:for="{{record.inventoryDetailList}}" wx:for-item="row">
+            <view class="left-title">{{row.inventoryName}}</view>
+            <view class="item" wx:for="{{row.inventoryDetail}}" wx:for-item="detail">
               {{detail.tablewareName}}:{{detail.quantity}}</view>
           </view>
         </view>
       </view>
     </view>
-    <view class="record-no-more" wx:if="{{false}}">没有更多了</view>
+    <view class="record-no-more" hidden="{{noMore}}">没有更多了</view>
   </view>
   <view class="store-current" hidden="{{!currentTab}}">
     <view class="store-row">

@@ -1,10 +1,10 @@
 // 小程序开发api接口工具包，https://github.com/gooking/wxapi
 // const API_BASE_URL = 'https://api.it120.cc/jieyakang/'
-// const API_BASE_URL_XCX = 'https://www.easy-mock.com/mock/5ced4b17d564921f45a737c3/xcx'
-// const API_BASE_URL_ADMIN = 'https://www.easy-mock.com/mock/5cdb6b1c196b3a1793f9fcad/admin'
-const baseUrl = 'http://6afb2cc4.ngrok.io/market'
-const API_BASE_URL_XCX = baseUrl
-const API_BASE_URL_ADMIN = baseUrl
+const API_BASE_URL_XCX = 'https://www.easy-mock.com/mock/5ced4b17d564921f45a737c3/xcx'
+const API_BASE_URL_ADMIN = 'https://www.easy-mock.com/mock/5cdb6b1c196b3a1793f9fcad/admin'
+// const baseUrl = 'http://6afb2cc4.ngrok.io/market'
+// const API_BASE_URL_XCX = baseUrl
+// const API_BASE_URL_ADMIN = baseUrl
 const app = getApp()
 // todo 统一处理 正确错误、token过期
 const request = (url,data={},method='post') => {
@@ -216,8 +216,11 @@ module.exports = {
   getSchoolList: (data)=>{
     return request_admin('/school/list', data)
   },
-  getInventoryList: ()=>{
-    return request_admin('/inventory/list')
+  getInventoryList: (data)=>{
+    return request_admin('/inventory/list', data)
+  },
+  getCurrentStore: ()=>{
+    return request_admin('/inventory/current')
   },
 
 }
