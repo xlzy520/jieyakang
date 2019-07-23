@@ -1,5 +1,5 @@
 <!--index.wxml-->
 <!--1px = 750/320 = 2.34rpx;-->
 <view class="container">
-  <image src="http://www.xlzy520.cn/assets/banner-detail.png" style="width: 100%;height: 4583rpx"></image>
+  <image src="https://www.xlzy520.cn/assets/banner-detail.png" style="width: 100%;height: 4583rpx"></image>
 </view>

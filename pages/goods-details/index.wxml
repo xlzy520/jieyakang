@@ -16,7 +16,7 @@
   </view>
   <view class="goods-img-wrap" wx:if="{{false}}">
 <!--    <image class="goods-img" src="{{goodsDetail.fileUrls[0]}}"></image>-->
-    <image class="goods-img" src="http://www.xlzy520.cn/750_600/餐馆餐具.png"></image>
+    <image class="goods-img" src="https://www.xlzy520.cn/750_600/餐馆餐具.png"></image>
   </view>
   <view class="goods-content">
     <view class="goods-parameter">
@@ -62,7 +62,7 @@
       <view class="pop-goods-info">
         <view class="pop-img-box">
 <!--          <image src="{{goodsDetail.fileUrls[0]}}" class="goods-thumbnail"/>-->
-          <image src="http://www.xlzy520.cn/750_600/餐馆餐具.png" class="goods-thumbnail"/>
+          <image src="https://www.xlzy520.cn/750_600/餐馆餐具.png" class="goods-thumbnail"/>
         </view>
         <view class="pop-goods-des">
           <view class="pop-goods-title">{{goodsDetail.goodsName}}</view>

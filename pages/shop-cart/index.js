@@ -219,16 +219,16 @@ Page({
       if (this.data[type] < 9999) {
         let currentNum = this.data[type];
         currentNum++;
-        this.setData({
-          [type]: currentNum
-        })
+        // this.setData({
+        //   [type]: currentNum
+        // })
       }
     } else {
       if (currentShop[type] < 9999) {
         let currentNum = currentShop[type];
         currentNum++;
         this.setData({
-          'currentShop.'[type]: currentNum
+          // 'currentShop.'[type]: currentNum
         })
       }
     }

@@ -20,7 +20,7 @@
       <view class="a-goods" wx:for-items="{{goodsList}}" wx:key="{{index}}">
         <view class="img-box">
 <!--          <image src="{{item.fileUrls[0]}}" class="img"/>-->
-          <image src="http://www.xlzy520.cn/750_600/餐馆餐具.png" class="img"/>
+          <image src="https://www.xlzy520.cn/750_600/餐馆餐具.png" class="img"/>
         </view>
         <view class="text-box">
           <view class="name-price">
