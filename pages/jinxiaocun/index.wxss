@@ -157,4 +157,5 @@
   font-family: PingFang SC Bold, sans-serif;
   font-weight: bold;
   font-size: 36rpx;
+  text-align: center;
 }

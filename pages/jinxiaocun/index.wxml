@@ -33,9 +33,9 @@
           <view class="date">{{record.date}}</view>
         </view>
         <view class="record-item-content">
-          <view class="row" wx:for="{{record.inventoryDetailList}}" wx:for-item="row">
+          <view class="row" wx:for="{{record.inventoryDetailList}}" wx:for-item="row" :key="unique">
             <view class="left-title">{{row.inventoryName}}</view>
-            <view class="item" wx:for="{{row.inventoryDetail}}" wx:for-item="detail">
+            <view class="item" wx:for="{{row.inventoryDetail}}" wx:for-item="detail" :key="unique">
               {{detail.tablewareName}}:{{detail.quantity}}</view>
           </view>
         </view>
@@ -44,24 +44,12 @@
     <view class="record-no-more" hidden="{{noMore}}">没有更多了</view>
   </view>
   <view class="store-current" hidden="{{!currentTab}}">
-    <view class="store-row">
-      <view class="row-header">宴席餐具</view>
+    <view class="store-row" wx:for="{{storeMap}}" wx:for-item="goods" :key="{{goods.useType}}">
+      <view class="row-header">{{goods.useType}}</view>
       <view class="row-content">
-        <view class="store-block">
-          <view class="store-goods-type">餐盘</view>
-          <view class="store-number">300</view>
-        </view>
-        <view class="store-block">
-          <view class="store-goods-type">餐盘</view>
-          <view class="store-number">300</view>
-        </view>
-        <view class="store-block">
-          <view class="store-goods-type">餐盘</view>
-          <view class="store-number">300</view>
-        </view>
-        <view class="store-block">
-          <view class="store-goods-type">餐盘</view>
-          <view class="store-number">300</view>
+        <view class="store-block" wx:for="{{goods.recoveryDetail}}" wx:for-item="detail" :key="detail.tablewareName">
+          <view class="store-goods-type">{{detail.tablewareName}}</view>
+          <view class="store-number">{{detail.quantity}}</view>
         </view>
       </view>
     </view>

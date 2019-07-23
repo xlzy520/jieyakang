@@ -2,7 +2,7 @@ const WXAPI = require('../../wxapi/main')
 const utils = require('../../utils/index')
 Page({
   data: {
-    tabList: ['进销记录', '当前库存'],
+    tabList: ['进销记录', '当前留存'],
     currentTab: 0,
     recordList: [],
     inventoryTypeMap: [],
