@@ -27,9 +27,7 @@ Page({
       success: res=> {
         WXAPI.login(res.code).then(res=> {
           wx.setStorageSync('token', res.data.appToken)
-          if (true) {
-          // if (res.data.isFirst) {
-            // 去注册
+          if (res.data.isFirst) {
             this.registerUser();
             return;
           }
@@ -62,6 +60,7 @@ Page({
               iv: iv,
             }).then(()=> {
               wx.hideLoading();
+              wx.navigateBack();
             })
           }
         })
