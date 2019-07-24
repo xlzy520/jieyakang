@@ -9,6 +9,7 @@ Page({
     curAddressData: {},
     totalNum: 0, //共几份
     eatNumTag: ['一餐','二餐', '三餐', '四餐'],
+    orderId: ''
   },
   onShow () {
     let shopList = [];
@@ -70,32 +71,32 @@ Page({
     //   formId: e.detail.formId
     // })
     // 配置模板消息推送
-    let postJsonString = {
-      keyword1: {
-        value: res.data.dateAdd,
-        color: '#173177'
-      }
-    };
-    postJsonString.keyword1 = {
-      value: res.data.dateAdd,
-      color: '#173177'
-    }
-    postJsonString.keyword2 = {
-      value: res.data.amountReal + '元',
-      color: '#173177'
-    }
-    postJsonString.keyword3 = {
-      value: res.data.orderNumber,
-      color: '#173177'
-    }
-    postJsonString.keyword4 = {
-      value: '订单已关闭',
-      color: '#173177'
-    }
-    postJsonString.keyword5 = {
-      value: '您可以重新下单，请在30分钟内完成支付',
-      color: '#173177'
-    }
+    // let postJsonString = {
+    //   keyword1: {
+    //     value: res.data.dateAdd,
+    //     color: '#173177'
+    //   }
+    // };
+    // postJsonString.keyword1 = {
+    //   value: res.data.dateAdd,
+    //   color: '#173177'
+    // }
+    // postJsonString.keyword2 = {
+    //   value: res.data.amountReal + '元',
+    //   color: '#173177'
+    // }
+    // postJsonString.keyword3 = {
+    //   value: res.data.orderNumber,
+    //   color: '#173177'
+    // }
+    // postJsonString.keyword4 = {
+    //   value: '订单已关闭',
+    //   color: '#173177'
+    // }
+    // postJsonString.keyword5 = {
+    //   value: '您可以重新下单，请在30分钟内完成支付',
+    //   color: '#173177'
+    // }
     // WXAPI.sendTempleMsg({
     //   module: 'order',
     //   business_id: res.data.id,
@@ -106,19 +107,19 @@ Page({
     //   token: wx.getStorageSync('token'),
     //   url: 'pages/index/index'
     // })
-    postJsonString = {};
-    postJsonString.keyword1 = {
-      value: '您的订单已发货，请注意查收',
-      color: '#173177'
-    }
-    postJsonString.keyword2 = {
-      value: res.data.orderNumber,
-      color: '#173177'
-    }
-    postJsonString.keyword3 = {
-      value: res.data.dateAdd,
-      color: '#173177'
-    }
+    // postJsonString = {};
+    // postJsonString.keyword1 = {
+    //   value: '您的订单已发货，请注意查收',
+    //   color: '#173177'
+    // }
+    // postJsonString.keyword2 = {
+    //   value: res.data.orderNumber,
+    //   color: '#173177'
+    // }
+    // postJsonString.keyword3 = {
+    //   value: res.data.dateAdd,
+    //   color: '#173177'
+    // }
     // WXAPI.sendTempleMsg({
     //   module: 'order',
     //   business_id: res.data.id,
@@ -133,6 +134,7 @@ Page({
     // wx.redirectTo({
     //   url: "/pages/order-my/index"
     // });
+    console.log(this.data.orderId);
     wxpay.wxpay('order', this.data.allGoodsPrice, this.data.orderId, "/pages/order-list/index");
   },
   createOrder() {
