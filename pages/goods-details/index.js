@@ -22,7 +22,7 @@ Page({
     quantity: 10,
   
     tipText: '',
-    imgs: ['https://www.xlzy520.cn/750_600/餐馆餐具.png', 'https://www.xlzy520.cn/750_600/餐馆餐具.png']
+    imgs: ['http://www.xlzy520.cn/750_600/餐馆餐具.png', 'http://www.xlzy520.cn/750_600/餐馆餐具.png']
   },
 
   //事件处理函数
