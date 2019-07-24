@@ -5,7 +5,7 @@
     <view class="goods-item">
       <view class="img-box">
         <!--<image src="http://84c0a094.ngrok.io/market/file/preview?fileUrl={{item.fileUrls[0]}}" class="image" mode="aspectFill"/>-->
-        <image src="https://www.xlzy520.cn/164_164/餐馆餐具.png" class="image" mode="aspectFill"/>
+        <image src="http://www.xlzy520.cn/164_164/餐馆餐具.png" class="image" mode="aspectFill"/>
       </view>
       <view class="goods-detail">
         <view class="goods-title">{{item.goodsName}}</view>
