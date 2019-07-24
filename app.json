@@ -1,18 +1,14 @@
 {
   "pages": [
-    "pages/shop-cart/index",
     "pages/index/index",
-
-
+    "pages/to-pay-order/index",
+    "pages/shop-cart/index",
     "pages/select-address/index",
-
-
-
     "pages/jinxiaocun/index",
 
     "pages/order-details/index",
     "pages/order-my/index",
-    "pages/to-pay-order/index",
+
     "pages/goods-details/index",
 
     "pages/address-add/index",
@@ -62,7 +58,7 @@
     ]
   },
   "navigateToMiniProgramAppIdList": [
-    "wx0db38963938fe329"
+    "wxfcc24a29b3ff5f57"
   ],
   "sitemapLocation": "sitemap.json"
 }
