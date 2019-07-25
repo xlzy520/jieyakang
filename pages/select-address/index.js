@@ -3,8 +3,8 @@ Page({
   data: {
     addressList: []
   },
-
-  selectTap(e) {
+  
+  updateAddressDefault(e){
     const { id } = e.currentTarget.dataset;
     WXAPI.updateAddressDefault({
       addressId: id,
@@ -14,8 +14,12 @@ Page({
         title: '更新默认地址成功',
         duration: 1000
       })
-      wx.navigateBack({})
     })
+  },
+  selectTap(e) {
+    const address = e.currentTarget.dataset.address
+    wx.setStorageSync('select-address', address)
+    wx.navigateBack()
   },
   addAddress() {
     wx.navigateTo({

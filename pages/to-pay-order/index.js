@@ -9,11 +9,13 @@ Page({
     curAddressData: {},
     totalNum: 0, //共几份
     eatNumTag: ['一餐','二餐', '三餐', '四餐'],
-    orderId: ''
+    orderId: '',
+    dialogText: '',
+    dialogType: 'add-address'
   },
   onShow () {
+    this.initShippingAddress();
     let shopList = [];
-    //立即购买下单
     if ("buyNow" === this.data.orderType) {
       let buyNowInfoMem = wx.getStorageSync('buyNowInfo');
       let {useType, quantity, priceStr, eatNum, peopleNum,eatDay} = buyNowInfoMem.shopList[0]
@@ -42,21 +44,25 @@ Page({
       //购物车下单
       let shopCarInfoMem = wx.getStorageSync('shopCarInfo');
       if (shopCarInfoMem && shopCarInfoMem.shopList) {
-        shopList = shopCarInfoMem.shopList.filter(entity => {
-          return entity.active;
-        });
+        shopList = shopCarInfoMem.shopList.filter(entity => entity.active);
       }
     }
     this.setData({
       goodsList: shopList,
     });
-    this.initShippingAddress();
   },
 
   onLoad(e) {
     this.setData({
       orderType: e.orderType|| 'buyNow'
     });
+    const address = wx.getStorageSync('select-address')
+    if (address) {
+      this.setData({
+        curAddressData: address
+      })
+      wx.removeStorageSync('select-address')
+    }
   },
 
   toPay(e){
@@ -163,20 +169,12 @@ Page({
       })
     })
   },
-  getAllPrice(){
-
-  },
   initShippingAddress() {
     WXAPI.defaultAddress().then( (res)=> {
       this.setData({
         curAddressData: res.data
       });
-      this.getAllPrice()
       this.createOrder();
-    }).catch(err=>{
-      this.setData({
-        curAddressData: null
-      });
     })
   },
   addAddress() {

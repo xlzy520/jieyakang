@@ -192,7 +192,7 @@ Page({
     this.closePopupTap();
     wx.showToast({
       title: '添加成功，在购物车等亲～',
-      icon: 'success',
+      icon: 'none',
       duration: 2000
     })
   },

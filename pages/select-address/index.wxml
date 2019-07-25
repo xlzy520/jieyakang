@@ -1,7 +1,7 @@
 <view class="container">
   <view class="address-list" wx:if="{{addressList.length}}">
     <view class="address-item" wx:for-items="{{addressList}}"
-          wx:key="{{index}}" bindtap="selectTap" data-id="{{item.addressId}}">
+          wx:key="{{index}}" bindtap="selectTap" data-address="{{item}}">
       <view class="name-tel">
         <view class="name">{{item.consignee}}</view>
         <view class="phone">{{item.mobile}}</view>
@@ -10,7 +10,7 @@
         <view class="{{item.addressType?'restaurant':'school'}}">{{item.addressType?'餐馆':'学校'}}</view>
         <view class="address">{{item.address||item.schoolName}}</view>
       </view>
-      <view class="address-action">
+      <view class="address-action" bindtap="updateAddressDefault">
         <view class="address-default">
           <image class="address-check-icon" src="/images/{{item.isDefault?'check':'unchecked'}}.png"></image>
           <view class="address-default-text">默认{{item.addressType?'地址':'班级'}}</view>

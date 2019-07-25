@@ -43,10 +43,7 @@ App({
         wx.showToast({
           title: '网络已断开',
           icon: 'loading',
-          duration: 2000,
-          complete: ()=> {
-            this.goStartIndexPage()
-          }
+          duration: 2000
         })
       } else {
         this.globalData.isConnected = true
@@ -56,17 +53,9 @@ App({
     // let token = wx.getStorageSync('token');
   },
   goLoginPageTimeOut() {
-    console.log('goLoginPageTimeOut');
     setTimeout(()=> {
       wx.navigateTo({
         url: "/pages/authorize/index"
-      })
-    }, 500)
-  },
-  goStartIndexPage() {
-    setTimeout(()=> {
-      wx.redirectTo({
-        url: "/pages/start/start"
       })
     }, 500)
   },

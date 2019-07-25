@@ -58,5 +58,5 @@
       <button class="to-pay-btn" formType="submit">提交订单</button>
     </view>
   </form>
-  <dialog wx:if="{{tipText}}" type="add-address" text="请添加地址" bindclose="close"></dialog>
+  <dialog wx:if="{{dialogText}}" type="{{dialogType}}" text="{{dialogText}}" bindclose="close"></dialog>
 </view>
