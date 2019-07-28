@@ -11,13 +11,17 @@ Component({
     goods: []
   },
   attached(){
-    this.getGoodsList()
+    const token = wx.getStorageSync('token')
+    if (token){
+      this.getGoodsList()
+      wx.hideLoading()
+    }
   },
   methods: {
     getGoodsList () {
       wx.showLoading({
-        "mask": true,
-        title: '正在获取商品列表...'
+        mask: true,
+        title: '正在获取数据...'
       })
       return WXAPI.goods({
         pageIndex: 1,
