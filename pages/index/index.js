@@ -18,7 +18,11 @@ Page({
     const token = wx.getStorageSync('token')
     if (token){
       this.getPartner()
+      wx.hideLoading()
     }
+  },
+  getGoodsList(){
+    return this.selectComponent("#goods-list").getGoodsList()
   },
   getPartner(){
     WXAPI.getPartner({
@@ -45,7 +49,7 @@ Page({
   },
   onPullDownRefresh() {
     wx.showNavigationBarLoading()
-    this.selectComponent("#goods-list").getGoodsList().then(()=>{
+    this.getGoodsList().then(()=>{
       wx.stopPullDownRefresh()
       wx.hideLoading()
       wx.hideNavigationBarLoading()
