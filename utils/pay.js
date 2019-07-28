@@ -7,20 +7,20 @@ function wxpay(app, money, orderId, redirectUrl) {
     money: 0.01,
   }).then( (res) =>{
     wx.requestPayment({
-      timeStamp: Date.now(),
+      timeStamp: res.data.timeStamp.toString(),
       nonceStr: res.data.nonceStr,
-      package: 'prepay_id=' + res.data.prepayId,
+      package: res.data.packageStr,
       signType: 'MD5',
       paySign: res.data.sign,
-      fail:  (aaa)=> {
+      fail:  (err)=> {
+        console.log(err);
         wx.showToast({
-          title: '支付失败:' + aaa
+          title: '支付失败:' + err.errMsg
         })
       },
       success:  ()=> {
         // 保存 formid
         WXAPI.addTempleMsgFormid({
-          token: wx.getStorageSync('token'),
           type: 'pay',
           formId: res.data.prepayId
         })
@@ -34,9 +34,10 @@ function wxpay(app, money, orderId, redirectUrl) {
       }
     })
   }).catch(err=>{
+    console.log(err);
     wx.showModal({
       title: '出错了',
-      content: res.code + ':' + res.msg + ':' + res.data,
+      content: err.code + ':' + err.msg + ':' + err.data,
       showCancel: false,
       success: function (res) {
 
