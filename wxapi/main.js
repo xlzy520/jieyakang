@@ -1,69 +1,8 @@
-// 小程序开发api接口工具包，https://github.com/gooking/wxapi
-// const API_BASE_URL = 'https://api.it120.cc/jieyakang/'
-const API_BASE_URL_XCX = 'https://www.easy-mock.com/mock/5ced4b17d564921f45a737c3/xcx'
-const API_BASE_URL_ADMIN = 'https://www.easy-mock.com/mock/5cdb6b1c196b3a1793f9fcad/admin'
-// const baseUrl = 'http://6afb2cc4.ngrok.io/market'
-// const API_BASE_URL_XCX = baseUrl
-// const API_BASE_URL_ADMIN = baseUrl
+const baseUrl = 'http://49.234.212.216:8080/market'
 const app = getApp()
 // todo 统一处理 正确错误、token过期
 const request = (url,data={},method='post') => {
-  let _url = 'https://api.it120.cc/jieyakang/' + url
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url: _url,
-      method: method==='formdata'?'post': method,
-      data: Object.assign(data, {
-        token: wx.getStorageSync('token')
-      }),
-      header: {
-        'Content-Type': method==='formdata'?'application/x-www-form-urlencoded':'application/json'
-      },
-      success(request) {
-        resolve(request.data)
-      },
-      fail(error) {
-        reject(error)
-      },
-      complete(aaa) {
-        // 加载完成
-      }
-    })
-  })
-}
-const request_xcx = (url,data={},method='post') => {
-  let _url = API_BASE_URL_XCX + url
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url: _url+'?appToken='+ wx.getStorageSync('token'),
-      method: method==='formdata'?'post': method,
-      data: data,
-      header: {
-        'Content-Type': method==='formdata'?'application/x-www-form-urlencoded':'application/json'
-      },
-      success(request) {
-        if (request.data.success){
-          resolve(request.data)
-        } else {
-          if (request.data.code === 1027) {
-            wx.removeStorageSync('token')
-            app.goLoginPageTimeOut()
-          } else {
-            reject(request.data)
-          }
-        }
-      },
-      fail(error) {
-        reject(error)
-      },
-      complete(aaa) {
-        // 加载完成
-      }
-    })
-  })
-}
-const request_admin = (url,data={},method='post') => {
-  let _url = API_BASE_URL_ADMIN + url
+  let _url = baseUrl + url
   return new Promise((resolve, reject) => {
     wx.request({
       url: _url+'?appToken='+ wx.getStorageSync('token'),
@@ -131,57 +70,57 @@ module.exports = {
     return request('/template-msg/put', data)
   },
   wxpay: (data) => {
-    return request_admin('/bill/pay', data)
+    return request('/bill/pay', data)
   },
   login: (code) => {
-    return request_xcx('/login', {
+    return request('/login', {
       username: code,
       password: code
     }, 'formdata')
   },
   register: (data) => {
-    return request_admin('/user/logon', data)
+    return request('/user/logon', data)
   },
   goods: (data) => {
-    return request_admin('/goods/list', data)
+    return request('/goods/list', data)
   },
   goodsDetail: (id) => {
-    return request_admin('/goods/detail', id)
+    return request('/goods/detail', id)
   },
   goodsPrice: (data) => {
     return request('/shop/goods/price', data)
   },
   addAddress: (data) => {
-    return request_admin('/address/save', data)
+    return request('/address/save', data)
   },
   updateAddressDefault: (data) => {
-    return request_xcx('/address/default/update', data)
+    return request('/address/default/update', data)
   },
   updateAddress: (data) => {
-    return request_admin('/address/update', data)
+    return request('/address/update', data)
   },
   deleteAddress: data => {
-    return request_admin('/address/delete', data)
+    return request('/address/delete', data)
   },
   getAddressList: (data) => {
-    return request_admin('/address/list', data)
+    return request('/address/list', data)
   },
   defaultAddress: () => {
-    return request_xcx('/address/default/get')
+    return request('/address/default/get')
   },
   addressDetail: (id) => {
-    return request_xcx('/address/detail',{
+    return request('/address/detail',{
       id,
     })
   },
   orderCreate: (data) => {
-    return request_admin('/order/save', data)
+    return request('/order/save', data)
   },
   orderList: (data) => {
-    return request_xcx('/order/list', data)
+    return request('/order/list', data)
   },
   orderDetail: (id, token) => {
-    return request_xcx('/order/detail',{
+    return request('/order/detail',{
       id,
       token
     })
@@ -193,34 +132,28 @@ module.exports = {
     })
   },
   orderClose: (orderId, token) => {
-    return request_admin('/order/close', {
-      orderId,
-      token
-    })
-  },
-  orderPay: (orderId, token) => {
-    return request('/order/pay', {
+    return request('/order/close', {
       orderId,
       token
     })
   },
   orderStatistics: () => {
-    return request_xcx('/order/statistics')
+    return request('/order/statistics')
   },
   getPartner: (data) => {
-    return request_admin('/partner/list', data)
+    return request('/partner/list', data)
   },
   getCompanyInfo: ()=>{
-    return request_admin('/company/getInfo')
+    return request('/company/getInfo')
   },
   getSchoolList: (data)=>{
-    return request_admin('/school/list', data)
+    return request('/school/list', data)
   },
   getInventoryList: (data)=>{
-    return request_admin('/inventory/list', data)
+    return request('/inventory/list', data)
   },
   getCurrentStore: ()=>{
-    return request_admin('/inventory/current')
+    return request('/inventory/current')
   },
 
 }
