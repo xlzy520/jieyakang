@@ -6,17 +6,7 @@ Page({
     currentTab: 0,
     orderList: [],
   },
-  getAllOrder(){
-    WXAPI.orderList({
-      pageIndex: 1,
-      pageSize: 20,
-      statusCode: ''
-    }).then((res) => {
-      this.setData({
-        orderList: res.data.list
-      })
-    })
-  },
+  // todo 下载加载
   goBack(){
     wx.navigateBack({
       delta: 2,
@@ -26,7 +16,7 @@ Page({
     this.setData({
       currentTab: e.detail
     })
-    this.onShow();
+    this.onLoad();
   },
   orderDetail(e) {
     let orderId = e.currentTarget.dataset.id;
@@ -42,6 +32,10 @@ Page({
       success:(res)=> {
         if (res.confirm) {
           WXAPI.orderClose(orderId).then((res)=> {
+            wx.showToast({
+              title: '取消订单成功',
+              duration: 1000
+            })
             this.onShow();
           })
         }
@@ -75,28 +69,30 @@ Page({
         currentTab: Number(options.type)
       });
     }
+    // 获取订单列表
+    wx.showLoading({
+      title: '努力加载中...'
+    })
+    const currentTabIndex = this.data.currentTab
+    const tabMap = ['', 'unpaid', 'unshipped', 'unreceived']
+    WXAPI.orderList({
+      pageSize: 20,
+      pageIndex: 1,
+      statusCode: tabMap[currentTabIndex]
+    }).then((res)=> {
+      this.setData({
+        orderList: res.data.list
+      });
+    }).finally(()=>{
+      wx.hideLoading()
+    })
   },
   onReady() {
     // 生命周期函数--监听页面初次渲染完成
 
   },
   onShow() {
-    // 获取订单列表
-    const currentTabIndex = this.data.currentTab
-    const tabMap = ['', 'unpaid', 'unshipped', 'unreceived']
-    if (currentTabIndex !== 0) {
-      WXAPI.orderList({
-        pageSize: 20,
-        pageIndex: 1,
-        statusCode: tabMap[currentTabIndex]
-      }).then((res)=> {
-        this.setData({
-          orderList: res.data.list
-        });
-      })
-    } else {
-      this.getAllOrder()
-    }
+
     
   }
 })

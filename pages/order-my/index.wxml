@@ -12,12 +12,14 @@
         <view class="order-number-label">订单号：{{item.orderNumber}}</view>
         <view class="order-status">{{item.statusName}}</view>
       </view>
-      <view class="goods-info" bindtap="orderDetail" data-id="{{item.id}}">
+      <view class="goods-info" bindtap="orderDetail" data-id="{{item.orderId}}">
         <view class="goods-box" wx:for="{{item.orderDetails}}" wx:for-item="goods" wx:key="{{goods.orderId}}">
-          <image src="{{goods.goodsUrl}}" class="goods-img"></image>
+<!--          <image src="{{goods.goodsUrl}}" class="goods-img"></image>-->
+          <image src="http://49.234.212.216/164_164/宴席餐具.png" class="goods-img"></image>
           <view class="goods-right">
             <view class="goods-right-header">
-              <view class="goods-name">{{goods.goodsName}}{{goods.description}}</view>
+              <view class="goods-name">{{goods.goodsName}}
+                {{goods.useType === '幼儿园餐具'?'('+goods.specsName+')':''}}</view>
               <view class="goods-price"><view style="font-size: 30rpx">¥</view> {{goods.price}}</view>
             </view>
             <view class="goods-number {{goods.useType==='餐馆餐具'||goods.useType==='宴席餐具'?'': 'school'}}">
@@ -30,10 +32,10 @@
       </view>
       <view class="heji">
         <!-- todo 记得删除默认-->
-        <view class="heji-gong">共{{item.goodsNumber||200}}份, </view>
+        <view class="heji-gong">共{{item.total}}份, </view>
         <view class="heji-xiaoji">合计:</view>
         <view class="heji-yuan">¥ </view>
-        <view class="heji-price">{{allGoodsPrice||'500.00'}}</view>
+        <view class="heji-price">{{item.amount}}</view>
       </view>
       <view class="order-action">
         <view class="btn cancel-btn" hidden="{{!item.orderStatusId}}" bindtap="cancelOrderTap"

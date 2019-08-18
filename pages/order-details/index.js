@@ -42,7 +42,9 @@ Page({
     }
   },
   onShow() {
-    WXAPI.orderDetail(this.data.orderId).then(res => {
+    WXAPI.orderDetail({
+      orderId: this.data.orderId
+    }).then(res => {
       this.setData({
         orderDetail: res.data
       });

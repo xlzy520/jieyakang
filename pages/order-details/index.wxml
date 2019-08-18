@@ -26,12 +26,13 @@
   <view class="goods-list">
     <view class="goods-info">
       <view class="goods-box" wx:for="{{orderDetail.orderDetails}}" wx:for-item="goods"
-            bindtap="gotoGoods" wx:key="{{goods.orderId}}">
+            bindtap="gotoGoods" wx:key="{{goods.orderId}}" data-id="{{goods.goodsId}}">
         <image src="http://www.xlzy520.cn/164_164/餐馆餐具.png" class="goods-img"></image>
 <!--        <image src="{{goods.goodsUrl}}" class="goods-img"></image>-->
         <view class="goods-right">
           <view class="goods-right-header">
-            <view class="goods-name">{{goods.goodsName}}{{goods.description}}</view>
+            <view class="goods-name">{{goods.goodsName}}
+              {{goods.useType === '幼儿园餐具'?'('+goods.specsName+')':''}}</view>
             <view class="goods-price"><view style="font-size: 30rpx">¥</view> {{goods.price}}</view>
           </view>
           <view class="goods-number {{goods.useType==='餐馆餐具'||goods.useType==='宴席餐具'?'': 'school'}}">
