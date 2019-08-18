@@ -84,8 +84,8 @@ module.exports = {
   goods: (data) => {
     return request('/goods/list', data)
   },
-  goodsDetail: (id) => {
-    return request('/goods/detail', id)
+  goodsDetail: data => {
+    return request('/goods/detail', data)
   },
   goodsPrice: (data) => {
     return request('/shop/goods/price', data)
@@ -119,11 +119,8 @@ module.exports = {
   orderList: (data) => {
     return request('/order/list', data)
   },
-  orderDetail: (id, token) => {
-    return request('/order/detail',{
-      id,
-      token
-    })
+  orderDetail: data => {
+    return request('/order/detail',data)
   },
   orderDelivery: (orderId, token) => {
     return request('/order/delivery', {
@@ -131,11 +128,8 @@ module.exports = {
       token
     })
   },
-  orderClose: (orderId, token) => {
-    return request('/order/close', {
-      orderId,
-      token
-    })
+  orderClose: data => {
+    return request('/order/close', data)
   },
   orderStatistics: () => {
     return request('/order/statistics')
