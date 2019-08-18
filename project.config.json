@@ -8,10 +8,11 @@
 		"newFeature": true,
 		"autoAudits": false,
 		"uglifyFileName": true,
-		"checkInvalidKey": true
+		"checkInvalidKey": true,
+		"checkSiteMap": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.6",
+	"libVersion": "2.8.0",
 	"appid": "wxfcc24a29b3ff5f57",
 	"projectname": "jieyakang-miniprogram",
 	"scripts": {},
