@@ -50,7 +50,13 @@ App({
         wx.hideToast()
       }
     });
-    // let token = wx.getStorageSync('token');
+    let token = wx.getStorageSync('token');
+    if (token === '') {
+      this.navigateToLogin = true
+      if (this.navigateToLogin === true) {
+        this.goLoginPageTimeOut()
+      }
+    }
   },
   goLoginPageTimeOut() {
     setTimeout(()=> {
