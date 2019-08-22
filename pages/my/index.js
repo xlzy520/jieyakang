@@ -17,9 +17,9 @@ Page({
   },
 	onLoad() {
     this.getUserTypeByDefaultAddress();
-    this.getOrderStatistics()
 	},
   onShow() {
+    this.getOrderStatistics()
   },
   getUserTypeByDefaultAddress() {
     WXAPI.defaultAddress().then((res)=> {

@@ -1,5 +1,5 @@
-// const baseUrl = 'https://axjieyakang.com/market'
-const baseUrl = 'http://7dc785e8.ngrok.io/market'
+const baseUrl = 'https://axjieyakang.com/market'
+// const baseUrl = 'http://7dc785e8.ngrok.io/market'
 // todo 统一处理 正确错误、token过期
 const auth = require('../utils/auth')
 const request = (url,data={},method='post') => {
@@ -109,10 +109,8 @@ module.exports = {
   defaultAddress: () => {
     return request('/address/default/get')
   },
-  addressDetail: (id) => {
-    return request('/address/detail',{
-      id,
-    })
+  addressDetail: (data) => {
+    return request('/address/detail',data)
   },
   orderCreate: (data) => {
     return request('/order/save', data)
