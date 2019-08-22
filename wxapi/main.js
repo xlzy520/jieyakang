@@ -1,4 +1,4 @@
-const baseUrl = 'http://49.234.212.216:8080/market'
+const baseUrl = 'https://axjieyakang.com/market'
 const app = getApp()
 // todo 统一处理 正确错误、token过期
 const request = (url,data={},method='post') => {
