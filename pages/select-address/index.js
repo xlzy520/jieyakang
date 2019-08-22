@@ -1,7 +1,8 @@
 const WXAPI = require('../../wxapi/main')
 Page({
   data: {
-    addressList: []
+    addressList: [],
+    from: ''
   },
   
   updateAddressDefault(e){
@@ -17,9 +18,11 @@ Page({
     })
   },
   selectTap(e) {
-    const address = e.currentTarget.dataset.address
-    wx.setStorageSync('select-address', address)
-    wx.navigateBack()
+    if (this.data.from === 'pay') {
+      const address = e.currentTarget.dataset.address
+      wx.setStorageSync('select-address', address)
+      wx.navigateBack()
+    }
   },
   addAddress() {
     wx.navigateTo({
@@ -33,7 +36,9 @@ Page({
     })
   },
   onLoad(e) {
-
+    this.setData({
+      from: e.from
+    });
   },
   onShow() {
     this.initShippingAddress();

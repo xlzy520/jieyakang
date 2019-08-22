@@ -120,7 +120,7 @@ Page({
   },
   selectAddress() {
     wx.navigateTo({
-      url: "/pages/select-address/index"
+      url: "/pages/select-address/index?from=pay"
     })
   }
 })
