@@ -64,13 +64,20 @@ Page({
       orderType: e.orderType
     });
   },
-
   toPay(e){
-    if (e && "buyNow" !== this.data.orderType) {
-      // 清空购物车数据
-      wx.removeStorageSync('shopCarInfo');
+    if (this.matchGoodsAddress()) {
+      // 如果已存在订单id，那么就是已经创建过订单了
+      // todo 未测试  还需要测试
+      if (this.data.orderId) {
+        this.createOrder().then(()=>{
+          if (e && "buyNow" !== this.data.orderType) {
+            // 清空购物车数据
+            wx.removeStorageSync('shopCarInfo');
+          }
+          wxpay.wxpay('order', this.data.allGoodsPrice, this.data.orderId, "/pages/index/index");
+        })
+      }
     }
-    wxpay.wxpay('order', this.data.allGoodsPrice, this.data.orderId, "/pages/index/index");
   },
   createOrder() {
     // if (!this.data.curAddressData) {
@@ -82,7 +89,7 @@ Page({
     //   })
     //   return;
     // }
-    WXAPI.orderCreate({
+    return WXAPI.orderCreate({
       addressId: this.data.curAddressData.addressId,
       orderDetails: this.data.goodsList,
     }).then( (res)=> {
@@ -100,6 +107,19 @@ Page({
       wx.hideLoading()
     })
   },
+  matchGoodsAddress(){
+    if (Boolean(this.data.curAddressData.addressType)===
+      Boolean(['宴席餐具','餐馆餐具'].includes('this.goodsList[0].useType'))) {
+      this.setData({
+        dialogText: '请选择商品想对应的地址',
+        dialogType: ''
+      })
+      return false
+    } else {
+      this.createOrder()
+      return true
+    }
+  },
   initShippingAddress() {
     wx.showLoading({
       mask: true,
@@ -109,8 +129,15 @@ Page({
       this.setData({
         curAddressData: res.data
       });
-
-      this.createOrder();
+      if (this.matchGoodsAddress()) {
+        this.createOrder()
+      }
+    })
+  },
+  close(){
+    this.setData({
+      dialogText: '',
+      dialogType: 'add-address'
     })
   },
   addAddress() {
