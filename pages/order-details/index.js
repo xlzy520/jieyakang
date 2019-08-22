@@ -1,5 +1,6 @@
 const app = getApp();
 const WXAPI = require('../../wxapi/main')
+const wxpay = require('../../utils/pay')
 Page({
   data: {
     titleMap: {
@@ -65,15 +66,19 @@ Page({
           WXAPI.orderClose({
             orderId: this.data.orderId
           }).then((res)=> {
-            this.onShow();
+            wx.showToast({
+              title: '取消订单成功',
+              duration: 1000
+            })
+            wx.navigateBack()
           })
         }
       }
     })
   },
   toPayTap(e) {
-    const orderId = e.currentTarget.dataset.id;
-    let money = e.currentTarget.dataset.money;
+    const orderId = this.data.orderId
+    let money = this.data.orderDetail.amount
     let _msg = '订单金额: ' + money +' 元'
     wx.showModal({
       title: '请确认支付',
