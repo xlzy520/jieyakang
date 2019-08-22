@@ -151,6 +151,9 @@ Page({
         });
       }).catch(err=>{
         this.setTipText('无法获取快递地址数据')
+        setTimeout(function(){
+          wx.navigateBack()
+        }, 1000)
       })
     }
   },
