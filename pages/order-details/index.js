@@ -3,6 +3,7 @@ const WXAPI = require('../../wxapi/main')
 const wxpay = require('../../utils/pay')
 Page({
   data: {
+    lastTime: '',
     titleMap: {
       'unpaid': {
         label: '等待买家付款',
@@ -47,8 +48,14 @@ Page({
       orderId: this.data.orderId
     }).then(res => {
       this.setData({
-        orderDetail: res.data
+        orderDetail: res.data,
+        lastTime: Date.now()
       });
+      // todo 完善
+      const ss = 'titleMap.unpaid.labelTip'
+      this.setData({
+        [ss]: 'ssssssssss'
+      })
     }).catch(err => {
       wx.showModal({
         title: '错误',
