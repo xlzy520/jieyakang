@@ -14,10 +14,11 @@ Page({
       url: "/pages/banner-detail/index"
     })
   },
-  onLoad() {
+  onShow() {
     const token = wx.getStorageSync('token')
     if (token){
       this.getPartner()
+      this.getGoodsList()
       wx.hideLoading()
     }
   },

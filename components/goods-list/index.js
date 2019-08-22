@@ -11,6 +11,7 @@ Component({
     goods: []
   },
   attached(){
+    console.log(2);
     const token = wx.getStorageSync('token')
     if (token){
       this.getGoodsList()
