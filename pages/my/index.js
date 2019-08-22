@@ -20,14 +20,6 @@ Page({
     this.getOrderStatistics()
 	},
   onShow() {
-    let userInfo = wx.getStorageSync('userInfo')
-    if (!userInfo) {
-      app.goLoginPageTimeOut()
-    } else {
-      this.setData({
-        userInfo: userInfo,
-      })
-    }
   },
   getUserTypeByDefaultAddress() {
     WXAPI.defaultAddress().then((res)=> {

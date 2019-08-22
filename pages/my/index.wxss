@@ -22,6 +22,8 @@
   border-radius: 50%;
   border: 2px solid #fff;
   background-color: #b90105;
+  overflow:hidden;
+  display: block;
 }
 .userinfo-nickname {
   font-family: PingFang SC Medium, sans-serif;
