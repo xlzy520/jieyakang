@@ -1,5 +1,3 @@
-const WXAPI = require('../../wxapi/main')
-const app = getApp()
 Page({
   data: {
     isEditing: false,
