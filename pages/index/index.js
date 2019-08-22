@@ -15,6 +15,9 @@ Page({
     })
   },
   onShow() {
+    wx.showLoading({
+      title: '努力加载中...'
+    })
     const token = wx.getStorageSync('token')
     if (token){
       this.getPartner()
