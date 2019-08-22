@@ -14,7 +14,15 @@ Page({
     dialogType: 'add-address'
   },
   onShow () {
-    this.initShippingAddress();
+    const address = wx.getStorageSync('select-address')
+    if (address) {
+      this.setData({
+        curAddressData: address
+      })
+      wx.removeStorageSync('select-address')
+    } else {
+      this.initShippingAddress();
+    }
     let shopList = [];
     if ("buyNow" === this.data.orderType) {
       let buyNowInfoMem = wx.getStorageSync('buyNowInfo');
@@ -51,18 +59,10 @@ Page({
       goodsList: shopList,
     });
   },
-
   onLoad(e) {
     this.setData({
       orderType: e.orderType
     });
-    const address = wx.getStorageSync('select-address')
-    if (address) {
-      this.setData({
-        curAddressData: address
-      })
-      wx.removeStorageSync('select-address')
-    }
   },
 
   toPay(e){
@@ -109,6 +109,7 @@ Page({
       this.setData({
         curAddressData: res.data
       });
+
       this.createOrder();
     })
   },
