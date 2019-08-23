@@ -131,7 +131,11 @@ Page({
       });
       if (this.matchGoodsAddress()) {
         this.createOrder()
+      }else {
+        wx.hideLoading()
       }
+    }).finally(() => {
+      wx.hideLoading()
     })
   },
   close(){
