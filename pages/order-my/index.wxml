@@ -41,7 +41,7 @@
         <view class="btn cancel-btn" hidden="{{!item.orderStatusId}}" bindtap="cancelOrderTap"
               data-id="{{item.orderId}}">取消订单</view>
         <view class="btn topay-btn" hidden="{{!item.orderStatusId}}" bindtap="toPayTap" data-id="{{item.orderId}}"
-              data-money="{{item.amountReal||500}}">立即支付</view>
+              data-money="{{item.amount}}">立即支付</view>
       </view>
     </view>
 

@@ -35,6 +35,7 @@ Page({
             orderId: orderId
           }).then((res)=> {
             wx.showToast({
+              icon: 'success',
               title: '取消订单成功',
               duration: 1000
             })
