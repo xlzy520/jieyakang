@@ -1,6 +1,5 @@
 const WXAPI = require('../../wxapi/main.js')
 const CONFIG = require('../../config.js')
-const auth = require('../../utils/auth')
 Page({
   data: {
     partners: []
@@ -15,18 +14,47 @@ Page({
       url: "/pages/banner-detail/index"
     })
   },
+  goLoginPageTimeOut() {
+    setTimeout(() => {
+      wx.navigateTo({
+        url: "/pages/authorize/index"
+      })
+    }, 500)
+  },
+  login() {
+    wx.login({
+      success: res=> {
+        WXAPI.login(res.code).then(res=> {
+          wx.setStorageSync('token', res.data.appToken)
+          if (res.data.isFirst) {
+            this.goLoginPageTimeOut();
+          } else {
+            this.getPartner()
+            this.getGoodsList()
+          }
+        }).catch(err=>{
+          wx.showModal({
+            title: '提示',
+            content: err.msg||'无法登录，请重试',
+            showCancel: false
+          })
+        }).finally(()=>{
+          wx.hideLoading();
+        })
+      }
+    })
+  },
   onLoad() {
-    // todo 如果第一次登陆的话，需要测试授权之后返回能否获取列表
     wx.showLoading({
       title: '努力加载中...'
     })
     const token = wx.getStorageSync('token')
-    if (!token){
+    if (token){
       this.getPartner()
       this.getGoodsList()
       wx.hideLoading()
     } else {
-      auth.login()
+      this.login()
     }
   },
   getGoodsList(){

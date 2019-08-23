@@ -1,4 +1,3 @@
-const auth = require('utils/auth')
 App({
   navigateToLogin: false,
   onLaunch() {
@@ -50,10 +49,6 @@ App({
         wx.hideToast()
       }
     });
-    let token = wx.getStorageSync('token');
-    if (token === '') {
-      auth.login()
-    }
   },
   globalData: {
     isConnected: true
