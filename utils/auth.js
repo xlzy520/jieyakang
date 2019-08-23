@@ -3,7 +3,6 @@ module.exports = {
   login() {
     wx.login({
       success: res=> {
-        console.log(res.code);
         WXAPI.login(res.code).then(res=> {
           wx.setStorageSync('token', res.data.appToken)
           if (res.data.isFirst) {

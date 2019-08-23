@@ -2,6 +2,7 @@ const baseUrl = 'https://axjieyakang.com/market'
 // const baseUrl = 'http://7dc785e8.ngrok.io/market'
 // todo 统一处理 正确错误、token过期
 const auth = require('../utils/auth')
+let loginFlag = false
 const request = (url,data={},method='post') => {
   let _url = baseUrl + url
   return new Promise((resolve, reject) => {
@@ -18,7 +19,12 @@ const request = (url,data={},method='post') => {
         } else {
           if (request.data.code === 1027) {
             wx.removeStorageSync('token')
-            auth.login()
+            if (!loginFlag) {
+              auth.login()
+            } else {
+              loginFlag = true
+            }
+
           } else {
             wx.showModal({
               title: '错误',

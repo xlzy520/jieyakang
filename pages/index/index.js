@@ -1,5 +1,6 @@
 const WXAPI = require('../../wxapi/main.js')
 const CONFIG = require('../../config.js')
+const auth = require('../../utils/auth')
 Page({
   data: {
     partners: []
@@ -19,10 +20,12 @@ Page({
       title: '努力加载中...'
     })
     const token = wx.getStorageSync('token')
-    if (token){
+    if (!token){
       this.getPartner()
       this.getGoodsList()
       wx.hideLoading()
+    } else {
+      auth.login()
     }
   },
   getGoodsList(){
