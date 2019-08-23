@@ -92,6 +92,9 @@ Page({
     switch (this.data.goodsDetail.useType) {
       case '幼儿园餐具':
         eatNumTag = [{label: '两餐', value: 2}]
+        this.setData({
+          eatNum: 2
+        })
         break;
       case '小学餐具':
         eatNumTag = [{label: '一餐', value: 1},{label: '两餐', value: 2}]
