@@ -14,9 +14,6 @@ function wxpay(app, money, orderId, redirectUrl) {
       paySign: res.data.sign,
       fail:  (err)=> {
         console.log(err);
-        wx.showToast({
-          title: '支付失败:' + err.errMsg
-        })
       },
       success:  ()=> {
         // 保存 formid

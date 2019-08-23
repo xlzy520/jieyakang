@@ -16,11 +16,11 @@ Page({
     selectSpecLabel: "",
     selectSizePrice: 0,
     specsId: '',
-    eatNum: 2,
-    peopleNum: 10,
-    eatDay: 20,
-    quantity: 10,
-  
+    eatNum: 1,
+    peopleNum: 1,
+    eatDay: 1,
+    quantity: 1,
+  //update 商品详情更新默认值，当时幼儿园类型时，修改价格为
     tipText: '',
     imgs: ['http://www.xlzy520.cn/750_600/餐馆餐具.png', 'http://www.xlzy520.cn/750_600/餐馆餐具.png']
   },
@@ -56,8 +56,13 @@ Page({
       goodsId: e.id
     }).then((res)=> {
       this.setData({
-        goodsDetail: res.data
+        goodsDetail: res.data,
       })
+      if (res.data.useType === '幼儿园餐具') {
+        this.setData({
+          selectSizePrice: res.data.priceStr
+        })
+      }
     }).finally(()=>{
       wx.hideLoading()
     })
@@ -197,12 +202,6 @@ Page({
     })
   },
   buyNow() {
-    // todo 选择地址的逻辑
-    // WXAPI.getAddressList().then( (res)=> {
-    //   if (res.length){
-    //
-    //   }
-    // })
     if (!this.validate()) {
       return
     }
@@ -307,6 +306,8 @@ Page({
       delete shopCarMap.eatNum
       delete shopCarMap.eatDay
       delete shopCarMap.peopleNum
+    }else {
+      delete shopCarMap.quantity
     }
     buyNowInfo.shopList.push(shopCarMap);
     return buyNowInfo;

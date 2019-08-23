@@ -14,10 +14,14 @@ Page({
       url: "/pages/banner-detail/index"
     })
   },
-  onLoad() {
+  onShow() {
+    wx.showLoading({
+      title: '努力加载中...'
+    })
     const token = wx.getStorageSync('token')
     if (token){
       this.getPartner()
+      this.getGoodsList()
       wx.hideLoading()
     }
   },

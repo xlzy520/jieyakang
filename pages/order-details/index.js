@@ -1,7 +1,9 @@
 const app = getApp();
 const WXAPI = require('../../wxapi/main')
+const wxpay = require('../../utils/pay')
 Page({
   data: {
+    lastTime: '',
     titleMap: {
       'unpaid': {
         label: '等待买家付款',
@@ -46,8 +48,14 @@ Page({
       orderId: this.data.orderId
     }).then(res => {
       this.setData({
-        orderDetail: res.data
+        orderDetail: res.data,
+        lastTime: Date.now()
       });
+      // todo 完善
+      const ss = 'titleMap.unpaid.labelTip'
+      this.setData({
+        [ss]: 'ssssssssss'
+      })
     }).catch(err => {
       wx.showModal({
         title: '错误',
@@ -65,15 +73,19 @@ Page({
           WXAPI.orderClose({
             orderId: this.data.orderId
           }).then((res)=> {
-            this.onShow();
+            wx.showToast({
+              title: '取消订单成功',
+              duration: 1000
+            })
+            wx.navigateBack()
           })
         }
       }
     })
   },
   toPayTap(e) {
-    const orderId = e.currentTarget.dataset.id;
-    let money = e.currentTarget.dataset.money;
+    const orderId = this.data.orderId
+    let money = this.data.orderDetail.amount
     let _msg = '订单金额: ' + money +' 元'
     wx.showModal({
       title: '请确认支付',

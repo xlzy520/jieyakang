@@ -31,12 +31,14 @@ Page({
       content: '',
       success:(res)=> {
         if (res.confirm) {
-          WXAPI.orderClose(orderId).then((res)=> {
+          WXAPI.orderClose({
+            orderId: orderId
+          }).then((res)=> {
             wx.showToast({
               title: '取消订单成功',
               duration: 1000
             })
-            this.onShow();
+            this.onLoad();
           })
         }
       }

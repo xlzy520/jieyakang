@@ -84,7 +84,7 @@
       <view class="goods-guige" wx:if="{{goodsDetail.useType==='幼儿园餐具'}}">
         <view class="left-title">餐具规格</view>
         <view class="right-content">
-          <view class="guige-item {{specSelected===item.specsId?'active': ''}}"
+          <view class="guige-item {{specsId===item.specsId?'active': ''}}"
                 wx:for="{{goodsDetail.specsList}}" wx:key="item.specsId"
                 data-id="{{item.specsId}}" data-specsname="{{item.specsName}}"
                 data-price="{{item.price}}" bindtap="selectSpec">

@@ -1,4 +1,4 @@
-// const WXAPI = require('wxapi/main')
+const auth = require('utils/auth')
 App({
   navigateToLogin: false,
   onLaunch() {
@@ -52,18 +52,8 @@ App({
     });
     let token = wx.getStorageSync('token');
     if (token === '') {
-      this.navigateToLogin = true
-      if (this.navigateToLogin === true) {
-        this.goLoginPageTimeOut()
-      }
+      auth.login()
     }
-  },
-  goLoginPageTimeOut() {
-    setTimeout(()=> {
-      wx.navigateTo({
-        url: "/pages/authorize/index"
-      })
-    }, 500)
   },
   globalData: {
     isConnected: true
