@@ -11,7 +11,7 @@
 
   <view class="cart-goods-list">
     <view class="list-top" hidden="{{!shopList.length}}">
-      <view class="edit-btn" bindtap="shopCarEdit" data-type="{{isEditing}}">{{isEditing?'完成': '编辑'}}</view>
+      <view class="edit-btn" bindtap="shopCarEdit">{{isEditing?'完成': '编辑'}}</view>
     </view>
     <view class="goodsList">
       <view class="a-gooods" wx:for="{{shopList}}" wx:for-item="goods" wx:key="{{goods.goodsId}}" >

@@ -17,28 +17,25 @@ Page({
   onShow() {
     const shopCarInfo = wx.getStorageSync('shopCarInfo');
     if (shopCarInfo&&shopCarInfo.shopList) {
+      const list = shopCarInfo.shopList.map(v=>{
+        v.active = false
+        return v
+      })
       this.setData({
-        shopList: shopCarInfo.shopList
+        shopList: list
       })
     }
   },
   shopCarEdit(e){
-    const active = e.target.dataset.type
+    const active = this.data.isEditing
     const { shopList } = this.data;
     for (let i = 0; i < shopList.length; i++) {
-      shopList[i].active = active;
+      shopList[i].active = false;
     }
-    if (active) {
-      this.setData({
-        isEditing: false
-      })
-    } else {
-      this.setData({
-        isEditing: true
-      })
-    }
+    this.setData({
+      isEditing: !active
+    })
     this.updatePageData()
-    // this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
   },
   toIndexPage() {
     wx.switchTab({
