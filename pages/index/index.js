@@ -15,7 +15,8 @@ Page({
       url: "/pages/banner-detail/index"
     })
   },
-  onShow() {
+  onLoad() {
+    // todo 如果第一次登陆的话，需要测试授权之后返回能否获取列表
     wx.showLoading({
       title: '努力加载中...'
     })
