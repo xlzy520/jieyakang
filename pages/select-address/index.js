@@ -37,7 +37,7 @@ Page({
   },
   onLoad(e) {
     this.setData({
-      from: e.from
+      from: e.from|| ""
     });
   },
   onShow() {
