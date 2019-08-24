@@ -54,6 +54,10 @@
     </view>
    </view>
   <view class="footer-box">
+    <view class="shop-cart" bindtap="goShopCart">
+      <image src="/images/nav/shop-cart-off.png" class="shop-cart"></image>
+      <sup class="badge" wx:if="{{shopCartNum}}">{{shopCartNum}}</sup>
+    </view>
     <image src="/images/goods-detail/shop-cart.png" class="join-shop-cart" bindtap="toAddShopCar"></image>
     <image src="/images/goods-detail/buy-now.png" class="now-buy" bindtap="tobuy"></image>
   </view>
