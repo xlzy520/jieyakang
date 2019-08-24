@@ -15,6 +15,7 @@ Page({
         title: '更新默认地址成功',
         duration: 1000
       })
+      this.initShippingAddress()
     })
   },
   selectTap(e) {
