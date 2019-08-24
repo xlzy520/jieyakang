@@ -13,6 +13,7 @@
 
     "pages/address-add/index",
     "pages/my/index",
+    "pages/pay-success/index",
     "pages/tableware/index",
     "pages/contact-us/index",
     "pages/authorize/index",
