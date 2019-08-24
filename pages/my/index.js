@@ -2,7 +2,7 @@ const app = getApp()
 const WXAPI = require('../../wxapi/main')
 Page({
 	data: {
-    userType: '1',
+    userType: 0,
 	  orderNav: [
       {type: 0, label: '我的订单', img: 'order'},
       {type: 1, label: '待付款', img: 'pay'},
@@ -16,10 +16,11 @@ Page({
     badge: [0,0,0,0]
   },
 	onLoad() {
-    this.getUserTypeByDefaultAddress();
+
 	},
   onShow() {
     this.getOrderStatistics()
+    this.getUserTypeByDefaultAddress();
   },
   getUserTypeByDefaultAddress() {
     WXAPI.defaultAddress().then((res)=> {
@@ -31,6 +32,11 @@ Page({
   goOrder(e) {
     wx.navigateTo({
       url: "/pages/order-my/index?type=" + e.currentTarget.dataset.type
+    })
+  },
+  goRecord(e){
+    wx.navigateTo({
+      url: "/pages/jinxiaocun/index?type=" + e.currentTarget.dataset.type
     })
   },
   getOrderStatistics() {
