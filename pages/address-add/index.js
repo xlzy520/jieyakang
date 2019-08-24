@@ -168,6 +168,10 @@ Page({
     WXAPI.deleteAddress({
       addressId: id
     }).then(()=> {
+      wx.showToast({
+        title: '删除地址成功',
+        icon: 'success'
+      })
       wx.navigateBack({})
     })
   }
