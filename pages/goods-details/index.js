@@ -240,12 +240,13 @@ Page({
   },
   buildShopCarInfo() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType} = this.data.goodsDetail
-    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
+    const { specsId, eatNum, peopleNum, eatDay, quantity,selectSpecLabel, selectSizePrice} = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
       fileUrls: fileUrls,
-      priceStr: priceStr,
+      selectSizePrice: selectSizePrice,
+      selectSpecLabel: selectSpecLabel? '('+selectSpecLabel+')': '',
       specsList: specsList,
       useType: useType,
       

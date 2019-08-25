@@ -39,8 +39,8 @@
             </view>
             <view class="text-box" wx:if="{{goods.specsList[0].pack}}">
               <view class="name-price">
-                <view class="goods-name">{{goods.goodsName}}</view>
-                <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{goods.priceStr}}</view>
+                <view class="goods-name">{{goods.goodsName}}{{goods.selectSpecLabel}}</view>
+                <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{goods.selectSizePrice}}</view>
               </view>
               <view class="guige-num">
                 <view class="detail-selected" catchtap="changeGuige" data-index="{{index}}">

@@ -22,7 +22,11 @@ Page({
         return v
       })
       this.setData({
-        shopList: list
+        shopList: list,
+        isEditing: false,
+        totalPrice: 0,
+        allSelect: false,
+        noSelect: false,
       })
       this.updatePageData()
     }
@@ -83,7 +87,7 @@ Page({
     for (let i = 0; i < shopList.length; i++) {
       let curItem = shopList[i];
       if (curItem.active) {
-        total += parseFloat(curItem.priceStr) * curItem.quantity;
+        total += parseFloat(curItem.selectSizePrice) * curItem.quantity;
       }
     }
     total = total.toFixed(2); //js浮点计算bug，取两位小数精度
@@ -142,8 +146,8 @@ Page({
     this.setSelectStatus()
   },
   toPayOrder() {
-    const shopList = this.data.shopList
-    const useTypeMap = shopList.map(v=>v.useType)
+    const activeShopList = this.data.shopList.filter(v=>v.active)
+    const useTypeMap = activeShopList.map(v=>v.useType)
     const initMap1 = ['宴席餐具','餐馆餐具']
     const initMap2 = ['小学餐具','中学餐具', '幼儿园餐具']
     let flag = []
@@ -154,7 +158,8 @@ Page({
         flag.push(2)
       }
     })
-    if (!flag.every(v=>v===1)&&!flag.every(v=>v===2)) {
+    const isMixin = flag.every(v=>v===1)||flag.every(v=>v===2)
+    if (!isMixin) {
       wx.showToast({
         title: '只能选择学校或餐馆类型的商品',
         icon: 'none'
@@ -187,7 +192,7 @@ Page({
     }
     this.setData({
       hideShopPopup: false,
-      selectSizePrice: this.data.goodsDetail.priceStr,
+      selectSizePrice: this.data.goodsDetail.selectSizePrice,
       eatNumTag: eatNumTag
     })
   },

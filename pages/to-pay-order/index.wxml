@@ -24,13 +24,13 @@
         </view>
         <view class="text-box">
           <view class="name-price">
-            <view class="goods-name">{{item.goodsName}}</view>
-            <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{item.priceStr}}</view>
+            <view class="goods-name">{{item.goodsName}}{{goods.selectSpecLabel}}</view>
+            <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{item.selectSizePrice}}</view>
           </view>
           <view class="guige-num {{item.useType==='餐馆餐具'||item.useType==='宴席餐具'?'': 'school'}}">
             <view class="goods-guige" wx:if="{{item.useType==='餐馆餐具'||item.useType==='宴席餐具'}}">
               ({{item.specsList[0].specsStr}})</view>
-            <view class="goods-num"><view style="font-size: 20rpx;margin-right: 15rpx">x</view> {{totalNum}}</view>
+            <view class="goods-num"><view style="font-size: 20rpx;margin-right: 15rpx">x</view> {{item.quantity}}</view>
           </view>
           <view class="num-detail">
             <view class="num-detail-row" wx:if="{{item.useType!=='餐馆餐具'&&item.useType!=='宴席餐具'&&item.useType!=='幼儿园餐具'}}">

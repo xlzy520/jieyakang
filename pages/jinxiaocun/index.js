@@ -13,7 +13,12 @@ Page({
     pageIndex: 1,
     noMore: false
   },
-  onLoad() {
+  onLoad(e) {
+    if (e&&e.type) {
+      this.setData({
+        currentTab: e.type
+      })
+    }
    this.getInventoryList({
      pageSize: 20,
      pageIndex: 1,

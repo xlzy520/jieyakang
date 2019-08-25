@@ -95,7 +95,8 @@ Page({
         // 清空购物车数据
         wx.removeStorageSync('shopCarInfo');
       }
-      wxpay.wxpay('order', this.data.allGoodsPrice, this.data.orderId, "/pages/pay-success/index");
+      wxpay.wxpay('order', this.data.allGoodsPrice, this.data.orderId,
+        "/pages/pay-success/index?orderId="+this.data.orderId);
     }).catch(err=>{
       wx.showModal({
         title: '错误',
