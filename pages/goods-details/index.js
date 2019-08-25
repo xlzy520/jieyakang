@@ -22,7 +22,6 @@ Page({
     quantity: 1,
   //update 商品详情更新默认值，当时幼儿园类型时，修改价格为
     tipText: '',
-    imgs: ['http://www.xlzy520.cn/750_600/餐馆餐具.png', 'http://www.xlzy520.cn/750_600/餐馆餐具.png'],
     shopCartNum: null
   },
 

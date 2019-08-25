@@ -6,7 +6,7 @@ Page({
     allGoodsPrice: '0.00',
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
-    curAddressData: {},
+    curAddressData: null,
     totalNum: 0, //共几份
     eatNumTag: ['一餐','二餐', '三餐', '四餐'],
     orderId: '',
@@ -71,15 +71,6 @@ Page({
     }
   },
   createOrder() {
-    // if (!this.data.curAddressData) {
-    //   wx.hideLoading();
-    //   wx.showModal({
-    //     title: '错误',
-    //     content: '请先设置您的收货地址！',
-    //     showCancel: false
-    //   })
-    //   return;
-    // }
     wx.showLoading({
       title: '创建订单中...'
     })
@@ -108,6 +99,14 @@ Page({
     })
   },
   matchGoodsAddress(){
+    if (!this.data.curAddressData) {
+      wx.showModal({
+        title: '错误',
+        content: '请先设置您的收货地址！',
+        showCancel: false
+      })
+      return;
+    }
     if (Boolean(this.data.curAddressData.addressType) ===
       Boolean(['宴席餐具','餐馆餐具'].includes(this.data.goodsList[0].useType))) {
       this.createOrder()

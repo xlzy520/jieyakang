@@ -47,6 +47,18 @@ Page({
       url: "/pages/index/index"
     });
   },
+  selectSpec(e) {
+    const spec = e.target.dataset.id
+    const specsName = e.target.dataset.specsname
+    const price = e.target.dataset.price
+    this.setData({
+      'currentShop.specsId': spec,
+      'currentShop.selectSpecLabel': specsName? '('+specsName+')': '',
+      selectSpecLabel: specsName,
+      selectSizePrice: price
+    })
+    // this.updatePageData()
+  },
   selectTap(e) {
     const index = e.currentTarget.dataset.index;
     const { shopList } = this.data;
@@ -56,10 +68,9 @@ Page({
     }
   },
   selectEatNumTag(e){
-    const eatNumLabel = e.target.dataset.label
-    const eatNum = this.data.eatNumTag.findIndex(v=>v===eatNumLabel)
+    const eatNum = e.target.dataset.num
     this.setData({
-      'currentShop.eatNum': eatNum+1,
+      'currentShop.eatNum': eatNum,
     })
   },
   changeGuige(e){
@@ -68,6 +79,7 @@ Page({
       hideShopPopup: false,
       currentShop: JSON.parse(JSON.stringify(this.data.shopList[index]))
     })
+    this.openGuigeDialog()
   },
   setShopList(){
     const { shopList } = this.data
@@ -173,7 +185,7 @@ Page({
   // 规格选择
   openGuigeDialog() {
     let eatNumTag = []
-    switch (this.data.goodsDetail.useType) {
+    switch (this.data.currentShop.useType) {
       case '幼儿园餐具':
         eatNumTag = [{label: '两餐', value: 2}]
         break;
@@ -192,13 +204,17 @@ Page({
     }
     this.setData({
       hideShopPopup: false,
-      selectSizePrice: this.data.goodsDetail.selectSizePrice,
+      selectSizePrice: this.data.currentShop.selectSizePrice,
+      selectSpecLabel: this.data.currentShop.selectSpecLabel
+        .replace('(','').replace(')',''),
       eatNumTag: eatNumTag
     })
   },
   closePopupTap: function() {
     this.setData({
-      hideShopPopup: true
+      hideShopPopup: true,
+      selectSpecLabel: this.data.currentShop.selectSpecLabel
+        .replace('(','').replace(')','')
     })
   },
   numJianTap(e) {

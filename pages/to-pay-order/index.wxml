@@ -9,7 +9,7 @@
           <view class="name-or-class">{{curAddressData.consignee||curAddressData.class}}</view>
           <view class="mobile">{{curAddressData.mobile}}</view>
         </view>
-        <view class="row">
+        <view class="row" hidden="{{curAddressData.length > 0}}">
           <image class="address-type" src="/images/useType/{{curAddressData.addressType?'canguan':'school'}}.png"></image>
           <view class="addr-text">{{curAddressData.address||curAddressData.schoolName}}</view>
         </view>
