@@ -23,7 +23,15 @@ Page({
       }
     },
     orderId: 0,
-    orderDetail: {}
+    orderDetail: {},
+    companyPhone: ''
+  },
+  getCompanyInfo(){
+    WXAPI.getCompanyInfo().then(res=>{
+      this.setData({
+        companyPhone: res.data.phone|| '0736 - 4388889',
+      })
+    })
   },
   call() {
     wx.makePhoneCall({
