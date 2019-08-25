@@ -48,13 +48,19 @@ Page({
   },
   changeCurrentTab(e){
     this.setData({
-      currentTab: e.detail
+      currentTab: e.detail,
+      noMore: false
     })
     if (e.detail){
+      wx.showLoading({
+        title: '努力加载中...'
+      })
       WXAPI.getCurrentStore().then(res=>{
         this.setData({
           storeMap: res.data
         })
+      }).finally(() => {
+        wx.hideLoading()
       })
     }
   },

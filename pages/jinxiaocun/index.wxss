@@ -53,7 +53,7 @@
   height: 45rpx;
   line-height: 45rpx;
   padding: 5rpx 20rpx;
-  background: linear-gradient(#3399ff, #6ab9ff);
+  background: linear-gradient(#ff0000, #ff001c);
   color: #fff;
   border-radius: 20rpx;
 }

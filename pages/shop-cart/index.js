@@ -24,6 +24,7 @@ Page({
       this.setData({
         shopList: list
       })
+      this.updatePageData()
     }
   },
   shopCarEdit(e){
@@ -141,6 +142,25 @@ Page({
     this.setSelectStatus()
   },
   toPayOrder() {
+    const shopList = this.data.shopList
+    const useTypeMap = shopList.map(v=>v.useType)
+    const initMap1 = ['宴席餐具','餐馆餐具']
+    const initMap2 = ['小学餐具','中学餐具', '幼儿园餐具']
+    let flag = []
+    useTypeMap.map(v=>{
+      if (initMap1.includes(v)) {
+        flag.push(1)
+      } else {
+        flag.push(2)
+      }
+    })
+    if (!flag.every(v=>v===1)&&!flag.every(v=>v===2)) {
+      wx.showToast({
+        title: '只能选择学校或餐馆类型的商品',
+        icon: 'none'
+      })
+      return false
+    }
     wx.navigateTo({
       url: "/pages/to-pay-order/index"
     })
@@ -222,6 +242,7 @@ Page({
     
   },
   confirmChange(){
+
     const { eatNum, peopleNum, eatDay } =  this.data.currentShop
     const index = this.data.shopList.findIndex(v=>v.goodsId === this.data.currentShop.goodsId)
     this.data.currentShop.quantity = eatNum* peopleNum * eatDay

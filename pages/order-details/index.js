@@ -35,7 +35,7 @@ Page({
   },
   call() {
     wx.makePhoneCall({
-      phoneNumber: '0736-4388889'
+      phoneNumber: this.data.companyPhone
     })
   },
   gotoGoods(e){
@@ -52,17 +52,19 @@ Page({
     }
   },
   onShow() {
+    wx.showLoading({
+      title: '努力加载中...'
+    })
+    this.getCompanyInfo()
     WXAPI.orderDetail({
       orderId: this.data.orderId
     }).then(res => {
       this.setData({
         orderDetail: res.data,
-        lastTime: Date.now()
       });
-      // todo 完善
       const ss = 'titleMap.unpaid.labelTip'
       this.setData({
-        [ss]: 'ssssssssss'
+        [ss]: `剩余${res.data.lastTime}自动关闭`
       })
     }).catch(err => {
       wx.showModal({
@@ -70,6 +72,8 @@ Page({
         content: err.msg,
         showCancel: false
       })
+    }).finally(() => {
+      wx.hideLoading()
     })
   },
   cancelOrderTap() {
@@ -109,39 +113,23 @@ Page({
       }
     });
   },
-  confirmBtnTap(e) {
-    let that = this;
+  shouhuo() {
     let orderId = this.data.orderId;
-    WXAPI.addTempleMsgFormid({
-      token: wx.getStorageSync('token'),
-      type: 'form',
-      formId: e.detail.formId
-    })
     wx.showModal({
       title: '确认您已收到商品？',
       content: '',
       success: function (res) {
         if (res.confirm) {
-          WXAPI.orderDelivery(orderId, wx.getStorageSync('token')).then(function (res) {
-            if (res.code == 0) {
-              that.onShow();
-              // 模板消息，提醒用户进行评价
-              let postJsonString = {};
-              postJsonString.keyword1 = {value: that.data.orderDetail.orderInfo.orderNumber, color: '#173177'}
-              let keywords2 = '您已确认收货，期待您的再次光临！';
-              if (app.globalData.order_reputation_score) {
-                keywords2 += '立即好评，系统赠送您' + app.globalData.order_reputation_score + '积分奖励。';
-              }
-              postJsonString.keyword2 = {value: keywords2, color: '#173177'}
-              WXAPI.sendTempleMsg({
-                module: 'immediately',
-                postJsonString: JSON.stringify(postJsonString),
-                template_id: 'uJL7D8ZWZfO29Blfq34YbuKitusY6QXxJHMuhQm_lco',
-                type: 0,
-                token: wx.getStorageSync('token'),
-                url: '/pages/order-details/index?id=' + orderId
-              })
-            }
+          WXAPI.orderComplete({
+            orderId: orderId,
+          }).then( (res)=> {
+            wx.showToast({
+              title: '收货成功',
+              icon: 'success',
+            })
+            wx.redirectTo({
+              url: 'pages/index/index'
+            })
           })
         }
       }

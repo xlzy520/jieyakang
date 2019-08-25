@@ -24,6 +24,28 @@ Page({
       url: "/pages/order-details/index?id=" + orderId
     })
   },
+  shouhuo(e) {
+    let orderId = e.currentTarget.dataset.id;
+    wx.showModal({
+      title: '确认您已收到商品？',
+      content: '',
+      success: function (res) {
+        if (res.confirm) {
+          WXAPI.orderComplete({
+            orderId: orderId,
+          }).then( (res)=> {
+            wx.showToast({
+              title: '收货成功',
+              icon: 'success',
+            })
+            wx.redirectTo({
+              url: 'pages/index/index'
+            })
+          })
+        }
+      }
+    })
+  },
   cancelOrderTap(e) {
     const orderId = e.currentTarget.dataset.id;
     wx.showModal({
@@ -90,12 +112,4 @@ Page({
       wx.hideLoading()
     })
   },
-  onReady() {
-    // 生命周期函数--监听页面初次渲染完成
-
-  },
-  onShow() {
-
-    
-  }
 })

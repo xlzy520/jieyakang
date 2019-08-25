@@ -25,8 +25,10 @@
               <image src="https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2019-07-02/6382dc5d00b486371428f62251103d3a.jpg" class="img"/>
             </view>
             <view class="text-box {{goods.specsList[0].pack?'':'restaurant'}}" wx:if="{{!goods.specsList[0].pack}}">
-              <view class="goods-title">{{goods.goodsName}}</view>
-              <view class="goods-price">¥ {{goods.priceStr}}</view>
+              <view class="name-price">
+                <view class="goods-name">{{goods.goodsName}}</view>
+                <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{goods.priceStr}}</view>
+              </view>
               <view class="buy-num">
                 <view class="jian-btn {{goods.quantity==1? 'disabled' : ''}}" catchtap="jiaJianBtnTap"
                       data-index="{{index}}" data-type="decrease">-</view>

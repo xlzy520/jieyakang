@@ -216,6 +216,7 @@ Page({
       data: shopCarInfo
     })
     this.closePopupTap();
+    this.getShopCartNum();
     wx.showToast({
       title: '添加成功，在购物车等亲～',
       icon: 'none',
