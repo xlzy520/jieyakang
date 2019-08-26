@@ -100,7 +100,7 @@ Page({
     }
     if (this.data.id) {
       apiResult = WXAPI.updateAddress({
-        id: this.data.id,
+        addressId: this.data.id,
         ...params
       })
     } else {
@@ -132,17 +132,11 @@ Page({
     })
   },
   onLoad(e) {
-    if (e.addressType){
-      this.setData({
-        'addressData.addressType': e.addressType,
-        identityHidden: true
-      })
-    }
-    this.getSchoolList()
-    if (e.id) { // 修改初始化数据库数据
+    if (e.addressType&&e.id){
       wx.setNavigationBarTitle({
         title: '编辑收货地址'
       })
+      this.getSchoolList()
       WXAPI.addressDetail({
         addressId: e.id
       }).then((res)=> {
@@ -154,6 +148,11 @@ Page({
         setTimeout(function(){
           wx.navigateBack()
         }, 1000)
+      })
+      this.setData({
+        'addressData.addressType': e.addressType,
+        identityHidden: true,
+        id: e.id
       })
     }
   },
