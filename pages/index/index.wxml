@@ -5,7 +5,7 @@
   <goods-list id="goods-list"></goods-list>
   <view class="partner-container">
     <view class="partner-header">合作伙伴</view>
-    <scroll-view class="container" scroll-y>
+    <scroll-view scroll-y>
       <view class="partner-item" wx:for-items="{{partners}}" wx:key="{{index}}">
         <image src="https://axjieyakang.com/assets/{{item.fileUrl}}" lazy-load class="image" mode="aspectFill"/>
         <view class="partner-modal"></view>

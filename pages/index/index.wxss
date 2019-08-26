@@ -127,18 +127,18 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin: 0 30rpx 30rpx;
+  margin-bottom: 20rpx;
 }
 .partner-item image{
-  width: 700rpx;
-  height: 260rpx;
+  width: 690rpx;
+  height: 300rpx;
   border-radius: 12rpx;
 }
 .partner-modal{
   position: absolute;
-  height: 260rpx;
-  width: 700rpx;
-  background:rgba(40,40,40,0.7);
+  width: 690rpx;
+  height: 300rpx;
+  background:rgba(40,40,40,0.6);
   border-radius: 12rpx;
 }
 .partner-name{
