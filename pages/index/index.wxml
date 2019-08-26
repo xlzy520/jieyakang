@@ -6,7 +6,7 @@
   <view class="partner-container">
     <view class="partner-header">合作伙伴</view>
     <view class="partner-item" wx:for-items="{{partners}}" wx:key="{{index}}">
-      <image src="{{item.fileUrl}}" class="image" mode="aspectFill"/>
+      <image src="https://axjieyakang.com/assets/{{item.fileUrl}}" class="image" mode="aspectFill"/>
       <view class="partner-modal"></view>
       <view class="partner-name">- {{item.partnersName}} -</view>
     </view>

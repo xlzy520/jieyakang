@@ -79,7 +79,7 @@
     <view class="popup-contents">
       <view class="pop-goods-info">
         <view class="pop-img-box">
-          <!--          <image src="{{currentShop.fileUrls[0]}}" class="goods-thumbnail"/>-->
+          <!--          <image src="https://axjieyakang.com/assets/{{currentShop.fileUrls[0]}}" class="goods-thumbnail"/>-->
           <image src="http://www.xlzy520.cn/750_600/餐馆餐具.png" class="goods-thumbnail"/>
         </view>
         <view class="pop-goods-des">

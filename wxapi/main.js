@@ -1,5 +1,5 @@
 const baseUrl = 'https://axjieyakang.com/market'
-// const baseUrl = 'http://7dc785e8.ngrok.io/market'
+// const baseUrl = 'http://tq7yf2.natappfree.cc/market'
 // todo 统一处理 正确错误、token过期
 const request = (url,data={},method='post') => {
   let _url = baseUrl + url
@@ -119,11 +119,8 @@ module.exports = {
   orderDetail: data => {
     return request('/order/detail',data)
   },
-  orderDelivery: (orderId, token) => {
-    return request('/order/delivery', {
-      orderId,
-      token
-    })
+  orderComplete: data => {
+    return request('/order/complete', data)
   },
   orderClose: data => {
     return request('/order/close', data)

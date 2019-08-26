@@ -338,7 +338,7 @@ Page({
       default:
         break;
     }
-    shopCarMap.allGoodsPrice = shopCarMap.quantity * Number(shopCarMap.selectSizePrice).toFixed(2)
+    shopCarMap.allGoodsPrice = (shopCarMap.quantity * Number(shopCarMap.selectSizePrice)).toFixed(2)
     buyNowInfo.shopList.push(shopCarMap);
     return buyNowInfo;
   },
