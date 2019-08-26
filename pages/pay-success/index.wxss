@@ -1,0 +1,40 @@
+.contact-us {
+  font-family: PingFang SC Medium, sans-serif;
+  background: #F8F8F8;
+}
+.icon{
+  /*margin: auto;*/
+  margin-top: 100rpx;
+}
+.icon image {
+  width: 176rpx;
+  height: 176rpx;
+}
+.text{
+  font-size: 34rpx;
+  margin-top: 39rpx;
+}
+.btns{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  font-size: 36rpx;
+  margin-top: 100rpx;
+  font-weight: 500;
+  text-align: center;
+}
+.btns .btn{
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-bottom: 26rpx;
+  border-radius: 10rpx;
+}
+.btns .view{
+  background: #ff0000;
+  color: #fff;
+}
+.btns .back-to-index{
+  background: #fff;
+  color: #ff0000;
+  border: 1rpx solid #ff0000;
+}

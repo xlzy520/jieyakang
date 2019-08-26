@@ -17,33 +17,47 @@ Page({
   onShow() {
     const shopCarInfo = wx.getStorageSync('shopCarInfo');
     if (shopCarInfo&&shopCarInfo.shopList) {
-      this.setData({
-        shopList: shopCarInfo.shopList
+      const list = shopCarInfo.shopList.map(v=>{
+        v.active = false
+        return v
       })
+      this.setData({
+        shopList: list,
+        isEditing: false,
+        totalPrice: 0,
+        allSelect: false,
+        noSelect: false,
+      })
+      this.updatePageData()
     }
   },
   shopCarEdit(e){
-    const active = e.target.dataset.type
+    const active = this.data.isEditing
     const { shopList } = this.data;
     for (let i = 0; i < shopList.length; i++) {
-      shopList[i].active = active;
+      shopList[i].active = false;
     }
-    if (active) {
-      this.setData({
-        isEditing: false
-      })
-    } else {
-      this.setData({
-        isEditing: true
-      })
-    }
+    this.setData({
+      isEditing: !active
+    })
     this.updatePageData()
-    // this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
   },
   toIndexPage() {
     wx.switchTab({
       url: "/pages/index/index"
     });
+  },
+  selectSpec(e) {
+    const spec = e.target.dataset.id
+    const specsName = e.target.dataset.specsname
+    const price = e.target.dataset.price
+    this.setData({
+      'currentShop.specsId': spec,
+      'currentShop.selectSpecLabel': specsName? '('+specsName+')': '',
+      selectSpecLabel: specsName,
+      selectSizePrice: price
+    })
+    // this.updatePageData()
   },
   selectTap(e) {
     const index = e.currentTarget.dataset.index;
@@ -54,10 +68,9 @@ Page({
     }
   },
   selectEatNumTag(e){
-    const eatNumLabel = e.target.dataset.label
-    const eatNum = this.data.eatNumTag.findIndex(v=>v===eatNumLabel)
+    const eatNum = e.target.dataset.num
     this.setData({
-      'currentShop.eatNum': eatNum+1,
+      'currentShop.eatNum': eatNum,
     })
   },
   changeGuige(e){
@@ -66,6 +79,7 @@ Page({
       hideShopPopup: false,
       currentShop: JSON.parse(JSON.stringify(this.data.shopList[index]))
     })
+    this.openGuigeDialog()
   },
   setShopList(){
     const { shopList } = this.data
@@ -85,7 +99,7 @@ Page({
     for (let i = 0; i < shopList.length; i++) {
       let curItem = shopList[i];
       if (curItem.active) {
-        total += parseFloat(curItem.priceStr) * curItem.quantity;
+        total += parseFloat(curItem.selectSizePrice) * curItem.quantity;
       }
     }
     total = total.toFixed(2); //js浮点计算bug，取两位小数精度
@@ -144,6 +158,26 @@ Page({
     this.setSelectStatus()
   },
   toPayOrder() {
+    const activeShopList = this.data.shopList.filter(v=>v.active)
+    const useTypeMap = activeShopList.map(v=>v.useType)
+    const initMap1 = ['宴席餐具','餐馆餐具']
+    const initMap2 = ['小学餐具','中学餐具', '幼儿园餐具']
+    let flag = []
+    useTypeMap.map(v=>{
+      if (initMap1.includes(v)) {
+        flag.push(1)
+      } else {
+        flag.push(2)
+      }
+    })
+    const isMixin = flag.every(v=>v===1)||flag.every(v=>v===2)
+    if (!isMixin) {
+      wx.showToast({
+        title: '只能选择学校或餐馆类型的商品',
+        icon: 'none'
+      })
+      return false
+    }
     wx.navigateTo({
       url: "/pages/to-pay-order/index"
     })
@@ -151,7 +185,7 @@ Page({
   // 规格选择
   openGuigeDialog() {
     let eatNumTag = []
-    switch (this.data.goodsDetail.useType) {
+    switch (this.data.currentShop.useType) {
       case '幼儿园餐具':
         eatNumTag = [{label: '两餐', value: 2}]
         break;
@@ -170,13 +204,17 @@ Page({
     }
     this.setData({
       hideShopPopup: false,
-      selectSizePrice: this.data.goodsDetail.priceStr,
+      selectSizePrice: this.data.currentShop.selectSizePrice,
+      selectSpecLabel: this.data.currentShop.selectSpecLabel
+        .replace('(','').replace(')',''),
       eatNumTag: eatNumTag
     })
   },
   closePopupTap: function() {
     this.setData({
-      hideShopPopup: true
+      hideShopPopup: true,
+      selectSpecLabel: this.data.currentShop.selectSpecLabel
+        .replace('(','').replace(')','')
     })
   },
   numJianTap(e) {
@@ -225,6 +263,7 @@ Page({
     
   },
   confirmChange(){
+
     const { eatNum, peopleNum, eatDay } =  this.data.currentShop
     const index = this.data.shopList.findIndex(v=>v.goodsId === this.data.currentShop.goodsId)
     this.data.currentShop.quantity = eatNum* peopleNum * eatDay

@@ -13,7 +13,12 @@ Page({
     pageIndex: 1,
     noMore: false
   },
-  onLoad() {
+  onLoad(e) {
+    if (e&&e.type) {
+      this.setData({
+        currentTab: e.type
+      })
+    }
    this.getInventoryList({
      pageSize: 20,
      pageIndex: 1,
@@ -48,13 +53,19 @@ Page({
   },
   changeCurrentTab(e){
     this.setData({
-      currentTab: e.detail
+      currentTab: e.detail,
+      noMore: false
     })
     if (e.detail){
+      wx.showLoading({
+        title: '努力加载中...'
+      })
       WXAPI.getCurrentStore().then(res=>{
         this.setData({
           storeMap: res.data
         })
+      }).finally(() => {
+        wx.hideLoading()
       })
     }
   },

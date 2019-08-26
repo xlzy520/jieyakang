@@ -15,13 +15,7 @@ function wxpay(app, money, orderId, redirectUrl) {
       fail:  (err)=> {
         console.log(err);
       },
-      success:  ()=> {
-        // 保存 formid
-        WXAPI.addTempleMsgFormid({
-          type: 'pay',
-          formId: res.data.prepayId
-        })
-        // 提示支付成功
+      success: ()=> {
         wx.showToast({
           title: '支付成功'
         })

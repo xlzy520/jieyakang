@@ -2,8 +2,8 @@
   <top-nav tabList="{{orderTypeTabs}}" currentTab="{{currentTab}}" bindchange="statusTap"></top-nav>
   <view class="no-order" hidden="{{orderList.length !== 0}}">
     <image src="/images/no-order.png" class="no-order-img"></image>
-    <view class="text" wx:if="{{currentType === 0}}">暂无订单，去别处看看吧。</view>
-    <view class="text" wx:if="{{currentType !== 0}}">暂无{{orderTypeTabs[currentTab]}}订单，切换全部看看吧～</view>
+    <view class="text" wx:if="{{currentTab === 0}}">暂无订单，去别处看看吧。</view>
+    <view class="text" wx:if="{{currentTab !== 0}}">暂无{{orderTypeTabs[currentTab]}}订单，切换全部看看吧～</view>
     <view bindtap="goBack" class="no-order-back">返回</view>
   </view>
   <view class="order-list" hidden="{{orderList.length === 0}}">
@@ -38,10 +38,12 @@
         <view class="heji-price">{{item.amount}}</view>
       </view>
       <view class="order-action">
-        <view class="btn cancel-btn" hidden="{{!item.orderStatusId}}" bindtap="cancelOrderTap"
+        <view class="btn cancel-btn" wx:if="{{item.statusCode==='unpaid'}}" bindtap="cancelOrderTap"
               data-id="{{item.orderId}}">取消订单</view>
-        <view class="btn topay-btn" hidden="{{!item.orderStatusId}}" bindtap="toPayTap" data-id="{{item.orderId}}"
-              data-money="{{item.amountReal||500}}">立即支付</view>
+        <view class="btn topay-btn" wx:if="{{item.statusCode==='unpaid'}}" bindtap="toPayTap" data-id="{{item.orderId}}"
+              data-money="{{item.amount}}">立即支付</view>
+        <view class="btn topay-btn" wx:if="{{item.statusCode==='unreceived'}}" bindtap="shouhuo"
+              data-id="{{item.orderId}}">确认收货</view>
       </view>
     </view>
 

@@ -1,3 +1,32 @@
+const WXAPI = require('../wxapi/main')
+
+function goLoginPageTimeOut() {
+  setTimeout(() => {
+    wx.navigateTo({
+      url: "/pages/authorize/index"
+    })
+  }, 500)
+}
+function login() {
+  wx.login({
+    success: res => {
+      WXAPI.login(res.code).then(res => {
+        wx.setStorageSync('token', res.data.appToken)
+        if (res.data.isFirst) {
+          this.goLoginPageTimeOut();
+        }
+      }).catch(err => {
+        wx.showModal({
+          title: '提示',
+          content: err.msg || '无法登录，请重试',
+          showCancel: false
+        })
+      }).finally(() => {
+        wx.hideLoading();
+      })
+    }
+  })
+}
 function parseTime(time, cFormat) {
   if (arguments.length === 0) {
     return null
@@ -31,5 +60,7 @@ function parseTime(time, cFormat) {
 }
 
 module.exports = {
-  parseTime: parseTime
+  parseTime: parseTime,
+  login: login,
+  goLoginPageTimeOut: goLoginPageTimeOut
 }

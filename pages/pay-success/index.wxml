@@ -1,0 +1,10 @@
+<view class="pay-success container">
+  <view class="icon">
+    <image src="/images/success.png"></image>
+  </view>
+  <view class="text">支付成功</view>
+  <view class="btns">
+    <view class="view btn" bindtap="viewOrder">查看订单</view>
+    <view class="back-to-index btn" bindtap="back2Index">返回首页</view>
+  </view>
+</view>

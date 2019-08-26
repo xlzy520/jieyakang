@@ -60,13 +60,13 @@
     <view class="label">
       <view class="title">创建时间:</view>
       <view class="content">
-        2019-04-08  17:06:57
+        {{orderDetail.saveDate}}
       </view>
     </view>
     <view class="label" wx:if="{{orderDetail.statusCode !== 'unpaid'}}">
       <view class="title">付款时间:</view>
       <view class="content">
-        2019-04-08  17:06:57
+        {{orderDetail.payTime}}
       </view>
     </view>
   </view>
@@ -74,7 +74,7 @@
     <view class="peisong-info-header">配送信息</view>
     <view class="label">08:00 - 17:00 间下单，一小时后开始配送。</view>
     <view class="label">
-      如有特殊疑问， 公司电话：0736 - 4388889
+      如有特殊疑问， 公司电话：{{companyPhone}}
       <view class="call" bindtap="call">拨打</view>
     </view>
   </view>
@@ -83,7 +83,7 @@
       <view class="btn-row">
         <view class="cancel-btn" bindtap="cancelOrderTap" wx:if="{{orderDetail.statusCode==='unpaid'}}">取消订单</view>
         <view class="pay-btn" bindtap="toPayTap" wx:if="{{orderDetail.statusCode==='unpaid'}}">付款</view>
-        <button class="confirm-btn" formType="submit" wx:if="{{orderDetail.statusCode==='unreceived'}}">确认收货</button>
+        <view class="pay-btn" bindtap="shouhuo" wx:if="{{orderDetail.statusCode==='unreceived'}}">确认收货</view>
       </view>
     </form>
   </view>

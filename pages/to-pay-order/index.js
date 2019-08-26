@@ -6,7 +6,7 @@ Page({
     allGoodsPrice: '0.00',
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
-    curAddressData: {},
+    curAddressData: null,
     totalNum: 0, //共几份
     eatNumTag: ['一餐','二餐', '三餐', '四餐'],
     orderId: '',
@@ -28,7 +28,6 @@ Page({
       let buyNowInfoMem = wx.getStorageSync('buyNowInfo');
       let {useType, quantity, priceStr, eatNum, peopleNum,eatDay} = buyNowInfoMem.shopList[0]
       if (buyNowInfoMem && buyNowInfoMem.shopList) {
-        useType = '宴席餐具'
         switch (useType) {
           case '幼儿园餐具': case '小学餐具': case '中学餐具':
           const totalNum = eatNum * peopleNum * eatDay
@@ -61,35 +60,21 @@ Page({
   },
   onLoad(e) {
     this.setData({
-      orderType: e.orderType
+      orderType: e.orderType || ""
     });
   },
   toPay(e){
     if (this.matchGoodsAddress()) {
-      // 如果已存在订单id，那么就是已经创建过订单了
-      // todo 未测试  还需要测试
       if (this.data.orderId) {
-        this.createOrder().then(()=>{
-          if (e && "buyNow" !== this.data.orderType) {
-            // 清空购物车数据
-            wx.removeStorageSync('shopCarInfo');
-          }
-          wxpay.wxpay('order', this.data.allGoodsPrice, this.data.orderId, "/pages/index/index");
-        })
+        this.createOrder()
       }
     }
   },
   createOrder() {
-    // if (!this.data.curAddressData) {
-    //   wx.hideLoading();
-    //   wx.showModal({
-    //     title: '错误',
-    //     content: '请先设置您的收货地址！',
-    //     showCancel: false
-    //   })
-    //   return;
-    // }
-    return WXAPI.orderCreate({
+    wx.showLoading({
+      title: '创建订单中...'
+    })
+    WXAPI.orderCreate({
       addressId: this.data.curAddressData.addressId,
       orderDetails: this.data.goodsList,
     }).then( (res)=> {
@@ -97,6 +82,12 @@ Page({
         allGoodsPrice: res.data.amount,
         orderId: res.data.orderId
       });
+      if ("buyNow" !== this.data.orderType) {
+        // 清空购物车数据
+        wx.removeStorageSync('shopCarInfo');
+      }
+      wxpay.wxpay('order', this.data.allGoodsPrice, this.data.orderId,
+        "/pages/pay-success/index?orderId="+this.data.orderId);
     }).catch(err=>{
       wx.showModal({
         title: '错误',
@@ -108,16 +99,24 @@ Page({
     })
   },
   matchGoodsAddress(){
-    if (Boolean(this.data.curAddressData.addressType)===
-      Boolean(['宴席餐具','餐馆餐具'].includes('this.goodsList[0].useType'))) {
+    if (!this.data.curAddressData) {
+      wx.showModal({
+        title: '错误',
+        content: '请先设置您的收货地址！',
+        showCancel: false
+      })
+      return;
+    }
+    if (Boolean(this.data.curAddressData.addressType) ===
+      Boolean(['宴席餐具','餐馆餐具'].includes(this.data.goodsList[0].useType))) {
+      this.createOrder()
+      return true
+    } else {
       this.setData({
-        dialogText: '请选择商品想对应的地址',
+        dialogText: '请选择商品相对应的地址',
         dialogType: ''
       })
       return false
-    } else {
-      this.createOrder()
-      return true
     }
   },
   initShippingAddress() {
@@ -129,9 +128,11 @@ Page({
       this.setData({
         curAddressData: res.data
       });
-      if (this.matchGoodsAddress()) {
-        this.createOrder()
+      if (!this.matchGoodsAddress()) {
+        wx.hideLoading()
       }
+    }).finally(() => {
+      wx.hideLoading()
     })
   },
   close(){

@@ -52,5 +52,5 @@
     <!--<button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>-->
   </form>
   <dialog wx:if="{{tipText}}" type="{{dialogType}}" text="{{tipText}}" bindclose="close"
-          bindconfirm="confirmDelete" data-id="{{addressData.id}}"></dialog>
+          bindconfirm="confirmDelete" data-id="{{addressData.addressId}}"></dialog>
 </view>

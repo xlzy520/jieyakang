@@ -22,7 +22,7 @@ Page({
     quantity: 1,
   //update 商品详情更新默认值，当时幼儿园类型时，修改价格为
     tipText: '',
-    imgs: ['http://www.xlzy520.cn/750_600/餐馆餐具.png', 'http://www.xlzy520.cn/750_600/餐馆餐具.png']
+    shopCartNum: null
   },
 
   //事件处理函数
@@ -67,6 +67,23 @@ Page({
       wx.hideLoading()
     })
   },
+  onShow(){
+    this.getShopCartNum()
+  },
+  goShopCart(){
+    wx.reLaunch({
+      url: "/pages/shop-cart/index"
+    })
+  },
+  getShopCartNum(){
+    const shopCarInfo = wx.getStorageSync('shopCarInfo');
+    if (shopCarInfo&&shopCarInfo.shopList) {
+      const num = shopCarInfo.shopList.length>99?'99+':shopCarInfo.shopList.length
+      this.setData({
+        shopCartNum: num
+      })
+    }
+  },
   goShopCar: function() {
     wx.reLaunch({
       url: "/pages/shop-cart/index"
@@ -92,6 +109,9 @@ Page({
     switch (this.data.goodsDetail.useType) {
       case '幼儿园餐具':
         eatNumTag = [{label: '两餐', value: 2}]
+        this.setData({
+          eatNum: 2
+        })
         break;
       case '小学餐具':
         eatNumTag = [{label: '一餐', value: 1},{label: '两餐', value: 2}]
@@ -195,6 +215,7 @@ Page({
       data: shopCarInfo
     })
     this.closePopupTap();
+    this.getShopCartNum();
     wx.showToast({
       title: '添加成功，在购物车等亲～',
       icon: 'none',
@@ -218,12 +239,13 @@ Page({
   },
   buildShopCarInfo() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType} = this.data.goodsDetail
-    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
+    const { specsId, eatNum, peopleNum, eatDay, quantity,selectSpecLabel, selectSizePrice} = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
       fileUrls: fileUrls,
-      priceStr: priceStr,
+      selectSizePrice: selectSizePrice,
+      selectSpecLabel: selectSpecLabel? '('+selectSpecLabel+')': '',
       specsList: specsList,
       useType: useType,
       

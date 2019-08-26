@@ -155,16 +155,15 @@ page {
   width: 164rpx;
   height: 48rpx;
   line-height: 48rpx;
-  position: absolute;
-  right: 30rpx;
-  bottom: 0;
   display: flex;
-  /*justify-content: space-between;*/
   font-size: 24rpx;
-  text-align: center
+  text-align: center;
+  margin-top: 67rpx;
+  margin-left: 199rpx;
+
 }
 .goods-info .text-box.restaurant .buy-num{
-  right: 0;
+
 }
 
 .goods-info .text-box .buy-num .jian-btn {
@@ -205,7 +204,7 @@ page {
 
 .goods-info .text-box .buy-num input {
   font-family: PingFang SC Medium, sans-serif;
-  width: 68rpx;
+  width: 100rpx;
   height: 48rpx;
   min-height: 48rpx;
   text-align: center;
@@ -346,6 +345,62 @@ page {
   color:#ff001c;
   margin-top:20rpx;
 }
+.pop-goods-guige-select{
+  font-size: 22rpx;
+}
+.left-title{
+  color: #888;
+  font-size: 26rpx;
+  padding: 30rpx;
+}
+.goods-guige{
+  display: flex;
+  border-bottom: 1rpx solid #eee;
+  margin: 0 30rpx;
+}
+.goods-guige .left-title{
+  color: #000;
+  padding-left: 0;
+}
+.goods-guige .guige-item{
+  font-size: 26rpx;
+  padding: 10rpx 30rpx 10rpx 20rpx;
+  background: #f5f5f5;
+  border-radius: 6rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #d7d7d7;
+}
+.goods-guige .guige-item.active{
+  background: #ffe7eb;
+  color: #fe1241;
+  border: 1rpx solid #fe103d;
+}
+
+.right-content{
+  font-size: 26rpx;
+  padding: 30rpx 0;
+  color: #000;
+  line-height: 40rpx;
+}
+.right-content .dividing{
+  box-sizing: border-box;
+  width: 1rpx;
+  margin: 7rpx 20rpx;
+  border-right: 1rpx solid #e4e4e4;
+}
+.right-content .top{
+  display: flex;
+  letter-spacing: 1rpx;
+}
+.right-content .bottom{
+  letter-spacing: 1rpx;
+  line-height: 60rpx;
+}
+.spec-item{
+  letter-spacing: 1rpx;
+}
+
 .pop-goods-close{
   width: 36rpx;
   height: 36rpx;

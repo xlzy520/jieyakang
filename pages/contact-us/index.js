@@ -11,8 +11,8 @@ Page({
   getCompanyInfo(){
     WXAPI.getCompanyInfo().then(res=>{
       this.setData({
-        companyPhone: res.data.phone,
-        companyAddress: res.data.address
+        companyPhone: res.data.phone||'0736 - 4388889',
+        companyAddress: res.data.address|| '安乡县深柳镇工业园柏力园中园8栋'
       })
     })
   },

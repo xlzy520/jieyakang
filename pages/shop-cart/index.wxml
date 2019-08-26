@@ -11,7 +11,7 @@
 
   <view class="cart-goods-list">
     <view class="list-top" hidden="{{!shopList.length}}">
-      <view class="edit-btn" bindtap="shopCarEdit" data-type="{{isEditing}}">{{isEditing?'完成': '编辑'}}</view>
+      <view class="edit-btn" bindtap="shopCarEdit">{{isEditing?'完成': '编辑'}}</view>
     </view>
     <view class="goodsList">
       <view class="a-gooods" wx:for="{{shopList}}" wx:for-item="goods" wx:key="{{goods.goodsId}}" >
@@ -25,8 +25,10 @@
               <image src="https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2019-07-02/6382dc5d00b486371428f62251103d3a.jpg" class="img"/>
             </view>
             <view class="text-box {{goods.specsList[0].pack?'':'restaurant'}}" wx:if="{{!goods.specsList[0].pack}}">
-              <view class="goods-title">{{goods.goodsName}}</view>
-              <view class="goods-price">¥ {{goods.priceStr}}</view>
+              <view class="name-price">
+                <view class="goods-name">{{goods.goodsName}}</view>
+                <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{goods.selectSizePrice}}</view>
+              </view>
               <view class="buy-num">
                 <view class="jian-btn {{goods.quantity==1? 'disabled' : ''}}" catchtap="jiaJianBtnTap"
                       data-index="{{index}}" data-type="decrease">-</view>
@@ -37,12 +39,13 @@
             </view>
             <view class="text-box" wx:if="{{goods.specsList[0].pack}}">
               <view class="name-price">
-                <view class="goods-name">{{goods.goodsName}}</view>
-                <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{goods.priceStr}}</view>
+                <view class="goods-name">{{goods.goodsName}}{{goods.selectSpecLabel}}</view>
+                <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{goods.selectSizePrice}}</view>
               </view>
               <view class="guige-num">
                 <view class="detail-selected" catchtap="changeGuige" data-index="{{index}}">
-                  <view class="label">{{eatNumTag[goods.eatNum-1]}} , {{goods.peopleNum}}人 , {{goods.eatDay}}天</view>
+                  <view class="label">{{goods.useType==='幼儿园餐具'?'两餐':eatNumTag[goods.eatNum-1].label}} ,
+                    {{goods.peopleNum}}人 , {{goods.eatDay}}天</view>
                   <image src="/images/arrow-right.png"></image>
                 </view>
                 <view class="goods-num">
@@ -80,23 +83,37 @@
           <image src="http://www.xlzy520.cn/750_600/餐馆餐具.png" class="goods-thumbnail"/>
         </view>
         <view class="pop-goods-des">
-          <view class="pop-goods-title">{{currentShop.goodsName}}</view>
+          <view class="pop-goods-title">{{currentShop.goodsName}}{{currentShop.selectSpecLabel}}</view>
           <view class="goods-rule" hidden="{{!currentShop.specsList[0].specsStr}}">({{currentShop.specsList[0].specsStr}})</view>
           <view class="pop-goods-price">
             <view class="row goods-price">
               <view class="price-money">¥</view>
-              <view class="price">{{currentShop.priceStr}}</view>
+              <view class="price">{{currentShop.selectSizePrice}}</view>
               <view class="price-unit">/{{currentShop.pack?'套':'件'}}</view>
             </view>
           </view>
+          <view class="pop-goods-guige-select"
+                wx:if="{{currentShop.useType==='幼儿园餐具'}}">
+            {{selectSpecLabel?'(已选择：'+selectSpecLabel+')':'请选择规格分类'}}</view>
         </view>
         <view class="pop-goods-close" bindtap="closePopupTap"></view>
+      </view>
+      <view class="goods-guige" wx:if="{{currentShop.useType==='幼儿园餐具'}}">
+        <view class="left-title">餐具规格</view>
+        <view class="right-content">
+          <view class="guige-item {{currentShop.specsId===item.specsId?'active': ''}}"
+                wx:for="{{currentShop.specsList}}" wx:key="item.specsId"
+                data-id="{{item.specsId}}" data-specsname="{{item.specsName}}"
+                data-price="{{item.price}}" bindtap="selectSpec">
+            {{item.specsName}} : {{item.specsStr}}
+          </view>
+        </view>
       </view>
       <view class="jiu-can-box jiu-can-ci-shu" wx:if="{{!currentShop.pack}}">
         <view class="num-label">就餐次数</view>
         <view class="ci-shu-tag-wrap">
-          <view class="ci-shu-tag {{currentShop.eatNum===index+1?'active':''}}" wx:for="{{eatNumTag}}" wx:key="item.label"
-                bindtap="selectEatNumTag" data-label="{{item}}">{{item}}</view>
+          <view class="ci-shu-tag {{currentShop.eatNum===item.value?'active':''}}" wx:for="{{eatNumTag}}"
+                wx:key="item.value" bindtap="selectEatNumTag" data-num="{{item.value}}">{{item.label}}</view>
         </view>
       </view>
       <view class="jiu-can-box jiu-can-ren-shu" wx:if="{{!currentShop.pack}}">
