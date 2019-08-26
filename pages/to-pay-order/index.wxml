@@ -24,7 +24,7 @@
         </view>
         <view class="text-box">
           <view class="name-price">
-            <view class="goods-name">{{item.goodsName}}{{goods.selectSpecLabel}}</view>
+            <view class="goods-name">{{item.goodsName}}{{item.selectSpecLabel}}</view>
             <view class="goods-price"><view style="font-size: 30rpx">¥</view>{{item.selectSizePrice}}</view>
           </view>
           <view class="guige-num {{item.useType==='餐馆餐具'||item.useType==='宴席餐具'?'': 'school'}}">
@@ -34,15 +34,15 @@
           </view>
           <view class="num-detail">
             <view class="num-detail-row" wx:if="{{item.useType!=='餐馆餐具'&&item.useType!=='宴席餐具'&&item.useType!=='幼儿园餐具'}}">
-              <view class="ji-can">{{eatNumTag[item.eatNum]}}</view>
-              <view class="ji-suan-shi">{{item.peopleNum}}人 * {{item.eatDay}} 天 = {{allGoodsPrice}}</view>
+              <view class="ji-can">{{eatNumTag[item.eatNum-1]}}</view>
+              <view class="ji-suan-shi">{{item.peopleNum}}人 * {{item.eatDay}} 天 = {{item.quantity}}</view>
             </view>
           </view>
           <view class="heji">
-            <view class="heji-gong">共{{totalNum}}份, </view>
+            <view class="heji-gong">共{{item.quantity}}份, </view>
             <view class="heji-xiaoji">小计:</view>
             <view class="heji-yuan">¥ </view>
-            <view class="heji-price">{{allGoodsPrice}}</view>
+            <view class="heji-price">{{item.allGoodsPrice}}</view>
           </view>
         </view>
       </view>

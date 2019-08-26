@@ -1,11 +1,12 @@
 const WXAPI = require('../wxapi/main')
 
 function wxpay(app, money, orderId, redirectUrl) {
+  wx.showLoading()
   WXAPI.wxpay({
     orderId: orderId,
-    token: wx.getStorageSync('token'),
-    money: 0.01,
+    money: money,
   }).then( (res) =>{
+    wx.hideLoading()
     wx.requestPayment({
       timeStamp: res.data.timeStamp.toString(),
       nonceStr: res.data.nonceStr,
@@ -25,6 +26,7 @@ function wxpay(app, money, orderId, redirectUrl) {
       }
     })
   }).catch(err=>{
+    wx.hideLoading()
     console.log(err);
     wx.showModal({
       title: '出错了',

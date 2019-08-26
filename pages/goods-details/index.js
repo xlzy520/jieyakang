@@ -292,6 +292,7 @@ Page({
         default:
           break;
       }
+      shopCarMap.allGoodsPrice = shopCarMap.quantity * Number(shopCarMap.selectSizePrice)
       if (sameGoods) {
         const sameGoodsIndex = shopCarInfo.shopList.findIndex(v=>v.goodsId === sameGoods.goodsId)
         shopCarInfo.shopList.splice(sameGoodsIndex, 1, shopCarMap);
@@ -304,7 +305,7 @@ Page({
   },
   buildBuyNowInfo: function() {
     const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
-    const { specsId, eatNum, peopleNum, eatDay, quantity } = this.data
+    const { specsId, eatNum, peopleNum, eatDay, quantity,selectSizePrice,selectSpecLabel } = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
@@ -312,7 +313,8 @@ Page({
       priceStr: priceStr,
       specsList: specsList,
       useType: useType,
-
+      selectSizePrice: selectSizePrice,
+      selectSpecLabel: selectSpecLabel? '('+selectSpecLabel+')': '',
       specsId: specsId,
       eatNum: eatNum,
       peopleNum: peopleNum,
@@ -324,13 +326,19 @@ Page({
     if (!buyNowInfo.shopList) {
       buyNowInfo.shopList = [];
     }
-    if (useType === '宴席餐具'|| useType === '餐馆餐具'){
-      delete shopCarMap.eatNum
-      delete shopCarMap.eatDay
-      delete shopCarMap.peopleNum
-    }else {
-      delete shopCarMap.quantity
+    switch (useType) {
+      case '小学餐具': case '中学餐具':  case '幼儿园餐具':
+        shopCarMap.quantity = shopCarMap.peopleNum * shopCarMap.eatDay * shopCarMap.eatNum
+        break;
+      case '宴席餐具':  case '餐馆餐具':
+        delete shopCarMap.eatNum
+        delete shopCarMap.eatDay
+        delete shopCarMap.peopleNum
+        break;
+      default:
+        break;
     }
+    shopCarMap.allGoodsPrice = shopCarMap.quantity * Number(shopCarMap.selectSizePrice).toFixed(2)
     buyNowInfo.shopList.push(shopCarMap);
     return buyNowInfo;
   },

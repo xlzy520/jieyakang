@@ -1,3 +1,4 @@
+const WXAPI = require('../../wxapi/main')
 Page({
   data: {
     isEditing: false,
@@ -7,8 +8,11 @@ Page({
     shopList: [],
     hideShopPopup: true,
     tipText: '',
-    eatNumTag: ['一餐','二餐', '三餐', '四餐'],
-    currentShop: {} // todo 先保存在这里  点确认后再更新到缓存中
+    eatNumTag: [
+      {label: '一餐', value: 1},{label: '两餐', value: 2},
+      {label: '三餐', value: 3},{label: '四餐', value: 4}
+    ],
+    currentShop: {}
   },
 
   onLoad() {
@@ -16,20 +20,40 @@ Page({
   },
   onShow() {
     const shopCarInfo = wx.getStorageSync('shopCarInfo');
+    // todo 测试价格变化
     if (shopCarInfo&&shopCarInfo.shopList) {
       const list = shopCarInfo.shopList.map(v=>{
         v.active = false
         return v
       })
-      this.setData({
-        shopList: list,
-        isEditing: false,
-        totalPrice: 0,
-        allSelect: false,
-        noSelect: false,
+      WXAPI.goods({
+        pageIndex: 1,
+        pageSize: 20
+      }).then((res)=> {
+        list.map(v=>{
+          res.data.list.map(vres=>{
+            if (v.useType === vres.useType) {
+              if (v.useType === '幼儿园餐具') {
+                v.selectSizePrice = vres.specsList.find(sp=>sp.specsId === v.specsId).price
+              } else {
+                v.selectSizePrice = vres.priceStr
+              }
+            }
+          })
+        })
+        this.setData({
+          shopList: list,
+          isEditing: false,
+          totalPrice: 0,
+          allSelect: false,
+          noSelect: false,
+        })
+        this.updatePageData()
       })
-      this.updatePageData()
     }
+  },
+  updatePrice(){
+  
   },
   shopCarEdit(e){
     const active = this.data.isEditing

@@ -25,7 +25,7 @@ Component({
       })
       return WXAPI.goods({
         pageIndex: 1,
-        pageSize: 20
+        pageSize: 100
       }).then((res)=> {
         this.setData({
           goods: res.data.list,

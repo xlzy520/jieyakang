@@ -26,32 +26,30 @@ Page({
     let shopList = [];
     if ("buyNow" === this.data.orderType) {
       let buyNowInfoMem = wx.getStorageSync('buyNowInfo');
-      let {useType, quantity, priceStr, eatNum, peopleNum,eatDay} = buyNowInfoMem.shopList[0]
+      let {quantity,selectSizePrice} = buyNowInfoMem.shopList[0]
       if (buyNowInfoMem && buyNowInfoMem.shopList) {
-        switch (useType) {
-          case '幼儿园餐具': case '小学餐具': case '中学餐具':
-          const totalNum = eatNum * peopleNum * eatDay
-          this.setData({
-            totalNum: totalNum,
-            allGoodsPrice: (totalNum * Number(priceStr)).toFixed(2)
-          })
-            break;
-          case '宴席餐具':  case '餐馆餐具':
-            this.setData({
-              totalNum: quantity,
-              allGoodsPrice: quantity * Number(priceStr).toFixed(2)
-            })
-            break;
-          default:
-            break;
-        }
+        this.setData({
+          totalNum: quantity,
+          allGoodsPrice: (quantity * Number(selectSizePrice)).toFixed(2)
+        })
         shopList = buyNowInfoMem.shopList
       }
     } else {
       //购物车下单
       let shopCarInfoMem = wx.getStorageSync('shopCarInfo');
+    
       if (shopCarInfoMem && shopCarInfoMem.shopList) {
         shopList = shopCarInfoMem.shopList.filter(entity => entity.active);
+        let totalNum = 0;
+        let allGoodsPrice = 0;
+        for (let i = 0; i < shopList.length; i++) {
+          totalNum += shopList[i].quantity
+          allGoodsPrice += shopList[i].quantity * Number(shopList[i].selectSizePrice)
+        }
+        this.setData({
+          totalNum: totalNum,
+          allGoodsPrice: allGoodsPrice.toFixed(2)
+        })
       }
     }
     this.setData({
