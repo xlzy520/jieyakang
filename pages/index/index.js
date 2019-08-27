@@ -44,7 +44,7 @@ Page({
       }
     })
   },
-  onLoad() {
+  onShow(){
     wx.showLoading({
       title: '努力加载中...'
     })
@@ -56,6 +56,9 @@ Page({
     } else {
       this.login()
     }
+  },
+  onLoad() {
+  
   },
   getGoodsList(){
     return this.selectComponent("#goods-list").getGoodsList()
