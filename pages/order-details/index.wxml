@@ -27,7 +27,7 @@
     <view class="goods-info">
       <view class="goods-box" wx:for="{{orderDetail.orderDetails}}" wx:for-item="goods"
             bindtap="gotoGoods" wx:key="{{goods.orderId}}" data-id="{{goods.goodsId}}">
-        <image src="http://www.xlzy520.cn/164_164/餐馆餐具.png" class="goods-img"></image>
+        <image src="https://axjieyakang.com/164_164/餐馆餐具.png" class="goods-img"></image>
 <!--        <image src="https://axjieyakang.com/assets/{{goods.goodsUrl}}" class="goods-img"></image>-->
         <view class="goods-right">
           <view class="goods-right-header">

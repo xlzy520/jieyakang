@@ -22,7 +22,7 @@
           <view class="goods-info">
             <view class="img-box">
 <!--              <image src="{{goods.pic}}" class="img"/>-->
-              <image src="https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2019-07-02/6382dc5d00b486371428f62251103d3a.jpg" class="img"/>
+              <image src="https://axjieyakang.com/164_164/餐馆餐具.png" class="img"/>
             </view>
             <view class="text-box {{goods.specsList[0].pack?'':'restaurant'}}" wx:if="{{!goods.specsList[0].pack}}">
               <view class="name-price">
@@ -80,7 +80,7 @@
       <view class="pop-goods-info">
         <view class="pop-img-box">
           <!--          <image src="https://axjieyakang.com/assets/{{currentShop.fileUrls[0]}}" class="goods-thumbnail"/>-->
-          <image src="http://www.xlzy520.cn/750_600/餐馆餐具.png" class="goods-thumbnail"/>
+          <image src="https://axjieyakang.com/164_164/餐馆餐具.png" class="goods-thumbnail"/>
         </view>
         <view class="pop-goods-des">
           <view class="pop-goods-title">{{currentShop.goodsName}}{{currentShop.selectSpecLabel}}</view>
