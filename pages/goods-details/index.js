@@ -238,12 +238,13 @@ Page({
     })
   },
   buildShopCarInfo() {
-    const { goodsId,goodsName,fileUrls,priceStr,specsList,useType} = this.data.goodsDetail
+    const { goodsId,goodsName,fileUrls,littleUrl,specsList,useType} = this.data.goodsDetail
     const { specsId, eatNum, peopleNum, eatDay, quantity,selectSpecLabel, selectSizePrice} = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
       fileUrls: fileUrls,
+      littleUrl: littleUrl,
       selectSizePrice: selectSizePrice,
       selectSpecLabel: selectSpecLabel? '('+selectSpecLabel+')': '',
       specsList: specsList,
@@ -304,12 +305,13 @@ Page({
     return shopCarInfo;
   },
   buildBuyNowInfo: function() {
-    const { goodsId,goodsName,fileUrls,priceStr,specsList,useType } = this.data.goodsDetail
+    const { goodsId,goodsName,fileUrls, littleUrl,priceStr,specsList,useType } = this.data.goodsDetail
     const { specsId, eatNum, peopleNum, eatDay, quantity,selectSizePrice,selectSpecLabel } = this.data
     let shopCarMap = {
       goodsId: goodsId,
       goodsName: goodsName,
       fileUrls: fileUrls,
+      littleUrl: littleUrl,
       priceStr: priceStr,
       specsList: specsList,
       useType: useType,
