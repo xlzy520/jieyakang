@@ -4,7 +4,7 @@
         bindtap="toDetailsTap" data-id="{{item.goodsId}}">
     <view class="goods-item">
       <view class="img-box">
-        <image src="https://axjieyakang.com/assets/{{item.littleUrl}}" class="image" mode="aspectFill"/>
+        <image src="{{'https://axjieyakang.com/assets/'+item.littleUrl}}" class="image" mode="aspectFill"/>
       </view>
       <view class="goods-detail">
         <view class="goods-title">{{item.goodsName}}</view>

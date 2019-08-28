@@ -7,7 +7,7 @@
     <view class="partner-header">合作伙伴</view>
     <scroll-view scroll-y>
       <view class="partner-item" wx:for-items="{{partners}}" wx:key="{{index}}">
-        <image src="https://axjieyakang.com/assets/{{item.fileUrl}}" lazy-load class="image" mode="aspectFill"/>
+        <image src="{{item.fileUrl}}" lazy-load class="image" mode="aspectFill"/>
         <view class="partner-modal"></view>
         <view class="partner-name">- {{item.partnersName}} -</view>
       </view>

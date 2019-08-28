@@ -14,7 +14,7 @@
       </view>
       <view class="goods-info" bindtap="orderDetail" data-id="{{item.orderId}}">
         <view class="goods-box" wx:for="{{item.orderDetails}}" wx:for-item="goods" wx:key="{{goods.orderId}}">
-          <image src="https://axjieyakang.com/assets/{{goods.littleUrl}}" class="goods-img"></image>
+          <image src="{{'https://axjieyakang.com/assets/'+goods.goodsUrl}}" class="goods-img"></image>
           <view class="goods-right">
             <view class="goods-right-header">
               <view class="goods-name">{{goods.goodsName}}

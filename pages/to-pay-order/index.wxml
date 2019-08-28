@@ -19,7 +19,7 @@
     <view class="goods-list">
       <view class="a-goods" wx:for-items="{{goodsList}}" wx:key="{{index}}">
         <view class="img-box">
-          <image src="https://axjieyakang.com/assets/{{item.littleUrl}}" class="img"/>
+          <image src="{{item.littleUrl}}" class="img"/>
         </view>
         <view class="text-box">
           <view class="name-price">

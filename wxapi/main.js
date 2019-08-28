@@ -1,5 +1,28 @@
 const baseUrl = 'https://axjieyakang.com/market'
 // const baseUrl = 'http://tq7yf2.natappfree.cc/market'
+
+const imgBaseUrl = 'https://axjieyakang.com/assets/'
+
+const patchImaUrl = (data)=>{
+  console.log(data);
+  if (data.fileUrls&&data.fileUrls.length>0) {
+    data.fileUrls = data.fileUrls.map(v=>imgBaseUrl+v)
+  }
+  if (data.littleUrl) {
+    data.littleUrl = imgBaseUrl + data.littleUrl
+  }
+  if (data.list&&data.list.length>0) {
+    data.list.map(v=>{
+      if (v.fileUrl) {
+        v.fileUrl = imgBaseUrl+ v.fileUrl
+      }
+      if (v.fileUrls&&v.fileUrls.length>0) {
+        v.fileUrls = v.fileUrls.map(fileUrl=>imgBaseUrl+ fileUrl)
+      }
+    })
+  }
+  return data
+}
 // todo 统一处理 正确错误、token过期
 const request = (url,data={},method='post') => {
   let _url = baseUrl + url
@@ -12,7 +35,10 @@ const request = (url,data={},method='post') => {
         'Content-Type': method==='formdata'?'application/x-www-form-urlencoded':'application/json'
       },
       success:(request)=> {
-        if (request.data.success){
+        const { data, success } = request.data
+        if (success){
+          // 图片默认补充路径
+          request.data.data = patchImaUrl(data)
           resolve(request.data)
         } else {
           if (request.data.code === 1027) {
