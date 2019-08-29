@@ -4,7 +4,6 @@ const baseUrl = 'https://axjieyakang.com/market'
 const imgBaseUrl = 'https://axjieyakang.com/assets/'
 
 const patchImaUrl = (data)=>{
-  console.log(data);
   if (data.fileUrls&&data.fileUrls.length>0) {
     data.fileUrls = data.fileUrls.map(v=>imgBaseUrl+v)
   }
@@ -88,12 +87,6 @@ Promise.prototype.finally = function (callback) {
 
 module.exports = {
   request,
-  addTempleMsgFormid: (data) => {
-    return request('/template-msg/wxa/formId', data)
-  },
-  sendTempleMsg: (data) => {
-    return request('/template-msg/put', data)
-  },
   wxpay: (data) => {
     return request('/bill/pay', data)
   },
@@ -111,9 +104,6 @@ module.exports = {
   },
   goodsDetail: data => {
     return request('/goods/detail', data)
-  },
-  goodsPrice: (data) => {
-    return request('/shop/goods/price', data)
   },
   addAddress: (data) => {
     return request('/address/save', data)
@@ -150,6 +140,9 @@ module.exports = {
   },
   orderClose: data => {
     return request('/order/close', data)
+  },
+  getOrderAmount: data=>{
+    return request('/order/amount/count', data)
   },
   orderStatistics: () => {
     return request('/order/statistics')
