@@ -241,6 +241,8 @@ Page({
     const { goodsId,goodsName,fileUrls,littleUrl,specsList,useType} = this.data.goodsDetail
     const { specsId, eatNum, peopleNum, eatDay, quantity,selectSpecLabel, selectSizePrice} = this.data
     let shopCarMap = {
+      // todo 待测试
+      shopCarId: Date.now(),
       goodsId: goodsId,
       goodsName: goodsName,
       fileUrls: fileUrls,
@@ -293,7 +295,7 @@ Page({
         default:
           break;
       }
-      shopCarMap.allGoodsPrice = shopCarMap.quantity * Number(shopCarMap.selectSizePrice)
+      shopCarMap.allGoodsPrice = (shopCarMap.quantity * Number(shopCarMap.selectSizePrice)).toFixed(2)
       if (sameGoods) {
         const sameGoodsIndex = shopCarInfo.shopList.findIndex(v=>v.goodsId === sameGoods.goodsId)
         shopCarInfo.shopList.splice(sameGoodsIndex, 1, shopCarMap);
