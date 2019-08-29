@@ -1,6 +1,6 @@
 const WXAPI = require('../wxapi/main')
 
-function wxpay(app, money, orderId, redirectUrl) {
+function wxpay(money, orderId, redirectUrl, shopCarIds) {
   wx.showLoading()
   WXAPI.wxpay({
     orderId: orderId,
@@ -17,6 +17,14 @@ function wxpay(app, money, orderId, redirectUrl) {
         console.log(err);
       },
       success: ()=> {
+        if (shopCarIds&&shopCarIds.length>0) {
+          let shopCarInfoMem = wx.getStorageSync('shopCarInfo');
+
+          if (shopCarInfoMem && shopCarInfoMem.shopList) {
+            shopCarInfoMem.shopList = shopCarInfoMem.shopList.filter(v=>!shopCarIds.includes(v.shopCarId))
+            wx.setStorageSync('shopCarInfo', shopCarInfoMem)
+          }
+        }
         wx.showToast({
           title: '支付成功'
         })

@@ -11,7 +11,8 @@ Page({
     eatNumTag: ['一餐','二餐', '三餐', '四餐'],
     orderId: '',
     dialogText: '',
-    dialogType: 'add-address'
+    dialogType: 'add-address',
+    type: 0 //  0线上支付，1线下支付
   },
   onShow () {
     const address = wx.getStorageSync('select-address')
@@ -52,9 +53,11 @@ Page({
         })
       }
     }
+    this.getAmount(shopList)
     this.setData({
       goodsList: shopList,
     });
+
   },
   onLoad(e) {
     this.setData({
@@ -68,6 +71,12 @@ Page({
       }
     }
   },
+  offlinePay(){
+    this.setData({
+      type: 1
+    })
+    this.createOrder()
+  },
   createOrder() {
     wx.showLoading({
       title: '创建订单中...'
@@ -75,17 +84,25 @@ Page({
     WXAPI.orderCreate({
       addressId: this.data.curAddressData.addressId,
       orderDetails: this.data.goodsList,
+      type: this.data.type
     }).then( (res)=> {
       this.setData({
         allGoodsPrice: res.data.amount,
         orderId: res.data.orderId
       });
+      let shopCarIds = []
       if ("buyNow" !== this.data.orderType) {
         // 清空购物车数据
-        wx.removeStorageSync('shopCarInfo');
+        shopCarIds = this.data.goodsList.map(v=>v.shopCarId)
       }
-      wxpay.wxpay('order', this.data.allGoodsPrice, this.data.orderId,
-        "/pages/pay-success/index?orderId="+this.data.orderId);
+      const redirectUrl = "/pages/pay-success/index?orderId="+this.data.orderId;
+      if (this.data.type === 0) {
+        wxpay.wxpay(this.data.allGoodsPrice, this.data.orderId, redirectUrl, shopCarIds);
+      } else if (this.data.type === 1) {
+        wx.redirectTo({
+          url: redirectUrl
+        });
+      }
     }).catch(err=>{
       wx.showModal({
         title: '错误',
@@ -107,7 +124,6 @@ Page({
     }
     if (Boolean(this.data.curAddressData.addressType) ===
       Boolean(['宴席餐具','餐馆餐具'].includes(this.data.goodsList[0].useType))) {
-      this.createOrder()
       return true
     } else {
       this.setData({
@@ -120,17 +136,21 @@ Page({
   initShippingAddress() {
     wx.showLoading({
       mask: true,
-      title: '正在获取数据...'
+      title: '获取数据中...'
     })
     WXAPI.defaultAddress().then( (res)=> {
       this.setData({
         curAddressData: res.data
       });
-      if (!this.matchGoodsAddress()) {
-        wx.hideLoading()
-      }
     }).finally(() => {
       wx.hideLoading()
+    })
+  },
+  getAmount(shopList){
+    WXAPI.getOrderAmount({
+      orderDetails: shopList
+    }).then(res=>{
+      console.log(res);
     })
   },
   close(){
