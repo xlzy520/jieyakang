@@ -21,7 +21,7 @@ Component({
     getGoodsList () {
       wx.showLoading({
         mask: true,
-        title: '正在获取数据...'
+        title: '获取数据中...'
       })
       return WXAPI.goods({
         pageIndex: 1,

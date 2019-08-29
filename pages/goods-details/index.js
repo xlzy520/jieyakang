@@ -50,7 +50,7 @@ Page({
   onLoad(e) {
     wx.showLoading({
       "mask": true,
-      title: '正在获取商品详情...'
+      title: '努力加载中...'
     })
     WXAPI.goodsDetail({
       goodsId: e.id

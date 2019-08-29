@@ -46,7 +46,7 @@ Page({
   },
   initShippingAddress() {
     wx.showLoading({
-      title: '正在获取地址列表...'
+      title: '获取地址列表...'
     })
     WXAPI.getAddressList({
       pageIndex: 1,
