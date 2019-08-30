@@ -48,34 +48,7 @@ const request = (url,data={},method='post') => {
             })
             wx.removeStorageSync('token')
             if (!tokenError) {
-              wx.login({
-                success: resWXLogin=> {
-                  request('/login', {
-                    username: resWXLogin.code,
-                    password: resWXLogin.code
-                  }, 'formdata').then(resLogin=> {
-                    wx.setStorageSync('token', resLogin.data.appToken)
-                    if (resLogin.data.isFirst) {
-                      setTimeout(() => {
-                        wx.navigateTo({
-                          url: "/pages/authorize/index"
-                        })
-                      }, 500)
-                    }
-                    wx.redirectTo({
-                      url: "/pages/index/index"
-                    })
-                  }).catch(err=>{
-                    wx.showModal({
-                      title: '提示',
-                      content: err.msg||'无法登录，请重试',
-                      showCancel: false
-                    })
-                  }).finally(()=>{
-                    wx.hideLoading();
-                  })
-                }
-              })
+              handleLoginExpire()
               tokenError = true
             }
           } else {
@@ -95,6 +68,37 @@ const request = (url,data={},method='post') => {
         // 加载完成
       }
     })
+  })
+}
+
+const handleLoginExpire = () =>{
+  wx.login({
+    success: resWXLogin=> {
+      request('/login', {
+        username: resWXLogin.code,
+        password: resWXLogin.code
+      }, 'formdata').then(resLogin=> {
+        wx.setStorageSync('token', resLogin.data.appToken)
+        if (resLogin.data.isFirst) {
+          setTimeout(() => {
+            wx.navigateTo({
+              url: "/pages/authorize/index"
+            })
+          }, 500)
+        }
+        wx.redirectTo({
+          url: "/pages/index/index"
+        })
+      }).catch(err=>{
+        wx.showModal({
+          title: '提示',
+          content: err.msg||'无法登录，请重试',
+          showCancel: false
+        })
+      }).finally(()=>{
+        wx.hideLoading();
+      })
+    }
   })
 }
 
