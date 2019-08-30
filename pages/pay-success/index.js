@@ -9,7 +9,7 @@ Page({
     if (e&&e.orderId) {
       this.setData({
         orderId: e.orderId,
-        type: e.type
+        type: Number(e.type)
       })
     }
   },
