@@ -44,10 +44,10 @@ Page({
     })
   },
   onLoad(e) {
+    // 路由传递都会变成string
     if (e.id) {
-      const orderId = e.id;
       this.setData({
-        orderId: orderId
+        orderId: e.id
       });
     }
   },
@@ -59,13 +59,14 @@ Page({
     WXAPI.orderDetail({
       orderId: this.data.orderId
     }).then(res => {
+      const ss = 'titleMap.unpaid.labelTip'
+      const text = res.data.type === 1? `您选择线下支付，等待洁雅康发货`: `剩余${res.data.lastTime}自动关闭`
+      this.setData({
+        [ss]: text
+      })
       this.setData({
         orderDetail: res.data,
       });
-      const ss = 'titleMap.unpaid.labelTip'
-      this.setData({
-        [ss]: `剩余${res.data.lastTime}自动关闭`
-      })
     }).catch(err => {
       wx.showModal({
         title: '错误',
@@ -106,7 +107,7 @@ Page({
       cancelText: "取消支付",
       success :(res)=> {
         if (res.confirm) {
-          wxpay.wxpay('order', money, orderId, "/pages/order-list/index");
+          wxpay.wxpay( money, orderId, "/pages/order-list/index");
         } else {
           console.log('用户点击取消支付')
         }

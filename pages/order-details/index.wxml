@@ -80,9 +80,12 @@
   <view class="order-operation" wx:if="{{orderDetail.statusCode!=='unshipped'}}">
     <form bindsubmit="confirmBtnTap" report-submit="true">
       <view class="btn-row">
-        <view class="cancel-btn" bindtap="cancelOrderTap" wx:if="{{orderDetail.statusCode==='unpaid'}}">取消订单</view>
-        <view class="pay-btn" bindtap="toPayTap" wx:if="{{orderDetail.statusCode==='unpaid'}}">付款</view>
-        <view class="pay-btn" bindtap="shouhuo" wx:if="{{orderDetail.statusCode==='unreceived'}}">确认收货</view>
+        <view class="cancel-btn" bindtap="cancelOrderTap"
+              wx:if="{{orderDetail.statusCode==='unpaid'}}">取消订单</view>
+        <view class="pay-btn" bindtap="toPayTap"
+              wx:if="{{orderDetail.statusCode==='unpaid'&&orderDetail.type === 0}}">付款</view>
+        <view class="pay-btn" bindtap="shouhuo"
+              wx:if="{{orderDetail.statusCode==='unreceived'}}">确认收货</view>
       </view>
     </form>
   </view>
