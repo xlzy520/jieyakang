@@ -2,12 +2,14 @@ const WXAPI = require('../../wxapi/main')
 
 Page({
   data: {
-    orderId: ''
+    orderId: '',
+    type: 0,
   },
   onLoad(e){
     if (e&&e.orderId) {
       this.setData({
-        orderId: e.orderId
+        orderId: e.orderId,
+        type: e.type
       })
     }
   },
