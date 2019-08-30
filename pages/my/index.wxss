@@ -72,7 +72,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  box-shadow:0rpx 11rpx 24rpx 0rpx rgba(0, 0, 0, 0.08);
 }
 .order{
   height: 205rpx;
@@ -122,6 +121,7 @@
   width: 187rpx;
   justify-content: center;
   align-items: center;
+  box-shadow:0rpx 11rpx 24rpx 0rpx rgba(0, 0, 0, 0.08);
 }
 .my-wrapper-content .item .icon {
   width: 50rpx;

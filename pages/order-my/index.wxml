@@ -10,7 +10,7 @@
     <view class="a-order" wx:for="{{orderList}}" wx:key="{{index}}">
       <view class="order-number">
         <view class="order-number-label">订单号：{{item.orderNumber}}</view>
-        <view class="order-status">{{item.statusName}}</view>
+        <view class="order-status">{{item.type?'线下':''}}{{item.statusName}}</view>
       </view>
       <view class="goods-info" bindtap="orderDetail" data-id="{{item.orderId}}">
         <view class="goods-box" wx:for="{{item.orderDetails}}" wx:for-item="goods" wx:key="{{goods.orderId}}">
@@ -39,7 +39,7 @@
       <view class="order-action">
         <view class="btn cancel-btn" wx:if="{{item.statusCode==='unpaid'}}" bindtap="cancelOrderTap"
               data-id="{{item.orderId}}">取消订单</view>
-        <view class="btn topay-btn" wx:if="{{item.statusCode==='unpaid'}}" bindtap="toPayTap" data-id="{{item.orderId}}"
+        <view class="btn topay-btn" wx:if="{{item.statusCode==='unpaid'&&item.type === 0}}" bindtap="toPayTap" data-id="{{item.orderId}}"
               data-money="{{item.amount}}">立即支付</view>
         <view class="btn topay-btn" wx:if="{{item.statusCode==='unreceived'}}" bindtap="shouhuo"
               data-id="{{item.orderId}}">确认收货</view>

@@ -66,9 +66,7 @@ Page({
   },
   toPay(e){
     if (this.matchGoodsAddress()) {
-      if (this.data.orderId) {
-        this.createOrder()
-      }
+      this.createOrder()
     }
   },
   offlinePay(){

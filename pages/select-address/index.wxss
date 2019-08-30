@@ -41,7 +41,7 @@
 .name-tel .phone {
   font-family: Mark Pro Regular, sans-serif;
   color: #999;
-  font-weight: lighter;
+  font-weight: normal;
 }
 .address-type-wrap{
   display: flex;
