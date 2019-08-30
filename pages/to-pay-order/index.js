@@ -150,7 +150,11 @@ Page({
     WXAPI.getOrderAmount({
       orderDetails: shopList
     }).then(res=>{
-      console.log(res);
+      if (res.data > 0) {
+        this.setData({
+          allGoodsPrice: res.data
+        })
+      }
     })
   },
   close(){
