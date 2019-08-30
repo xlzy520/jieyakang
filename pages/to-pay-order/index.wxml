@@ -54,7 +54,7 @@
         <view class="heji-yuan">¥ </view>
         <view class="heji-price">{{allGoodsPrice}}</view>
       </view>
-      <button class="to-pay-btn" bindtap="offlinePay">线下支付</button>
+      <button class="to-pay-btn offine" bindtap="offlinePay">线下支付</button>
       <button class="to-pay-btn" formType="submit">立即支付</button>
     </view>
   </form>

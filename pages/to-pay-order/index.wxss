@@ -246,7 +246,7 @@ form {
   z-index: 999;
 }
 .jiesuan-box .to-pay-btn {
-  width: 210rpx;
+  width: 170rpx;
   border-radius: 37.5rpx;
   text-align: center;
   height: 75rpx;
@@ -254,6 +254,11 @@ form {
   background-image: linear-gradient(90deg,#ff0000,#ff0025);
   font-size: 28rpx;
   color: #ffffff;
+}
+.jiesuan-box .to-pay-btn.offine{
+  color: #ff0000;
+  border: 1rpx solid #ff0000;
+  margin-right: 10rpx;
 }
 .jiesuan-box .heji {
   font-size: 26rpx;
