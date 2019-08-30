@@ -76,7 +76,7 @@ Page({
     this.createOrder()
   },
   createOrder() {
-    const { orderId, type } = this.data
+    const { type, allGoodsPrice, orderType } = this.data
     wx.showLoading({
       title: '创建订单中...'
     })
@@ -84,19 +84,20 @@ Page({
       addressId: this.data.curAddressData.addressId,
       orderDetails: this.data.goodsList,
       type: type
-    }).then( (res)=> {
+    }).then((res)=> {
+      const { amount, orderId } = res.data
       this.setData({
-        allGoodsPrice: res.data.amount,
-        orderId: res.data.orderId
+        allGoodsPrice: amount,
+        orderId: orderId
       });
       let shopCarIds = []
-      if ("buyNow" !== this.data.orderType) {
+      if ("buyNow" !== orderType) {
         // 清空购物车数据
         shopCarIds = this.data.goodsList.map(v=>v.shopCarId)
       }
       const redirectUrl = `/pages/pay-success/index?orderId=${orderId}&type=${type}`;
       if (type === 0) {
-        wxpay.wxpay(this.data.allGoodsPrice, orderId, redirectUrl, shopCarIds);
+        wxpay.wxpay(allGoodsPrice, orderId, redirectUrl, shopCarIds);
       } else if (type === 1) {
         wx.redirectTo({
           url: redirectUrl

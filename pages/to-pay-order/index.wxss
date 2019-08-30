@@ -247,15 +247,16 @@ form {
 }
 .jiesuan-box .to-pay-btn {
   width: 170rpx;
-  border-radius: 37.5rpx;
+  border-radius: 35rpx;
   text-align: center;
-  height: 75rpx;
-  line-height: 75rpx;
+  height: 70rpx;
+  line-height: 70rpx;
   background-image: linear-gradient(90deg,#ff0000,#ff0025);
   font-size: 28rpx;
   color: #ffffff;
 }
 .jiesuan-box .to-pay-btn.offine{
+  background: unset;
   color: #ff0000;
   border: 1rpx solid #ff0000;
   margin-right: 10rpx;

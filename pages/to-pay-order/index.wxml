@@ -54,8 +54,8 @@
         <view class="heji-yuan">¥ </view>
         <view class="heji-price">{{allGoodsPrice}}</view>
       </view>
-      <button class="to-pay-btn offine" bindtap="offlinePay">线下支付</button>
-      <button class="to-pay-btn" formType="submit">立即支付</button>
+      <view class="to-pay-btn offine" bindtap="offlinePay">线下支付</view>
+      <view class="to-pay-btn" bindtap="toPay">立即付款</view>
     </view>
   </form>
   <dialog wx:if="{{dialogText}}" type="{{dialogType}}" text="{{dialogText}}" bindclose="close"></dialog>
