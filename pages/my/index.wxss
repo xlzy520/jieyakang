@@ -121,11 +121,13 @@
   width: 187rpx;
   justify-content: center;
   align-items: center;
-  box-shadow:0rpx 11rpx 24rpx 0rpx rgba(0, 0, 0, 0.08);
 }
 .my-wrapper-content .item .icon {
   width: 50rpx;
   height: 50rpx;
+}
+.record .my-wrapper-content .item{
+  box-shadow:0rpx 11rpx 24rpx 0rpx rgba(0, 0, 0, 0.08);
 }
 .record .my-wrapper-content .item:nth-child(1) .icon {
   width: 47rpx;
