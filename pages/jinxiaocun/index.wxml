@@ -1,7 +1,7 @@
 <view class="container">
   <top-nav tabList="{{tabList}}" currentTab="{{currentTab}}" bindchange="changeCurrentTab"></top-nav>
-  <view class="search" hidden="{{currentTab}}">
-    <picker mode="date" value="{{start}}" start="2019-07-01" end="{{endDate}}"
+  <view class="search" hidden="{{currentTab||!recordList.length}}">
+    <picker mode="date" value="{{start}}" end="{{endDate}}"
             bindchange="bindDateChange" data-type="start">
       <view class="picker">
         <view class="placeholder" hidden="{{start}}">开始时间</view>
@@ -9,7 +9,7 @@
       </view>
     </picker>
     <view class="middle">至</view>
-    <picker mode="date" value="{{end}}" start="2019-79-01" end="{{endDate}}"
+    <picker mode="date" value="{{end}}"  end="{{endDate}}"
             bindchange="bindDateChange" data-type="end">
       <view class="picker">
         <view class="placeholder" hidden="{{end}}">结束时间</view>

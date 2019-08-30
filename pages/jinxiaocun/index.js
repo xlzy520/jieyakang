@@ -14,9 +14,10 @@ Page({
     noMore: false
   },
   onLoad(e) {
+    // 路由来的参数会转为string
     if (e&&e.type) {
       this.setData({
-        currentTab: e.type
+        currentTab: Number(e.type)
       })
     }
    this.getInventoryList({
