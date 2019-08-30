@@ -1,5 +1,5 @@
 const baseUrl = 'https://axjieyakang.com/market'
-// const baseUrl = 'http://tq7yf2.natappfree.cc/market'
+// const baseUrl = 'http://zvvuz8.natappfree.cc/market'
 
 const imgBaseUrl = 'https://axjieyakang.com/assets/'
 
@@ -22,6 +22,8 @@ const patchImaUrl = (data)=>{
   }
   return data
 }
+
+let tokenError = false
 // todo 统一处理 正确错误、token过期
 const request = (url,data={},method='post') => {
   let _url = baseUrl + url
@@ -33,19 +35,53 @@ const request = (url,data={},method='post') => {
       header: {
         'Content-Type': method==='formdata'?'application/x-www-form-urlencoded':'application/json'
       },
-      success:(request)=> {
-        const { data, success } = request.data
+      success:(res)=> {
+        const { data, success, code, msg } = res.data
         if (success){
           // 图片默认补充路径
-          request.data.data = patchImaUrl(data)
-          resolve(request.data)
+          res.data.data = patchImaUrl(data)
+          resolve(res.data)
         } else {
-          if (request.data.code === 1027) {
+          if (code === 1027) {
+            wx.showLoading({
+              title: '正在登录...'
+            })
             wx.removeStorageSync('token')
+            if (!tokenError) {
+              wx.login({
+                success: resWXLogin=> {
+                  request('/login', {
+                    username: resWXLogin.code,
+                    password: resWXLogin.code
+                  }, 'formdata').then(resLogin=> {
+                    wx.setStorageSync('token', resLogin.data.appToken)
+                    if (resLogin.data.isFirst) {
+                      setTimeout(() => {
+                        wx.navigateTo({
+                          url: "/pages/authorize/index"
+                        })
+                      }, 500)
+                    }
+                    wx.redirectTo({
+                      url: "/pages/index/index"
+                    })
+                  }).catch(err=>{
+                    wx.showModal({
+                      title: '提示',
+                      content: err.msg||'无法登录，请重试',
+                      showCancel: false
+                    })
+                  }).finally(()=>{
+                    wx.hideLoading();
+                  })
+                }
+              })
+              tokenError = true
+            }
           } else {
             wx.showModal({
               title: '错误',
-              content: request.data.msg,
+              content: msg|| '请重新登陆',
               showCancel: false
             })
             reject(request.data)
