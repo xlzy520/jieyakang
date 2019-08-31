@@ -41,6 +41,9 @@ Page({
     
       if (shopCarInfoMem && shopCarInfoMem.shopList) {
         shopList = shopCarInfoMem.shopList.filter(entity => entity.active);
+        shopList.map(v=>{
+          v.allGoodsPrice = (v.quantity * v.selectSizePrice).toFixed(2)
+        })
         let totalNum = 0;
         let allGoodsPrice = 0;
         for (let i = 0; i < shopList.length; i++) {
@@ -152,7 +155,7 @@ Page({
     }).then(res=>{
       if (res.data > 0) {
         this.setData({
-          allGoodsPrice: res.data
+          allGoodsPrice: (res.data).toFixed(2)
         })
       }
     })

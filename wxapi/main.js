@@ -1,5 +1,5 @@
-const baseUrl = 'https://axjieyakang.com/market'
-// const baseUrl = 'http://zvvuz8.natappfree.cc/market'
+// const baseUrl = 'https://axjieyakang.com/market'
+const baseUrl = 'http://r87d4m.natappfree.cc/market'
 
 const imgBaseUrl = 'https://axjieyakang.com/assets/'
 
@@ -86,7 +86,7 @@ const handleLoginExpire = () =>{
             })
           }, 500)
         }
-        wx.redirectTo({
+        wx.reLaunch({
           url: "/pages/index/index"
         })
       }).catch(err=>{

@@ -251,7 +251,7 @@ Page({
       selectSpecLabel: selectSpecLabel? '('+selectSpecLabel+')': '',
       specsList: specsList,
       useType: useType,
-      
+      allGoodsPrice: '',
       specsId: specsId,
       eatNum: eatNum,
       peopleNum: peopleNum,

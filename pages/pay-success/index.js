@@ -19,7 +19,7 @@ Page({
     })
   },
   back2Index(){
-    wx.navigateTo({
+    wx.reLaunch({
       url: "/pages/index/index"
     })
   }

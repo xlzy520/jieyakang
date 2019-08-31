@@ -16,14 +16,19 @@ Page({
   onLoad(e) {
     // 路由来的参数会转为string
     if (e&&e.type) {
+      if (e.type) {
+        this.getCurrentStore()
+      } else {
+        this.getInventoryList({
+          pageSize: 20,
+          pageIndex: 1,
+        })
+      }
       this.setData({
         currentTab: Number(e.type)
       })
     }
-   this.getInventoryList({
-     pageSize: 20,
-     pageIndex: 1,
-   })
+
   },
   getInventoryList(data){
     WXAPI.getInventoryList(data).then(res=>{
@@ -58,17 +63,25 @@ Page({
       noMore: false
     })
     if (e.detail){
-      wx.showLoading({
-        title: '努力加载中...'
-      })
-      WXAPI.getCurrentStore().then(res=>{
-        this.setData({
-          storeMap: res.data
-        })
-      }).finally(() => {
-        wx.hideLoading()
+      this.getCurrentStore()
+    } else {
+      this.getInventoryList({
+        pageSize: 20,
+        pageIndex: 1,
       })
     }
+  },
+  getCurrentStore(){
+    wx.showLoading({
+      title: '努力加载中...'
+    })
+    WXAPI.getCurrentStore().then(res=>{
+      this.setData({
+        storeMap: res.data
+      })
+    }).finally(() => {
+      wx.hideLoading()
+    })
   },
 
   onReachBottom() {
