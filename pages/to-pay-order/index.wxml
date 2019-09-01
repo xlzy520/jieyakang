@@ -1,10 +1,10 @@
 <view class="container">
   <form bindsubmit="toPay" report-submit="true">
     <view class="address-box">
-      <view class="add-address" hidden="{{curAddressData}}">
+      <view class="add-address" hidden="{{curAddressData.consignee}}">
         <view class="title" bindtap="addAddress">新增收货地址</view>
       </view>
-      <view class="show-address" hidden="{{!curAddressData}}" bindtap="selectAddress">
+      <view class="show-address" hidden="{{!curAddressData.consignee}}" bindtap="selectAddress">
         <view class="row">
           <view class="name-or-class">{{curAddressData.consignee||curAddressData.class}}</view>
           <view class="mobile">{{curAddressData.mobile}}</view>
