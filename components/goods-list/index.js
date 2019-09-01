@@ -19,10 +19,6 @@ Component({
   },
   methods: {
     getGoodsList () {
-      wx.showLoading({
-        mask: true,
-        title: '获取数据中...'
-      })
       return WXAPI.goods({
         pageIndex: 1,
         pageSize: 100
