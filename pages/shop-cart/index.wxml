@@ -21,8 +21,7 @@
           </view>
           <view class="goods-info">
             <view class="img-box">
-<!--              <image src="{{goods.pic}}" class="img"/>-->
-              <image src="https://axjieyakang.com/164_164/餐馆餐具.png" class="img"/>
+              <image src="{{goods.littleUrl}}" class="img"/>
             </view>
             <view class="text-box {{goods.specsList[0].pack?'':'restaurant'}}" wx:if="{{!goods.specsList[0].pack}}">
               <view class="name-price">
