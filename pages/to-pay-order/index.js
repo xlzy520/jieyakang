@@ -73,10 +73,12 @@ Page({
     }
   },
   offlinePay(){
-    this.setData({
-      type: 1
-    })
-    this.createOrder()
+    if (this.matchGoodsAddress()) {
+      this.setData({
+        type: 1
+      })
+      this.createOrder()
+    }
   },
   createOrder() {
     const { type, allGoodsPrice, orderType } = this.data

@@ -41,7 +41,7 @@
               data-id="{{item.orderId}}">取消订单</view>
         <view class="btn topay-btn" wx:if="{{item.statusCode==='unpaid'&&item.type === 0}}" bindtap="toPayTap" data-id="{{item.orderId}}"
               data-money="{{item.amount}}">立即付款</view>
-        <view class="btn topay-btn" wx:if="{{item.statusCode==='unreceived'}}" bindtap="shouhuo"
+        <view class="btn topay-btn" wx:if="{{item.statusCode==='unreceived'&&!item.monthSettle}}" bindtap="shouhuo"
               data-id="{{item.orderId}}">确认收货</view>
       </view>
     </view>

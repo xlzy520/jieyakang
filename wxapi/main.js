@@ -1,9 +1,12 @@
-// const baseUrl = 'https://axjieyakang.com/market'
-const baseUrl = 'http://r87d4m.natappfree.cc/market'
+const baseUrl = 'https://axjieyakang.com/market'
+// const baseUrl = 'http://auv4nb.natappfree.cc/market'
 
 const imgBaseUrl = 'https://axjieyakang.com/assets/'
 
 const patchImaUrl = (data)=>{
+  if (data === null) {
+    return ''
+  }
   if (data.fileUrls&&data.fileUrls.length>0) {
     data.fileUrls = data.fileUrls.map(v=>imgBaseUrl+v)
   }

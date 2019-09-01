@@ -16,7 +16,7 @@ Page({
   onLoad(e) {
     // 路由来的参数会转为string
     if (e&&e.type) {
-      if (e.type) {
+      if (Number(e.type)) {
         this.getCurrentStore()
       } else {
         this.getInventoryList({
@@ -32,8 +32,17 @@ Page({
   },
   getInventoryList(data){
     WXAPI.getInventoryList(data).then(res=>{
+      let list = res.data.list
+      if (list&&list.length>0) {
+        list = list.map(v=>{
+          if (v.saveDate&&v.saveDate.length>0) {
+            v.saveDate = v.saveDate.substr(0,10)
+          }
+          return v
+        })
+      }
       this.setData({
-        recordList: res.data.list
+        recordList: list
       })
     })
   },
@@ -50,11 +59,19 @@ Page({
 
   },
   submit(){
+    const { start, end }  = this.data
+    if (start > end) {
+      wx.showToast({
+        title: '初始时间大于结束时间',
+        icon: 'none'
+      })
+      return false
+    }
     this.getInventoryList({
       pageSize: 100,
       pageIndex: 1,
-      startDate: this.data.start,
-      endDate: this.data.end
+      startDate: start,
+      endDate: end
     })
   },
   changeCurrentTab(e){

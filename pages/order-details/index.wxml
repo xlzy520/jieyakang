@@ -85,7 +85,7 @@
         <view class="pay-btn" bindtap="toPayTap"
               wx:if="{{orderDetail.statusCode==='unpaid'&&orderDetail.type === 0}}">付款</view>
         <view class="pay-btn" bindtap="shouhuo"
-              wx:if="{{orderDetail.statusCode==='unreceived'}}">确认收货</view>
+              wx:if="{{orderDetail.statusCode==='unreceived'&&!item.monthSettle}}">确认收货</view>
       </view>
     </form>
   </view>
