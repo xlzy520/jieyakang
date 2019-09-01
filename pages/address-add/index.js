@@ -132,11 +132,11 @@ Page({
     })
   },
   onLoad(e) {
+    this.getSchoolList()
     if (e.addressType&&e.id){
       wx.setNavigationBarTitle({
         title: '编辑收货地址'
       })
-      this.getSchoolList()
       WXAPI.addressDetail({
         addressId: e.id
       }).then((res)=> {
