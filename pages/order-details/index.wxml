@@ -18,7 +18,7 @@
         <view class="mobile">{{orderDetail.mobile}}</view>
       </view>
       <view class="row">
-        <image class="address-type" src="/images/useType/{{orderDetail.addressType?'school':'canguan'}}.png"></image>
+        <image class="address-type" src="/images/useType/{{orderDetail.addressType?'canguan':'school'}}.png"></image>
         <view class="addr-text">{{orderDetail.address}}</view>
       </view>
     </view>
