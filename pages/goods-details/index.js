@@ -58,6 +58,11 @@ Page({
       this.setData({
         goodsDetail: res.data,
       })
+      if (!['餐馆餐具', '宴席餐具'].includes(res.data.useType)) {
+        this.setData({
+          eatDay: 20
+        })
+      }
       if (res.data.useType === '幼儿园餐具') {
         this.setData({
           selectSizePrice: res.data.priceStr
