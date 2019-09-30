@@ -15,6 +15,9 @@
 }
 .phone-text, .address-text{
   text-indent: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .copy, .call{
   padding: 5rpx 5rpx;

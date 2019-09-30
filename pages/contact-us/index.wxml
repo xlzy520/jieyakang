@@ -1,6 +1,6 @@
 <view class="contact-us container">
     <view class="info-item address">
-        <view class="address-text">公司地址：{{companyAddress}}</view>
+        <view class="address-text" title="{{companyAddress}}">公司地址：{{companyAddress}}</view>
         <view class="copy" bindtap="copyAddress">复制</view>
     </view>
     <view class="info-item phone">
