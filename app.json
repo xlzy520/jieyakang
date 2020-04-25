@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/my/index",
+
+    "pages/staff-action/index",
+    "pages/index/index",
     "pages/to-pay-order/index",
     "pages/shop-cart/index",
     "pages/select-address/index",
@@ -62,5 +64,15 @@
   "navigateToMiniProgramAppIdList": [
     "wxfcc24a29b3ff5f57"
   ],
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index"
+  }
 }

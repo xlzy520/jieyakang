@@ -1,0 +1,18 @@
+{
+  "name": "jieyakang",
+  "version": "1.0.0",
+  "description": "洁雅康",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.weixin.qq.com/lv1017866168/jieyakang.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.2.2"
+  }
+}

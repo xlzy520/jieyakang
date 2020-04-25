@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "员工操作",
+  "usingComponents": {
+    "top-nav": "/components/top-nav/index"
+  }
+}
