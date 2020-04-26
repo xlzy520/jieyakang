@@ -143,6 +143,9 @@ module.exports = {
   register: (data) => {
     return request('/user/logon', data)
   },
+  getUserInfo: () => {
+    return request('/info')
+  },
   goods: (data) => {
     return request('/goods/list', data)
   },

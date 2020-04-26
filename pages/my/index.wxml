@@ -32,7 +32,7 @@
     <view class="my-item-subtitle">联系方式与地址</view>
     <image class="arrow-right" src="/images/arrow-right.png"></image>
   </navigator>
-  <navigator class="my-item" url="/pages/staff-action/index" hover-class="navigator-hover">
+  <navigator class="my-item" url="/pages/staff-action/index" hover-class="navigator-hover" wx:if="{{hasProduceAuth}}">
     <image class="my-item-img" src="/images/contact_us.png"></image>
     <view class="my-item-title">员工操作</view>
     <view class="my-item-subtitle">生产数据与二维码</view>

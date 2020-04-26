@@ -19,9 +19,11 @@ Component({
   },
   methods: {
     getGoodsList () {
+      const schoolId = wx.getStorageSync('schoolId')
       return WXAPI.goods({
         pageIndex: 1,
-        pageSize: 100
+        pageSize: 100,
+        schoolId
       }).then((res)=> {
         this.setData({
           goods: res.data.list,

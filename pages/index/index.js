@@ -25,12 +25,13 @@ Page({
     wx.login({
       success: res=> {
         WXAPI.login(res.code).then(res=> {
+          console.log(9999);
           wx.setStorageSync('token', res.data.appToken)
           if (res.data.isFirst) {
             this.goLoginPageTimeOut();
           } else {
+            this.getUserInfo()
             this.getPartner()
-            this.getGoodsList()
           }
         }).catch(err=>{
           wx.showModal({
@@ -49,6 +50,7 @@ Page({
       title: '努力加载中...'
     })
     const token = wx.getStorageSync('token')
+    console.log(token);
     if (token){
       this.getPartner()
       this.getGoodsList()
@@ -62,6 +64,13 @@ Page({
   },
   getGoodsList(){
     return this.selectComponent("#goods-list").getGoodsList()
+  },
+  getUserInfo(){
+    WXAPI.getUserInfo().then(res=>{
+      wx.setStorageSync('schoolId', res.data.schoolId)
+      wx.setStorageSync('hasProduceAuth', res.data.hasProduceAuth)
+      this.getGoodsList()
+    })
   },
   getPartner(){
     WXAPI.getPartner({

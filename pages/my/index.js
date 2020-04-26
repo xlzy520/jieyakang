@@ -13,12 +13,18 @@ Page({
       {type: 0, label: '进销记录', img: 'jinxiaocun'},
       {type: 1, label: '当前留存', img: 'liucun'},
     ],
-    badge: [0,0,0,0]
+    badge: [0,0,0,0],
+    hasProduceAuth: false
   },
 	onLoad() {
-
+	
 	},
   onShow() {
+    // const hasProduceAuth = wx.getStorageSync('hasProduceAuth')
+    // this.setData({
+    //   hasProduceAuth
+    // })
+    this.getProduceList()
     this.getOrderStatistics()
     this.getUserTypeByDefaultAddress();
   },
@@ -32,6 +38,25 @@ Page({
   goOrder(e) {
     wx.navigateTo({
       url: "/pages/order-my/index?type=" + e.currentTarget.dataset.type
+    })
+  },
+  getProduceList() {
+    WXAPI.getProduceList({
+      pageIndex: 1,
+      pageSize: 20,
+      hasProduceAuth: true
+    }).then(res => {
+      console.log(res);
+      wx.getUserInfo({
+        success: (userInfo_res) => {
+          console.log(userInfo_res);
+          if (res.list.find(value => value.openId === userInfo_res.openId)) {
+            this.setData({
+              hasProduceAuth: true
+            })
+          }
+        }
+      })
     })
   },
   goRecord(e){
