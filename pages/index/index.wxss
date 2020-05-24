@@ -3,6 +3,21 @@
   width: 720rpx;
   position: relative;
   padding: 0 15rpx;
+	height: 115px;
+}
+.shoufei-title{
+	text-align: center;
+	padding: 10rpx 0;
+	color: black;
+	font-weight: bold;
+}
+
+.shoufei-item{
+	padding: 10rpx 40rpx 40rpx;
+	border: 1rpx solid #eee;
+	border-radius: 10rpx;
+	height: 78%;
+	overflow: scroll;
 }
 
 .banner image {

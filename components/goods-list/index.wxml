@@ -21,4 +21,11 @@
       </view>
     </view>
   </view>
+  <view >
+  </view>
+  <view class="no-goods goods-box" wx:if="{{!goods.length}}">
+    <view wx:if="{{!loading}}">根据您的用户类型未查询到商品</view>
+
+    <van-loading wx:if="{{loading}}" type="spinner" color="#1989fa" />
+  </view>
 </view>

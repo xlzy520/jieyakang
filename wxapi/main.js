@@ -197,6 +197,9 @@ module.exports = {
   getPartner: (data) => {
     return request('/partner/list', data)
   },
+  getShoufeiData: (data) => {
+    return request('/payProcess/get', data)
+  },
   getCompanyInfo: ()=>{
     return request('/company/getInfo')
   },
@@ -215,4 +218,8 @@ module.exports = {
   addProduce(data) {
     return request('/produce/add', data)
   },
+  getSchoolQRCode(data) {
+    return request('/wxCode/get', data)
+  },
+  
 }

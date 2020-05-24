@@ -2,7 +2,11 @@ const WXAPI = require('../../wxapi/main.js')
 const CONFIG = require('../../config.js')
 Page({
   data: {
-    partners: []
+    partners: [],
+    shoufeiData: {
+      payProcessContent: '暂无收费流程',
+      payNotifyContent: '暂无收费公告'
+    }
   },
   toDetailsTap(e) {
     wx.navigateTo({
@@ -50,10 +54,12 @@ Page({
       title: '努力加载中...'
     })
     const token = wx.getStorageSync('token')
+    const schoolId = wx.getStorageSync('schoolId')
     console.log(token);
     if (token){
       this.getPartner()
       this.getGoodsList()
+      this.getShoufeiData(schoolId)
       wx.hideLoading()
     } else {
       this.login()
@@ -70,6 +76,7 @@ Page({
       wx.setStorageSync('schoolId', res.data.schoolId)
       wx.setStorageSync('hasProduceAuth', res.data.hasProduceAuth)
       this.getGoodsList()
+      this.getShoufeiData(res.data.schoolId)
     })
   },
   getPartner(){
@@ -80,6 +87,20 @@ Page({
       this.setData({
         partners: res.data.list
       })
+    })
+  },
+  getShoufeiData(schoolId){
+    WXAPI.getShoufeiData({
+      pageIndex: 1,
+      pageSize: 20,
+      schoolId,
+      show: true
+    }).then((res) =>{
+      if (res.data.schoolId === schoolId) {
+        this.setData({
+          shoufeiData: res.data
+        })
+      }
     })
   },
   onShareAppMessage () {

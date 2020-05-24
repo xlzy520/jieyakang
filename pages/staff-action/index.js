@@ -15,7 +15,13 @@ Page({
     typeOptions:['学生餐具','幼儿园餐具','餐馆餐具','宴请餐具'],
     typeIndex: '学生餐具',
     produceCount: '',
-    sendCount: ''
+    sendCount: '',
+    qrcodeUrl: '',
+    shop: {
+      schoolName: '商家',
+      schoolId: -9999
+    },
+    selectedName: ''
   },
   onLoad(e) {
     // 路由来的参数会转为string
@@ -164,8 +170,9 @@ Page({
       pageSize: 200,
       pageIndex: 1,
     }).then(res=>{
+      const baseSchoolList = res.data.list
       this.setData({
-        schoolList: res.data.list
+        schoolList: baseSchoolList
       })
     }).finally(() => {
       wx.hideLoading()
@@ -173,42 +180,56 @@ Page({
   },
   
   selectSchool(event){
-    console.log(event);
-    this.setData({
-      show: true
+    wx.showLoading({
+      title: '生成二维码中...'
+    })
+    const school = event.target.dataset.name
+    WXAPI.getSchoolQRCode({
+      address: `pages/address-add/index?schoolId=${school.schoolId}&salt=${school.salt}`,
+      width: 360
+    }).then(res=>{
+      this.setData({
+        show: true,
+        qrcodeUrl: 'data:image/png;base64,'+res.data,
+        selectedName: school.schoolName
+      })
+    }).finally(() => {
+      wx.hideLoading()
     })
   },
 
   onReachBottom() {
-    wx.showLoading({
-      title: '获取数据中...'
-    })
-    this.setData({
-      pageIndex: this.data.pageIndex++
-    })
-    WXAPI.getProduceList({
-      pageSize: 20,
-      pageIndex: this.data.pageIndex,
-      startDate: this.data.start,
-      endDate: this.data.end
-    }).then(res=>{
-      const data =res.data.list.map(v=>{
-        if (v.saveDate&&v.saveDate.length>0) {
-          v.saveDate = v.saveDate.substr(0,10)
-        }
-        v.produceTypeText = this.data.typeOptions[v.produceTypeId]
-        return v
+    if (this.data.currentTab === 0) {
+      wx.showLoading({
+        title: '获取数据中...'
       })
-      if (data.list.length<20) {
-        this.setData({
-          noMore: true
-        })
-      }
       this.setData({
-        recordList: this.data.recordList.concat(data.list)
+        pageIndex: this.data.pageIndex++
       })
-    }).finally(()=>{
-      wx.hideLoading()
-    })
+      WXAPI.getProduceList({
+        pageSize: 20,
+        pageIndex: this.data.pageIndex,
+        startDate: this.data.start,
+        endDate: this.data.end
+      }).then(res=>{
+        const data =res.data.list.map(v=>{
+          if (v.saveDate&&v.saveDate.length>0) {
+            v.saveDate = v.saveDate.substr(0,10)
+          }
+          v.produceTypeText = this.data.typeOptions[v.produceTypeId]
+          return v
+        })
+        if (data.list.length<20) {
+          this.setData({
+            noMore: true
+          })
+        }
+        this.setData({
+          recordList: this.data.recordList.concat(data.list)
+        })
+      }).finally(()=>{
+        wx.hideLoading()
+      })
+    }
   },
 })

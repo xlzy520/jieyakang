@@ -327,6 +327,7 @@ swiper-item image {
 }
 .jiu-can-box .num-box .num-input input{
   height: 100%;
+	background: #fff;
 }
 .jiu-can-box .num-box .hui{
   background-color: #f5f5f9;

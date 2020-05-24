@@ -20,11 +20,11 @@ Page({
 	
 	},
   onShow() {
-    // const hasProduceAuth = wx.getStorageSync('hasProduceAuth')
-    // this.setData({
-    //   hasProduceAuth
-    // })
-    this.getProduceList()
+    const hasProduceAuth = wx.getStorageSync('hasProduceAuth')
+    this.setData({
+      hasProduceAuth
+    })
+    // this.getProduceList()
     this.getOrderStatistics()
     this.getUserTypeByDefaultAddress();
   },

@@ -127,3 +127,8 @@
   color: #fff;
   font-size: 28rpx;
 }
+.no-goods{
+	justify-content: center;
+	align-items: center;
+	color: #ff001c;
+}

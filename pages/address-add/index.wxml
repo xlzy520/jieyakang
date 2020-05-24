@@ -1,15 +1,15 @@
 <view class="container">
-  <view class="identity-select" hidden="{{identityHidden}}">
-    <view class="identity-select-content">
-      <view class="identity-select-title">选择身份标签</view>
-      <view class="identity-select-helper">选择好身份标签，</view>
-      <view class="identity-select-helper">有助于更好的填写地址信息</view>
-      <view class="card-select">
-        <image src="/images/address/restaurant-card.png" bindtap="selectIdentity" data-type="1"></image>
-        <image src="/images/address/school-card.png" bindtap="selectIdentity" data-type="0"></image>
-      </view>
-    </view>
-  </view>
+<!--  <view class="identity-select" hidden="{{identityHidden}}">-->
+<!--    <view class="identity-select-content">-->
+<!--      <view class="identity-select-title">选择身份标签</view>-->
+<!--      <view class="identity-select-helper">选择好身份标签，</view>-->
+<!--      <view class="identity-select-helper">有助于更好的填写地址信息</view>-->
+<!--      <view class="card-select">-->
+<!--        <image src="/images/address/restaurant-card.png" bindtap="selectIdentity" data-type="1"></image>-->
+<!--        <image src="/images/address/school-card.png" bindtap="selectIdentity" data-type="0"></image>-->
+<!--      </view>-->
+<!--    </view>-->
+<!--  </view>-->
   <form bindsubmit="bindSave" class="form-content">
     <view class="form-box" wx:if="{{addressData.addressType}}">
       <view class="row-wrap">
@@ -20,16 +20,20 @@
         <input name="mobile" class="input" maxlength="11" type="number" placeholder-class="phcolor"
                placeholder="手机号码" value="{{addressData.mobile}}"/>
       </view>
-      <view class="addr-details" hidden="{{!identityHidden}}">
+      <view class="addr-details">
             <textarea name="address" placeholder="详细地址：县镇+街道+道路门牌号+企业单位地址名称"
                       placeholder-class="phcolor" value="{{addressData.address}}"/>
       </view>
     </view>
     <view class="form-box school" wx:if="{{!addressData.addressType}}">
+<!--      <van-cell title="单元格" value="内容" />-->
+
       <view class="row-wrap">
-        <picker bindchange="bindPickerChange" value="{{schoolIndex}}" range="{{schoolList}}" range-key="schoolName">
-          <view class="picker">{{schoolList[schoolIndex].schoolName}}</view>
-        </picker>
+        <input name="school" class="input" type="text" disabled="true"
+               maxlength="25" value="{{addressData.schoolName}}"/>
+<!--        <picker bindchange="bindPickerChange" value="{{schoolIndex}}" range="{{schoolList}}" range-key="schoolName">-->
+<!--          <view class="picker">{{schoolList[schoolIndex].schoolName}}</view>-->
+<!--        </picker>-->
       </view>
       <view class="row-wrap">
         <input name="consignee" class="input" type="text" placeholder-class="phcolor" maxlength="25"
@@ -48,7 +52,7 @@
           wx:if="{{addressData.addressId}}">删除地址
     </view>
     <button class="btn save-btn" formType="submit">保存</button>
-    <button class="btn reselect-btn" bindtap="reSelectIdentity" hidden="{{}}">重新选择身份标签</button>
+<!--    <button class="btn reselect-btn" bindtap="reSelectIdentity" hidden="{{}}">重新选择身份标签</button>-->
     <!--<button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>-->
   </form>
   <dialog wx:if="{{tipText}}" type="{{dialogType}}" text="{{tipText}}" bindclose="close"

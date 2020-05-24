@@ -1,7 +1,22 @@
 <view class="container">
-  <view class="banner">
-    <image bindtap="toBannerDetail" src="/images/banner/banner.png" class="slide-image"/>
-  </view>
+  <swiper autoplay indicator-dots	class="banner" indicator-active-color="#ff001c">
+    <swiper-item>
+      <image bindtap="toBannerDetail" src="/images/banner/banner.png" class="slide-image"/>
+    </swiper-item>
+    <swiper-item>
+      <view class="shoufei-item">
+        <view class="shoufei-title">收费公告</view>
+
+        {{shoufeiData.payNotifyContent}}
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="shoufei-item">
+        <view class="shoufei-title">收费流程</view>
+        {{shoufeiData.payProcessContent}}
+      </view>
+    </swiper-item>
+  </swiper>
   <goods-list id="goods-list"></goods-list>
   <view class="partner-container">
     <view class="partner-header">合作伙伴</view>

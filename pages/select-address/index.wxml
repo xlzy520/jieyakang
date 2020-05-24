@@ -27,7 +27,7 @@
     <image src="/images/no-address.png"></image>
     <view class="no-content-text">暂无绑定地址信息</view>
   </view>
-  <view class="footer">
-    <view class="add-address" bindtap="addAddress">添加新地址</view>
-  </view>
+<!--  <view class="footer">-->
+<!--    <view class="add-address" bindtap="addAddress">添加新地址</view>-->
+<!--  </view>-->
 </view>

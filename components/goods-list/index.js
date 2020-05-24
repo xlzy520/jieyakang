@@ -8,7 +8,8 @@ Component({
     }
   },
   data: {
-    goods: []
+    goods: [],
+    loading: false
   },
   attached(){
     const token = wx.getStorageSync('token')
@@ -19,6 +20,9 @@ Component({
   },
   methods: {
     getGoodsList () {
+      this.setData({
+        loading: true,
+      });
       const schoolId = wx.getStorageSync('schoolId')
       return WXAPI.goods({
         pageIndex: 1,
@@ -30,6 +34,9 @@ Component({
         });
       }).finally(()=>{
         wx.hideLoading()
+        this.setData({
+          loading: false,
+        });
       })
     },
     toDetailsTap(e) {

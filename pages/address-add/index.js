@@ -8,23 +8,31 @@ Page({
       consignee: '',
       mobile: '',
       address: '',
+      schoolId: '',
       isDefault: true
     },
     schoolList: [],
     tipText: '',
-    identityHidden: false,
     dialogType: '',
-    schoolIndex: 0,
-    classNumber: ''
+    schoolName: '',
+    classNumber: '',
   },
-  selectIdentity(e){
-    this.setData({
-      identityHidden: true,
-      'addressData.addressType': Number(e.currentTarget.dataset.type)
-    })
+  selectIdentity(id){
+    if (id === '-9999') {
+      this.setData({
+        'addressData.addressType': 1,
+      })
+    } else {
+      const school = this.data.schoolList.find(f=> f.schoolId == id)
+      this.setData({
+        'addressData.addressType': 0,
+        'addressData.schoolId': id,
+        'addressData.schoolName': school.schoolName,
+      })
+    }
   },
   getSchoolList(){
-    WXAPI.getSchoolList({
+    return WXAPI.getSchoolList({
       pageIndex: 1,
       pageSize: 20
     }).then((res) => {
@@ -44,6 +52,7 @@ Page({
     })
   },
   bindPickerChange(e) {
+    console.log(e);
     this.setData({
       schoolIndex: e.detail.value
     })
@@ -83,12 +92,13 @@ Page({
       mobile: mobile,
       isDefault: this.data.addressData.isDefault,
       consignee: consignee,
+      schoolId: this.data.addressData.schoolId,
     }
     if (!this.data.addressData.addressType) { //学校
-      schoolId = this.data.schoolList[this.data.schoolIndex].schoolId
-      params = Object.assign(params,{
-        schoolId: schoolId
-      })
+      // schoolId = this.data.schoolList[this.data.schoolIndex].schoolId
+      // params = Object.assign(params,{
+      //   schoolId: schoolId
+      // })
     } else {
       if (address.trim() === ""){
         this.setTipText('请填写详细地址')
@@ -132,7 +142,12 @@ Page({
     })
   },
   onLoad(e) {
-    this.getSchoolList()
+    console.log(e);
+    if (e.schoolId) {
+      this.getSchoolList().then(()=>{
+        this.selectIdentity(e.schoolId)
+      })
+    }
     if (e.addressType&&e.id){
       wx.setNavigationBarTitle({
         title: '编辑收货地址'
@@ -158,7 +173,7 @@ Page({
   },
   deleteAddress() {
     this.setData({
-      tipText: '确定要删除该收货地址吗？',
+      tipText: '确定要删除该收货地址吗？删除之后需要扫描二维码才可以添加地址',
       dialogType: 'delete'
     })
   },
