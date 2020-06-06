@@ -25,7 +25,7 @@
   </view>
   <view class="no-address" wx:if="{{!addressList.length}}">
     <image src="/images/no-address.png"></image>
-    <view class="no-content-text">暂无绑定地址信息</view>
+    <view class="no-content-text">暂无绑定地址信息,请联系管理员扫描二维码</view>
   </view>
 <!--  <view class="footer">-->
 <!--    <view class="add-address" bindtap="addAddress">添加新地址</view>-->

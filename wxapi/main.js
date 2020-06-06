@@ -1,5 +1,5 @@
-const baseUrl = 'http://localhost:8080/market'
-// const baseUrl = 'https://axjieyakang.com/market'
+// const baseUrl = 'http://localhost:8080/market'
+const baseUrl = 'https://axjieyakang.com/market'
 // const baseUrl = 'http://auv4nb.natappfree.cc/market'
 
 const imgBaseUrl = 'https://axjieyakang.com/assets/'
