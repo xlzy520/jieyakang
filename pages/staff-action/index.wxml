@@ -18,52 +18,8 @@
     </picker>
     <view class="submit" bindtap="submit">查询</view>
     <view class="footer">
-      <view class="add-address" bindtap="showAddProduce">添加生产数据</view>
+      <view class="add-address" bindtap="showAddProduce">添加进销存数据</view>
     </view>
-    <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
-      <view>
-        <van-cell-group title="规格"></van-cell-group>
-        <van-radio-group value="{{ typeIndex }}"  bind:change="onTypeChange">
-          <van-cell-group>
-            <van-cell
-                wx:for="{{typeOptions}}"
-                wx:for-item="type"
-                wx:key="{{type}}"
-                name="{{type}}"
-                title="{{type}}"
-                clickable
-                data-name="{{type}}"
-                bind:click="onTypeClick"
-            >
-              <van-radio slot="right-icon" name="{{type}}" />
-            </van-cell>
-          </van-cell-group>
-        </van-radio-group>
-        <van-cell-group title="数量">
-          <van-field
-              value="{{ produceCount }}"
-              label="生产数量"
-              type="number"
-              placeholder="请输入生产数量"
-              error="{{produceCount === ''}}"
-              bind:change="onProduceCountChange"
-          />
-          <van-field
-              value="{{ sendCount }}"
-              type="number"
-              label="出货数量"
-              placeholder="请输入出货数量"
-              error="{{sendCount === ''}}"
-              bind:change="onSendCountChange"
-          />
-          <view class="submit-btn" >
-            <van-button round type="info" block size="small" bind:tap="addProduce">提交</van-button>
-          </view>
-        </van-cell-group>
-
-      </view>
-
-    </van-popup>
 
   </view>
   <view class="no-record" wx:if="{{!recordList.length&&currentTab===0}}">
@@ -76,25 +32,30 @@
       <view class="record-item header">
         <view class="record-item-header">
           <view class="goods-type">规格</view>
-          <view class="number">生产数量</view>
-          <view class="number">出货数量</view>
-          <view class="number">填报人</view>
+<!--          <view class="number">生产数量</view>-->
+<!--          <view class="number">出货数量</view>-->
+<!--          <view class="number">填报人</view>-->
           <view class="date">保存日期</view>
         </view>
       </view>
-      <view class="record-item" wx:for="{{recordList}}" wx:for-item="record" wx:key="{{record.inventoryId}}">
+      <view class="record-item" wx:for="{{recordList}}" wx:for-item="record"
+            data-item="{{record}}"
+            bindtap="viewRecordDetail"
+            wx:key="{{record.inventoryId}}">
         <view class="record-item-header">
-          <view class="goods-type">{{record.produceTypeText}}</view>
+          <view class="goods-type">{{record.useType}}</view>
           <view class="number">{{record.produceCount}}</view>
           <view class="number">{{record.sendCount}}</view>
-          <view class="number">{{record.reporterName}}</view>
+<!--          <view class="number">{{record.reporterName}}</view>-->
           <view class="date">{{record.saveDate}}</view>
         </view>
         <view class="record-item-content">
           <view class="row" wx:for="{{record.inventoryDetailList}}" wx:for-item="row" :key="unique">
-            <view class="left-title">{{row.inventoryName}}</view>
+            <view class="left-title {{inventoryTypeClass[row.inventoryName]}}">
+              {{row.inventoryName}}
+            </view>
             <view class="item" wx:for="{{row.inventoryDetail}}" wx:for-item="detail" :key="unique">
-              {{detail.tablewareName}}:{{detail.quantity}}</view>
+              {{detail.tablewareName}}: {{detail.quantity}}</view>
           </view>
         </view>
       </view>
@@ -114,4 +75,20 @@
     </van-popup>
 
   </view>
+  <van-popup show="{{ popupShow }}" bind:close="onPopupClose" position="bottom" closeable
+             custom-style="height: 80%;">
+    <van-cell-group>
+      <van-cell title="填报时间" value="内容" />
+      <van-cell title="类型" value="内容" />
+      <van-cell title="餐碗" value="12" />
+      <van-cell title="餐碗" value="12" />
+      <van-cell title="餐碗" value="12" />
+      <van-cell title="餐碗" value="12" />
+      <van-cell title="填报时间" value="内容" />
+    </van-cell-group>
+  </van-popup>
+  <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
+
+  </van-popup>
+
 </view>

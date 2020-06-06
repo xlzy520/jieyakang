@@ -208,30 +208,11 @@ Page({
   },
   // 规格选择
   openGuigeDialog() {
-    let eatNumTag = []
-    switch (this.data.currentShop.useType) {
-      case '幼儿园餐具':
-        eatNumTag = [{label: '两餐', value: 2}]
-        break;
-      case '小学餐具':
-        eatNumTag = [{label: '一餐', value: 1},{label: '两餐', value: 2}]
-        break;
-      case '中学餐具':
-        //todo 初中不能选四餐，待确认
-        eatNumTag = [
-          {label: '一餐', value: 1},{label: '两餐', value: 2},
-          {label: '三餐', value: 3},{label: '四餐', value: 4}
-          ]
-        break;
-      default:
-        break;
-    }
     this.setData({
       hideShopPopup: false,
       selectSizePrice: this.data.currentShop.selectSizePrice,
       selectSpecLabel: this.data.currentShop.selectSpecLabel
         .replace('(','').replace(')',''),
-      eatNumTag: eatNumTag
     })
   },
   closePopupTap: function() {
@@ -287,7 +268,6 @@ Page({
     
   },
   confirmChange(){
-
     const { eatNum, peopleNum, eatDay } =  this.data.currentShop
     const index = this.data.shopList.findIndex(v=>v.goodsId === this.data.currentShop.goodsId)
     this.data.currentShop.quantity = eatNum* peopleNum * eatDay

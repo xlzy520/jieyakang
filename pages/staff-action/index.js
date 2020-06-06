@@ -2,7 +2,7 @@ const WXAPI = require('../../wxapi/main')
 const utils = require('../../utils/index')
 Page({
   data: {
-    tabList: ['生产数据', '生成二维码'],
+    tabList: ['进销存记录', '生成二维码'],
     currentTab: 0,
     recordList: [],
     schoolList: [],
@@ -12,7 +12,7 @@ Page({
     pageIndex: 1,
     noMore: false,
     show: false,
-    typeOptions:['学生餐具','幼儿园餐具','餐馆餐具','宴请餐具'],
+    typeOptions:['学生餐具','幼儿园餐具','餐馆餐具','宴席餐具'],
     typeIndex: '学生餐具',
     produceCount: '',
     sendCount: '',
@@ -21,14 +21,29 @@ Page({
       schoolName: '商家',
       schoolId: -9999
     },
-    selectedName: ''
+    inventoryType: [
+      {name: '生产数据', value: 3},
+      {name: '发货数据', value: 4},
+      {name: '回收数据', value: 1},
+    ],
+    cars: [],
+    inventoryTypeClass: {
+      '生产': 'produce',
+      '发货': 'send',
+      '回收': 'recycle',
+      '损耗': 'loss',
+    },
+    selectedName: '',
+    popupShow: false,
+    currentRecord: {},
+    count: 0
   },
   onLoad(e) {
     // 路由来的参数会转为string
     this.setData({
       currentTab: Number(e.type)
     })
-    this.getProduceList({
+    this.getInventoryListAdmin({
       pageSize: 20,
       pageIndex: 1,
     })
@@ -45,9 +60,20 @@ Page({
     // }
 
   },
-  
-  getProduceList(data){
-    WXAPI.getProduceList(data).then(res=>{
+  onPopupClose(){
+    this.setData({ popupShow: false });
+  },
+  viewRecordDetail(e){
+    console.log(e);
+    const item = e.currentTarget.dataset.item
+    
+    // this.setData({
+    //   popupShow: true,
+    //   currentRecord: item
+    // });
+  },
+  getInventoryListAdmin(data){
+    WXAPI.getInventoryListAdmin(data).then(res=>{
       let list = res.data.list
       if (list&&list.length>0) {
         list = list.map(v=>{
@@ -59,12 +85,20 @@ Page({
         })
       }
       this.setData({
-        recordList: list
+        recordList: list,
+        count: res.data.count
       })
     })
   },
+  onChange(event) {
+    this.setData({
+      activeName: event.detail,
+    });
+  },
   showAddProduce(){
-    this.setData({ show: true });
+    wx.navigateTo({
+      url: "/pages/addRecord/index"
+    })
   },
   onClose(){
     this.setData({ show: false });
@@ -141,7 +175,7 @@ Page({
       })
       return false
     }
-    this.getProduceList({
+    this.getInventoryListAdmin({
       pageSize: 100,
       pageIndex: 1,
       startDate: start,
@@ -156,7 +190,7 @@ Page({
     if (e.detail){
       this.getSchoolList()
     } else {
-      this.getProduceList({
+      this.getInventoryListAdmin({
         pageSize: 20,
         pageIndex: 1,
       })
@@ -199,16 +233,18 @@ Page({
   },
 
   onReachBottom() {
-    if (this.data.currentTab === 0) {
+    if (!this.data.currentTab) {
+      if (this.data.count < this.data.pageIndex * 20) {
+        console.log(333);
+        return false
+      }
       wx.showLoading({
         title: '获取数据中...'
       })
-      this.setData({
-        pageIndex: this.data.pageIndex++
-      })
-      WXAPI.getProduceList({
+      const pageIndex = this.data.pageIndex + 1
+      WXAPI.getInventoryListAdmin({
         pageSize: 20,
-        pageIndex: this.data.pageIndex,
+        pageIndex,
         startDate: this.data.start,
         endDate: this.data.end
       }).then(res=>{
@@ -219,13 +255,15 @@ Page({
           v.produceTypeText = this.data.typeOptions[v.produceTypeId]
           return v
         })
-        if (data.list.length<20) {
+        if (data.length<20) {
           this.setData({
             noMore: true
           })
         }
         this.setData({
-          recordList: this.data.recordList.concat(data.list)
+          recordList: this.data.recordList.concat(data),
+          count: res.data.count,
+          pageIndex
         })
       }).finally(()=>{
         wx.hideLoading()

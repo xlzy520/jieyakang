@@ -11,7 +11,7 @@
 		"nodeModules": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": false,
-		"scopeDataCheck": false,
+		"scopeDataCheck": true,
 		"uglifyFileName": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": false,
@@ -20,7 +20,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"bundle": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.0",

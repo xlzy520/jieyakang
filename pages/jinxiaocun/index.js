@@ -11,6 +11,7 @@ Page({
     end: '',
     endDate: utils.parseTime(new Date()),
     pageIndex: 1,
+    count: 0,
     noMore: false
   },
   onLoad(e) {
@@ -42,7 +43,8 @@ Page({
         })
       }
       this.setData({
-        recordList: list
+        recordList: list,
+        count: res.data.count
       })
     })
   },
@@ -105,6 +107,9 @@ Page({
     wx.showLoading({
       title: '获取数据中...'
     })
+    if (this.data.count < this.data.pageIndex * 20) {
+      return false
+    }
     this.setData({
       pageIndex: this.data.pageIndex++
     })
@@ -120,7 +125,8 @@ Page({
         })
       }
       this.setData({
-        recordList: this.data.recordList.concat(res.data.list)
+        recordList: this.data.recordList.concat(res.data.list),
+        count: res.data.count
       })
     }).finally(()=>{
       wx.hideLoading()

@@ -37,7 +37,8 @@
   width: 230rpx;
   color: rgba(0,0,0,.5);
 
-  border: 1rpx solid #707070;
+  border: 1rpx solid #808080;
+	border-radius: 5rpx;
 }
 .search .picker{
   text-align: center;
@@ -62,7 +63,13 @@
   width: 750rpx;
 }
 .record-content .record-list{
-  margin-bottom: 40rpx;
+  /*margin-bottom: 40rpx;*/
+}
+.record-no-more{
+	color: #8d8d8d;
+	text-align: center;
+	margin-top: 10rpx;
+	margin-bottom: 100rpx;
 }
 .record-list .record-item{
   background: #fff;
@@ -81,8 +88,7 @@
 .record-item .record-item-header{
   font-family: PingFang SC Medium, sans-serif;
   font-size: 26rpx;
-  height: 80rpx;
-  line-height: 80rpx;
+  line-height: 60rpx;
   display: flex;
   justify-content: space-between;
 }
@@ -113,16 +119,33 @@
   font-weight:500;
 }
 .record-item:last-child{
-	margin-bottom: 120rpx;
+	/*margin-bottom: 120rpx;*/
 }
 .record-item .row{
   display: flex;
   justify-content: space-between;
-  padding-top: 30rpx;
+	align-items: center;
   line-height: 1;
+	padding: 10rpx 0;
 }
-.record-item .row:last-child{
-  padding-bottom: 40rpx;
+.row .left-title{
+	display: inline-flex;
+	align-items: center;
+	line-height: normal;
+	padding: 2rpx .5em;
+	color: #fff;
+	font-size: 10px;
+	border-radius: .2em;
+	background: #1989fa;
+}
+.row .left-title.produce{
+	background: rgb(114, 50, 221);
+}
+.row .left-title.recycle{
+	background: #07c160;
+}
+.row .left-title.send{
+	background: rgb(242, 130, 106);
 }
 .record-item-content .item{
   color: #787878;
@@ -174,7 +197,7 @@
 .footer {
 	position: fixed;
 	width: 690rpx;
-	bottom: 30rpx;
+	bottom: 10rpx;
 	height: 80rpx;
 	line-height: 80rpx;
 	background-color: #ff001c;

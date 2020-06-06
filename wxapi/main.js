@@ -170,6 +170,9 @@ module.exports = {
   defaultAddress: () => {
     return request('/address/default/get')
   },
+  defaultAddressByMobile: (data) => {
+    return request('/address/user/default/getByMobile', data)
+  },
   addressDetail: (data) => {
     return request('/address/detail',data)
   },
@@ -209,6 +212,18 @@ module.exports = {
   getInventoryList: (data)=>{
     return request('/inventory/list', data)
   },
+  getInventoryListAdmin: (data)=>{
+    return request('/inventory/list/admin', data)
+  },
+  getTablewareList(data) {
+    return request('/use/type/list', data)
+  },
+  getTablewareDetail(data) {
+    return request('/tableware/list', data)
+  },
+  addInventory(data) {
+    return request('/inventory/save', data)
+  },
   getCurrentStore: ()=>{
     return request('/inventory/current')
   },
@@ -220,6 +235,12 @@ module.exports = {
   },
   getSchoolQRCode(data) {
     return request('/wxCode/get', data)
+  },
+  getCars(data) {
+    return request('/car/list', data)
+  },
+  getWXUsers(data) {
+    return request('/user/simple/info', data)
   },
   
 }

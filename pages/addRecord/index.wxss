@@ -1,0 +1,26 @@
+.tabs{
+	width: 100%;
+}
+.content{
+	width: 100%;
+}
+.submit-btn{
+	margin: 30rpx;
+}
+.submit-btn .van-button{
+	margin-bottom: 30rpx;
+}
+.row{
+	padding: 5rpx 50rpx;
+}
+.row van-row{
+	padding: 10rpx;
+}
+.row input{
+	border: 1px solid #000;
+	margin-right: 30rpx;
+}
+van-radio-group{
+	display: flex;
+	justify-content: space-between;
+}

@@ -43,7 +43,7 @@
               </view>
               <view class="guige-num">
                 <view class="detail-selected" catchtap="changeGuige" data-index="{{index}}">
-                  <view class="label">{{goods.useType==='幼儿园餐具'?'两餐':eatNumTag[goods.eatNum-1].label}} ,
+                  <view class="label">{{eatNumTag[goods.eatNum-1].label}} ,
                     {{goods.peopleNum}}人 , {{goods.eatDay}}天</view>
                   <image src="/images/arrow-right.png"></image>
                 </view>
