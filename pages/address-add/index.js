@@ -67,6 +67,9 @@ Page({
     })
   },
   bindSave(e) {
+    wx.showLoading({
+      title: '正在保存...',
+    })
     let schoolId;
     let consignee = e.detail.value.consignee;
     let address = e.detail.value.address;
@@ -80,12 +83,13 @@ Page({
           tipText: '班级长度需要在2-25个字符之间'
         })
       }
-
+      wx.hideLoading();
       return
     }
     const mobile = e.detail.value.mobile;
     if (!this.checkPhone(mobile)) {
       this.setTipText('请填写正确的手机号码')
+      wx.hideLoading();
       return
     }
     let apiResult
@@ -117,9 +121,6 @@ Page({
     } else {
       apiResult = WXAPI.addAddress(params)
     }
-    wx.showLoading({
-      title: '正在保存...',
-    })
     apiResult.then((res) => {
       wx.hideLoading();
       wx.showToast({
@@ -127,7 +128,7 @@ Page({
         showCancel: false
       })
       if (this.data.referer === 'qr') {
-        wx.navigateTo({
+        wx.switchTab({
           url: "/pages/index/index"
         })
       } else {
@@ -149,16 +150,15 @@ Page({
     })
   },
   onLoad(e) {
-    console.log(e);
     if (e.schoolId) {
+      wx.setStorageSync('scanSchoolId', e.schoolId)
       this.getSchoolList().then(()=>{
         this.selectIdentity(e.schoolId)
         this.setData({
           referer: 'qr'
         })
       })
-    }
-    if (e.addressType&&e.id){
+    } else if (e.addressType&&e.id){
       wx.setNavigationBarTitle({
         title: '编辑收货地址'
       })

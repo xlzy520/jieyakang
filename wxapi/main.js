@@ -51,8 +51,8 @@ const request = (url,data={},method='post') => {
               title: '正在登录...'
             })
             wx.removeStorageSync('token')
+            handleLoginExpire()
             if (!tokenError) {
-              handleLoginExpire()
               tokenError = true
             }
           } else {
@@ -83,16 +83,23 @@ const handleLoginExpire = () =>{
         password: resWXLogin.code
       }, 'formdata').then(resLogin=> {
         wx.setStorageSync('token', resLogin.data.appToken)
-        if (resLogin.data.isFirst) {
-          setTimeout(() => {
-            wx.navigateTo({
-              url: "/pages/authorize/index"
-            })
-          }, 500)
+        if (resLogin.data.isFirst === true) {
+          wx.navigateTo({
+            url: "/pages/authorize/index"
+          })
+        } else {
+          wx.setStorageSync('token', resLogin.data.appToken)
         }
-        wx.reLaunch({
-          url: "/pages/index/index"
-        })
+        // const scanSchoolId = wx.getStorageSync('scanSchoolId')
+        // if (scanSchoolId) {
+        //   wx.reLaunch({
+        //     url: "/pages/address-add/index?schoolId="+ scanSchoolId
+        //   })
+        // } else {
+        //   wx.reLaunch({
+        //     url: "/pages/index/index"
+        //   })
+        // }
       }).catch(err=>{
         wx.showModal({
           title: '提示',

@@ -38,10 +38,10 @@
     <view class="my-item-subtitle">进销存与二维码</view>
     <image class="arrow-right" src="/images/arrow-right.png"></image>
   </navigator>
-<!--  <navigator class="my-item" url="/pages/address-add/index?schoolId=-9999" hover-class="navigator-hover">-->
-<!--    <image class="my-item-img" src="/images/contact_us.png"></image>-->
-<!--    <view class="my-item-title">模拟</view>-->
-<!--    <view class="my-item-subtitle">进销存与二维码</view>-->
-<!--    <image class="arrow-right" src="/images/arrow-right.png"></image>-->
-<!--  </navigator>-->
+  <navigator class="my-item" url="/pages/address-add/index?schoolId=-9999" hover-class="navigator-hover">
+    <image class="my-item-img" src="/images/contact_us.png"></image>
+    <view class="my-item-title">模拟</view>
+    <view class="my-item-subtitle">进销存与二维码</view>
+    <image class="arrow-right" src="/images/arrow-right.png"></image>
+  </navigator>
 </view>

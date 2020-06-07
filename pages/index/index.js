@@ -19,21 +19,18 @@ Page({
     })
   },
   goLoginPageTimeOut() {
-    setTimeout(() => {
-      wx.navigateTo({
-        url: "/pages/authorize/index"
-      })
-    }, 500)
+    wx.navigateTo({
+      url: "/pages/authorize/index"
+    })
   },
   login() {
     wx.login({
       success: res=> {
         WXAPI.login(res.code).then(res=> {
-          console.log(9999);
-          wx.setStorageSync('token', res.data.appToken)
-          if (res.data.isFirst) {
-            this.goLoginPageTimeOut();
+          if (res.data.isFirst == true) {
+            // this.goLoginPageTimeOut();
           } else {
+            wx.setStorageSync('token', res.data.appToken)
             this.getUserInfo()
             this.getPartner()
           }
@@ -55,28 +52,27 @@ Page({
     })
     const token = wx.getStorageSync('token')
     const schoolId = wx.getStorageSync('schoolId')
-    console.log(token);
     if (token){
       this.getPartner()
-      this.getGoodsList()
-      this.getShoufeiData(schoolId)
+      // this.getGoodsList()
+      this.getUserInfo()
       wx.hideLoading()
     } else {
-      this.login()
     }
   },
   onLoad() {
-    this.getUserInfo()
+    this.login()
   },
   getGoodsList(){
     return this.selectComponent("#goods-list").getGoodsList()
   },
   getUserInfo(){
     WXAPI.getUserInfo().then(res=>{
-      wx.setStorageSync('schoolId', res.data.schoolId)
+      const schoolId = res.data.schoolId || 0
+      wx.setStorageSync('schoolId', schoolId)
       wx.setStorageSync('hasProduceAuth', res.data.hasProduceAuth)
       this.getGoodsList()
-      this.getShoufeiData(res.data.schoolId)
+      this.getShoufeiData(schoolId)
     })
   },
   getPartner(){

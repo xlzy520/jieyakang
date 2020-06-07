@@ -29,9 +29,23 @@ Component({
         pageSize: 100,
         schoolId
       }).then((res)=> {
-        this.setData({
-          goods: res.data.list,
-        });
+        if (res.data.list.length>4) {
+          wx.login({
+            success: res=> {
+              WXAPI.login(res.code).then(res=> {
+                if (res.data.isFirst == true) {
+                  this.goLoginPageTimeOut();
+                } else {
+                  wx.setStorageSync('token', res.data.appToken)
+                }
+              })
+            }
+          })
+        } else {
+          this.setData({
+            goods: res.data.list,
+          });
+        }
       }).finally(()=>{
         wx.hideLoading()
         this.setData({
