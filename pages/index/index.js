@@ -66,7 +66,7 @@ Page({
     }
   },
   onLoad() {
-  
+    this.getUserInfo()
   },
   getGoodsList(){
     return this.selectComponent("#goods-list").getGoodsList()
