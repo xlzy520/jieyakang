@@ -169,9 +169,14 @@ Page({
     })
   },
   addAddress() {
-    wx.navigateTo({
-      url: "/pages/address-add/index"
+    wx.showToast({
+      title: '您暂无地址类型，请联系管理员扫描地址归属二维码添加默认地址',
+      duration: 2000,
+      icon: 'none'
     })
+    // wx.navigateTo({
+    //   url: "/pages/address-add/index"
+    // })
   },
   selectAddress() {
     wx.navigateTo({

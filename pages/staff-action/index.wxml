@@ -69,7 +69,7 @@
     <van-cell-group title="学校">
       <van-cell wx:for="{{schoolList}}" data-name="{{item}}" title="{{item.schoolName}}"  is-link bind:click="selectSchool" />
     </van-cell-group>
-    <van-popup show="{{ show }}" bind:close="onClose">
+    <van-popup show="{{ show }}" bind:close="onClose" overlay="{{false}}" z-index="200">
       <van-cell title="{{selectedName}}" />
       <image class="qr-code" src="{{qrcodeUrl}}" />
     </van-popup>

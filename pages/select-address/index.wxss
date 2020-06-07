@@ -5,6 +5,7 @@
 .no-address {
   margin: auto;
   margin-top: 280rpx;
+	text-align: center;
 }
 .no-content-text {
   font-family: PingFang SC Medium, sans-serif;

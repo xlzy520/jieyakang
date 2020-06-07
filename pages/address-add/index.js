@@ -16,6 +16,7 @@ Page({
     dialogType: '',
     schoolName: '',
     classNumber: '',
+    referer: ''
   },
   selectIdentity(id){
     if (id === '-9999') {
@@ -125,7 +126,13 @@ Page({
         title: '请求成功',
         showCancel: false
       })
-      wx.navigateBack({})
+      if (this.data.referer === 'qr') {
+        wx.navigateTo({
+          url: "/pages/index/index"
+        })
+      } else {
+        wx.navigateBack({})
+      }
     }).catch(err=>{
       wx.hideLoading();
       wx.showModal({
@@ -146,6 +153,9 @@ Page({
     if (e.schoolId) {
       this.getSchoolList().then(()=>{
         this.selectIdentity(e.schoolId)
+        this.setData({
+          referer: 'qr'
+        })
       })
     }
     if (e.addressType&&e.id){
@@ -169,6 +179,12 @@ Page({
         identityHidden: true,
         id: e.id
       })
+    } else {
+      wx.showToast({
+        title: '请联系管理员扫描二维码',
+        icon: 'none'
+      })
+      wx.navigateBack({})
     }
   },
   deleteAddress() {
