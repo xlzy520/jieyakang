@@ -33,6 +33,7 @@ Component({
           wx.login({
             success: res=> {
               WXAPI.login(res.code).then(res=> {
+                this.getGoodsList()
                 if (res.data.isFirst == true) {
                   this.goLoginPageTimeOut();
                 } else {
