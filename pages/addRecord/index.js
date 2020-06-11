@@ -1,4 +1,12 @@
 const WXAPI = require('../../wxapi/main')
+const initForm = {
+  userId: '',
+  specsId: '',
+  schoolId: '',
+  useTypeId: '',
+  boxNum: 0,
+  vehicle: ''
+}
 Page({
   data: {
     active: '3',
@@ -23,14 +31,7 @@ Page({
       lossyDetail: [],
       recoveryDetail: []
     },
-    initForm: {
-      userId: '',
-      specsId: '',
-      schoolId: '',
-      useTypeId: '',
-      boxNum: 0,
-      vehicle: ''
-    },
+    initForm: initForm,
     defaultAddress: {}
   },
   toDetailsTap: function (e) {
@@ -96,17 +97,19 @@ Page({
   onSubmit(){
     if (this.data.active !== '3') {
       if (!this.data.mobile) {
-        wx.showToast({
-          title: '请输入用户手机号码',
-          icon: 'none'
-        })
-        return
-      } else if (this.data.mobile.length !== 11) {
+        if (this.data.userType === '0') {
+          wx.showToast({
+            title: '请输入用户手机号码',
+            icon: 'none'
+          })
+          return;
+        }
+      } else if(this.data.mobile.length !== 11) {
         wx.showToast({
           title: '请输入正确的手机号码格式',
           icon: 'none'
         })
-        return
+        return;
       }
     }
     if (this.data.userType === '1' && !this.data.initForm.schoolId) {
@@ -114,14 +117,21 @@ Page({
         title: '请选择学校',
         icon: 'none'
       })
-      return
+      return;
     }
     if (!this.data.initForm.useTypeId) {
       wx.showToast({
         title: '请选择餐具类型',
         icon: 'none'
       })
-      return
+      return;
+    } else if (this.data.initForm.useTypeId === 3) {
+      if (!this.data.initForm.specsId) {
+        wx.showToast({
+          title: '请选择规格',
+          icon: 'none'
+        })
+      }
     }
     const tablewareData = JSON.parse(JSON.stringify(this.data.tablewareData))
     if (this.data.active === '3') {
@@ -134,6 +144,9 @@ Page({
         }
       })
     } else {
+      this.setData({
+        'initForm.vehicle': this.data.car.carId
+      })
       this.data.tableware.forEach((v,index)=>{
         for (const item in this.data.tablewareData) {
           tablewareData[item][index] = {
@@ -143,6 +156,8 @@ Page({
         }
       })
     }
+    
+    
     
     const param = {
       ...this.data.initForm,
@@ -208,7 +223,16 @@ Page({
       })
     }
     this.setData({
-      active: name
+      active: name,
+      'initForm.specsId': '',
+      'initForm.userId': '',
+      'initForm.useTypeId': '',
+      'initForm.schoolId': '',
+      specs: {},
+      school: {},
+      useType: {},
+      tableware: [],
+      userType: '0'
     })
   },
   onUserChange(event){
