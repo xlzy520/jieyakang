@@ -242,7 +242,7 @@ Page({
     this.getUsers()
   },
   setSpecsList(val){
-    if (val.useType === '幼儿园餐具') {
+    if (val.useType === '幼儿园餐具' || val.useType === '学生餐具') {
       this.setData({
         specsList: val.specsList.map(v => {
           v.text = v.specsName + ':' + v.specsStr

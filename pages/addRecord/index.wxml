@@ -53,7 +53,9 @@
 <!--               label="默认地址" readonly autosize="{maxHeight: 100, minHeight: 50}"/>-->
     <van-cell title="餐具类型" is-link value="{{useType.useType}}" data-popup="useType"
               arrow-direction="down" bind:click="openPopup"/>
-    <van-cell wx:if="{{useType.useType === '幼儿园餐具'}}" title="规格" is-link
+    <van-cell wx:if="{{useType.useType === '幼儿园餐具' || useType.useType === '学生餐具'}}"
+              title="规格" is-link
+              title-width="120rpx"
               value="{{specs.specsName}}" data-popup="specs"
               arrow-direction="down" bind:click="openPopup"/>
 
