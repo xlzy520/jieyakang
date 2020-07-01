@@ -34,6 +34,7 @@ Page({
               encryptedData: encryptedData,
               iv: iv,
             }).then(()=> {
+              wx.setStorageSync('isFirst', '')
               wx.hideLoading();
               wx.navigateBack();
             })

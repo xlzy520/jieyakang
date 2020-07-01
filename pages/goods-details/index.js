@@ -143,7 +143,17 @@ Page({
       })
     }
   },
+  goLoginPageTimeOut() {
+    wx.navigateTo({
+      url: "/pages/authorize/index"
+    })
+  },
   popupOk(){
+    const isFirst = wx.getStorageSync('isFirst')
+    if (isFirst) {
+      this.goLoginPageTimeOut()
+      return
+    }
     if (this.data.shopType === 'addShopCar'){
       this.addShopCar()
     } else {

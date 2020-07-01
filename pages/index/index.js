@@ -28,8 +28,9 @@ Page({
       success: res=> {
         WXAPI.login(res.code).then(res=> {
           wx.setStorageSync('token', res.data.appToken)
+          wx.setStorageSync('isFirst', res.data.isFirst)
           if (res.data.isFirst == true) {
-            this.goLoginPageTimeOut();
+            // this.goLoginPageTimeOut();
           } else {
             this.getUserInfo()
             this.getPartner()
