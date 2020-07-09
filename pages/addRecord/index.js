@@ -131,6 +131,7 @@ Page({
           title: '请选择规格',
           icon: 'none'
         })
+        return;
       }
     }
     const tablewareData = JSON.parse(JSON.stringify(this.data.tablewareData))
@@ -161,7 +162,10 @@ Page({
     const param = {
       ...this.data.initForm,
       ...tablewareData,
-      inventoryType: this.data.active
+      inventoryType: this.data.active,
+    }
+    if (this.data.mobile) {
+      param.mobile = this.data.mobile
     }
     WXAPI.addInventory(param).then(res => {
       wx.showToast({
@@ -201,7 +205,7 @@ Page({
       }).then(res=>{
         this.setData({
           defaultAddress: res.data,
-          'initForm.userId': res.data.operatorId,
+          'initForm.userId': res.data.operatorId || '',
         })
       })
     }
